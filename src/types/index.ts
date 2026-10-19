@@ -86,7 +86,7 @@ export interface ArtifactPieceItem {
 
 export const DEFAULT_ARTIFACT_PIECES: ArtifactPieceItem[] = [
   { slotKey: 'flower', slotName: 'Hoa Sự Sống', level: 20, isOptimized: false },
-  { slotKey: 'plume', slotName: 'Lông Vũ Tử Thần', level: 20, isOptimized: false },
+  { slotKey: 'plume', slotName: 'Lông Vũ Tử Vong', level: 20, isOptimized: false },
   { slotKey: 'sands', slotName: 'Cát Thời Gian', level: 20, isOptimized: false },
   { slotKey: 'goblet', slotName: 'Ly Không Gian', level: 20, isOptimized: false },
   { slotKey: 'circlet', slotName: 'Nón Lý Trí', level: 20, isOptimized: false },

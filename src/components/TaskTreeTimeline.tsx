@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   DndContext,
   closestCenter,
@@ -18,7 +18,13 @@ import { useStore } from '../store/useStore';
 import { CharacterTreeCard } from './CharacterTreeCard';
 
 export const TaskTreeTimeline: React.FC = () => {
-  const { characterTrees, reorderCharacterTrees, setActiveNav } = useStore();
+  const {
+    characterTrees,
+    reorderCharacterTrees,
+    setActiveNav,
+    lastAddedTreeId,
+    setLastAddedTreeId,
+  } = useStore();
 
   const activeTrees = characterTrees.filter((t) => !t.isCompleted);
 
@@ -39,6 +45,20 @@ export const TaskTreeTimeline: React.FC = () => {
       reorderCharacterTrees(String(active.id), String(over.id));
     }
   };
+
+  // Automatically scroll and smoothly focus on newly added character card
+  useEffect(() => {
+    if (lastAddedTreeId) {
+      const timer = setTimeout(() => {
+        const el = document.getElementById(`tree-node-${lastAddedTreeId}`);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        setLastAddedTreeId(null);
+      }, 120);
+      return () => clearTimeout(timer);
+    }
+  }, [lastAddedTreeId, setLastAddedTreeId]);
 
   return (
     <div className="space-y-4">
@@ -85,9 +105,9 @@ export const TaskTreeTimeline: React.FC = () => {
         </div>
       ) : (
         /* Continuous Timeline Spine with Anchored Character Trees */
-        <div className="relative pl-6 sm:pl-8 pt-2">
-          {/* Main Timeline Line (Vertical Spine) */}
-          <div className="absolute left-[11px] sm:left-[15px] top-6 bottom-6 w-0.5 bg-gradient-to-b from-amber-400 via-amber-400/40 to-purple-500/20 shadow-[0_0_8px_rgba(245,158,11,0.4)] pointer-events-none" />
+        <div className="relative pt-2">
+          {/* Main Timeline Line (Vertical Spine) - Mathematically centered with milestone circles */}
+          <div className="absolute left-[18px] sm:left-[22px] top-6 bottom-6 w-1 bg-gradient-to-b from-amber-400 via-amber-400/50 to-purple-500/20 shadow-[0_0_10px_rgba(245,158,11,0.5)] rounded-full pointer-events-none" />
 
           {/* DnD Sortable Character Trees along Timeline */}
           <DndContext
@@ -101,17 +121,21 @@ export const TaskTreeTimeline: React.FC = () => {
             >
               <div className="space-y-6">
                 {activeTrees.map((tree, idx) => (
-                  <div key={tree.id} className="relative">
-                    {/* Timeline Milestone Dot on Spine */}
+                  <div
+                    key={tree.id}
+                    id={`tree-node-${tree.id}`}
+                    className="relative pl-12 sm:pl-14 transition-all duration-300"
+                  >
+                    {/* Timeline Milestone Dot on Spine (w-7 h-7, centered on 20px / 24px) */}
                     <div
-                      className={`absolute -left-6 sm:-left-8 top-10 w-6 h-6 rounded-full bg-slate-950 border-2 flex items-center justify-center z-10 transition-transform ${
+                      className={`absolute left-[5px] sm:left-[9px] top-8 w-7 h-7 rounded-full bg-slate-950 border-2 flex items-center justify-center z-10 transition-transform ${
                         idx === 0
                           ? 'border-amber-400 shadow-[0_0_14px_rgba(245,158,11,0.8)] scale-110'
-                          : 'border-white/40 shadow-[0_0_8px_rgba(255,255,255,0.2)]'
+                          : 'border-amber-400/60 shadow-[0_0_8px_rgba(245,158,11,0.3)]'
                       }`}
                     >
                       <span
-                        className={`text-[10px] font-black font-sans ${
+                        className={`text-[11px] font-black font-sans ${
                           idx === 0 ? 'text-amber-300' : 'text-slate-300'
                         }`}
                       >
@@ -119,8 +143,8 @@ export const TaskTreeTimeline: React.FC = () => {
                       </span>
                     </div>
 
-                    {/* Horizontal Connector Line from Milestone Node to Tree Card */}
-                    <div className="absolute -left-3 sm:-left-4 top-[51px] w-3 sm:w-4 h-0.5 bg-gradient-to-r from-amber-400/70 to-white/20 pointer-events-none" />
+                    {/* Horizontal Connector Line from Milestone Dot to Character Card */}
+                    <div className="absolute left-[20px] sm:left-[24px] top-[46px] w-[28px] sm:w-[32px] h-0.5 bg-gradient-to-r from-amber-400/80 via-amber-400/40 to-white/10 pointer-events-none" />
 
                     {/* Character Tree with Horizontal Branching */}
                     <CharacterTreeCard tree={tree} index={idx} />

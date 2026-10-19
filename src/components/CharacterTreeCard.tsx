@@ -5,7 +5,6 @@ import {
   GripVertical,
   Check,
   Trash2,
-  Sparkles,
   TrendingUp,
   Sword,
   BookOpen,
@@ -16,7 +15,6 @@ import {
   CheckCircle2,
   Circle,
   Calendar,
-  Sparkle,
   Layers,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
@@ -25,6 +23,7 @@ import { DEFAULT_ARTIFACT_PIECES } from '../types';
 import { useStore } from '../store/useStore';
 import { isDomainOpenToday } from '../utils/priority';
 import { ElementIcon } from './ElementIcon';
+import { getMaterialIconUrl, BASE_MATERIAL_ICONS } from '../utils/materialIcons';
 
 interface CharacterTreeCardProps {
   tree: CharacterBranchTree;
@@ -32,17 +31,6 @@ interface CharacterTreeCardProps {
 }
 
 type ActiveBranchType = 'level' | 'weapon' | 'talent' | 'artifact' | null;
-
-const ARTIFACT_SLOT_META: Record<
-  string,
-  { label: string; icon: string; statHint: string }
-> = {
-  flower: { label: 'Hoa Sự Sống', icon: '🌸', statHint: 'HP Cố Định' },
-  plume: { label: 'Lông Vũ Tử Thần', icon: '🪶', statHint: 'Tấn Công Cố Định' },
-  sands: { label: 'Cát Thời Gian', icon: '⏳', statHint: 'ATK% / HP% / Hiệu Quả Nạp' },
-  goblet: { label: 'Ly Không Gian', icon: '🏆', statHint: 'Sát Thương Nguyên Tố / HP%' },
-  circlet: { label: 'Nón Lý Trí', icon: '👑', statHint: 'Tỉ Lệ Bạo / ST Bạo' },
-};
 
 const DAY_NAMES = ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'];
 
@@ -91,13 +79,26 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
   const isC6 = (tree.constellation ?? 0) >= 6;
   const currentCharLevel = tree.level ?? tree.levelBranch.currentLevel;
 
-  // Safe artifact pieces fallback
+  // Safe artifact pieces fallback (with updated Lông Vũ Tử Vong name)
   const artifactPieces =
     tree.artifactBranch.pieces && tree.artifactBranch.pieces.length === 5
       ? tree.artifactBranch.pieces
       : DEFAULT_ARTIFACT_PIECES;
 
   const optimizedArtifactCount = artifactPieces.filter((p) => p.isOptimized).length;
+
+  // Weapon cost calculation
+  const calculateWeaponCost = (lvl: number) => {
+    const cur = Math.max(1, Math.min(90, lvl));
+    if (cur >= 90) return { mats: 0, mora: 0 };
+    if (cur >= 80) return { mats: 6, mora: 225000 };
+    if (cur >= 70) return { mats: 12, mora: 450000 };
+    if (cur >= 60) return { mats: 16, mora: 600000 };
+    if (cur >= 50) return { mats: 20, mora: 750000 };
+    return { mats: 24, mora: 900000 };
+  };
+
+  const weaponCost = calculateWeaponCost(tree.weaponBranch.currentLevel);
 
   return (
     <div
@@ -111,28 +112,20 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
           : 'liquid-glass liquid-glass-interactive'
       }`}
     >
-      {/* Top Priority Badge */}
-      {isTopPriority && (
-        <div className="absolute -top-3 left-6 px-3 py-0.5 rounded-full bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-slate-950 text-[10px] font-extrabold uppercase tracking-wider flex items-center gap-1 shadow-[0_2px_12px_rgba(245,158,11,0.4)] z-20">
-          <Sparkles className="w-3 h-3 fill-current" />
-          Ưu Tiên #1 (Đỉnh Stack)
-        </div>
-      )}
-
       <div className="p-4 sm:p-5">
-        {/* Main Horizontal Tree Layout: Branches extend to the RIGHT */}
-        <div className="flex items-stretch gap-3 sm:gap-5 overflow-x-auto pb-2 custom-scrollbar">
+        {/* Main Horizontal Tree Layout: Branches extend to the RIGHT with items-start to prevent vertical distortion */}
+        <div className="flex items-start gap-3 sm:gap-4 overflow-x-auto pb-2 custom-scrollbar">
           {/* ========================================================= */}
-          {/* 1. CHARACTER CARD NODE (Identical to Character Roster Card) */}
+          {/* 1. CHARACTER CARD NODE (Locked fixed dimensions)          */}
           {/* ========================================================= */}
-          <div className="w-[136px] sm:w-[150px] shrink-0 flex flex-col justify-between p-3 rounded-2xl bg-slate-900/50 border border-white/[0.08] backdrop-blur-xl relative group/card">
+          <div className="w-[140px] sm:w-[150px] min-w-[140px] max-w-[150px] shrink-0 flex flex-col p-3 rounded-2xl bg-slate-900/50 border border-white/[0.08] backdrop-blur-xl relative group/card self-start">
             {/* Top Quick Actions: Drag Handle, Delete & Complete */}
             <div className="flex items-center justify-between mb-2">
               <button
                 {...attributes}
                 {...listeners}
                 className="p-1 rounded-lg text-slate-500 hover:text-slate-200 hover:bg-white/[0.06] cursor-grab active:cursor-grabbing transition-colors"
-                title="Kéo thả để đổi thứ tự trên timeline"
+                title="Kéo thả đổi thứ tự ưu tiên"
               >
                 <GripVertical className="w-3.5 h-3.5" />
               </button>
@@ -213,21 +206,21 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
           </div>
 
           {/* ========================================================= */}
-          {/* CONNECTOR LINE & ARROW (Branching out to the right) */}
+          {/* CONNECTOR LINE & ARROW (Branching out to the right)       */}
           {/* ========================================================= */}
-          <div className="flex items-center justify-center shrink-0 text-amber-400/40">
+          <div className="flex items-center justify-center shrink-0 text-amber-400/40 pt-16">
             <div className="w-3 sm:w-5 h-0.5 bg-gradient-to-r from-amber-400/60 to-amber-400/20" />
             <ChevronRight className="w-4 h-4 -ml-1.5 text-amber-400/60" />
           </div>
 
           {/* ========================================================= */}
-          {/* 2. THE 4 MAIN BRANCH SELECTORS (Vertically stacked or pills) */}
+          {/* 2. THE 4 MAIN BRANCH SELECTORS                            */}
           {/* ========================================================= */}
-          <div className="flex flex-col justify-between gap-2.5 w-[190px] sm:w-[210px] shrink-0 py-1">
+          <div className="flex flex-col gap-2.5 w-[180px] sm:w-[195px] shrink-0 self-start">
             {/* Branch 1: Cấp độ (Level) */}
             <button
               onClick={() => setActiveBranch(activeBranch === 'level' ? null : 'level')}
-              className={`w-full p-2.5 rounded-2xl text-left border transition-all flex items-center justify-between group/branch ${
+              className={`w-full p-2.5 rounded-2xl text-left border transition-all flex items-center justify-between group/branch cursor-pointer ${
                 activeBranch === 'level'
                   ? 'bg-amber-400/15 border-amber-400/60 shadow-[0_0_16px_rgba(245,158,11,0.25)] text-amber-200'
                   : tree.levelBranch.isCompleted
@@ -261,10 +254,10 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
               </div>
             </button>
 
-            {/* Branch 2: Vũ Khí (Weapon) */}
+            {/* Branch 2: Vũ Khí (Weapon) - Không để tên vũ khí */}
             <button
               onClick={() => setActiveBranch(activeBranch === 'weapon' ? null : 'weapon')}
-              className={`w-full p-2.5 rounded-2xl text-left border transition-all flex items-center justify-between group/branch ${
+              className={`w-full p-2.5 rounded-2xl text-left border transition-all flex items-center justify-between group/branch cursor-pointer ${
                 activeBranch === 'weapon'
                   ? 'bg-amber-400/15 border-amber-400/60 shadow-[0_0_16px_rgba(245,158,11,0.25)] text-amber-200'
                   : tree.weaponBranch.isCompleted
@@ -284,8 +277,8 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                 </div>
                 <div className="min-w-0">
                   <div className="text-xs font-bold truncate">Nhánh Vũ Khí</div>
-                  <div className="text-[11px] text-slate-400 font-sans truncate">
-                    Lv.{tree.weaponBranch.currentLevel} • {tree.weaponBranch.weaponName}
+                  <div className="text-[11px] text-slate-400 font-sans">
+                    Lv.{tree.weaponBranch.currentLevel} → 90
                   </div>
                 </div>
               </div>
@@ -301,7 +294,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
             {/* Branch 3: Thiên Phú (Talents - 3 skills) */}
             <button
               onClick={() => setActiveBranch(activeBranch === 'talent' ? null : 'talent')}
-              className={`w-full p-2.5 rounded-2xl text-left border transition-all flex items-center justify-between group/branch ${
+              className={`w-full p-2.5 rounded-2xl text-left border transition-all flex items-center justify-between group/branch cursor-pointer ${
                 activeBranch === 'talent'
                   ? 'bg-amber-400/15 border-amber-400/60 shadow-[0_0_16px_rgba(245,158,11,0.25)] text-amber-200'
                   : tree.talentBranch.isCompleted
@@ -335,10 +328,10 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
               </div>
             </button>
 
-            {/* Branch 4: Thánh Di Vật (Artifacts - 5 pieces) */}
+            {/* Branch 4: Thánh Di Vật (Artifacts - 5 pieces) - Không để tên bộ */}
             <button
               onClick={() => setActiveBranch(activeBranch === 'artifact' ? null : 'artifact')}
-              className={`w-full p-2.5 rounded-2xl text-left border transition-all flex items-center justify-between group/branch ${
+              className={`w-full p-2.5 rounded-2xl text-left border transition-all flex items-center justify-between group/branch cursor-pointer ${
                 activeBranch === 'artifact'
                   ? 'bg-amber-400/15 border-amber-400/60 shadow-[0_0_16px_rgba(245,158,11,0.25)] text-amber-200'
                   : tree.artifactBranch.isCompleted
@@ -374,20 +367,23 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
           </div>
 
           {/* ========================================================= */}
-          {/* CONNECTOR LINE TO EXPANDED DETAIL PANEL (To the Right!) */}
+          {/* CONNECTOR LINE TO EXPANDED DRAWER PANEL                   */}
           {/* ========================================================= */}
           {activeBranch && (
-            <div className="flex items-center justify-center shrink-0 text-amber-400/40 animate-in fade-in duration-200">
+            <div className="flex items-center justify-center shrink-0 text-amber-400/40 pt-16">
               <div className="w-3 sm:w-5 h-0.5 bg-gradient-to-r from-amber-400/60 to-amber-400/20" />
               <ChevronRight className="w-4 h-4 -ml-1.5 text-amber-400/60" />
             </div>
           )}
 
           {/* ========================================================= */}
-          {/* 3. EXPANDED BRANCH DETAIL PANEL (Rendered to the right) */}
+          {/* 3. EXPANDED DRAWER DETAIL PANEL ("mở ra như ngăn kéo")     */}
           {/* ========================================================= */}
           {activeBranch && (
-            <div className="w-[360px] sm:w-[460px] lg:w-[500px] shrink-0 p-4 rounded-2xl bg-slate-900/60 border border-white/[0.08] backdrop-blur-xl shadow-xl flex flex-col justify-between animate-in fade-in slide-in-from-left-3 duration-200">
+            <div
+              key={activeBranch}
+              className="w-[360px] sm:w-[450px] lg:w-[480px] shrink-0 p-4 rounded-2xl bg-slate-900/70 border border-white/[0.08] backdrop-blur-xl shadow-2xl flex flex-col justify-between animate-drawer-open self-start"
+            >
               {/* -------------------------------------------------- */}
               {/* DETAIL: BRANCH 1 - LEVEL                           */}
               {/* -------------------------------------------------- */}
@@ -400,17 +396,17 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                       </div>
                       <div>
                         <h4 className="text-xs sm:text-sm font-bold text-slate-100">
-                          Chi Tiết Nhánh Cấp Độ
+                          Nhánh Cấp Độ
                         </h4>
                         <p className="text-[11px] text-slate-400">
-                          Mục tiêu đạt cấp tối đa Lv. 90
+                          Mục tiêu Lv. 90
                         </p>
                       </div>
                     </div>
 
                     <button
                       onClick={() => toggleBranchComplete(tree.id, 'levelBranch')}
-                      className={`px-2.5 py-1 rounded-xl text-xs font-bold border transition-all flex items-center gap-1.5 ${
+                      className={`px-2.5 py-1 rounded-xl text-xs font-bold border transition-all flex items-center gap-1.5 cursor-pointer ${
                         tree.levelBranch.isCompleted
                           ? 'bg-emerald-500/20 border-emerald-500/40 text-emerald-300'
                           : 'bg-white/[0.04] border-white/10 text-slate-300 hover:border-amber-400/40'
@@ -428,7 +424,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                       <button
                         onClick={() => updateTreeLevel(tree.id, currentCharLevel - 1)}
                         disabled={currentCharLevel <= 1}
-                        className="p-1 rounded-lg bg-white/[0.06] hover:bg-white/[0.12] disabled:opacity-40 text-slate-200"
+                        className="p-1 rounded-lg bg-white/[0.06] hover:bg-white/[0.12] disabled:opacity-40 text-slate-200 cursor-pointer"
                         title="Giảm cấp"
                       >
                         <Minus className="w-3.5 h-3.5" />
@@ -439,7 +435,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                       <button
                         onClick={() => updateTreeLevel(tree.id, currentCharLevel + 1)}
                         disabled={currentCharLevel >= 90}
-                        className="p-1 rounded-lg bg-white/[0.06] hover:bg-white/[0.12] disabled:opacity-40 text-slate-200"
+                        className="p-1 rounded-lg bg-white/[0.06] hover:bg-white/[0.12] disabled:opacity-40 text-slate-200 cursor-pointer"
                         title="Tăng cấp"
                       >
                         <Plus className="w-3.5 h-3.5" />
@@ -452,7 +448,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                         <button
                           key={lvl}
                           onClick={() => updateTreeLevel(tree.id, lvl)}
-                          className={`px-2 py-0.5 rounded-md text-[10px] font-bold border transition-colors ${
+                          className={`px-2 py-0.5 rounded-md text-[10px] font-bold border transition-colors cursor-pointer ${
                             currentCharLevel === lvl
                               ? 'bg-amber-400/20 border-amber-400/50 text-amber-300'
                               : 'bg-white/[0.04] border-white/[0.08] text-slate-400 hover:text-slate-200'
@@ -464,44 +460,78 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                     </div>
                   </div>
 
-                  {/* Required Materials Grid */}
+                  {/* Required Materials Grid with Official Icons */}
                   <div>
                     <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">
                       Nguyên liệu cần đến Lv. 90:
                     </div>
                     <div className="grid grid-cols-2 gap-2 text-xs">
-                      {/* Sách Kinh Nghiệm */}
-                      <div className="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between">
-                        <span className="text-slate-400">Kinh Nghiệm Anh Hùng</span>
-                        <span className="font-bold text-amber-300">
+                      {/* Sách Kinh Nghiệm Anh Hùng */}
+                      <div className="p-2 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between gap-2">
+                        <div className="flex items-center gap-2 min-w-0">
+                          <img
+                            src={BASE_MATERIAL_ICONS.heroWit}
+                            alt="Hero's Wit"
+                            className="w-7 h-7 rounded-lg object-contain bg-slate-800/80 p-0.5 shrink-0"
+                          />
+                          <span className="text-slate-300 text-xs truncate">Kinh Nghiệm Anh Hùng</span>
+                        </div>
+                        <span className="font-bold text-amber-300 shrink-0 font-sans">
                           {tree.levelBranch.heroWitNeeded} cuốn
                         </span>
                       </div>
 
                       {/* Mora */}
-                      <div className="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between">
-                        <span className="text-slate-400">Mora Cần</span>
-                        <span className="font-bold text-yellow-300">
+                      <div className="p-2 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between gap-2">
+                        <div className="flex items-center gap-2 min-w-0">
+                          <img
+                            src={BASE_MATERIAL_ICONS.mora}
+                            alt="Mora"
+                            className="w-7 h-7 rounded-lg object-contain bg-slate-800/80 p-0.5 shrink-0"
+                          />
+                          <span className="text-slate-300 text-xs truncate">Mora</span>
+                        </div>
+                        <span className="font-bold text-yellow-300 shrink-0 font-sans">
                           {tree.levelBranch.moraNeeded.toLocaleString()}
                         </span>
                       </div>
 
                       {/* Boss Thế Giới */}
-                      <div className="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between col-span-2">
-                        <span className="text-slate-400 truncate mr-2">
-                          {tree.levelBranch.worldBossMat}
-                        </span>
-                        <span className="font-bold text-emerald-300 shrink-0">
+                      <div className="p-2 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between gap-2 col-span-2">
+                        <div className="flex items-center gap-2 min-w-0">
+                          <img
+                            src={getMaterialIconUrl(tree.levelBranch.worldBossMat, 'bossDrop')}
+                            alt={tree.levelBranch.worldBossMat}
+                            className="w-7 h-7 rounded-lg object-contain bg-slate-800/80 p-0.5 shrink-0"
+                            onError={(e) => {
+                              (e.target as HTMLImageElement).src = BASE_MATERIAL_ICONS.bossDrop;
+                            }}
+                          />
+                          <span className="text-slate-300 text-xs truncate">
+                            {tree.levelBranch.worldBossMat}
+                          </span>
+                        </div>
+                        <span className="font-bold text-emerald-300 shrink-0 font-sans">
                           {tree.levelBranch.bossDropNeeded} cái
                         </span>
                       </div>
 
                       {/* Đặc Sản Khu Vực */}
-                      <div className="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between col-span-2">
-                        <span className="text-slate-400 truncate mr-2">
-                          {tree.levelBranch.localSpecialty}
-                        </span>
-                        <span className="font-bold text-sky-300 shrink-0">
+                      <div className="p-2 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between gap-2 col-span-2">
+                        <div className="flex items-center gap-2 min-w-0">
+                          <img
+                            src={getMaterialIconUrl(tree.levelBranch.localSpecialty, 'specialty')}
+                            alt={tree.levelBranch.localSpecialty}
+                            className="w-7 h-7 rounded-lg object-contain bg-slate-800/80 p-0.5 shrink-0"
+                            onError={(e) => {
+                              (e.target as HTMLImageElement).src = BASE_MATERIAL_ICONS.specialty;
+                            }}
+                          />
+                          <span className="text-slate-300 text-xs truncate">
+                            {tree.levelBranch.localSpecialty}
+                          </span>
+                        </div>
+                        <span className="font-bold text-sky-300 shrink-0 font-sans">
                           {tree.levelBranch.specialtyNeeded} cái
                         </span>
                       </div>
@@ -511,7 +541,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
               )}
 
               {/* -------------------------------------------------- */}
-              {/* DETAIL: BRANCH 2 - WEAPON                          */}
+              {/* DETAIL: BRANCH 2 - WEAPON (Không hiện tên vũ khí)  */}
               {/* -------------------------------------------------- */}
               {activeBranch === 'weapon' && (
                 <div className="space-y-3.5">
@@ -522,17 +552,17 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                       </div>
                       <div>
                         <h4 className="text-xs sm:text-sm font-bold text-slate-100">
-                          Chi Tiết Nhánh Vũ Khí
+                          Nhánh Vũ Khí
                         </h4>
-                        <p className="text-[11px] text-slate-400 truncate max-w-[200px]">
-                          {tree.weaponBranch.weaponName}
+                        <p className="text-[11px] text-slate-400">
+                          Mục tiêu Lv. 90
                         </p>
                       </div>
                     </div>
 
                     <button
                       onClick={() => toggleBranchComplete(tree.id, 'weaponBranch')}
-                      className={`px-2.5 py-1 rounded-xl text-xs font-bold border transition-all flex items-center gap-1.5 ${
+                      className={`px-2.5 py-1 rounded-xl text-xs font-bold border transition-all flex items-center gap-1.5 cursor-pointer ${
                         tree.weaponBranch.isCompleted
                           ? 'bg-emerald-500/20 border-emerald-500/40 text-emerald-300'
                           : 'bg-white/[0.04] border-white/10 text-slate-300 hover:border-sky-400/40'
@@ -543,39 +573,14 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                     </button>
                   </div>
 
-                  {/* Weapon Card Info */}
-                  <div className="flex items-center gap-3 p-2.5 rounded-xl bg-white/[0.03] border border-white/[0.06]">
-                    {tree.weaponBranch.weaponIcon ? (
-                      <div className="w-12 h-12 rounded-xl overflow-hidden bg-slate-800/80 border border-white/10 shrink-0">
-                        <img
-                          src={tree.weaponBranch.weaponIcon}
-                          alt={tree.weaponBranch.weaponName}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                    ) : (
-                      <div className="w-12 h-12 rounded-xl bg-sky-500/10 border border-sky-400/20 flex items-center justify-center shrink-0 text-sky-300">
-                        <Sword className="w-6 h-6" />
-                      </div>
-                    )}
-                    <div className="min-w-0">
-                      <div className="text-xs sm:text-sm font-bold text-slate-100 truncate">
-                        {tree.weaponBranch.weaponName}
-                      </div>
-                      <div className="text-[11px] text-slate-400">
-                        Cấp hiện tại: <span className="text-sky-300 font-bold font-sans">Lv.{tree.weaponBranch.currentLevel}</span> / 90
-                      </div>
-                    </div>
-                  </div>
-
                   {/* Weapon Level Stepper */}
                   <div className="flex items-center justify-between bg-white/[0.03] p-2.5 rounded-xl border border-white/[0.06]">
-                    <div className="text-xs text-slate-300 font-semibold">Chỉnh cấp độ:</div>
+                    <div className="text-xs text-slate-300 font-semibold">Cấp hiện tại:</div>
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => updateTreeWeaponLevel(tree.id, tree.weaponBranch.currentLevel - 1)}
                         disabled={tree.weaponBranch.currentLevel <= 1}
-                        className="p-1 rounded-lg bg-white/[0.06] hover:bg-white/[0.12] disabled:opacity-40 text-slate-200"
+                        className="p-1 rounded-lg bg-white/[0.06] hover:bg-white/[0.12] disabled:opacity-40 text-slate-200 cursor-pointer"
                       >
                         <Minus className="w-3.5 h-3.5" />
                       </button>
@@ -585,7 +590,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                       <button
                         onClick={() => updateTreeWeaponLevel(tree.id, tree.weaponBranch.currentLevel + 1)}
                         disabled={tree.weaponBranch.currentLevel >= 90}
-                        className="p-1 rounded-lg bg-white/[0.06] hover:bg-white/[0.12] disabled:opacity-40 text-slate-200"
+                        className="p-1 rounded-lg bg-white/[0.06] hover:bg-white/[0.12] disabled:opacity-40 text-slate-200 cursor-pointer"
                       >
                         <Plus className="w-3.5 h-3.5" />
                       </button>
@@ -596,7 +601,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                         <button
                           key={lvl}
                           onClick={() => updateTreeWeaponLevel(tree.id, lvl)}
-                          className={`px-2 py-0.5 rounded-md text-[10px] font-bold border transition-colors ${
+                          className={`px-2 py-0.5 rounded-md text-[10px] font-bold border transition-colors cursor-pointer ${
                             tree.weaponBranch.currentLevel === lvl
                               ? 'bg-sky-400/20 border-sky-400/50 text-sky-300'
                               : 'bg-white/[0.04] border-white/[0.08] text-slate-400 hover:text-slate-200'
@@ -608,30 +613,59 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                     </div>
                   </div>
 
-                  {/* Required Materials & Schedule */}
+                  {/* Required Materials & Schedule (Lịch mở, số NL đột phá, Mora) */}
                   <div className="space-y-2 text-xs">
-                    <div className="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between">
-                      <span className="text-slate-400">Nguyên liệu đột phá:</span>
-                      <span className="font-bold text-sky-300 truncate ml-2">
-                        {tree.weaponBranch.materialName}
-                      </span>
-                    </div>
-
+                    {/* Lịch mở bí cảnh nguyên liệu */}
                     <div className="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between">
                       <span className="text-slate-400 flex items-center gap-1.5">
                         <Calendar className="w-3.5 h-3.5 text-amber-400" />
-                        Lịch mở bí cảnh:
+                        Lịch mở nguyên liệu:
                       </span>
                       <div className="flex items-center gap-2">
-                        <span className="text-slate-300 font-semibold">
+                        <span className="text-slate-200 font-bold">
                           {tree.weaponBranch.daysOfWeek.map((d) => DAY_NAMES[d]).join(', ')}
                         </span>
                         {isWeaponOpenToday && (
-                          <span className="px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[10px] font-bold animate-pulse">
+                          <span className="px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[10px] font-bold">
                             Hôm nay mở!
                           </span>
                         )}
                       </div>
+                    </div>
+
+                    {/* Số nguyên liệu đột phá cần */}
+                    <div className="p-2 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <img
+                          src={getMaterialIconUrl(tree.weaponBranch.materialName, 'weaponAscension')}
+                          alt={tree.weaponBranch.materialName}
+                          className="w-7 h-7 rounded-lg object-contain bg-slate-800/80 p-0.5 shrink-0"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).src = BASE_MATERIAL_ICONS.weaponAscension;
+                          }}
+                        />
+                        <span className="text-slate-300 text-xs truncate">
+                          Nguyên liệu đột phá ({tree.weaponBranch.materialName})
+                        </span>
+                      </div>
+                      <span className="font-bold text-sky-300 shrink-0 font-sans">
+                        {weaponCost.mats} cái
+                      </span>
+                    </div>
+
+                    {/* Mora cần */}
+                    <div className="p-2 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <img
+                          src={BASE_MATERIAL_ICONS.mora}
+                          alt="Mora"
+                          className="w-7 h-7 rounded-lg object-contain bg-slate-800/80 p-0.5 shrink-0"
+                        />
+                        <span className="text-slate-300 text-xs truncate">Mora đột phá</span>
+                      </div>
+                      <span className="font-bold text-yellow-300 shrink-0 font-sans">
+                        {weaponCost.mora.toLocaleString()}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -659,7 +693,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
 
                     <button
                       onClick={() => toggleBranchComplete(tree.id, 'talentBranch')}
-                      className={`px-2.5 py-1 rounded-xl text-xs font-bold border transition-all flex items-center gap-1.5 ${
+                      className={`px-2.5 py-1 rounded-xl text-xs font-bold border transition-all flex items-center gap-1.5 cursor-pointer ${
                         tree.talentBranch.isCompleted
                           ? 'bg-emerald-500/20 border-emerald-500/40 text-emerald-300'
                           : 'bg-white/[0.04] border-white/10 text-slate-300 hover:border-purple-400/40'
@@ -694,7 +728,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                             )
                           }
                           disabled={tree.talentBranch.currentLevels.attack <= 1}
-                          className="p-1 rounded-lg bg-white/[0.06] hover:bg-white/[0.12] disabled:opacity-40 text-slate-200"
+                          className="p-1 rounded-lg bg-white/[0.06] hover:bg-white/[0.12] disabled:opacity-40 text-slate-200 cursor-pointer"
                         >
                           <Minus className="w-3 h-3" />
                         </button>
@@ -710,7 +744,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                             )
                           }
                           disabled={tree.talentBranch.currentLevels.attack >= 10}
-                          className="p-1 rounded-lg bg-white/[0.06] hover:bg-white/[0.12] disabled:opacity-40 text-slate-200"
+                          className="p-1 rounded-lg bg-white/[0.06] hover:bg-white/[0.12] disabled:opacity-40 text-slate-200 cursor-pointer"
                         >
                           <Plus className="w-3 h-3" />
                         </button>
@@ -735,7 +769,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                             )
                           }
                           disabled={tree.talentBranch.currentLevels.skill <= 1}
-                          className="p-1 rounded-lg bg-white/[0.06] hover:bg-white/[0.12] disabled:opacity-40 text-slate-200"
+                          className="p-1 rounded-lg bg-white/[0.06] hover:bg-white/[0.12] disabled:opacity-40 text-slate-200 cursor-pointer"
                         >
                           <Minus className="w-3 h-3" />
                         </button>
@@ -751,7 +785,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                             )
                           }
                           disabled={tree.talentBranch.currentLevels.skill >= 10}
-                          className="p-1 rounded-lg bg-white/[0.06] hover:bg-white/[0.12] disabled:opacity-40 text-slate-200"
+                          className="p-1 rounded-lg bg-white/[0.06] hover:bg-white/[0.12] disabled:opacity-40 text-slate-200 cursor-pointer"
                         >
                           <Plus className="w-3 h-3" />
                         </button>
@@ -776,7 +810,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                             )
                           }
                           disabled={tree.talentBranch.currentLevels.burst <= 1}
-                          className="p-1 rounded-lg bg-white/[0.06] hover:bg-white/[0.12] disabled:opacity-40 text-slate-200"
+                          className="p-1 rounded-lg bg-white/[0.06] hover:bg-white/[0.12] disabled:opacity-40 text-slate-200 cursor-pointer"
                         >
                           <Minus className="w-3 h-3" />
                         </button>
@@ -792,7 +826,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                             )
                           }
                           disabled={tree.talentBranch.currentLevels.burst >= 10}
-                          className="p-1 rounded-lg bg-white/[0.06] hover:bg-white/[0.12] disabled:opacity-40 text-slate-200"
+                          className="p-1 rounded-lg bg-white/[0.06] hover:bg-white/[0.12] disabled:opacity-40 text-slate-200 cursor-pointer"
                         >
                           <Plus className="w-3 h-3" />
                         </button>
@@ -800,31 +834,63 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                     </div>
                   </div>
 
-                  {/* Required Materials based on current levels */}
-                  <div className="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.06] space-y-1.5 text-xs">
-                    <div className="flex items-center justify-between text-slate-300">
-                      <span className="text-slate-400">Sách Thiên Phú Vàng:</span>
-                      <span className="font-bold text-amber-300">
+                  {/* Required Materials with images */}
+                  <div className="space-y-1.5 text-xs">
+                    {/* Sách Thiên Phú Vàng */}
+                    <div className="p-2 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <img
+                          src={BASE_MATERIAL_ICONS.talentBook}
+                          alt="Talent Book"
+                          className="w-7 h-7 rounded-lg object-contain bg-slate-800/80 p-0.5 shrink-0"
+                        />
+                        <span className="text-slate-300 text-xs truncate">
+                          Sách Thiên Phú Vàng ({tree.talentBranch.talentBookName})
+                        </span>
+                      </div>
+                      <span className="font-bold text-amber-300 shrink-0 font-sans">
                         {tree.talentBranch.booksGoldNeeded} cuốn
                       </span>
                     </div>
-                    <div className="flex items-center justify-between text-slate-300">
-                      <span className="text-slate-400 truncate mr-2">
-                        {tree.talentBranch.weeklyBossMatName}:
-                      </span>
-                      <span className="font-bold text-purple-300 shrink-0">
+
+                    {/* Nguyên liệu Boss Tuần */}
+                    <div className="p-2 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <img
+                          src={getMaterialIconUrl(tree.talentBranch.weeklyBossMatName, 'bossDrop')}
+                          alt={tree.talentBranch.weeklyBossMatName}
+                          className="w-7 h-7 rounded-lg object-contain bg-slate-800/80 p-0.5 shrink-0"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).src = BASE_MATERIAL_ICONS.bossDrop;
+                          }}
+                        />
+                        <span className="text-slate-300 text-xs truncate">
+                          {tree.talentBranch.weeklyBossMatName}
+                        </span>
+                      </div>
+                      <span className="font-bold text-purple-300 shrink-0 font-sans">
                         {tree.talentBranch.weeklyBossMatsNeeded} cái
                       </span>
                     </div>
-                    <div className="flex items-center justify-between text-slate-300">
-                      <span className="text-slate-400">Vương Miện Trí Thức:</span>
-                      <span className="font-bold text-amber-400">
+
+                    {/* Vương Miện Trí Thức */}
+                    <div className="p-2 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <img
+                          src={BASE_MATERIAL_ICONS.crown}
+                          alt="Crown of Insight"
+                          className="w-7 h-7 rounded-lg object-contain bg-slate-800/80 p-0.5 shrink-0"
+                        />
+                        <span className="text-slate-300 text-xs truncate">Vương Miện Trí Thức</span>
+                      </div>
+                      <span className="font-bold text-amber-400 shrink-0 font-sans">
                         {tree.talentBranch.crownsNeeded} cái
                       </span>
                     </div>
+
                     {isTalentOpenToday && (
                       <div className="pt-1 flex items-center gap-1.5 text-emerald-300 text-[11px] font-bold">
-                        <Sparkle className="w-3.5 h-3.5 fill-current" />
+                        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
                         Bí cảnh sách hôm nay đang mở!
                       </div>
                     )}
@@ -833,7 +899,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
               )}
 
               {/* -------------------------------------------------- */}
-              {/* DETAIL: BRANCH 4 - ARTIFACTS (5 Separate Pieces)   */}
+              {/* DETAIL: BRANCH 4 - ARTIFACTS (Không hiện tên bộ)   */}
               {/* -------------------------------------------------- */}
               {activeBranch === 'artifact' && (
                 <div className="space-y-3.5">
@@ -846,15 +912,15 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                         <h4 className="text-xs sm:text-sm font-bold text-slate-100">
                           Nhánh Thánh Di Vật (5 Món)
                         </h4>
-                        <p className="text-[11px] text-slate-400 truncate max-w-[200px]">
-                          {tree.artifactBranch.setName}
+                        <p className="text-[11px] text-slate-400">
+                          Kiểm soát cấp độ và tối ưu
                         </p>
                       </div>
                     </div>
 
                     <button
                       onClick={() => toggleBranchComplete(tree.id, 'artifactBranch')}
-                      className={`px-2.5 py-1 rounded-xl text-xs font-bold border transition-all flex items-center gap-1.5 ${
+                      className={`px-2.5 py-1 rounded-xl text-xs font-bold border transition-all flex items-center gap-1.5 cursor-pointer ${
                         tree.artifactBranch.isCompleted
                           ? 'bg-emerald-500/20 border-emerald-500/40 text-emerald-300'
                           : 'bg-white/[0.04] border-white/10 text-slate-300 hover:border-rose-400/40'
@@ -884,33 +950,37 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                     </div>
                   </div>
 
-                  {/* 5 Distinct Artifact Pieces */}
+                  {/* 5 Distinct Artifact Pieces - Không có dòng phụ bên dưới */}
                   <div className="space-y-1.5">
                     {artifactPieces.map((piece, idx) => {
-                      const meta = ARTIFACT_SLOT_META[piece.slotKey] || {
-                        label: piece.slotName,
-                        icon: '🛡️',
-                        statHint: 'Chỉ số',
-                      };
+                      // Correct name for plume is Lông Vũ Tử Vong
+                      const pieceName =
+                        piece.slotKey === 'plume' ? 'Lông Vũ Tử Vong' : piece.slotName;
+                      const slotIcon =
+                        piece.slotKey === 'flower'
+                          ? '🌸'
+                          : piece.slotKey === 'plume'
+                          ? '🪶'
+                          : piece.slotKey === 'sands'
+                          ? '⏳'
+                          : piece.slotKey === 'goblet'
+                          ? '🏆'
+                          : '👑';
+
                       return (
                         <div
                           key={piece.slotKey}
-                          className={`p-2 rounded-xl border transition-all flex items-center justify-between gap-2 ${
+                          className={`p-2.5 rounded-xl border transition-all flex items-center justify-between gap-2 ${
                             piece.isOptimized
                               ? 'bg-emerald-500/[0.08] border-emerald-500/30'
                               : 'bg-white/[0.02] border-white/[0.06]'
                           }`}
                         >
                           <div className="flex items-center gap-2 min-w-0">
-                            <span className="text-base shrink-0">{meta.icon}</span>
-                            <div className="min-w-0">
-                              <div className="text-xs font-bold text-slate-200 truncate">
-                                {meta.label}
-                              </div>
-                              <div className="text-[10px] text-slate-400 truncate">
-                                {meta.statHint}
-                              </div>
-                            </div>
+                            <span className="text-base shrink-0">{slotIcon}</span>
+                            <span className="text-xs font-bold text-slate-200 truncate">
+                              {pieceName}
+                            </span>
                           </div>
 
                           <div className="flex items-center gap-2 shrink-0">
@@ -923,7 +993,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                                   })
                                 }
                                 disabled={piece.level <= 0}
-                                className="text-slate-400 hover:text-slate-100 disabled:opacity-30 text-xs px-1"
+                                className="text-slate-400 hover:text-slate-100 disabled:opacity-30 text-xs px-1 cursor-pointer"
                               >
                                 -
                               </button>
@@ -937,7 +1007,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                                   })
                                 }
                                 disabled={piece.level >= 20}
-                                className="text-slate-400 hover:text-slate-100 disabled:opacity-30 text-xs px-1"
+                                className="text-slate-400 hover:text-slate-100 disabled:opacity-30 text-xs px-1 cursor-pointer"
                               >
                                 +
                               </button>

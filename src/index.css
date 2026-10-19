@@ -154,3 +154,25 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.25);
 }
+
+/* Drawer opening animation ("mở ra như ngăn kéo") */
+@keyframes drawerSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-35px) scaleX(0.95);
+    clip-path: inset(0 100% 0 0);
+  }
+  50% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scaleX(1);
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.animate-drawer-open {
+  animation: drawerSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transform-origin: left center;
+}

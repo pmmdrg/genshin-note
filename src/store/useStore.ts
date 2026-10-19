@@ -27,6 +27,8 @@ interface AppState {
 
   // Character Branch Trees (Việc Cần Làm / Timeline)
   characterTrees: CharacterBranchTree[];
+  lastAddedTreeId: string | null;
+  setLastAddedTreeId: (id: string | null) => void;
   addCharacterToTimeline: (character: UserCharacter) => void;
   reorderCharacterTrees: (activeId: string, overId: string) => void;
   toggleBranchComplete: (treeId: string, branchKey: 'levelBranch' | 'weaponBranch' | 'talentBranch' | 'artifactBranch') => void;
@@ -238,7 +240,9 @@ export const useStore = create<AppState>()(
           }));
         },
 
-      // Starter character trees on timeline
+      // Character Branch Trees (Việc Cần Làm / Timeline)
+      lastAddedTreeId: null,
+      setLastAddedTreeId: (id) => set({ lastAddedTreeId: id }),
       characterTrees: [
         {
           id: 'tree-starter-furina',
@@ -426,6 +430,7 @@ export const useStore = create<AppState>()(
 
         set((state) => ({
           characterTrees: [newTree, ...state.characterTrees],
+          lastAddedTreeId: newTree.id,
           activeNav: 'timeline',
         }));
       },
