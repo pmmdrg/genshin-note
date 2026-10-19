@@ -200,11 +200,13 @@ export const WeaponSelectionDrawer: React.FC<WeaponSelectionDrawerProps> = ({
                 { id: '5', label: '5★ Vàng', color: 'text-amber-400' },
                 { id: '4', label: '4★ Tím', color: 'text-purple-400' },
                 { id: '3', label: '3★ Lam', color: 'text-sky-400' },
+                { id: '2', label: '2★ Lục', color: 'text-emerald-400' },
+                { id: '1', label: '1★ Xám', color: 'text-slate-400' },
               ].map((r) => (
                 <button
                   key={r.id}
                   onClick={() => setSelectedRarity(r.id)}
-                  className={`px-2.5 py-1 rounded-lg font-bold text-[11px] transition-all cursor-pointer border liquid-glass-interactive ${
+                  className={`px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-lg font-bold text-[11px] transition-all cursor-pointer border liquid-glass-interactive ${
                     selectedRarity === r.id
                       ? '!bg-white/20 border-white/40 text-white shadow-[0_0_12px_rgba(255,255,255,0.15)]'
                       : 'bg-transparent border-transparent text-slate-500 hover:text-slate-300 hover:bg-white/[0.04]'
@@ -252,11 +254,25 @@ export const WeaponSelectionDrawer: React.FC<WeaponSelectionDrawerProps> = ({
                         starColor: 'text-purple-300 drop-shadow-[0_0_8px_rgba(192,132,252,0.6)]',
                         avatarBg: 'bg-gradient-to-b from-purple-500/25 to-transparent border-purple-400/40',
                       }
-                    : {
+                    : weapon.rarity === 3
+                    ? {
                         border: 'border-sky-400/30 hover:border-sky-300',
                         bg: 'bg-gradient-to-br from-sky-500/[0.08] to-transparent',
                         starColor: 'text-sky-300',
                         avatarBg: 'bg-gradient-to-b from-sky-500/25 to-transparent border-sky-400/30',
+                      }
+                    : weapon.rarity === 2
+                    ? {
+                        border: 'border-emerald-400/30 hover:border-emerald-300',
+                        bg: 'bg-gradient-to-br from-emerald-500/[0.08] to-transparent',
+                        starColor: 'text-emerald-300',
+                        avatarBg: 'bg-gradient-to-b from-emerald-500/25 to-transparent border-emerald-400/30',
+                      }
+                    : {
+                        border: 'border-slate-500/30 hover:border-slate-400',
+                        bg: 'bg-gradient-to-br from-slate-500/[0.08] to-transparent',
+                        starColor: 'text-slate-400',
+                        avatarBg: 'bg-gradient-to-b from-slate-500/25 to-transparent border-slate-500/30',
                       };
 
                 return (

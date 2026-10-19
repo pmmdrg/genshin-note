@@ -23,7 +23,7 @@ export interface TaskGoal {
   targetName?: string;
   targetAvatar?: string;
   element?: ElementType;
-  rarity?: 3 | 4 | 5;
+  rarity?: 1 | 2 | 3 | 4 | 5;
   farmTarget?: FarmMaterial;
   order: number;
   isCompleted: boolean;
@@ -208,7 +208,7 @@ export interface CharacterPreset {
 export interface WeaponPreset {
   name: string;
   nameVi: string;
-  rarity: 3 | 4 | 5;
+  rarity: 1 | 2 | 3 | 4 | 5;
   type: 'sword' | 'claymore' | 'polearm' | 'bow' | 'catalyst';
   ascensionMat: string;
   ascensionMatIcon?: string;

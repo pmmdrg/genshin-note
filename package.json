@@ -1,7 +1,7 @@
 {
   "name": "genshin-note",
   "private": true,
-  "version": "1.5.7",
+  "version": "1.5.8",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -29,6 +29,7 @@
     "@types/react-dom": "^19.3.0",
     "@vercel/node": "^24.0.3",
     "@vitejs/plugin-react": "^6.1.2",
+    "genshin-db": "^5.2.14",
     "oxlint": "^1.88.0",
     "sharp": "^0.35.5",
     "typescript": "~7.0.2",
