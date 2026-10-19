@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Search, X, Sparkles, Check, Calendar } from 'lucide-react';
 import type { WeaponPreset } from '../types';
 import { WEAPONS_DATA } from '../data/genshinData';
@@ -83,23 +84,23 @@ export const WeaponSelectionDrawer: React.FC<WeaponSelectionDrawerProps> = ({
     return true;
   });
 
-  return (
+  if (typeof document === 'undefined') return null;
+
+  return createPortal(
     <div
-      className={`fixed inset-0 z-[100] transition-all duration-300 ${
-        isOpen ? 'pointer-events-auto' : 'pointer-events-none'
+      className={`fixed inset-0 z-[99999] transition-all duration-300 ${
+        isOpen ? 'pointer-events-auto visible opacity-100' : 'pointer-events-none invisible opacity-0'
       }`}
     >
       {/* Backdrop overlay with fade */}
       <div
         onClick={onClose}
-        className={`fixed inset-0 bg-slate-950/70 backdrop-blur-sm transition-opacity duration-300 ${
-          isOpen ? 'opacity-100' : 'opacity-0'
-        }`}
+        className="fixed inset-0 bg-slate-950/75 backdrop-blur-sm transition-opacity duration-300"
       />
 
       {/* Slide-in Drawer from Right */}
       <aside
-        className={`fixed inset-y-0 right-0 w-full sm:w-[480px] md:w-[540px] bg-slate-900/95 border-l border-white/10 backdrop-blur-2xl shadow-[-20px_0_50px_rgba(0,0,0,0.85)] flex flex-col z-[101] transition-transform duration-300 ease-out ${
+        className={`fixed inset-y-0 right-0 top-0 bottom-0 h-screen h-[100dvh] w-full sm:w-[480px] md:w-[540px] max-w-[100vw] bg-slate-900/98 border-l border-white/10 backdrop-blur-2xl shadow-[-20px_0_50px_rgba(0,0,0,0.85)] flex flex-col z-[100000] transition-transform duration-300 ease-out ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
@@ -345,6 +346,7 @@ export const WeaponSelectionDrawer: React.FC<WeaponSelectionDrawerProps> = ({
           )}
         </div>
       </aside>
-    </div>
+    </div>,
+    document.body
   );
 };

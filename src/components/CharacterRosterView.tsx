@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, Plus, Layers, RotateCw, Check, X, Sparkles } from 'lucide-react';
+import { Search, Plus, Layers, RotateCw, Check, X, Sparkles, ArrowRight } from 'lucide-react';
 import { useStore } from '../store/useStore';
 import { ELEMENT_NAMES_VI } from '../data/genshinData';
 import { ElementIcon } from './ElementIcon';
@@ -36,6 +36,7 @@ export const CharacterRosterView: React.FC = () => {
   };
 
   const c6Count = characters.filter((c) => c.constellation === 6).length;
+  const activeTimelineCount = characterTrees.filter((t) => !t.isCompleted).length;
 
   const filteredCharacters = characters.filter((c) => {
     const q = debouncedSearch.toLowerCase().trim();
@@ -54,13 +55,17 @@ export const CharacterRosterView: React.FC = () => {
       return;
     }
     confetti({
-      particleCount: 50,
-      spread: 60,
-      origin: { y: 0.7 },
+      particleCount: 35,
+      spread: 50,
+      origin: { y: 0.8 },
+      colors: ['#10b981', '#f59e0b', '#3b82f6'],
     });
     addCharacterToTimeline(char);
-    setAddedCharName(char.nameVi || char.name);
-    navigate('/timeline');
+    const displayName = char.nameVi || char.name;
+    setAddedCharName(displayName);
+    setTimeout(() => {
+      setAddedCharName((prev) => (prev === displayName ? null : prev));
+    }, 2200);
   };
 
   return (
@@ -289,12 +294,30 @@ export const CharacterRosterView: React.FC = () => {
         )}
       </div>
 
-      {/* Toast thông báo đã thêm vào Timeline */}
+      {/* Toast thông báo đã thêm vào Timeline (Center-bottom) */}
       {addedCharName && (
-        <div className="fixed bottom-8 right-8 z-50 px-4 py-2.5 rounded-2xl bg-slate-900/95 border border-emerald-400/40 backdrop-blur-xl text-xs font-bold text-emerald-300 shadow-[0_8px_30px_rgba(0,0,0,0.6)] animate-in fade-in slide-in-from-bottom-2 duration-200 flex items-center gap-2">
-          <Check className="w-4 h-4 text-emerald-400" />
-          <span>Đã thêm {addedCharName} vào Việc Cần Làm!</span>
+        <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 px-4 py-2.5 rounded-2xl bg-slate-900/95 border border-emerald-400/50 backdrop-blur-xl text-xs font-bold text-emerald-300 shadow-[0_10px_35px_rgba(16,185,129,0.35)] animate-in fade-in slide-in-from-bottom-3 duration-200 flex items-center gap-2 pointer-events-none ring-1 ring-emerald-500/30">
+          <Check className="w-4 h-4 text-emerald-400 stroke-[3]" />
+          <span>Đã thêm <strong>{addedCharName}</strong> vào Timeline!</span>
         </div>
+      )}
+
+      {/* Floating Timeline "Cart" Button */}
+      {activeTimelineCount > 0 && (
+        <button
+          onClick={() => navigate('/timeline')}
+          className="fixed bottom-6 right-6 z-40 px-4 py-3 rounded-2xl bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-slate-950 font-extrabold text-xs sm:text-sm shadow-[0_8px_30px_rgba(245,158,11,0.5)] hover:shadow-[0_12px_40px_rgba(245,158,11,0.7)] hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-2.5 cursor-pointer backdrop-blur-xl group"
+          title="Chuyển đến trang Việc Cần Làm (Timeline)"
+        >
+          <div className="relative">
+            <Layers className="w-4 h-4 sm:w-5 sm:h-5" />
+            <span className="absolute -top-2 -right-2 px-1.5 py-0.2 rounded-full bg-slate-950 text-amber-300 text-[10px] font-black border border-amber-300 shadow-sm animate-pulse">
+              {activeTimelineCount}
+            </span>
+          </div>
+          <span>Xem Timeline ({activeTimelineCount})</span>
+          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+        </button>
       )}
     </div>
   );
