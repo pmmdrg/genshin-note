@@ -71,7 +71,7 @@ export const Sidebar: React.FC = () => {
             </div>
             <div>
               <div className="flex items-center gap-1.5">
-                <h1 className="text-base font-bold tracking-tight bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent font-genshin">
+                <h1 className="text-base font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
                   Genshin Note
                 </h1>
                 <span className="text-[10px] font-mono font-bold px-1.5 py-0.2 rounded-md bg-white/[0.06] text-slate-400 border border-white/[0.08]">

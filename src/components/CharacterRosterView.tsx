@@ -160,9 +160,9 @@ export const CharacterRosterView: React.FC = () => {
                       </div>
                     )}
 
-                    {/* Element Icon - Không để trong khung, biểu tượng nguyên tố tự nhiên */}
-                    <div className="absolute top-1.5 right-1.5 z-10 drop-shadow-[0_2px_4px_rgba(0,0,0,0.85)] pointer-events-none">
-                      <ElementIcon element={char.element} className="w-4 h-4" />
+                    {/* Element Icon - Không để trong khung, biểu tượng nguyên tố tự nhiên to và rõ */}
+                    <div className="absolute top-1.5 right-1.5 z-10 drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)] pointer-events-none">
+                      <ElementIcon element={char.element} className="w-6 h-6 sm:w-7 sm:h-7" />
                     </div>
 
                     <img
@@ -175,16 +175,18 @@ export const CharacterRosterView: React.FC = () => {
                     />
                   </div>
 
-                  {/* Character Name & Level */}
-                  <div className="w-full px-0.5">
-                    <div className="text-[11px] font-bold text-slate-200 truncate group-hover:text-amber-300 transition-colors">
-                      {char.nameVi}
-                    </div>
-                    <div className="flex items-center justify-center gap-1.5 text-[10px] mt-0.5">
-                      <span className="font-mono font-semibold text-slate-400">Lv.{char.level}</span>
-                      <span className="text-amber-400 text-[9px] font-bold">
-                        {'★'.repeat(char.rarity)}
+                  {/* Character Name & Level inline horizontally on row 1, Stars on row 2 */}
+                  <div className="w-full px-1 pt-1.5 text-center">
+                    <div className="flex items-center justify-center gap-1.5 min-w-0">
+                      <span className="text-xs sm:text-sm font-bold text-slate-100 truncate group-hover:text-amber-300 transition-colors font-genshin tracking-wide">
+                        {char.nameVi}
                       </span>
+                      <span className="text-[10px] sm:text-[11px] font-mono font-black text-amber-300 bg-amber-400/20 px-1.5 py-0.5 rounded-md border border-amber-400/35 shrink-0 shadow-sm">
+                        Lv.{char.level}
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-center text-amber-400 text-xs sm:text-sm font-bold tracking-wider mt-1 drop-shadow-[0_0_8px_rgba(251,191,36,0.7)]">
+                      {'★'.repeat(char.rarity)}
                     </div>
                   </div>
                 </div>
@@ -209,7 +211,7 @@ export const CharacterRosterView: React.FC = () => {
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-5 border-b border-white/[0.08]">
               <div className="flex items-center gap-4">
                 <div
-                  className={`w-16 h-16 rounded-2xl overflow-hidden shrink-0 border relative backdrop-blur-md shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)] ${
+                  className={`w-20 h-20 sm:w-24 sm:h-24 rounded-3xl overflow-hidden shrink-0 border relative backdrop-blur-md shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)] ${
                     ELEMENT_COLORS[selectedChar.element].border
                   }`}
                 >
@@ -220,30 +222,30 @@ export const CharacterRosterView: React.FC = () => {
                   />
                 </div>
                 <div>
-                  {/* Name & Level inline horizontally (to hơn) */}
-                  <div className="flex items-center gap-3 flex-wrap">
-                    <h3 className="text-2xl sm:text-3xl font-black text-slate-100 font-genshin tracking-wide drop-shadow-sm">
+                  {/* Name & Level inline horizontally (to hơn rõ rệt) */}
+                  <div className="flex items-center gap-3.5 flex-wrap">
+                    <h3 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-100 font-genshin tracking-wide drop-shadow-md">
                       {selectedChar.nameVi}
                     </h3>
-                    <span className="text-xs sm:text-sm font-mono font-black px-3 py-1 rounded-xl bg-amber-400/20 text-amber-300 border border-amber-400/40 shadow-sm">
+                    <span className="text-sm sm:text-base font-mono font-black px-3.5 py-1 rounded-2xl bg-amber-400/20 text-amber-300 border border-amber-400/40 shadow-md">
                       Lv.{selectedChar.level}
                     </span>
                   </div>
 
-                  {/* Stars rating directly below name (to hơn) */}
-                  <div className="flex items-center gap-2 mt-1.5">
-                    <div className="flex text-amber-400 text-base sm:text-lg tracking-widest drop-shadow-[0_0_8px_rgba(251,191,36,0.65)]">
+                  {/* Stars rating directly below name (to hơn nhiều) */}
+                  <div className="flex items-center gap-2.5 mt-2">
+                    <div className="flex text-amber-400 text-xl sm:text-2xl lg:text-3xl tracking-widest drop-shadow-[0_0_12px_rgba(251,191,36,0.85)]">
                       {'★'.repeat(selectedChar.rarity)}
                     </div>
-                    <span className="text-xs text-amber-300/90 font-bold bg-amber-400/10 px-2 py-0.5 rounded-md border border-amber-400/20">
+                    <span className="text-xs sm:text-sm text-amber-300 font-bold bg-amber-400/15 px-2.5 py-0.5 rounded-lg border border-amber-400/30 shadow-sm">
                       {selectedChar.rarity} Sao
                     </span>
                   </div>
 
-                  {/* Element in Vietnamese (Không để trong khung), Constellation, and Fetter below stars */}
-                  <div className="flex items-center gap-2.5 text-xs text-slate-400 mt-2 flex-wrap">
-                    <span className="inline-flex items-center gap-1.5 font-bold">
-                      <ElementIcon element={selectedChar.element} className="w-4 h-4 drop-shadow-[0_0_6px_rgba(0,0,0,0.8)]" />
+                  {/* Element in Vietnamese (Không để trong khung, icon to và rõ), Constellation, and Fetter below stars */}
+                  <div className="flex items-center gap-3 text-xs sm:text-sm text-slate-400 mt-2.5 flex-wrap">
+                    <span className="inline-flex items-center gap-2 font-bold">
+                      <ElementIcon element={selectedChar.element} className="w-6 h-6 sm:w-7 sm:h-7 drop-shadow-[0_0_8px_rgba(0,0,0,0.9)]" />
                       <span className={ELEMENT_COLORS[selectedChar.element].text}>
                         Hệ {ELEMENT_NAMES_VI[selectedChar.element] || selectedChar.element}
                       </span>
@@ -321,7 +323,7 @@ export const CharacterRosterView: React.FC = () => {
                       </span>
                     </div>
 
-                    <h4 className="text-xl sm:text-2xl font-black text-slate-100 font-genshin tracking-wide mt-1.5">
+                    <h4 className="text-xl sm:text-2xl font-black text-slate-100 tracking-tight mt-1.5">
                       {selectedChar.weapon?.name || 'Chưa trang bị'}
                     </h4>
                   </div>
@@ -351,7 +353,7 @@ export const CharacterRosterView: React.FC = () => {
                   </div>
                   <div>
                     <div className="text-[11px] text-slate-400 font-medium">Bộ Thánh Di Vật Kích Hoạt</div>
-                    <h4 className="text-lg font-black text-slate-100 font-genshin tracking-wide text-emerald-300">
+                    <h4 className="text-lg sm:text-xl font-black text-slate-100 text-emerald-300 tracking-tight">
                       {selectedChar.relics?.[0]?.setName || 'Bộ Thánh Di Vật'}
                     </h4>
                   </div>
