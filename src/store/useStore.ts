@@ -101,6 +101,16 @@ export const useStore = create<AppState>()(
 
               const element = (hoyoChar.element || userPreset?.element || dataPreset?.element || 'pyro').toLowerCase() as any;
 
+              const weaponType = dataPreset?.weaponType || 'sword';
+              const weaponDefaults: Record<string, { name: string; icon: string; typeName: string }> = {
+                sword: { name: 'Tây Phong Kiếm', icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_EquipIcon_Sword_Favonius.png', typeName: 'Kiếm Đơn' },
+                claymore: { name: 'Đường Cùng Của Sói', icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_EquipIcon_Claymore_Wolfmound.png', typeName: 'Trọng Kiếm' },
+                polearm: { name: 'Thương Tây Phong', icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_EquipIcon_Pole_Favonius.png', typeName: 'Vũ Khí Cán Dài' },
+                bow: { name: 'Cung Tây Phong', icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_EquipIcon_Bow_Favonius.png', typeName: 'Cung' },
+                catalyst: { name: 'Mảnh Chương Tế Lễ', icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_EquipIcon_Catalyst_Fossil.png', typeName: 'Pháp Khí' },
+              };
+              const defaultWeapon = weaponDefaults[weaponType] || weaponDefaults.sword;
+
               return {
                 id: `char-hoyo-${hoyoChar.id}`,
                 name: rawName,
@@ -120,17 +130,17 @@ export const useStore = create<AppState>()(
                       rarity: hoyoChar.weapon.rarity,
                       level: hoyoChar.weapon.level,
                       affixLevel: hoyoChar.weapon.affix_level || 1,
-                      typeName: hoyoChar.weapon.type_name || 'Vũ khí',
+                      typeName: hoyoChar.weapon.type_name || defaultWeapon.typeName,
                       domainDays: [1, 4, 0],
                       materialName: 'Nguyên liệu rèn',
                     }
                   : userPreset?.weapon || {
-                      name: 'Vũ Khí Chuyên Dụng',
-                      icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_EquipIcon_Sword_Favonius.png',
+                      name: defaultWeapon.name,
+                      icon: defaultWeapon.icon,
                       rarity: 4,
-                      level: 80,
+                      level: Math.min(90, Math.max(70, hoyoChar.level || 80)),
                       affixLevel: 1,
-                      typeName: 'Vũ khí',
+                      typeName: defaultWeapon.typeName,
                       domainDays: [1, 4, 0],
                       materialName: 'Nguyên liệu rèn',
                     },
@@ -162,8 +172,8 @@ export const useStore = create<AppState>()(
                 talentDomain: userPreset?.talentDomain || dataPreset?.talentDomain || 'Bí Cảnh Thiên Phú',
                 talentDays: userPreset?.talentDays || dataPreset?.talentDays || [1, 4, 0],
                 weeklyBossMat: userPreset?.weeklyBossMat || dataPreset?.weeklyBossMat || 'Nguyên Liệu Boss Tuần',
-                worldBossMat: userPreset?.worldBossMat || 'Nguyên Liệu Boss Thế Giới',
-                localSpecialty: userPreset?.localSpecialty || 'Đặc Sản Khu Vực',
+                worldBossMat: userPreset?.worldBossMat || dataPreset?.worldBossMat || 'Nguyên Liệu Boss Thế Giới',
+                localSpecialty: userPreset?.localSpecialty || dataPreset?.localSpecialty || 'Đặc Sản Khu Vực',
               };
             });
 
@@ -177,7 +187,7 @@ export const useStore = create<AppState>()(
             set((state) => ({
               characters: transformed,
               selectedCharacterId:
-                transformed.some((c) => c.id === state.selectedCharacterId)
+                transformed.some((c) => c.id === state.selectedCharacterId && state.selectedCharacterId.startsWith('char-hoyo-'))
                   ? state.selectedCharacterId
                   : transformed[0]?.id || state.selectedCharacterId,
               characterFetchLoading: false,

@@ -173,6 +173,8 @@ export interface CharacterPreset {
   talentDomain: string;
   talentDays: number[];
   weeklyBossMat: string;
+  worldBossMat?: string;
+  localSpecialty?: string;
   avatarUrl: string;
 }
 
