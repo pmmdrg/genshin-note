@@ -1,66 +1,22 @@
 import React, { useState } from 'react';
-import { Search, Plus, Sparkles, Sword, Shield, BookOpen, Layers, RotateCw, SlidersHorizontal, Check, X } from 'lucide-react';
+import { Search, Plus, Layers, RotateCw, Check } from 'lucide-react';
 import { useStore } from '../store/useStore';
-import { ELEMENT_COLORS, ELEMENT_NAMES_VI } from '../data/genshinData';
-import { calculateLevelTo90Cost, calculateTalentCost } from '../utils/calculator';
-import { isDomainOpenToday } from '../utils/priority';
+import { ELEMENT_NAMES_VI } from '../data/genshinData';
 import { ElementIcon } from './ElementIcon';
+import type { UserCharacter } from '../types';
 import confetti from 'canvas-confetti';
 
 export const CharacterRosterView: React.FC = () => {
   const {
     characters,
-    selectedCharacterId,
-    setSelectedCharacterId,
     addCharacterToTimeline,
     fetchCharactersFromHoyo,
     characterFetchLoading,
-    updateCharacterCustomData,
   } = useStore();
 
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedElement, setSelectedElement] = useState<string>('all');
-  const targetLevel = 90;
-  const [isAddedToast, setIsAddedToast] = useState(false);
-
-  // Edit custom equipment and talents modal
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [editWeaponName, setEditWeaponName] = useState('');
-  const [editWeaponLevel, setEditWeaponLevel] = useState(90);
-  const [editWeaponAffix, setEditWeaponAffix] = useState(1);
-  const [editRelicSet, setEditRelicSet] = useState('');
-  const [editAttackTalent, setEditAttackTalent] = useState(1);
-  const [editSkillTalent, setEditSkillTalent] = useState(1);
-  const [editBurstTalent, setEditBurstTalent] = useState(1);
-
-  const openEditModal = (char: typeof selectedChar) => {
-    if (!char) return;
-    setEditWeaponName(char.weapon?.name || '');
-    setEditWeaponLevel(char.weapon?.level || 90);
-    setEditWeaponAffix(char.weapon?.affixLevel || 1);
-    setEditRelicSet(char.relics?.[0]?.setName || '');
-    setEditAttackTalent(char.talents?.attack || 1);
-    setEditSkillTalent(char.talents?.skill || 1);
-    setEditBurstTalent(char.talents?.burst || 1);
-    setIsEditModalOpen(true);
-  };
-
-  const handleSaveCustomData = () => {
-    if (!selectedChar) return;
-    updateCharacterCustomData(selectedChar.id, {
-      weaponName: editWeaponName,
-      weaponLevel: editWeaponLevel,
-      weaponAffix: editWeaponAffix,
-      relicSetName: editRelicSet,
-      talents: {
-        attack: editAttackTalent,
-        skill: editSkillTalent,
-        burst: editBurstTalent,
-      },
-    });
-    setIsEditModalOpen(false);
-  };
-
+  const [addedCharName, setAddedCharName] = useState<string | null>(null);
 
   const filteredCharacters = characters.filter((c) => {
     const matchesSearch =
@@ -70,686 +26,194 @@ export const CharacterRosterView: React.FC = () => {
     return matchesSearch && matchesElement;
   });
 
-  const selectedChar = characters.find((c) => c.id === selectedCharacterId) || characters[0];
-
-  const levelCost = selectedChar
-    ? calculateLevelTo90Cost(selectedChar.level, targetLevel)
-    : { heroWit: 0, mora: 0, bossDrops: 0, localSpecialty: 0 };
-
-  const talentCost = selectedChar
-    ? calculateTalentCost(
-        selectedChar.talents || { attack: 1, skill: 1, burst: 1 },
-        { attack: 10, skill: 10, burst: 10 }
-      )
-    : { goldBooks: 0, weeklyBossMats: 0, crowns: 0, mora: 0 };
-
-  const isOpenToday = selectedChar ? isDomainOpenToday(selectedChar.talentDays) : false;
-
-  const handleAddToTimeline = () => {
-    if (!selectedChar) return;
+  const handleAddCharacter = (char: UserCharacter) => {
     confetti({
-      particleCount: 60,
+      particleCount: 50,
       spread: 60,
-      origin: { y: 0.6 },
+      origin: { y: 0.7 },
     });
-    addCharacterToTimeline(selectedChar);
-    setIsAddedToast(true);
-    setTimeout(() => setIsAddedToast(false), 3000);
+    addCharacterToTimeline(char);
+    setAddedCharName(char.nameVi || char.name);
+    setTimeout(() => setAddedCharName(null), 3000);
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-      {/* ================= LEFT PANEL: 4-COLUMN CHARACTER GRID (5 cols on lg) ================= */}
-      <div className="lg:col-span-6 space-y-4">
-        {/* Search & Filter Header */}
-        <div className="liquid-glass rounded-3xl p-4 space-y-3">
-          <div className="flex items-center justify-between gap-2">
-            <h2 className="text-base font-bold text-slate-100 flex items-center gap-2">
-              <Layers className="w-4 h-4 text-amber-300" />
-              <span>Danh Sách Nhân Vật</span>
-              <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-white/[0.06] text-slate-300 border border-white/[0.08]">
-                {characters.length}
-              </span>
-            </h2>
-
-            <button
-              onClick={() => fetchCharactersFromHoyo()}
-              disabled={characterFetchLoading}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-white/20 text-xs font-semibold text-slate-200 transition-all active:scale-95 disabled:opacity-50"
-              title="Đồng bộ danh sách nhân vật từ tài khoản HoYoLAB"
-            >
-              <RotateCw className={`w-3.5 h-3.5 text-cyan-400 ${characterFetchLoading ? 'animate-spin' : ''}`} />
-              <span>{characterFetchLoading ? 'Đang tải...' : 'Đồng bộ HoYoLAB'}</span>
-            </button>
+    <div className="space-y-5 max-w-7xl mx-auto w-full">
+      {/* ================= SEARCH & FILTER BAR (LIQUID GLASS) ================= */}
+      <div className="liquid-glass rounded-3xl p-5 sm:p-6 space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-2xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-300 shadow-[0_0_15px_rgba(245,158,11,0.2)]">
+              <Layers className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <h2 className="text-lg font-bold text-slate-100">Danh Sách Nhân Vật</h2>
+                <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-amber-400/15 text-amber-300 border border-amber-400/30">
+                  {filteredCharacters.length} / {characters.length}
+                </span>
+              </div>
+              <p className="text-xs text-slate-400 mt-0.5">
+                Nhấn vào nút <span className="text-amber-300 font-semibold">+ Timeline</span> ở mỗi nhân vật để thêm vào kế hoạch cày cuốc
+              </p>
+            </div>
           </div>
 
-          {/* Search bar - perfectly vertically centered icon */}
-          <div className="relative flex items-center">
-            <Search className="w-4 h-4 absolute left-3.5 text-slate-400 pointer-events-none" />
-            <input
-              type="text"
-              placeholder="Tìm kiếm nhân vật (Furina, Raiden, Bennett...)"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full bg-white/[0.04] border border-white/[0.08] focus:border-amber-400/50 rounded-2xl pl-10 pr-3 py-2 text-xs text-slate-100 placeholder-slate-500 focus:outline-none transition-all"
-            />
-          </div>
-
-          {/* Element filter pills in Vietnamese */}
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-[11px] font-semibold">
-            {['all', 'pyro', 'hydro', 'anemo', 'electro', 'dendro', 'cryo', 'geo'].map((elem) => {
-              const label = elem === 'all' ? 'Tất cả' : (ELEMENT_NAMES_VI[elem as keyof typeof ELEMENT_NAMES_VI] || elem);
-              return (
-                <button
-                  key={elem}
-                  onClick={() => setSelectedElement(elem)}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl transition-all capitalize shrink-0 ${
-                    selectedElement === elem
-                      ? 'bg-white/[0.15] text-white border border-white/20 shadow-md font-bold'
-                      : 'text-slate-400 hover:text-slate-200 hover:bg-white/[0.04]'
-                  }`}
-                >
-                  {elem !== 'all' && (
-                    <ElementIcon element={elem as any} className="w-3.5 h-3.5" />
-                  )}
-                  <span>{label}</span>
-                </button>
-              );
-            })}
-          </div>
+          <button
+            onClick={() => fetchCharactersFromHoyo()}
+            disabled={characterFetchLoading}
+            className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.1] hover:border-cyan-400/40 text-xs font-semibold text-slate-200 transition-all active:scale-95 disabled:opacity-50 shadow-sm"
+            title="Đồng bộ danh sách nhân vật thực tế từ tài khoản HoYoLAB"
+          >
+            <RotateCw className={`w-4 h-4 text-cyan-400 ${characterFetchLoading ? 'animate-spin' : ''}`} />
+            <span>{characterFetchLoading ? 'Đang đồng bộ...' : 'Đồng bộ HoYoLAB'}</span>
+          </button>
         </div>
 
-        {/* 4-COLUMN CHARACTER GRID */}
-        <div className="liquid-glass rounded-3xl p-4 max-h-[620px] overflow-y-auto">
-          <div className="grid grid-cols-4 gap-2.5">
+        {/* Search Input */}
+        <div className="relative flex items-center">
+          <Search className="w-4 h-4 absolute left-4 text-slate-400 pointer-events-none" />
+          <input
+            type="text"
+            placeholder="Tìm kiếm nhân vật theo tên (Diluc, Furina, Raiden, Zhongli, Bennett...)"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full bg-white/[0.04] border border-white/[0.1] focus:border-amber-400/50 rounded-2xl pl-11 pr-4 py-2.5 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:outline-none transition-all shadow-inner"
+          />
+        </div>
+
+        {/* Element Filter Pills (Vietnamese) */}
+        <div className="flex items-center gap-2 overflow-x-auto pb-1 text-xs font-semibold scrollbar-none">
+          {['all', 'pyro', 'hydro', 'anemo', 'electro', 'dendro', 'cryo', 'geo'].map((elem) => {
+            const label = elem === 'all' ? 'Tất cả hệ' : `Hệ ${ELEMENT_NAMES_VI[elem as keyof typeof ELEMENT_NAMES_VI] || elem}`;
+            const isSelected = selectedElement === elem;
+            return (
+              <button
+                key={elem}
+                onClick={() => setSelectedElement(elem)}
+                className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl transition-all capitalize shrink-0 ${
+                  isSelected
+                    ? 'bg-amber-400/20 text-amber-300 border border-amber-400/40 shadow-md font-bold'
+                    : 'text-slate-400 hover:text-slate-200 hover:bg-white/[0.05] border border-transparent'
+                }`}
+              >
+                {elem !== 'all' && (
+                  <ElementIcon element={elem as any} className="w-4 h-4" />
+                )}
+                <span>{label}</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* ================= EXPANDED FULL-WIDTH CHARACTER GRID ================= */}
+      <div className="liquid-glass rounded-3xl p-5 sm:p-6 min-h-[500px]">
+        {filteredCharacters.length === 0 ? (
+          <div className="py-20 text-center space-y-3">
+            <div className="w-12 h-12 rounded-2xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-center mx-auto text-slate-500">
+              <Search className="w-6 h-6" />
+            </div>
+            <p className="text-sm text-slate-400">Không tìm thấy nhân vật nào phù hợp với bộ lọc.</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-3.5 sm:gap-4">
             {filteredCharacters.map((char) => {
-              const isSelected = selectedChar?.id === char.id;
               const isC6 = char.constellation === 6;
 
               return (
                 <div
                   key={char.id}
-                  onClick={() => setSelectedCharacterId(char.id)}
-                  className={`group relative rounded-2xl p-2 cursor-pointer transition-all duration-200 flex flex-col items-center text-center ${
-                    isSelected
-                      ? 'bg-amber-400/15 border-2 border-amber-400 shadow-[0_0_16px_rgba(245,158,11,0.3)] scale-[1.03]'
-                      : isC6
-                      ? 'bg-gradient-to-b from-amber-500/[0.08] to-purple-500/[0.04] border border-amber-400/35 hover:border-amber-300/60 hover:bg-white/[0.06] shadow-[0_0_12px_rgba(245,158,11,0.12)]'
-                      : 'bg-white/[0.03] border border-white/[0.08] hover:border-white/20 hover:bg-white/[0.06]'
+                  className={`group relative rounded-2xl p-2.5 transition-all duration-200 flex flex-col justify-between text-center hover:scale-[1.02] ${
+                    isC6
+                      ? 'bg-gradient-to-b from-amber-500/[0.09] to-purple-500/[0.05] border border-amber-400/35 hover:border-amber-300/60 shadow-[0_0_12px_rgba(245,158,11,0.12)] hover:shadow-[0_0_24px_rgba(245,158,11,0.25)]'
+                      : 'bg-white/[0.03] border border-white/[0.08] hover:border-amber-400/40 hover:bg-white/[0.06] hover:shadow-[0_8px_24px_rgba(0,0,0,0.45)]'
                   }`}
                 >
-                  {/* Character Avatar Box */}
-                  <div
-                    className={`w-full aspect-square rounded-xl overflow-hidden mb-2 relative border ${
-                      isC6
-                        ? 'border-amber-400/60 ring-1 ring-amber-400/50 bg-gradient-to-b from-amber-500/15 to-purple-500/10 shadow-[0_0_10px_rgba(245,158,11,0.25)]'
-                        : char.rarity === 5
-                        ? 'border-amber-400/40 bg-gradient-to-b from-amber-500/10 to-transparent'
-                        : 'border-purple-400/40 bg-gradient-to-b from-purple-500/10 to-transparent'
-                    }`}
+                  {/* Top: Avatar & Badges */}
+                  <div className="w-full flex flex-col items-center">
+                    <div
+                      className={`w-full aspect-square rounded-2xl overflow-hidden mb-2.5 relative border ${
+                        isC6
+                          ? 'border-amber-400/60 ring-1 ring-amber-400/50 bg-gradient-to-b from-amber-500/15 to-purple-500/10 shadow-[0_0_10px_rgba(245,158,11,0.25)]'
+                          : char.rarity === 5
+                          ? 'border-amber-400/40 bg-gradient-to-b from-amber-500/10 to-transparent'
+                          : 'border-purple-400/40 bg-gradient-to-b from-purple-500/10 to-transparent'
+                      }`}
+                    >
+                      {/* Constellation Badge - Distinct for C6 */}
+                      {isC6 ? (
+                        <div className="absolute top-1.5 left-1.5 z-10 px-1.5 py-0.5 rounded-md bg-gradient-to-r from-amber-400 via-rose-500 to-purple-600 text-[9px] font-black text-white border border-amber-300 shadow-[0_0_10px_rgba(245,158,11,0.7)] flex items-center gap-0.5">
+                          <span>✦ C6</span>
+                        </div>
+                      ) : (
+                        <div className="absolute top-1.5 left-1.5 z-10 px-1.5 py-0.5 rounded-md bg-black/75 backdrop-blur-md text-[10px] font-bold text-amber-300 border border-white/20 shadow-sm">
+                          C{char.constellation}
+                        </div>
+                      )}
+
+                      {/* Element Icon - Không để trong khung, to rõ */}
+                      <div className="absolute top-1.5 right-1.5 z-10 drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)] pointer-events-none">
+                        <ElementIcon element={char.element} className="w-6 h-6 sm:w-7 sm:h-7" />
+                      </div>
+
+                      <img
+                        src={char.icon}
+                        alt={char.name}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        onError={(e) => {
+                          (e.target as HTMLElement).style.display = 'none';
+                        }}
+                      />
+                    </div>
+
+                    {/* 3 Separate Rows */}
+                    <div className="w-full px-1 flex flex-col items-center gap-1 text-center">
+                      {/* Hàng 1: Tên nhân vật (Cinzel font-genshin) */}
+                      <div className="w-full text-xs sm:text-sm font-bold text-slate-100 truncate group-hover:text-amber-300 transition-colors font-genshin tracking-wide">
+                        {char.nameVi}
+                      </div>
+
+                      {/* Hàng 2: Cấp độ (Inter) */}
+                      <div className="flex items-center justify-center">
+                        <span className="text-[10px] sm:text-[11px] font-bold text-amber-300/90 bg-amber-400/10 px-2 py-0.5 rounded-md border border-amber-400/25 shadow-sm">
+                          Lv.{char.level}
+                        </span>
+                      </div>
+
+                      {/* Hàng 3: Số sao */}
+                      <div className="flex items-center justify-center text-amber-400 text-xs sm:text-sm font-bold tracking-widest drop-shadow-[0_0_8px_rgba(251,191,36,0.7)]">
+                        {'★'.repeat(char.rarity)}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Nút Thêm vào Timeline cho từng nhân vật */}
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleAddCharacter(char);
+                    }}
+                    className="w-full mt-3 py-1.5 px-2 rounded-xl bg-gradient-to-r from-amber-400/15 to-yellow-500/15 hover:from-amber-400 hover:to-yellow-500 text-amber-300 hover:text-slate-950 font-bold text-xs border border-amber-400/30 hover:border-amber-400 transition-all duration-200 active:scale-95 flex items-center justify-center gap-1.5 shadow-sm group/btn cursor-pointer"
+                    title={`Thêm ${char.nameVi} vào Việc Cần Làm (Timeline)`}
                   >
-                    {/* Constellation Badge - Distinct for C6 */}
-                    {isC6 ? (
-                      <div className="absolute top-1.5 left-1.5 z-10 px-1.5 py-0.5 rounded-md bg-gradient-to-r from-amber-400 via-rose-500 to-purple-600 text-[9px] font-black text-white border border-amber-300 shadow-[0_0_10px_rgba(245,158,11,0.7)] flex items-center gap-0.5">
-                        <span>✦ C6</span>
-                      </div>
-                    ) : (
-                      <div className="absolute top-1.5 left-1.5 z-10 px-1.5 py-0.5 rounded-md bg-black/75 backdrop-blur-md text-[10px] font-bold text-amber-300 border border-white/20 shadow-sm">
-                        C{char.constellation}
-                      </div>
-                    )}
-
-                    {/* Element Icon - Không để trong khung, biểu tượng nguyên tố tự nhiên to và rõ */}
-                    <div className="absolute top-1.5 right-1.5 z-10 drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)] pointer-events-none">
-                      <ElementIcon element={char.element} className="w-6 h-6 sm:w-7 sm:h-7" />
-                    </div>
-
-                    <img
-                      src={char.icon}
-                      alt={char.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      onError={(e) => {
-                        (e.target as HTMLElement).style.display = 'none';
-                      }}
-                    />
-                  </div>
-
-                  {/* 3 Separate Rows: Row 1 = Tên (font-genshin), Row 2 = Level (Inter), Row 3 = Số sao */}
-                  <div className="w-full px-1 pt-1.5 flex flex-col items-center gap-1 text-center">
-                    {/* Hàng 1: Tên nhân vật (giữ font-genshin Cinzel) */}
-                    <div className="w-full text-xs sm:text-sm font-bold text-slate-100 truncate group-hover:text-amber-300 transition-colors font-genshin tracking-wide">
-                      {char.nameVi}
-                    </div>
-
-                    {/* Hàng 2: Cấp độ (font Inter chuẩn) */}
-                    <div className="flex items-center justify-center">
-                      <span className="text-[10px] sm:text-[11px] font-bold text-amber-300/90 bg-amber-400/10 px-2 py-0.5 rounded-md border border-amber-400/25 shadow-sm">
-                        Lv.{char.level}
-                      </span>
-                    </div>
-
-                    {/* Hàng 3: Số sao */}
-                    <div className="flex items-center justify-center text-amber-400 text-xs sm:text-sm font-bold tracking-widest drop-shadow-[0_0_8px_rgba(251,191,36,0.7)]">
-                      {'★'.repeat(char.rarity)}
-                    </div>
-                  </div>
+                    <Plus className="w-3.5 h-3.5 group-hover/btn:rotate-90 transition-transform duration-200" />
+                    <span>+ Timeline</span>
+                  </button>
                 </div>
               );
             })}
           </div>
-        </div>
+        )}
       </div>
 
-      {/* ================= RIGHT PANEL: CHARACTER DETAIL & RESOURCE CALCULATOR (7 cols on lg) ================= */}
-      {selectedChar && (
-        <div className="lg:col-span-6 space-y-4">
-          <div className="liquid-glass rounded-3xl p-6 sm:p-7 relative overflow-hidden">
-            {/* Ambient character element glow */}
-            <div
-              className={`absolute -right-24 -top-24 w-72 h-72 rounded-full blur-3xl opacity-20 pointer-events-none ${
-                ELEMENT_COLORS[selectedChar.element].bg
-              }`}
-            />
-
-            {/* Character Header: Avatar + Info + Add to Timeline Button */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-5 border-b border-white/[0.08]">
-              <div className="flex items-center gap-4">
-                <div
-                  className={`w-20 h-20 sm:w-24 sm:h-24 rounded-3xl overflow-hidden shrink-0 border relative backdrop-blur-md shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)] ${
-                    ELEMENT_COLORS[selectedChar.element].border
-                  }`}
-                >
-                  <img
-                    src={selectedChar.icon}
-                    alt={selectedChar.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div>
-                  {/* Name (font-genshin) & Level (Inter) inline horizontally */}
-                  <div className="flex items-center gap-3.5 flex-wrap">
-                    <h3 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-100 font-genshin tracking-wide drop-shadow-md">
-                      {selectedChar.nameVi}
-                    </h3>
-                    <span className="text-sm sm:text-base font-bold px-3.5 py-1 rounded-2xl bg-amber-400/20 text-amber-300 border border-amber-400/40 shadow-md">
-                      Lv.{selectedChar.level}
-                    </span>
-                  </div>
-
-                  {/* Stars rating directly below name (to hơn nhiều) */}
-                  <div className="flex items-center gap-2.5 mt-2">
-                    <div className="flex text-amber-400 text-xl sm:text-2xl lg:text-3xl tracking-widest drop-shadow-[0_0_12px_rgba(251,191,36,0.85)]">
-                      {'★'.repeat(selectedChar.rarity)}
-                    </div>
-                    <span className="text-xs sm:text-sm text-amber-300 font-bold bg-amber-400/15 px-2.5 py-0.5 rounded-lg border border-amber-400/30 shadow-sm">
-                      {selectedChar.rarity} Sao
-                    </span>
-                  </div>
-
-                  {/* Element in Vietnamese (Không để trong khung, icon to và rõ), Constellation, and Fetter below stars */}
-                  <div className="flex items-center gap-3 text-xs sm:text-sm text-slate-400 mt-2.5 flex-wrap">
-                    <span className="inline-flex items-center gap-2 font-bold">
-                      <ElementIcon element={selectedChar.element} className="w-6 h-6 sm:w-7 sm:h-7 drop-shadow-[0_0_8px_rgba(0,0,0,0.9)]" />
-                      <span className={ELEMENT_COLORS[selectedChar.element].text}>
-                        Hệ {ELEMENT_NAMES_VI[selectedChar.element] || selectedChar.element}
-                      </span>
-                    </span>
-                    <span>•</span>
-                    {selectedChar.constellation === 6 ? (
-                      <span className="px-2.5 py-0.5 rounded-lg bg-gradient-to-r from-amber-400 via-rose-500 to-purple-600 text-white font-black text-xs shadow-[0_0_12px_rgba(245,158,11,0.5)] border border-amber-300/60 flex items-center gap-1">
-                        <span>✦ Cung Mệnh 6 (Tối Đa)</span>
-                      </span>
-                    ) : (
-                      <span className="px-2 py-0.5 rounded-md bg-white/[0.06] text-amber-300 font-semibold border border-white/[0.08]">
-                        Cung Mệnh: C{selectedChar.constellation}
-                      </span>
-                    )}
-                    <span>•</span>
-                    <span className="text-slate-300 font-medium">
-                      Độ Yêu Thích: Lv.{selectedChar.fetter}
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Action Button: Thêm vào Timeline */}
-              <button
-                onClick={handleAddToTimeline}
-                className="w-full sm:w-auto px-4 py-2.5 rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-400 hover:to-yellow-500 text-slate-950 font-bold text-xs shadow-[0_4px_20px_rgba(245,158,11,0.3)] transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 shrink-0 border border-amber-300/30"
-              >
-                <Plus className="w-4 h-4 stroke-[2.5]" />
-                <span>Thêm vào Timeline</span>
-              </button>
-            </div>
-
-            {/* Status & Customization Bar */}
-            <div className="flex items-center justify-between flex-wrap gap-2.5 pt-4 pb-1">
-              {selectedChar.isExactInGameData ? (
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-semibold shadow-sm">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  Dữ liệu in-game thực tế (Từ Tủ Trưng Bày)
-                </span>
-              ) : (
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-300 text-xs font-semibold shadow-sm">
-                  <span>⚠</span>
-                  Trang bị & Thiên phú mẫu (Nhân vật ngoài Tủ Trưng Bày in-game)
-                </span>
-              )}
-
-              <button
-                onClick={() => openEditModal(selectedChar)}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/[0.06] hover:bg-white/[0.12] border border-white/[0.1] text-xs font-semibold text-slate-200 transition-all active:scale-95 shadow-sm"
-              >
-                <SlidersHorizontal className="w-3.5 h-3.5 text-amber-300" />
-                <span>Tùy chỉnh trang bị & thiên phú</span>
-              </button>
-            </div>
-
-            {/* ================= FULL-WIDTH ROW 1: EQUIPPED WEAPON SHOWCASE ================= */}
-            <div className="liquid-glass-subtle rounded-3xl p-5 my-4 border border-white/10 hover:border-amber-400/30 transition-all">
-              <div className="flex flex-col sm:flex-row items-center sm:items-stretch gap-5">
-                {/* Large Weapon Image Frame */}
-                <div
-                  className={`w-28 h-28 sm:w-32 sm:h-32 rounded-3xl overflow-hidden shrink-0 border relative flex items-center justify-center p-2.5 shadow-lg ${
-                    (selectedChar.weapon?.rarity || 4) === 5
-                      ? 'bg-gradient-to-br from-amber-500/25 via-amber-600/15 to-slate-900/40 border-amber-400/50 shadow-[0_0_24px_rgba(245,158,11,0.25)]'
-                      : 'bg-gradient-to-br from-purple-500/25 via-purple-600/15 to-slate-900/40 border-purple-400/50 shadow-[0_0_24px_rgba(168,85,247,0.25)]'
-                  }`}
-                >
-                  {selectedChar.weapon?.icon ? (
-                    <img
-                      src={selectedChar.weapon.icon}
-                      alt={selectedChar.weapon.name}
-                      className="w-full h-full object-contain drop-shadow-[0_6px_16px_rgba(0,0,0,0.85)] hover:scale-110 transition-transform duration-300"
-                      onError={(e) => {
-                        (e.target as HTMLElement).style.display = 'none';
-                      }}
-                    />
-                  ) : (
-                    <Sword className="w-12 h-12 text-slate-400" />
-                  )}
-
-                  {/* Corner Rarity Pill */}
-                  <div className="absolute top-2 right-2 px-1.5 py-0.5 rounded-md bg-black/70 backdrop-blur-md text-[9px] font-bold text-amber-300 border border-white/20">
-                    {selectedChar.weapon?.rarity || 4}★
-                  </div>
-                </div>
-
-                {/* Weapon Info Details */}
-                <div className="flex-1 min-w-0 flex flex-col justify-between py-0.5 text-center sm:text-left">
-                  <div>
-                    <div className="flex items-center justify-center sm:justify-start gap-2 text-xs text-slate-400 font-medium">
-                      <span className="px-2 py-0.5 rounded-md bg-white/[0.06] text-slate-300 font-semibold border border-white/[0.08]">
-                        Vũ Khí Trang Bị
-                      </span>
-                      <span>•</span>
-                      <span className="text-amber-300 font-medium">{selectedChar.weapon?.typeName || 'Vũ Khí'}</span>
-                      <span>•</span>
-                      <span className="text-amber-400 font-bold tracking-wider">
-                        {'★'.repeat(selectedChar.weapon?.rarity || 4)}
-                      </span>
-                    </div>
-
-                    <h4 className="text-xl sm:text-2xl font-black text-slate-100 tracking-tight mt-1.5">
-                      {selectedChar.weapon?.name || 'Chưa trang bị'}
-                    </h4>
-                  </div>
-
-                  <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2.5 mt-3 pt-3 border-t border-white/[0.06] text-xs">
-                    <span className="px-3 py-1 rounded-xl bg-amber-400/15 border border-amber-400/30 text-amber-300 font-mono font-extrabold shadow-sm">
-                      Lv.{selectedChar.weapon?.level || 1} / 90
-                    </span>
-                    <span className="px-3 py-1 rounded-xl bg-white/[0.06] border border-white/[0.1] text-slate-200 font-bold">
-                      Tinh Luyện {selectedChar.weapon?.affixLevel || 1}
-                    </span>
-                    <span className="text-slate-400 text-xs italic">
-                      {selectedChar.weapon?.materialName || 'Nguyên liệu rèn & đột phá'}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* ================= FULL-WIDTH ROW 2: EQUIPPED ARTIFACTS SHOWCASE ================= */}
-            <div className="liquid-glass-subtle rounded-3xl p-5 mb-5 border border-white/10 hover:border-emerald-400/30 transition-all">
-              {/* Artifacts Header */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3.5 border-b border-white/[0.08]">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center shrink-0 text-emerald-400 shadow-[0_0_12px_rgba(16,185,129,0.2)]">
-                    <Shield className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <div className="text-[11px] text-slate-400 font-medium">Bộ Thánh Di Vật Kích Hoạt</div>
-                    <h4 className="text-lg sm:text-xl font-black text-slate-100 text-emerald-300 tracking-tight">
-                      {selectedChar.relics?.[0]?.setName || 'Bộ Thánh Di Vật'}
-                    </h4>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <span className="px-3 py-1 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 font-bold text-xs flex items-center gap-1.5 shadow-sm">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                    Bộ 5 món (+20 Max)
-                  </span>
-                </div>
-              </div>
-
-              {/* 5 Big Relic Pieces Cards */}
-              <div className="grid grid-cols-5 gap-2.5 sm:gap-3.5 mt-4">
-                {selectedChar.relics && selectedChar.relics.length > 0 ? (
-                  selectedChar.relics.slice(0, 5).map((r, idx) => {
-                    const slotNames = ['Hoa Sự Sống', 'Lông Vũ', 'Cát T.Gian', 'Ly K.Gian', 'Nón Lý Trí'];
-                    const fullSlotNames = ['Hoa Sự Sống (HP)', 'Lông Vũ Tử Thần (ATK)', 'Cát Thời Gian', 'Ly Không Gian', 'Nón Lý Trí'];
-                    return (
-                      <div
-                        key={idx}
-                        className="rounded-2xl p-2.5 sm:p-3 bg-white/[0.03] hover:bg-white/[0.08] border border-white/[0.08] hover:border-emerald-400/50 flex flex-col items-center justify-between transition-all group/relic shadow-sm hover:shadow-[0_0_20px_rgba(16,185,129,0.25)] relative overflow-hidden"
-                        title={`${r.name} - ${fullSlotNames[idx] || r.posName}`}
-                      >
-                        {/* Level badge */}
-                        <span className="text-[9px] sm:text-[10px] font-mono font-black text-amber-300 bg-black/60 px-2 py-0.5 rounded-md border border-amber-400/30 shadow-sm">
-                          +{r.level}
-                        </span>
-
-                        {/* Large Relic Image */}
-                        <div className="w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center my-2">
-                          <img
-                            src={r.icon}
-                            alt={r.name}
-                            className="w-full h-full object-contain drop-shadow-[0_4px_10px_rgba(0,0,0,0.7)] group-hover/relic:scale-115 transition-transform duration-200"
-                            onError={(e) => {
-                              (e.target as HTMLElement).style.display = 'none';
-                            }}
-                          />
-                        </div>
-
-                        {/* Slot label */}
-                        <span className="text-[9px] sm:text-[11px] font-bold text-slate-300 text-center truncate max-w-full leading-tight">
-                          {slotNames[idx] || r.posName}
-                        </span>
-                      </div>
-                    );
-                  })
-                ) : (
-                  <div className="col-span-5 text-center py-4 text-xs text-slate-500">
-                    Chưa có thông tin thánh di vật
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Talent Levels */}
-            <div className="liquid-glass-subtle rounded-2xl p-4 mb-5">
-              <div className="flex items-center justify-between mb-2.5">
-                <span className="text-xs font-bold text-slate-200 flex items-center gap-1.5">
-                  <BookOpen className="w-3.5 h-3.5 text-indigo-400" />
-                  Cấp Độ Thiên Phú Hiện Tại
-                </span>
-                <span className="text-[11px] text-indigo-300">Mục tiêu Max: 10 / 10 / 10</span>
-              </div>
-              <div className="grid grid-cols-3 gap-2">
-                <div className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-2 text-center">
-                  <div className="text-[10px] text-slate-400">Đánh thường</div>
-                  <div className="text-sm font-extrabold text-slate-100 font-mono mt-0.5">
-                    Lv.{selectedChar.talents?.attack || 1}
-                  </div>
-                </div>
-                <div className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-2 text-center">
-                  <div className="text-[10px] text-slate-400">Kỹ năng (E)</div>
-                  <div className="text-sm font-extrabold text-cyan-300 font-mono mt-0.5">
-                    Lv.{selectedChar.talents?.skill || 1}
-                  </div>
-                </div>
-                <div className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-2 text-center">
-                  <div className="text-[10px] text-slate-400">Chiêu nộ (Q)</div>
-                  <div className="text-sm font-extrabold text-amber-300 font-mono mt-0.5">
-                    Lv.{selectedChar.talents?.burst || 1}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* RESOURCE CALCULATOR: MATERIALS NEEDED TO MAX */}
-            <div className="space-y-3 pt-3 border-t border-white/[0.08]">
-              <div className="flex items-center justify-between">
-                <div className="text-xs font-extrabold text-amber-300 flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5" />
-                  Tài Nguyên Cần Để Max Cấp {targetLevel} & Thiên Phú 10
-                </div>
-                {selectedChar.level < 90 && (
-                  <span className="text-[11px] text-slate-400">
-                    Từ Lv.{selectedChar.level} $\rightarrow$ Lv.{targetLevel}
-                  </span>
-                )}
-              </div>
-
-              {/* Resource Grid Cards */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-                {/* EXP Books */}
-                <div className="bg-white/[0.04] border border-white/[0.08] rounded-2xl p-2.5 text-center">
-                  <div className="text-[10px] text-purple-300 font-medium">Sách EXP Tím</div>
-                  <div className="text-base font-extrabold text-slate-100 font-mono mt-0.5">
-                    {levelCost.heroWit} cuốn
-                  </div>
-                  <div className="text-[9px] text-slate-500">Kinh Nghiệm Anh Hùng</div>
-                </div>
-
-                {/* Mora */}
-                <div className="bg-white/[0.04] border border-white/[0.08] rounded-2xl p-2.5 text-center">
-                  <div className="text-[10px] text-amber-300 font-medium">Tổng Mora</div>
-                  <div className="text-base font-extrabold text-slate-100 font-mono mt-0.5">
-                    {((levelCost.mora + talentCost.mora) / 1000000).toFixed(1)}M
-                  </div>
-                  <div className="text-[9px] text-slate-500">Cấp độ & Thiên phú</div>
-                </div>
-
-                {/* World Boss Drops */}
-                <div className="bg-white/[0.04] border border-white/[0.08] rounded-2xl p-2.5 text-center">
-                  <div className="text-[10px] text-cyan-300 font-medium">Mảnh Boss (40N)</div>
-                  <div className="text-base font-extrabold text-slate-100 font-mono mt-0.5">
-                    {levelCost.bossDrops} cái
-                  </div>
-                  <div className="text-[9px] text-slate-500 truncate" title={selectedChar.worldBossMat}>
-                    {selectedChar.worldBossMat}
-                  </div>
-                </div>
-
-                {/* Local Specialty */}
-                <div className="bg-white/[0.04] border border-white/[0.08] rounded-2xl p-2.5 text-center">
-                  <div className="text-[10px] text-emerald-300 font-medium">Đặc Sản Vùng</div>
-                  <div className="text-base font-extrabold text-slate-100 font-mono mt-0.5">
-                    {levelCost.localSpecialty} cây
-                  </div>
-                  <div className="text-[9px] text-slate-500 truncate" title={selectedChar.localSpecialty}>
-                    {selectedChar.localSpecialty}
-                  </div>
-                </div>
-              </div>
-
-              {/* Talent Books & Weekly Boss Details */}
-              <div className="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
-                <div>
-                  <div className="text-slate-300 font-bold flex items-center gap-1.5">
-                    <span>Sách: {selectedChar.talentBook}</span>
-                    {isOpenToday ? (
-                      <span className="text-[10px] text-emerald-300 bg-emerald-500/20 px-1.5 py-0.5 rounded-md font-semibold">
-                        Mở hôm nay!
-                      </span>
-                    ) : (
-                      <span className="text-[10px] text-slate-400">
-                        ({selectedChar.talentDays.map((d) => (d === 0 ? 'CN' : `T${d + 1}`)).join(', ')})
-                      </span>
-                    )}
-                  </div>
-                  <div className="text-[11px] text-slate-500 mt-0.5">
-                    Boss tuần: {selectedChar.weeklyBossMat}
-                  </div>
-                </div>
-
-                <div className="text-left sm:text-right font-mono text-slate-200 shrink-0">
-                  <span className="font-bold text-amber-300">{talentCost.goldBooks}</span> Sách Vàng •{' '}
-                  <span className="font-bold text-indigo-300">{talentCost.weeklyBossMats}</span> Boss Tuần
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Added to Timeline Toast */}
-      {isAddedToast && selectedChar && (
-        <div className="fixed bottom-8 right-8 z-50 px-4 py-2.5 rounded-2xl bg-slate-900/90 border border-emerald-400/40 backdrop-blur-xl text-xs font-bold text-emerald-300 shadow-[0_8px_30px_rgba(0,0,0,0.5)] animate-in fade-in slide-in-from-bottom-2 duration-200 flex items-center gap-2">
-          <span>✓ Đã thêm {selectedChar.nameVi} vào Việc Cần Làm!</span>
-        </div>
-      )}
-
-      {/* Liquid Glass Edit Custom Equipment & Talents Modal */}
-      {isEditModalOpen && selectedChar && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-200">
-          <div className="liquid-glass rounded-3xl p-6 sm:p-7 max-w-lg w-full border border-white/15 shadow-[0_16px_50px_rgba(0,0,0,0.7)] space-y-5 relative overflow-hidden">
-            {/* Modal Header */}
-            <div className="flex items-center justify-between pb-3 border-b border-white/[0.08]">
-              <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-300">
-                  <SlidersHorizontal className="w-4 h-4" />
-                </div>
-                <div>
-                  <h3 className="text-base font-bold text-slate-100">
-                    Tùy Chỉnh Trang Bị & Thiên Phú
-                  </h3>
-                  <p className="text-xs text-slate-400">
-                    {selectedChar.nameVi} • Cài đặt trang bị thực tế trong game
-                  </p>
-                </div>
-              </div>
-              <button
-                onClick={() => setIsEditModalOpen(false)}
-                className="w-8 h-8 rounded-xl bg-white/[0.06] hover:bg-white/[0.12] text-slate-400 hover:text-white flex items-center justify-center transition-colors"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-
-            {/* Note banner explaining why manual edit exists */}
-            <div className="p-3 rounded-2xl bg-white/[0.03] border border-white/[0.08] text-[11px] text-slate-300 space-y-1">
-              <div className="font-semibold text-amber-300 flex items-center gap-1.5">
-                <span>💡 Lưu ý về dữ liệu game:</span>
-              </div>
-              <p className="text-slate-400 leading-relaxed">
-                HoYoLAB không công khai trang bị của nhân vật ngoài Tủ Trưng Bày 12 vị trí in-game. Bạn có thể tự chỉnh sửa thông tin tại đây hoặc đưa nhân vật vào Tủ Trưng Bày trong game để đồng bộ tự động.
-              </p>
-            </div>
-
-            {/* Weapon Settings */}
-            <div className="space-y-3">
-              <label className="text-xs font-bold text-slate-200 block">Vũ Khí Đang Dùng</label>
-              <div>
-                <input
-                  type="text"
-                  placeholder="Tên vũ khí (ví dụ: Kiếm Ly Cốt, Đường Cùng Của Sói, Xích Giác...)"
-                  value={editWeaponName}
-                  onChange={(e) => setEditWeaponName(e.target.value)}
-                  className="w-full bg-white/[0.04] border border-white/[0.1] focus:border-amber-400/50 rounded-xl px-3.5 py-2 text-xs text-slate-100 placeholder-slate-500 focus:outline-none transition-all"
-                />
-              </div>
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="text-[11px] text-slate-400 block mb-1">Cấp Độ Vũ Khí (1-90)</label>
-                  <input
-                    type="number"
-                    min={1}
-                    max={90}
-                    value={editWeaponLevel}
-                    onChange={(e) => setEditWeaponLevel(Number(e.target.value))}
-                    className="w-full bg-white/[0.04] border border-white/[0.1] focus:border-amber-400/50 rounded-xl px-3.5 py-2 text-xs text-slate-100 focus:outline-none transition-all"
-                  />
-                </div>
-                <div>
-                  <label className="text-[11px] text-slate-400 block mb-1">Tinh Luyện (1-5)</label>
-                  <input
-                    type="number"
-                    min={1}
-                    max={5}
-                    value={editWeaponAffix}
-                    onChange={(e) => setEditWeaponAffix(Number(e.target.value))}
-                    className="w-full bg-white/[0.04] border border-white/[0.1] focus:border-amber-400/50 rounded-xl px-3.5 py-2 text-xs text-slate-100 focus:outline-none transition-all"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Artifact Set Settings */}
-            <div className="space-y-1.5">
-              <label className="text-xs font-bold text-slate-200 block">Bộ Thánh Di Vật</label>
-              <input
-                type="text"
-                placeholder="Tên bộ (ví dụ: Diệm Liệt Ma Nữ Cháy Rực, Thợ Săn Marechaussee...)"
-                value={editRelicSet}
-                onChange={(e) => setEditRelicSet(e.target.value)}
-                className="w-full bg-white/[0.04] border border-white/[0.1] focus:border-emerald-400/50 rounded-xl px-3.5 py-2 text-xs text-slate-100 placeholder-slate-500 focus:outline-none transition-all"
-              />
-            </div>
-
-            {/* Talent Levels Settings */}
-            <div className="space-y-2">
-              <label className="text-xs font-bold text-slate-200 block">Cấp Độ Thiên Phú Thực Tế</label>
-              <div className="grid grid-cols-3 gap-3">
-                <div>
-                  <label className="text-[10px] text-slate-400 block mb-1">Đánh thường (1-10)</label>
-                  <input
-                    type="number"
-                    min={1}
-                    max={10}
-                    value={editAttackTalent}
-                    onChange={(e) => setEditAttackTalent(Number(e.target.value))}
-                    className="w-full bg-white/[0.04] border border-white/[0.1] focus:border-indigo-400/50 rounded-xl px-3 py-1.5 text-xs text-center text-slate-100 font-bold focus:outline-none transition-all"
-                  />
-                </div>
-                <div>
-                  <label className="text-[10px] text-slate-400 block mb-1">Kỹ năng E (1-10)</label>
-                  <input
-                    type="number"
-                    min={1}
-                    max={10}
-                    value={editSkillTalent}
-                    onChange={(e) => setEditSkillTalent(Number(e.target.value))}
-                    className="w-full bg-white/[0.04] border border-white/[0.1] focus:border-cyan-400/50 rounded-xl px-3 py-1.5 text-xs text-center text-cyan-300 font-bold focus:outline-none transition-all"
-                  />
-                </div>
-                <div>
-                  <label className="text-[10px] text-slate-400 block mb-1">Nộ Q (1-10)</label>
-                  <input
-                    type="number"
-                    min={1}
-                    max={10}
-                    value={editBurstTalent}
-                    onChange={(e) => setEditBurstTalent(Number(e.target.value))}
-                    className="w-full bg-white/[0.04] border border-white/[0.1] focus:border-amber-400/50 rounded-xl px-3 py-1.5 text-xs text-center text-amber-300 font-bold focus:outline-none transition-all"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Modal Actions */}
-            <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-white/[0.08]">
-              <button
-                onClick={() => setIsEditModalOpen(false)}
-                className="px-4 py-2 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-xs font-semibold text-slate-300 transition-colors"
-              >
-                Hủy
-              </button>
-              <button
-                onClick={handleSaveCustomData}
-                className="px-4 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs font-bold shadow-md transition-all active:scale-95 flex items-center gap-1.5"
-              >
-                <Check className="w-3.5 h-3.5" />
-                <span>Lưu Thay Đổi</span>
-              </button>
-            </div>
-          </div>
+      {/* Toast thông báo đã thêm vào Timeline */}
+      {addedCharName && (
+        <div className="fixed bottom-8 right-8 z-50 px-4 py-2.5 rounded-2xl bg-slate-900/95 border border-emerald-400/40 backdrop-blur-xl text-xs font-bold text-emerald-300 shadow-[0_8px_30px_rgba(0,0,0,0.6)] animate-in fade-in slide-in-from-bottom-2 duration-200 flex items-center gap-2">
+          <Check className="w-4 h-4 text-emerald-400" />
+          <span>Đã thêm {addedCharName} vào Việc Cần Làm!</span>
         </div>
       )}
     </div>
   );
 };
-
