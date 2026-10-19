@@ -1,17 +1,16 @@
 import React from 'react';
-import { Navbar } from './components/Navbar';
+import { Sidebar } from './components/Sidebar';
 import { CharacterRosterView } from './components/CharacterRosterView';
 import { TaskTreeTimeline } from './components/TaskTreeTimeline';
 import { CompletedList } from './components/CompletedList';
 import { useStore } from './store/useStore';
 import { APP_VERSION } from './version';
 
-
 export const App: React.FC = () => {
   const { activeNav } = useStore();
 
   return (
-    <div className="min-h-screen bg-[#07090e] text-slate-100 flex flex-col selection:bg-amber-400/30 selection:text-amber-200 relative overflow-hidden">
+    <div className="min-h-screen bg-[#07090e] text-slate-100 flex flex-col md:flex-row selection:bg-amber-400/30 selection:text-amber-200 relative overflow-hidden">
       {/* Liquid Glass Background - Animated Floating Water Droplets / Blobs */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
         {/* Blob 1: Top-Left Deep Indigo / Purple */}
@@ -27,25 +26,26 @@ export const App: React.FC = () => {
         <div className="absolute top-1/4 left-1/2 w-48 h-48 rounded-full bg-cyan-400/10 blur-[80px] animate-bubble-subtle" />
       </div>
 
-      {/* Top Navigation Bar with Resin & Dailies */}
-      <Navbar />
+      {/* Left Sidebar Navigation (Navbar bên trái) */}
+      <Sidebar />
 
-      {/* Main Content Area based on Active Nav */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 lg:px-8 py-6 relative z-10">
-        {activeNav === 'characters' && <CharacterRosterView />}
-        {activeNav === 'timeline' && <TaskTreeTimeline />}
-        {activeNav === 'completed' && <CompletedList />}
-      </main>
+      {/* Right Main Content Area */}
+      <div className="flex-1 min-w-0 flex flex-col justify-between relative z-10 overflow-y-auto max-h-screen">
+        <main className="p-4 lg:p-8">
+          {activeNav === 'characters' && <CharacterRosterView />}
+          {activeNav === 'timeline' && <TaskTreeTimeline />}
+          {activeNav === 'completed' && <CompletedList />}
+        </main>
 
-      {/* Ultra-Minimal Footer */}
-      <footer className="py-6 text-center text-xs text-slate-500/80 relative z-10">
-        <p className="tracking-wide font-medium flex items-center justify-center gap-2">
-          <span>Genshin Note</span>
-          <span>•</span>
-          <span className="font-mono text-[11px] text-slate-600">v{APP_VERSION}</span>
-        </p>
-      </footer>
-
+        {/* Ultra-Minimal Footer */}
+        <footer className="py-4 text-center text-xs text-slate-500/60 border-t border-white/[0.04]">
+          <p className="tracking-wide font-medium flex items-center justify-center gap-2">
+            <span>Genshin Note</span>
+            <span>•</span>
+            <span className="font-mono text-[11px] text-slate-600">v{APP_VERSION}</span>
+          </p>
+        </footer>
+      </div>
     </div>
   );
 };
