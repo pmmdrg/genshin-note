@@ -1,44 +1,26 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
-// In-memory cache to prevent spamming HoYoLAB servers (minimum 30 seconds interval per IP)
+// In-memory cache to prevent spamming HoYoLAB servers (minimum 3 seconds interval per IP)
 const ipRequestTimestamps = new Map<string, number>();
 
 /**
  * Vercel Serverless Function to proxy HoYoLAB Daily Note API
- * Enhanced security:
- * - Requires APP_PIN verification if set in environment variables
- * - Rate limits requests to prevent HoYoverse IP blocking/rate-limiting
- * - Never leaks cookies or full errors to unauthorized callers
+ * For personal use: Reads credentials directly from environment variables.
  */
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  // Only allow POST
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method Not Allowed' });
   }
 
-  // 1. SECURITY PIN VERIFICATION (Protects public Vercel deployment)
-  const serverPin = process.env.APP_PIN;
-  if (serverPin) {
-    const clientPin = req.headers['x-app-pin'];
-    if (!clientPin || clientPin !== serverPin) {
-      return res.status(401).json({
-        retcode: -401,
-        message: 'Mã PIN bảo mật không đúng hoặc chưa được cung cấp. Truy cập bị từ chối.',
-        data: null,
-      });
-    }
-  }
-
-  // 2. RATE LIMITING (Prevent IP ban / 429 from HoYoLAB)
+  // 1. RATE LIMITING (Prevent IP ban / 429 from HoYoLAB)
   const clientIp = (req.headers['x-forwarded-for'] as string) || req.socket.remoteAddress || 'unknown';
   const now = Date.now();
   const lastRequest = ipRequestTimestamps.get(clientIp) || 0;
   
-  if (now - lastRequest < 5000) {
-    // 5 seconds minimum cooldown
+  if (now - lastRequest < 3000) {
     return res.status(429).json({
       retcode: -429,
-      message: 'Thao tác quá nhanh. Vui lòng chờ 5 giây trước khi đồng bộ lại.',
+      message: 'Vui lòng chờ vài giây trước khi làm mới lại.',
       data: null,
     });
   }
@@ -47,18 +29,25 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     const { uid: bodyUid, server: bodyServer } = req.body || {};
     
-    const uid = bodyUid || process.env.HOYOLAB_UID;
-    const server = bodyServer || process.env.HOYOLAB_SERVER || 'os_asia';
-    
-    // Cookie can come from client header or Vercel Environment Variables
-    const cookie = (req.headers['x-hoyolab-cookie'] as string) || process.env.HOYOLAB_COOKIE;
-
-    if (!uid) {
-      return res.status(400).json({ message: 'Thiếu UID Genshin Impact' });
-    }
+    // Priority: Environment variables first, then request body/headers
+    const cookie = process.env.HOYOLAB_COOKIE || (req.headers['x-hoyolab-cookie'] as string);
+    const uid = process.env.HOYOLAB_UID || bodyUid;
+    const server = process.env.HOYOLAB_SERVER || bodyServer || 'os_asia';
 
     if (!cookie) {
-      return res.status(401).json({ message: 'Chưa cấu hình Cookie HoYoLAB trong biến môi trường hoặc giao diện.' });
+      return res.status(400).json({
+        retcode: -1,
+        message: 'Chưa cấu hình biến môi trường HOYOLAB_COOKIE. Vui lòng thêm vào .env.local hoặc Vercel Environment Variables.',
+        data: null,
+      });
+    }
+
+    if (!uid) {
+      return res.status(400).json({
+        retcode: -1,
+        message: 'Chưa cấu hình biến môi trường HOYOLAB_UID. Vui lòng thêm vào .env.local hoặc Vercel Environment Variables.',
+        data: null,
+      });
     }
 
     // Call HoYoLAB Daily Note API
@@ -81,7 +70,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (data.retcode !== 0) {
       return res.status(200).json({
         retcode: data.retcode,
-        message: data.message || 'Lỗi khi gọi API HoYoLAB. Hãy kiểm tra Cookie & UID.',
+        message: data.message || 'Lỗi khi gọi API HoYoLAB. Hãy kiểm tra Cookie & UID trong env.',
         data: null,
       });
     }

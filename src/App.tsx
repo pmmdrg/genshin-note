@@ -4,23 +4,30 @@ import { ResinTracker } from './components/ResinTracker';
 import { TimelineView } from './components/TimelineView';
 import { CompletedList } from './components/CompletedList';
 import { AddGoalModal } from './components/AddGoalModal';
-import { HoyoSyncModal } from './components/HoyoSyncModal';
 
 export const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'timeline' | 'completed'>('timeline');
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const [isHoyoModalOpen, setIsHoyoModalOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-[#07090e] text-slate-100 flex flex-col selection:bg-amber-400/30 selection:text-amber-200 relative overflow-hidden">
-      {/* Liquid Glass Background Orbs */}
-      <div className="fixed -top-40 -left-40 w-96 h-96 rounded-full bg-indigo-600/15 blur-[120px] pointer-events-none" />
-      <div className="fixed top-1/4 right-0 w-[30rem] h-[30rem] rounded-full bg-cyan-500/10 blur-[140px] pointer-events-none" />
-      <div className="fixed bottom-0 left-1/3 w-[32rem] h-[32rem] rounded-full bg-amber-500/[0.08] blur-[160px] pointer-events-none" />
+      {/* Liquid Glass Background - Animated Floating Water Droplets / Blobs */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        {/* Blob 1: Top-Left Deep Indigo / Purple */}
+        <div className="absolute -top-24 -left-24 w-[34rem] h-[34rem] rounded-full bg-gradient-to-br from-indigo-600/20 via-purple-600/15 to-transparent blur-[110px] animate-bubble-1" />
+        
+        {/* Blob 2: Right Cyan / Emerald Water Droplet */}
+        <div className="absolute top-1/3 -right-20 w-[36rem] h-[36rem] rounded-full bg-gradient-to-bl from-cyan-500/15 via-teal-500/10 to-transparent blur-[130px] animate-bubble-2" />
+        
+        {/* Blob 3: Bottom Warm Amber / Rose Glow */}
+        <div className="absolute -bottom-20 left-1/4 w-[38rem] h-[38rem] rounded-full bg-gradient-to-tr from-amber-500/10 via-rose-500/10 to-transparent blur-[140px] animate-bubble-3" />
+
+        {/* Small floating specular water highlights */}
+        <div className="absolute top-1/4 left-1/2 w-48 h-48 rounded-full bg-cyan-400/10 blur-[80px] animate-bubble-subtle" />
+      </div>
 
       {/* Top Navigation */}
       <Navbar
-        onOpenHoyoModal={() => setIsHoyoModalOpen(true)}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
       />
@@ -38,29 +45,15 @@ export const App: React.FC = () => {
         )}
       </main>
 
-      {/* Footer */}
-      <footer className="border-t border-white/[0.06] bg-[#07090e]/80 backdrop-blur-xl py-6 px-4 text-center text-xs text-slate-500 relative z-10">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p>
-            Genshin Note • Lưu trữ cục bộ an toàn trên thiết bị của bạn
-          </p>
-          <div className="flex items-center gap-3 text-slate-400 text-[11px]">
-            <span>Genshin Impact 5.x</span>
-            <span>•</span>
-            <span>Reset lúc 04:00 AM (UTC+8)</span>
-          </div>
-        </div>
+      {/* Ultra-Minimal Footer */}
+      <footer className="py-6 text-center text-xs text-slate-500/80 relative z-10">
+        <p className="tracking-wide font-medium">Genshin Note</p>
       </footer>
 
-      {/* Modals */}
+      {/* Add Goal Modal */}
       <AddGoalModal
         isOpen={isAddModalOpen}
         onClose={() => setIsAddModalOpen(false)}
-      />
-
-      <HoyoSyncModal
-        isOpen={isHoyoModalOpen}
-        onClose={() => setIsHoyoModalOpen(false)}
       />
     </div>
   );

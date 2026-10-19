@@ -45,7 +45,8 @@ interface AppState {
 
 export const useStore = create<AppState>()(
   persist(
-    (set, get) => ({
+    (set) => ({
+
       // Default initial starter goals so user sees immediate value
       goals: [
         {
@@ -224,8 +225,6 @@ export const useStore = create<AppState>()(
       setHoyoData: (data) => set({ hoyoData: data, lastHoyoSync: Date.now() }),
 
       syncWithHoyo: async () => {
-        const { hoyoConfig } = get();
-
         set({ hoyoSyncLoading: true, hoyoSyncError: null });
 
         try {
@@ -233,14 +232,10 @@ export const useStore = create<AppState>()(
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              'x-hoyolab-cookie': hoyoConfig.cookie,
-              'x-app-pin': hoyoConfig.appPin,
             },
-            body: JSON.stringify({
-              uid: hoyoConfig.uid,
-              server: hoyoConfig.server,
-            }),
+            body: JSON.stringify({}),
           });
+
 
 
           if (!res.ok) {

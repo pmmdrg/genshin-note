@@ -207,10 +207,11 @@ export const ResinTracker: React.FC = () => {
                 Tự động kiểm tra trạng thái
               </p>
               <p className="text-[11px] text-slate-500 max-w-xs leading-relaxed">
-                Nhấn biểu tượng ⚙️ cài đặt ở góc trên để liên kết HoYoLAB, hệ thống sẽ tự động cập nhật tiến độ ủy thác và boss tuần.
+                Được đọc tự động từ biến môi trường (env). Bấm nút <b>"Làm mới"</b> để cập nhật dữ liệu.
               </p>
             </div>
           )}
+
         </div>
 
         <div className="mt-4 pt-3 border-t border-white/[0.06] flex items-center justify-between text-[11px] text-slate-500">
