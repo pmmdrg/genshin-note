@@ -181,7 +181,7 @@ export const TimelineCard: React.FC<TimelineCardProps> = ({ goal, index }) => {
           {goal.farmTarget?.targetCount && (
             <div className="flex items-center gap-2 bg-white/[0.04] border border-white/[0.08] rounded-2xl px-2.5 py-1">
               <span className="text-xs text-slate-400 font-medium">Tiến độ:</span>
-              <span className="text-xs font-bold text-slate-200 font-mono">
+              <span className="text-xs font-bold text-slate-200">
                 {goal.farmTarget.currentCount || 0} / {goal.farmTarget.targetCount}
               </span>
               <div className="flex items-center gap-0.5 ml-1">

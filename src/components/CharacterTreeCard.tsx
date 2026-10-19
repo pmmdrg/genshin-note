@@ -27,7 +27,11 @@ interface CharacterTreeCardProps {
 
 type ActiveBranchType = 'level' | 'weapon' | 'talent' | 'artifact' | null;
 
-const DAY_NAMES = ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'];
+const WEAPON_ROTATION_SCHEDULES = [
+  { id: 't2_t5', label: 'T2, T5, CN', days: [1, 4, 0] },
+  { id: 't3_t6', label: 'T3, T6, CN', days: [2, 5, 0] },
+  { id: 't4_t7', label: 'T4, T7, CN', days: [3, 6, 0] },
+];
 
 export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, index }) => {
   const {
@@ -36,6 +40,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
     deleteCharacterTree,
     updateTreeLevel,
     updateTreeWeaponLevel,
+    updateTreeWeaponDays,
     updateTreeTalentLevel,
     updateTreeArtifactPiece,
   } = useStore();
@@ -483,6 +488,9 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                           src={BASE_MATERIAL_ICONS.heroWit}
                           alt="Hero's Wit"
                           className="w-7 h-7 rounded-lg object-contain bg-slate-800/80 p-0.5 shrink-0"
+                          onError={(e) => {
+                            (e.target as HTMLElement).style.display = 'none';
+                          }}
                         />
                         <span className="text-slate-300 text-xs truncate">Kinh Nghiệm Anh Hùng</span>
                       </div>
@@ -498,6 +506,9 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                           src={BASE_MATERIAL_ICONS.mora}
                           alt="Mora"
                           className="w-7 h-7 rounded-lg object-contain bg-slate-800/80 p-0.5 shrink-0"
+                          onError={(e) => {
+                            (e.target as HTMLElement).style.display = 'none';
+                          }}
                         />
                         <span className="text-slate-300 text-xs truncate">Mora</span>
                       </div>
@@ -620,21 +631,46 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
 
                 {/* Required Materials & Schedule (Lịch mở, số NL đột phá, Mora) */}
                 <div className="space-y-2 text-xs">
-                  {/* Lịch mở bí cảnh nguyên liệu */}
-                  <div className="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between">
-                    <span className="text-slate-400 flex items-center gap-1.5">
-                      <Calendar className="w-3.5 h-3.5 text-amber-400" />
-                      Lịch mở nguyên liệu:
-                    </span>
-                    <div className="flex items-center gap-2">
-                      <span className="text-slate-200 font-bold">
-                        {tree.weaponBranch.daysOfWeek.map((d) => DAY_NAMES[d]).join(', ')}
+                  {/* Chọn lịch mở bí cảnh nguyên liệu */}
+                  <div className="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.06] space-y-2">
+                    <div className="flex items-center justify-between">
+                      <span className="text-slate-400 flex items-center gap-1.5 font-medium">
+                        <Calendar className="w-3.5 h-3.5 text-amber-400" />
+                        Lịch mở nguyên liệu:
                       </span>
-                      {isWeaponOpenToday && (
+                      {isWeaponOpenToday ? (
                         <span className="px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[10px] font-bold">
                           Hôm nay mở!
                         </span>
+                      ) : (
+                        <span className="text-[10px] text-slate-500 font-medium">
+                          Hôm nay đóng
+                        </span>
                       )}
+                    </div>
+
+                    {/* 3 Interactive Buttons for Rotations */}
+                    <div className="grid grid-cols-3 gap-1.5">
+                      {WEAPON_ROTATION_SCHEDULES.map((sched) => {
+                        const isSelected =
+                          tree.weaponBranch.daysOfWeek.length === sched.days.length &&
+                          sched.days.every((d) => tree.weaponBranch.daysOfWeek.includes(d));
+                        return (
+                          <button
+                            key={sched.id}
+                            type="button"
+                            onClick={() => updateTreeWeaponDays(tree.id, sched.days)}
+                            className={`px-2 py-1.5 rounded-lg text-[11px] font-bold border transition-all cursor-pointer flex items-center justify-center text-center ${
+                              isSelected
+                                ? 'bg-amber-400/20 border-amber-400/60 text-amber-300 shadow-[0_0_12px_rgba(245,158,11,0.2)]'
+                                : 'bg-white/[0.03] border-white/[0.08] text-slate-400 hover:text-slate-200 hover:bg-white/[0.06]'
+                            }`}
+                            title={`Chọn lịch mở: ${sched.label}`}
+                          >
+                            {sched.label}
+                          </button>
+                        );
+                      })}
                     </div>
                   </div>
 
@@ -643,14 +679,18 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                     <div className="flex items-center gap-2 min-w-0">
                       <img
                         src={getMaterialIconUrl(tree.weaponBranch.materialName, 'weaponAscension')}
-                        alt={tree.weaponBranch.materialName}
+                        alt="Nguyên liệu đột phá"
                         className="w-7 h-7 rounded-lg object-contain bg-slate-800/80 p-0.5 shrink-0"
                         onError={(e) => {
                           (e.target as HTMLImageElement).src = BASE_MATERIAL_ICONS.weaponAscension;
                         }}
                       />
                       <span className="text-slate-300 text-xs truncate">
-                        Nguyên liệu đột phá ({tree.weaponBranch.materialName})
+                        {tree.weaponBranch.materialName &&
+                        tree.weaponBranch.materialName !== 'Nguyên liệu rèn' &&
+                        tree.weaponBranch.materialName !== 'Nguyên liệu đột phá'
+                          ? `Nguyên liệu đột phá (${tree.weaponBranch.materialName})`
+                          : 'Nguyên liệu đột phá'}
                       </span>
                     </div>
                     <span className="font-bold text-sky-300 shrink-0 font-sans">
@@ -665,6 +705,9 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                         src={BASE_MATERIAL_ICONS.mora}
                         alt="Mora"
                         className="w-7 h-7 rounded-lg object-contain bg-slate-800/80 p-0.5 shrink-0"
+                        onError={(e) => {
+                          (e.target as HTMLElement).style.display = 'none';
+                        }}
                       />
                       <span className="text-slate-300 text-xs truncate">Mora đột phá</span>
                     </div>
@@ -828,6 +871,9 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                         src={BASE_MATERIAL_ICONS.talentBook}
                         alt="Talent Book"
                         className="w-7 h-7 rounded-lg object-contain bg-slate-800/80 p-0.5 shrink-0"
+                        onError={(e) => {
+                          (e.target as HTMLElement).style.display = 'none';
+                        }}
                       />
                       <span className="text-slate-300 text-xs truncate">
                         Sách Thiên Phú Vàng ({tree.talentBranch.talentBookName})
@@ -865,6 +911,9 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                         src={BASE_MATERIAL_ICONS.crown}
                         alt="Crown of Insight"
                         className="w-7 h-7 rounded-lg object-contain bg-slate-800/80 p-0.5 shrink-0"
+                        onError={(e) => {
+                          (e.target as HTMLElement).style.display = 'none';
+                        }}
                       />
                       <span className="text-slate-300 text-xs truncate">Vương Miện Trí Thức</span>
                     </div>

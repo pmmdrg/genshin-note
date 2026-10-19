@@ -74,7 +74,7 @@ export const Sidebar: React.FC = () => {
                 <h1 className="text-base font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
                   Genshin Note
                 </h1>
-                <span className="text-[10px] font-mono font-bold px-1.5 py-0.2 rounded-md bg-white/[0.06] text-slate-400 border border-white/[0.08]">
+                <span className="text-[10px] font-bold px-1.5 py-0.2 rounded-md bg-white/[0.06] text-slate-400 border border-white/[0.08]">
                   v{APP_VERSION}
                 </span>
               </div>
@@ -88,7 +88,7 @@ export const Sidebar: React.FC = () => {
             <Calendar className="w-3.5 h-3.5 text-indigo-400" />
             <span className="font-medium">{DAY_NAMES[serverDate.dayOfWeek]}</span>
           </div>
-          <div className="flex items-center gap-1 text-slate-400 font-mono text-[11px]">
+          <div className="flex items-center gap-1 text-slate-400 text-[11px]">
             <Clock className="w-3 h-3 text-slate-500" />
             <span>Máy chủ {serverDate.displayTime}</span>
           </div>
@@ -114,7 +114,7 @@ export const Sidebar: React.FC = () => {
               <span>Danh Sách Nhân Vật</span>
             </div>
             <span
-              className={`text-[10px] px-2 py-0.5 rounded-full font-mono font-bold transition-colors duration-300 ${
+              className={`text-[10px] px-2 py-0.5 rounded-full font-bold transition-colors duration-300 ${
                 activeNav === 'characters' ? 'bg-white/20 text-white' : 'bg-white/[0.06] text-slate-400'
               }`}
             >
@@ -136,7 +136,7 @@ export const Sidebar: React.FC = () => {
               <span>Việc Cần Làm</span>
             </div>
             <span
-              className={`text-[10px] px-2 py-0.5 rounded-full font-mono font-bold transition-colors duration-300 ${
+              className={`text-[10px] px-2 py-0.5 rounded-full font-bold transition-colors duration-300 ${
                 activeNav === 'timeline' ? 'bg-white/20 text-white' : 'bg-white/[0.06] text-amber-300'
               }`}
             >
@@ -158,7 +158,7 @@ export const Sidebar: React.FC = () => {
               <span>Đã Hoàn Thành</span>
             </div>
             <span
-              className={`text-[10px] px-2 py-0.5 rounded-full font-mono font-bold transition-colors duration-300 ${
+              className={`text-[10px] px-2 py-0.5 rounded-full font-bold transition-colors duration-300 ${
                 activeNav === 'completed' ? 'bg-white/20 text-white' : 'bg-white/[0.06] text-emerald-300'
               }`}
             >
@@ -191,7 +191,7 @@ export const Sidebar: React.FC = () => {
             </div>
             <div className="text-right">
               <span
-                className={`text-base font-extrabold font-mono ${
+                className={`text-base font-extrabold ${
                   isDanger ? 'text-rose-300' : 'text-cyan-200'
                 }`}
               >
@@ -213,7 +213,7 @@ export const Sidebar: React.FC = () => {
             />
           </div>
 
-          <div className="flex items-center justify-between text-[10px] text-slate-400 font-mono">
+          <div className="flex items-center justify-between text-[10px] text-slate-400">
             <span>{isCapped ? 'Đã đạt giới hạn' : `Đầy sau: ${formatSecondsToTime(recoveryInfo.secondsUntilFull)}`}</span>
             {!isCapped && <span>+1: {formatSecondsToTime(recoveryInfo.secondsUntilNext)}</span>}
           </div>
@@ -231,7 +231,7 @@ export const Sidebar: React.FC = () => {
                 if (!hoyoData) cycleCommissionsCount();
               }}
               title={!hoyoData ? 'Nhấp để thay đổi thủ công (0 -> 4)' : 'Được đồng bộ từ HoYoLAB'}
-              className={`font-mono font-bold px-2 py-0.5 rounded-lg border text-[11px] transition-transform ${
+              className={`font-bold px-2 py-0.5 rounded-lg border text-[11px] transition-transform ${
                 !hoyoData ? 'hover:scale-105 cursor-pointer active:scale-95' : 'cursor-default'
               } ${
                 actualCommissions === 4
@@ -258,7 +258,7 @@ export const Sidebar: React.FC = () => {
                   : '• Chưa nhận thưởng Katheryne (20 NT)'}
               </span>
               {lastHoyoSync && (
-                <span className="text-slate-500 font-mono text-[9px]">
+                <span className="text-slate-500 text-[9px]">
                   {new Date(lastHoyoSync).toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })}
                 </span>
               )}
@@ -266,7 +266,7 @@ export const Sidebar: React.FC = () => {
           ) : (
             <div className="text-[10px] text-slate-500 flex items-center justify-between pt-0.5 border-t border-white/[0.04]">
               <span>Chế độ thủ công</span>
-              <span className="text-[9px] text-slate-600 font-mono">(nhấn số để đổi)</span>
+              <span className="text-[9px] text-slate-600">(nhấn số để đổi)</span>
             </div>
           )}
         </div>
@@ -276,7 +276,7 @@ export const Sidebar: React.FC = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <img
-                src="https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_ItemIcon_204.png"
+                src="https://enka.network/ui/UI_ItemIcon_204.png"
                 alt="Ấm Trần Ca"
                 className="w-4 h-4 object-contain"
                 onError={(e) => {
@@ -285,7 +285,7 @@ export const Sidebar: React.FC = () => {
               />
               <span className="font-semibold text-slate-200">Xu Ấm Trần Ca</span>
             </div>
-            <span className="font-mono font-bold text-amber-300 text-xs">
+            <span className="font-bold text-amber-300 text-xs">
               {hoyoData?.current_home_coin !== undefined ? hoyoData.current_home_coin.toLocaleString() : 0}
               <span className="text-slate-500 font-normal text-[10px]">
                 /{hoyoData?.max_home_coin ? hoyoData.max_home_coin.toLocaleString() : 2400}
@@ -310,7 +310,7 @@ export const Sidebar: React.FC = () => {
             />
           </div>
 
-          <div className="flex items-center justify-between text-[10px] text-slate-400 font-mono">
+          <div className="flex items-center justify-between text-[10px] text-slate-400">
             <span>
               {(hoyoData?.current_home_coin || 0) >= (hoyoData?.max_home_coin || 2400)
                 ? 'Đã đầy tiền ấm'

@@ -48,7 +48,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     talentDomain: 'Bí Cảnh Natlan',
     talentDays: [1, 4, 0],
     weeklyBossMat: 'Nguyên liệu Natlan',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Mavuika.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Mavuika.png',
   },
   {
     name: 'Xilonen',
@@ -60,7 +60,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     talentDomain: 'Bí Cảnh Natlan',
     talentDays: [2, 5, 0],
     weeklyBossMat: 'Nguyên liệu Natlan',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Xilonen.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Xilonen.png',
   },
   {
     name: 'Kinich',
@@ -72,7 +72,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     talentDomain: 'Bí Cảnh Natlan',
     talentDays: [1, 4, 0],
     weeklyBossMat: 'Nguyên liệu Natlan',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Kinich.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Kinich.png',
   },
   {
     name: 'Furina',
@@ -84,7 +84,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     talentDomain: 'Vinh Quang Nhợt Nhạt (Fontaine)',
     talentDays: [2, 5, 0],
     weeklyBossMat: 'Dây Tơ Không Ám (Cá Voi)',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Furina.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Furina.png',
   },
   {
     name: 'Neuvillette',
@@ -96,7 +96,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     talentDomain: 'Vinh Quang Nhợt Nhạt (Fontaine)',
     talentDays: [1, 4, 0],
     weeklyBossMat: 'Thủ Hộ Của Primordial',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Neuvillette.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Neuvillette.png',
   },
   {
     name: 'Arlecchino',
@@ -108,7 +108,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     talentDomain: 'Vinh Quang Nhợt Nhạt (Fontaine)',
     talentDays: [3, 6, 0],
     weeklyBossMat: 'Ngọn Lửa Khắc Ghi (Arlecchino Boss)',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Arlecchino.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Arlecchino.png',
   },
   {
     name: 'Navia',
@@ -120,7 +120,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     talentDomain: 'Vinh Quang Nhợt Nhạt (Fontaine)',
     talentDays: [1, 4, 0],
     weeklyBossMat: 'Dây Tơ Không Ám',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Navia.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Navia.png',
   },
 
   // Sumeru
@@ -134,7 +134,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     talentDomain: 'Tháp Vô Danh (Sumeru)',
     talentDays: [2, 5, 0],
     weeklyBossMat: 'Dây Tơ Rối (Scaramouche)',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Nahida.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Nahida.png',
   },
   {
     name: 'Alhaitham',
@@ -146,7 +146,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     talentDomain: 'Tháp Vô Danh (Sumeru)',
     talentDays: [2, 5, 0],
     weeklyBossMat: 'Gương Mushin',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Alhatham.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Alhatham.png',
   },
 
   // Inazuma
@@ -160,7 +160,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     talentDomain: 'Sân Đình Violet (Inazuma)',
     talentDays: [3, 6, 0],
     weeklyBossMat: 'Thời Khắc Tan Biến (Signora)',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Shougun.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Shougun.png',
   },
   {
     name: 'Kaedehara Kazuha',
@@ -172,7 +172,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     talentDomain: 'Thái Sơn Phủ (Liyue)',
     talentDays: [2, 5, 0],
     weeklyBossMat: 'Vảy Vàng Mạ Bạc (Azhdaha)',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Kazuha.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Kazuha.png',
   },
   {
     name: 'Kamisato Ayaka',
@@ -184,7 +184,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     talentDomain: 'Sân Đình Violet (Inazuma)',
     talentDays: [2, 5, 0],
     weeklyBossMat: 'Nhánh Huyết Ngọc (Azhdaha)',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Ayaka.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Ayaka.png',
   },
 
   // Liyue & Mondstadt
@@ -198,7 +198,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     talentDomain: 'Thái Sơn Phủ (Liyue)',
     talentDays: [3, 6, 0],
     weeklyBossMat: 'Sừng Childe',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Zhongli.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Zhongli.png',
   },
   {
     name: 'Hu Tao',
@@ -210,7 +210,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     talentDomain: 'Thái Sơn Phủ (Liyue)',
     talentDays: [2, 5, 0],
     weeklyBossMat: 'Mảnh Ma Kiếm Phong Ma',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Hutao.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Hutao.png',
   },
   {
     name: 'Yelan',
@@ -222,7 +222,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     talentDomain: 'Thái Sơn Phủ (Liyue)',
     talentDays: [1, 4, 0],
     weeklyBossMat: 'Vảy Vàng Azhdaha',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Yelan.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Yelan.png',
   },
   {
     name: 'Bennett',
@@ -234,7 +234,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     talentDomain: 'Hẻm Núi Forsaken (Mondstadt)',
     talentDays: [2, 5, 0],
     weeklyBossMat: 'Lông Vũ Dvalin',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Bennett.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Bennett.png',
   },
   {
     name: 'Xiangling',
@@ -246,7 +246,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     talentDomain: 'Thái Sơn Phủ (Liyue)',
     talentDays: [2, 5, 0],
     weeklyBossMat: 'Móng Vuốt Dvalin',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Xiangling.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Xiangling.png',
   },
   {
     name: 'Diluc',
@@ -260,7 +260,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     weeklyBossMat: 'Lông Vũ Dvalin (Phong Long)',
     worldBossMat: 'Hạt Lửa Vĩnh Cửu (Cây Cấp Hỏa)',
     localSpecialty: 'Cỏ Tiểu Đăng',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Diluc.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Diluc.png',
   },
   {
     name: 'Qiqi',
@@ -274,7 +274,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     weeklyBossMat: 'Đuôi Sói Bắc Phong',
     worldBossMat: 'Hạt Cực Băng (Cây Cấp Băng)',
     localSpecialty: 'Lưu Ly Biện',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Qiqi.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Qiqi.png',
   },
   {
     name: 'Cyno',
@@ -288,7 +288,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     weeklyBossMat: 'Khuôn Khổ Tai Họa (Scaramouche)',
     worldBossMat: 'Hạt Tụ Lôi (Thuật Toán)',
     localSpecialty: 'Bọ Hung Thánh',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Cyno.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Cyno.png',
   },
   {
     name: 'Keqing',
@@ -302,7 +302,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     weeklyBossMat: 'Chiếc Nhẫn Bắc Phong',
     worldBossMat: 'Lăng Kính Sấm Sét',
     localSpecialty: 'Thạch Phách (Cor Lapis)',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Keqing.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Keqing.png',
   },
   {
     name: 'Tighnari',
@@ -316,7 +316,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     weeklyBossMat: 'Ý Nghĩ Vạn Kiếp (Scaramouche)',
     worldBossMat: 'Mỏ Nấm Huy Hoàng',
     localSpecialty: 'Sen Nilotpala',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Tighnari.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Tighnari.png',
   },
   {
     name: 'Mona',
@@ -330,7 +330,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     weeklyBossMat: 'Chiếc Nhẫn Bắc Phong',
     worldBossMat: 'Trái Tim Thuần Khiết (Tinh Linh Nước)',
     localSpecialty: 'Nấm Rơm Gió',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Mona.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Mona.png',
   },
   {
     name: 'Jean',
@@ -344,7 +344,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     weeklyBossMat: 'Lông Vũ Dvalin',
     worldBossMat: 'Hạt Bão Phong (Phong Nguyên Bản)',
     localSpecialty: 'Hạt Bồ Công Anh',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Jean.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Jean.png',
   },
   {
     name: 'Kuki Shinobu',
@@ -358,7 +358,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     weeklyBossMat: 'Nước Mắt Tai Họa (Raiden Boss)',
     worldBossMat: 'Bánh Răng Cổ Xưa (Ruin Serpent)',
     localSpecialty: 'Cỏ Naku',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Shinobu.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Shinobu.png',
   },
   {
     name: 'Gaming',
@@ -372,7 +372,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     weeklyBossMat: 'Khối Lạc Lối Bi Khấp (Narwhal)',
     worldBossMat: 'Đôi Cánh Kỳ Lân',
     localSpecialty: 'Trà Tinh Khiết Mật Vân',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Gaming.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Gaming.png',
   },
   {
     name: 'Kachina',
@@ -386,7 +386,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     weeklyBossMat: 'Nguyên Liệu Natlan',
     worldBossMat: 'Hạt Giống Ngọn Lửa Natlan',
     localSpecialty: 'Hoa Quả Quenka',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Kachina.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Kachina.png',
   },
   {
     name: 'Fischl',
@@ -400,7 +400,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     weeklyBossMat: 'Linh Hồn Bắc Phong',
     worldBossMat: 'Lăng Kính Sấm Sét',
     localSpecialty: 'Cỏ Tiểu Đăng',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Fischl.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Fischl.png',
   },
   {
     name: 'Sucrose',
@@ -414,7 +414,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     weeklyBossMat: 'Linh Hồn Bắc Phong',
     worldBossMat: 'Hạt Bão Phong',
     localSpecialty: 'Cúc Cánh Gió',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Sucrose.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Sucrose.png',
   },
   {
     name: 'Yaoyao',
@@ -428,7 +428,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     weeklyBossMat: 'Dây Tơ Scaramouche',
     worldBossMat: 'Mầm Cây Khô Thần Lạc',
     localSpecialty: 'Ớt Tuyệt Vân',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Yaoyao.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Yaoyao.png',
   },
   {
     name: 'Faruzan',
@@ -442,7 +442,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     weeklyBossMat: 'Dây Tơ Rối Scaramouche',
     worldBossMat: 'Hạt Tụ Lôi',
     localSpecialty: 'Quả Bọ Lạc Đà',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Faruzan.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Faruzan.png',
   },
   {
     name: 'Lynette',
@@ -456,7 +456,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     weeklyBossMat: 'Dây Tơ Không Ám',
     worldBossMat: 'Bánh Răng Khớp Nối',
     localSpecialty: 'Hoa Chuông Lumidouce',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Lynette.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Lynette.png',
   },
   {
     name: 'Ningguang',
@@ -470,7 +470,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     weeklyBossMat: 'Linh Hồn Bắc Phong',
     worldBossMat: 'Tháp Huyền Nham',
     localSpecialty: 'Bách Hợp Lưu Ly',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Ningguang.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Ningguang.png',
   },
   {
     name: 'Noelle',
@@ -484,7 +484,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     weeklyBossMat: 'Móng Vuốt Dvalin',
     worldBossMat: 'Tháp Huyền Nham',
     localSpecialty: 'Hoa Cẩm Chướng',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Noelle.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Noelle.png',
   },
   {
     name: 'Diona',
@@ -498,7 +498,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     weeklyBossMat: 'Mảnh Ma Kiếm Phong Ma',
     worldBossMat: 'Hạt Cực Băng',
     localSpecialty: 'Hoa Calla Lily',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Diona.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Diona.png',
   },
   {
     name: 'Rosaria',
@@ -512,7 +512,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     weeklyBossMat: 'Bóng Ma Childe',
     worldBossMat: 'Hạt Cực Băng',
     localSpecialty: 'Cúc Cánh Gió',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Rosaria.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Rosaria.png',
   },
   {
     name: 'Barbara',
@@ -526,7 +526,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     weeklyBossMat: 'Chiếc Nhẫn Bắc Phong',
     worldBossMat: 'Trái Tim Thuần Khiết',
     localSpecialty: 'Nấm Rơm Gió',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Barbara.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Barbara.png',
   },
   {
     name: 'Yanfei',
@@ -540,7 +540,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     weeklyBossMat: 'Nhánh Huyết Ngọc (Azhdaha)',
     worldBossMat: 'Ngọc Trai Rực Lửa',
     localSpecialty: 'Dạ Phách Thạch',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Feiyan.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Feiyan.png',
   },
   {
     name: 'Thoma',
@@ -554,7 +554,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     weeklyBossMat: 'Thời Khắc Tan Biến (Signora)',
     worldBossMat: 'Hạt Lửa Vĩnh Cửu',
     localSpecialty: 'Nấm Huỳnh Quang',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Tohma.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Tohma.png',
   },
   {
     name: 'Kirara',
@@ -568,7 +568,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     weeklyBossMat: 'Hổ Phách Vĩnh Hằng (Apep)',
     worldBossMat: 'Lõi Phù Du',
     localSpecialty: 'Quả Amakumo',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Momoka.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Momoka.png',
   },
   {
     name: 'Collei',
@@ -582,7 +582,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     weeklyBossMat: 'Nước Mắt Tai Họa',
     worldBossMat: 'Mỏ Nấm Huy Hoàng',
     localSpecialty: 'Nấm Rơm Rukkhashava',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Collei.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Collei.png',
   },
   {
     name: 'Kujou Sara',
@@ -596,7 +596,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     weeklyBossMat: 'Trái Tim Tro Tàn (Signora)',
     worldBossMat: 'Hạt Sen Sấm Sét',
     localSpecialty: 'Huyết Ngọc Thạch',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Sara.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Sara.png',
   },
   {
     name: 'Razor',
@@ -610,7 +610,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     weeklyBossMat: 'Móng Vuốt Dvalin',
     worldBossMat: 'Lăng Kính Sấm Sét',
     localSpecialty: 'Quả Móc Câu Wolfhook',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Razor.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Razor.png',
   },
   {
     name: 'Chongyun',
@@ -624,7 +624,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     weeklyBossMat: 'Linh Hồn Bắc Phong',
     worldBossMat: 'Hạt Cực Băng',
     localSpecialty: 'Thạch Phách',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Chongyun.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Chongyun.png',
   },
   {
     name: 'Charlotte',
@@ -638,7 +638,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     weeklyBossMat: 'Dây Tơ Không Ám',
     worldBossMat: 'Bánh Răng Khớp Nối',
     localSpecialty: 'Hoa Beryl',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Charlotte.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Charlotte.png',
   },
   {
     name: 'Candace',
@@ -652,7 +652,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     weeklyBossMat: 'Khuôn Khổ Tai Họa',
     worldBossMat: 'Hạt Tụ Lôi',
     localSpecialty: 'Quả Đỏ Sa Mạc',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Candace.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Candace.png',
   },
   {
     name: 'Sethos',
@@ -666,7 +666,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     weeklyBossMat: 'Dây Tơ Rối Scaramouche',
     worldBossMat: 'Mỏ Nấm Huy Hoàng',
     localSpecialty: 'Quả Bọ Lạc Đà',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Sethos.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Sethos.png',
   },
   {
     name: 'Yun Jin',
@@ -680,7 +680,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     weeklyBossMat: 'Trái Tim Tro Tàn Signora',
     worldBossMat: 'Vây Thú Rồng Nham',
     localSpecialty: 'Lưu Ly Biện',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Yunjin.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Yunjin.png',
   },
   {
     name: 'Mika',
@@ -694,7 +694,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     weeklyBossMat: 'Gương Vạn Kiếp Scaramouche',
     worldBossMat: 'Khối Bán Dẫn',
     localSpecialty: 'Quả Móc Câu Wolfhook',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Mika.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Mika.png',
   },
   {
     name: 'Nhà Lữ Hành',
@@ -708,7 +708,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     weeklyBossMat: 'Nguyên Liệu Boss Tuần',
     worldBossMat: 'Kim Cương Bạc Vụn',
     localSpecialty: 'Cúc Cánh Gió',
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_PlayerBoy.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_PlayerBoy.png',
   },
 ];
 
@@ -721,7 +721,7 @@ export const WEAPONS_DATA: WeaponPreset[] = [
     ascensionMat: 'Nhánh Biển Xanh San Hô',
     domainName: 'Vườn Cát Lưu Sa (Inazuma)',
     daysOfWeek: [1, 4, 0],
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_EquipIcon_Sword_Narukami.png',
+    avatarUrl: 'https://enka.network/ui/UI_EquipIcon_Sword_Narukami.png',
   },
   {
     name: 'Engulfing Lightning',
@@ -731,7 +731,7 @@ export const WEAPONS_DATA: WeaponPreset[] = [
     ascensionMat: 'Mặt Nạ Hổ Phách',
     domainName: 'Vườn Cát Lưu Sa (Inazuma)',
     daysOfWeek: [3, 6, 0],
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_EquipIcon_Pole_Narukami.png',
+    avatarUrl: 'https://enka.network/ui/UI_EquipIcon_Pole_Narukami.png',
   },
   {
     name: 'Splendor of Tranquil Waters',
@@ -741,7 +741,7 @@ export const WEAPONS_DATA: WeaponPreset[] = [
     ascensionMat: 'Giọt Sương Tinh Khiết',
     domainName: 'Tiếng Chuông Vọng (Fontaine)',
     daysOfWeek: [2, 5, 0],
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_EquipIcon_Sword_Regalis.png',
+    avatarUrl: 'https://enka.network/ui/UI_EquipIcon_Sword_Regalis.png',
   },
   {
     name: 'Tome of the Eternal Flow',
@@ -751,7 +751,7 @@ export const WEAPONS_DATA: WeaponPreset[] = [
     ascensionMat: 'Thánh Tích Fontaine',
     domainName: 'Tiếng Chuông Vọng (Fontaine)',
     daysOfWeek: [1, 4, 0],
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_EquipIcon_Catalyst_Iudex.png',
+    avatarUrl: 'https://enka.network/ui/UI_EquipIcon_Catalyst_Iudex.png',
   },
   {
     name: 'Staff of Homa',
@@ -761,7 +761,7 @@ export const WEAPONS_DATA: WeaponPreset[] = [
     ascensionMat: 'Hạt Muối Đen Liyue',
     domainName: 'Chấn Lôi Liên Đình (Liyue)',
     daysOfWeek: [3, 6, 0],
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_EquipIcon_Pole_Homa.png',
+    avatarUrl: 'https://enka.network/ui/UI_EquipIcon_Pole_Homa.png',
   },
   {
     name: 'Favonius Sword',
@@ -771,7 +771,7 @@ export const WEAPONS_DATA: WeaponPreset[] = [
     ascensionMat: 'Mảnh Xiềng Xích Dandelion',
     domainName: 'Khu Rừng Cecilia (Mondstadt)',
     daysOfWeek: [3, 6, 0],
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_EquipIcon_Sword_Favonius.png',
+    avatarUrl: 'https://enka.network/ui/UI_EquipIcon_Sword_Favonius.png',
   },
   {
     name: 'The Catch',
@@ -781,7 +781,7 @@ export const WEAPONS_DATA: WeaponPreset[] = [
     ascensionMat: 'Mặt Nạ Hổ Phách',
     domainName: 'Vườn Cát Lưu Sa (Inazuma)',
     daysOfWeek: [3, 6, 0],
-    avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_EquipIcon_Pole_Mori.png',
+    avatarUrl: 'https://enka.network/ui/UI_EquipIcon_Pole_Mori.png',
   },
 ];
 
@@ -792,14 +792,14 @@ export const USER_CHARACTERS_PRESET: UserCharacter[] = [
     nameVi: 'Furina',
     element: 'hydro',
     rarity: 5,
-    icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Furina.png',
+    icon: 'https://enka.network/ui/UI_AvatarIcon_Furina.png',
     level: 70,
     maxLevel: 90,
     constellation: 2,
     fetter: 10,
     weapon: {
       name: 'Sắc Nước Tĩnh Lặng',
-      icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_EquipIcon_Sword_Regalis.png',
+      icon: 'https://enka.network/ui/UI_EquipIcon_Sword_Regalis.png',
       rarity: 5,
       level: 80,
       affixLevel: 1,
@@ -808,7 +808,7 @@ export const USER_CHARACTERS_PRESET: UserCharacter[] = [
       domainDays: [2, 5, 0],
     },
     relics: [
-      { name: 'Đoàn Kịch Hoàng Kim', icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/relic_flower.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Đoàn Kịch Hoàng Kim (4 món)' },
+      { name: 'Đoàn Kịch Hoàng Kim', icon: 'https://enka.network/ui/relic_flower.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Đoàn Kịch Hoàng Kim (4 món)' },
     ],
     talents: { attack: 6, skill: 8, burst: 9 },
     talentBook: 'Công Lý (Justice)',
@@ -824,14 +824,14 @@ export const USER_CHARACTERS_PRESET: UserCharacter[] = [
     nameVi: 'Raiden Shogun',
     element: 'electro',
     rarity: 5,
-    icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Shougun.png',
+    icon: 'https://enka.network/ui/UI_AvatarIcon_Shougun.png',
     level: 80,
     maxLevel: 90,
     constellation: 0,
     fetter: 10,
     weapon: {
       name: 'Đoạn Thảo Trảm Quang',
-      icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_EquipIcon_Pole_Narukami.png',
+      icon: 'https://enka.network/ui/UI_EquipIcon_Pole_Narukami.png',
       rarity: 5,
       level: 90,
       affixLevel: 1,
@@ -840,7 +840,7 @@ export const USER_CHARACTERS_PRESET: UserCharacter[] = [
       domainDays: [3, 6, 0],
     },
     relics: [
-      { name: 'Dấu Ấn Ngăn Trở', icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/relic_flower.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Dấu Ấn Ngăn Trở (4 món)' },
+      { name: 'Dấu Ấn Ngăn Trở', icon: 'https://enka.network/ui/relic_flower.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Dấu Ấn Ngăn Trở (4 món)' },
     ],
     talents: { attack: 6, skill: 9, burst: 10 },
     talentBook: 'Ánh Sáng (Light)',
@@ -856,14 +856,14 @@ export const USER_CHARACTERS_PRESET: UserCharacter[] = [
     nameVi: 'Neuvillette',
     element: 'hydro',
     rarity: 5,
-    icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Neuvillette.png',
+    icon: 'https://enka.network/ui/UI_AvatarIcon_Neuvillette.png',
     level: 80,
     maxLevel: 90,
     constellation: 1,
     fetter: 10,
     weapon: {
       name: 'Dòng Chảy Giám Sát',
-      icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_EquipIcon_Catalyst_Iudex.png',
+      icon: 'https://enka.network/ui/UI_EquipIcon_Catalyst_Iudex.png',
       rarity: 5,
       level: 90,
       affixLevel: 1,
@@ -872,7 +872,7 @@ export const USER_CHARACTERS_PRESET: UserCharacter[] = [
       domainDays: [1, 4, 0],
     },
     relics: [
-      { name: 'Thợ Săn Marechaussee', icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/relic_flower.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Thợ Săn Marechaussee (4 món)' },
+      { name: 'Thợ Săn Marechaussee', icon: 'https://enka.network/ui/relic_flower.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Thợ Săn Marechaussee (4 món)' },
     ],
     talents: { attack: 10, skill: 8, burst: 8 },
     talentBook: 'Công Bằng (Equity)',
@@ -888,14 +888,14 @@ export const USER_CHARACTERS_PRESET: UserCharacter[] = [
     nameVi: 'Nahida',
     element: 'dendro',
     rarity: 5,
-    icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Nahida.png',
+    icon: 'https://enka.network/ui/UI_AvatarIcon_Nahida.png',
     level: 80,
     maxLevel: 90,
     constellation: 0,
     fetter: 10,
     weapon: {
       name: 'Cõi Mộng Ngàn Đêm',
-      icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_EquipIcon_Catalyst_Ayus.png',
+      icon: 'https://enka.network/ui/UI_EquipIcon_Catalyst_Ayus.png',
       rarity: 5,
       level: 80,
       affixLevel: 1,
@@ -904,7 +904,7 @@ export const USER_CHARACTERS_PRESET: UserCharacter[] = [
       domainDays: [1, 4, 0],
     },
     relics: [
-      { name: 'Ký Ức Rừng Sâu', icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/relic_flower.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Ký Ức Rừng Sâu (4 món)' },
+      { name: 'Ký Ức Rừng Sâu', icon: 'https://enka.network/ui/relic_flower.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Ký Ức Rừng Sâu (4 món)' },
     ],
     talents: { attack: 1, skill: 9, burst: 9 },
     talentBook: 'Khuyên Nhủ (Ingenuity)',
@@ -920,14 +920,14 @@ export const USER_CHARACTERS_PRESET: UserCharacter[] = [
     nameVi: 'Xilonen',
     element: 'geo',
     rarity: 5,
-    icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Xilonen.png',
+    icon: 'https://enka.network/ui/UI_AvatarIcon_Xilonen.png',
     level: 70,
     maxLevel: 90,
     constellation: 0,
     fetter: 6,
     weapon: {
       name: 'Tây Phong Kiếm',
-      icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_EquipIcon_Sword_Favonius.png',
+      icon: 'https://enka.network/ui/UI_EquipIcon_Sword_Favonius.png',
       rarity: 4,
       level: 80,
       affixLevel: 5,
@@ -936,7 +936,7 @@ export const USER_CHARACTERS_PRESET: UserCharacter[] = [
       domainDays: [3, 6, 0],
     },
     relics: [
-      { name: 'Dũng Sĩ Hỏa Diệm', icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/relic_flower.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Bí Cảnh Dũng Sĩ Natlan' },
+      { name: 'Dũng Sĩ Hỏa Diệm', icon: 'https://enka.network/ui/relic_flower.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Bí Cảnh Dũng Sĩ Natlan' },
     ],
     talents: { attack: 1, skill: 8, burst: 8 },
     talentBook: 'Hàn Huyên (Kindling)',
@@ -952,23 +952,23 @@ export const USER_CHARACTERS_PRESET: UserCharacter[] = [
     nameVi: 'Mavuika',
     element: 'pyro',
     rarity: 5,
-    icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Mavuika.png',
+    icon: 'https://enka.network/ui/UI_AvatarIcon_Mavuika.png',
     level: 60,
     maxLevel: 90,
     constellation: 0,
     fetter: 4,
     weapon: {
       name: 'Trấn Mavuika',
-      icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_EquipIcon_Claymore_Mavuika.png',
+      icon: 'https://enka.network/ui/UI_EquipIcon_Claymore_Mavuika.png',
       rarity: 5,
       level: 70,
       affixLevel: 1,
       typeName: 'Trọng Kiếm',
-      materialName: 'Nguyên Liệu Rèn Natlan',
+      materialName: 'Nguyên Liệu Natlan',
       domainDays: [1, 4, 0],
     },
     relics: [
-      { name: 'Dũng Sĩ Hỏa Diệm', icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/relic_flower.png', posName: 'Hoa Sự Sống', rarity: 5, level: 16, setName: 'Bí Cảnh Dũng Sĩ Natlan' },
+      { name: 'Dũng Sĩ Hỏa Diệm', icon: 'https://enka.network/ui/relic_flower.png', posName: 'Hoa Sự Sống', rarity: 5, level: 16, setName: 'Bí Cảnh Dũng Sĩ Natlan' },
     ],
     talents: { attack: 1, skill: 6, burst: 6 },
     talentBook: 'Bất Diệt (Contention)',
@@ -984,14 +984,14 @@ export const USER_CHARACTERS_PRESET: UserCharacter[] = [
     nameVi: 'Arlecchino',
     element: 'pyro',
     rarity: 5,
-    icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Arlecchino.png',
+    icon: 'https://enka.network/ui/UI_AvatarIcon_Arlecchino.png',
     level: 80,
     maxLevel: 90,
     constellation: 0,
     fetter: 9,
     weapon: {
       name: 'Xích Nguyệt Liêm',
-      icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_EquipIcon_Pole_CrimsonMoon.png',
+      icon: 'https://enka.network/ui/UI_EquipIcon_Pole_CrimsonMoon.png',
       rarity: 5,
       level: 90,
       affixLevel: 1,
@@ -1000,7 +1000,7 @@ export const USER_CHARACTERS_PRESET: UserCharacter[] = [
       domainDays: [1, 4, 0],
     },
     relics: [
-      { name: 'Mảnh Hài Hòa Hư Ảo', icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/relic_flower.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Mảnh Hài Hòa Hư Ảo (4 món)' },
+      { name: 'Mảnh Hài Hòa Hư Ảo', icon: 'https://enka.network/ui/relic_flower.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Mảnh Hài Hòa Hư Ảo (4 món)' },
     ],
     talents: { attack: 10, skill: 8, burst: 8 },
     talentBook: 'Trật Tự (Order)',
@@ -1016,14 +1016,14 @@ export const USER_CHARACTERS_PRESET: UserCharacter[] = [
     nameVi: 'Kaedehara Kazuha',
     element: 'anemo',
     rarity: 5,
-    icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Kazuha.png',
+    icon: 'https://enka.network/ui/UI_AvatarIcon_Kazuha.png',
     level: 90,
     maxLevel: 90,
     constellation: 0,
     fetter: 10,
     weapon: {
       name: 'Tây Phong Kiếm',
-      icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_EquipIcon_Sword_Favonius.png',
+      icon: 'https://enka.network/ui/UI_EquipIcon_Sword_Favonius.png',
       rarity: 4,
       level: 90,
       affixLevel: 5,
@@ -1032,7 +1032,7 @@ export const USER_CHARACTERS_PRESET: UserCharacter[] = [
       domainDays: [3, 6, 0],
     },
     relics: [
-      { name: 'Bóng Hình Màu Xanh', icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/relic_flower.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Bóng Hình Màu Xanh (4 món)' },
+      { name: 'Bóng Hình Màu Xanh', icon: 'https://enka.network/ui/relic_flower.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Bóng Hình Màu Xanh (4 món)' },
     ],
     talents: { attack: 6, skill: 8, burst: 8 },
     talentBook: 'Cần Thiết (Diligence)',
@@ -1048,7 +1048,7 @@ export const USER_CHARACTERS_PRESET: UserCharacter[] = [
     nameVi: 'Zhongli',
     element: 'geo',
     rarity: 5,
-    icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Zhongli.png',
+    icon: 'https://enka.network/ui/UI_AvatarIcon_Zhongli.png',
     level: 90,
     maxLevel: 90,
     constellation: 0,
@@ -1064,7 +1064,7 @@ export const USER_CHARACTERS_PRESET: UserCharacter[] = [
       domainDays: [1, 4, 0],
     },
     relics: [
-      { name: 'Thiên Nham Vững Chắc', icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/relic_flower.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Thiên Nham Vững Chắc (4 món)' },
+      { name: 'Thiên Nham Vững Chắc', icon: 'https://enka.network/ui/relic_flower.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Thiên Nham Vững Chắc (4 món)' },
     ],
     talents: { attack: 1, skill: 9, burst: 9 },
     talentBook: 'Vàng Kim (Gold)',
@@ -1080,14 +1080,14 @@ export const USER_CHARACTERS_PRESET: UserCharacter[] = [
     nameVi: 'Hu Tao',
     element: 'pyro',
     rarity: 5,
-    icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Hutao.png',
+    icon: 'https://enka.network/ui/UI_AvatarIcon_Hutao.png',
     level: 90,
     maxLevel: 90,
     constellation: 1,
     fetter: 10,
     weapon: {
       name: 'Trượng Homa',
-      icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_EquipIcon_Pole_Homa.png',
+      icon: 'https://enka.network/ui/UI_EquipIcon_Pole_Homa.png',
       rarity: 5,
       level: 90,
       affixLevel: 1,
@@ -1096,7 +1096,7 @@ export const USER_CHARACTERS_PRESET: UserCharacter[] = [
       domainDays: [3, 6, 0],
     },
     relics: [
-      { name: 'Diệm Ma Rực Cháy', icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/relic_flower.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Diệm Ma Rực Cháy (4 món)' },
+      { name: 'Diệm Ma Rực Cháy', icon: 'https://enka.network/ui/relic_flower.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Diệm Ma Rực Cháy (4 món)' },
     ],
     talents: { attack: 10, skill: 10, burst: 9 },
     talentBook: 'Cần Thiết (Diligence)',
@@ -1112,14 +1112,14 @@ export const USER_CHARACTERS_PRESET: UserCharacter[] = [
     nameVi: 'Yelan',
     element: 'hydro',
     rarity: 5,
-    icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Yelan.png',
+    icon: 'https://enka.network/ui/UI_AvatarIcon_Yelan.png',
     level: 80,
     maxLevel: 90,
     constellation: 0,
     fetter: 10,
     weapon: {
       name: 'Cung Tây Phong',
-      icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_EquipIcon_Bow_Favonius.png',
+      icon: 'https://enka.network/ui/UI_EquipIcon_Bow_Favonius.png',
       rarity: 4,
       level: 90,
       affixLevel: 5,
@@ -1128,7 +1128,7 @@ export const USER_CHARACTERS_PRESET: UserCharacter[] = [
       domainDays: [3, 6, 0],
     },
     relics: [
-      { name: 'Dấu Ấn Ngăn Trở', icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/relic_flower.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Dấu Ấn Ngăn Trở (4 món)' },
+      { name: 'Dấu Ấn Ngăn Trở', icon: 'https://enka.network/ui/relic_flower.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Dấu Ấn Ngăn Trở (4 món)' },
     ],
     talents: { attack: 1, skill: 9, burst: 10 },
     talentBook: 'Thịnh Vượng (Prosperity)',
@@ -1144,14 +1144,14 @@ export const USER_CHARACTERS_PRESET: UserCharacter[] = [
     nameVi: 'Bennett',
     element: 'pyro',
     rarity: 4,
-    icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Bennett.png',
+    icon: 'https://enka.network/ui/UI_AvatarIcon_Bennett.png',
     level: 80,
     maxLevel: 90,
     constellation: 5,
     fetter: 10,
     weapon: {
       name: 'Tây Phong Kiếm',
-      icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_EquipIcon_Sword_Favonius.png',
+      icon: 'https://enka.network/ui/UI_EquipIcon_Sword_Favonius.png',
       rarity: 4,
       level: 90,
       affixLevel: 5,
@@ -1160,7 +1160,7 @@ export const USER_CHARACTERS_PRESET: UserCharacter[] = [
       domainDays: [3, 6, 0],
     },
     relics: [
-      { name: 'Nghi Thức Tông Thất Cổ', icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/relic_flower.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Nghi Thức Tông Thất Cổ (4 món)' },
+      { name: 'Nghi Thức Tông Thất Cổ', icon: 'https://enka.network/ui/relic_flower.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Nghi Thức Tông Thất Cổ (4 món)' },
     ],
     talents: { attack: 1, skill: 6, burst: 10 },
     talentBook: 'Kháng Chiến (Resistance)',

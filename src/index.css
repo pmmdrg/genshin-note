@@ -13,8 +13,12 @@ body {
   overflow-x: hidden;
 }
 
-.font-genshin {
-  font-family: 'Cinzel', 'Inter', serif;
+*, ::before, ::after {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.font-genshin, .font-genshin * {
+  font-family: 'Cinzel', 'Inter', serif !important;
 }
 
 /* Liquid Glass Utilities */

@@ -34,6 +34,7 @@ interface AppState {
   toggleBranchComplete: (treeId: string, branchKey: 'levelBranch' | 'weaponBranch' | 'talentBranch' | 'artifactBranch') => void;
   updateTreeLevel: (treeId: string, newLevel: number) => void;
   updateTreeWeaponLevel: (treeId: string, newLevel: number) => void;
+  updateTreeWeaponDays: (treeId: string, daysOfWeek: number[]) => void;
   updateTreeTalentLevel: (treeId: string, skill: 'attack' | 'skill' | 'burst', newLevel: number) => void;
   updateTreeArtifactPiece: (treeId: string, slotIndex: number, updates: { level?: number; isOptimized?: boolean }) => void;
   toggleCompleteCharacterTree: (treeId: string) => void;
@@ -128,7 +129,7 @@ export const useStore = create<AppState>()(
                     affixLevel: hoyoChar.weapon.affix_level || 1,
                     typeName: hoyoChar.weapon.type_name || defaultBuild.weapon.typeName,
                     domainDays: [1, 4, 0],
-                    materialName: 'Nguyên liệu rèn',
+                    materialName: 'Nguyên liệu đột phá',
                   }
                 : userPreset?.weapon || {
                     name: defaultBuild.weapon.name,
@@ -138,7 +139,7 @@ export const useStore = create<AppState>()(
                     affixLevel: defaultBuild.weapon.affixLevel,
                     typeName: defaultBuild.weapon.typeName,
                     domainDays: [1, 4, 0],
-                    materialName: 'Nguyên liệu rèn',
+                    materialName: 'Nguyên liệu đột phá',
                   };
 
               const relicsData = hoyoChar.relics?.length
@@ -248,7 +249,7 @@ export const useStore = create<AppState>()(
           id: 'tree-starter-furina',
           characterId: 'char-furina',
           characterName: 'Furina',
-          avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Furina.png',
+          avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Furina.png',
           element: 'hydro',
           rarity: 5,
           constellation: 6,
@@ -269,7 +270,7 @@ export const useStore = create<AppState>()(
           },
           weaponBranch: {
             weaponName: 'Sắc Nước Tĩnh Lặng',
-            weaponIcon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_EquipIcon_Sword_Regalis.png',
+            weaponIcon: 'https://enka.network/ui/UI_EquipIcon_Sword_Regalis.png',
             currentLevel: 80,
             targetLevel: 90,
             materialName: 'Giọt Sương Tinh Khiết',
@@ -304,7 +305,7 @@ export const useStore = create<AppState>()(
           id: 'tree-starter-raiden',
           characterId: 'char-raiden',
           characterName: 'Raiden Shogun',
-          avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Shougun.png',
+          avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Shougun.png',
           element: 'electro',
           rarity: 5,
           constellation: 2,
@@ -325,7 +326,7 @@ export const useStore = create<AppState>()(
           },
           weaponBranch: {
             weaponName: 'Đoạn Thảo Trảm Quang',
-            weaponIcon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_EquipIcon_Pole_Narukami.png',
+            weaponIcon: 'https://enka.network/ui/UI_EquipIcon_Pole_Narukami.png',
             currentLevel: 90,
             targetLevel: 90,
             materialName: 'Mặt Nạ Hổ Phách',
@@ -403,7 +404,10 @@ export const useStore = create<AppState>()(
             weaponIcon: char.weapon?.icon,
             currentLevel: char.weapon?.level || 1,
             targetLevel: 90,
-            materialName: char.weapon?.materialName || 'Nguyên liệu rèn',
+            materialName:
+              char.weapon?.materialName && char.weapon.materialName !== 'Nguyên liệu rèn'
+                ? char.weapon.materialName
+                : 'Nguyên liệu đột phá',
             daysOfWeek: char.weapon?.domainDays || [1, 4, 0],
             isCompleted: (char.weapon?.level || 1) >= 90,
           },
@@ -499,6 +503,21 @@ export const useStore = create<AppState>()(
                 ...tree.weaponBranch,
                 currentLevel: clampedLevel,
                 isCompleted: clampedLevel >= 90,
+              },
+            };
+          }),
+        }));
+      },
+
+      updateTreeWeaponDays: (treeId, daysOfWeek) => {
+        set((state) => ({
+          characterTrees: state.characterTrees.map((tree) => {
+            if (tree.id !== treeId) return tree;
+            return {
+              ...tree,
+              weaponBranch: {
+                ...tree.weaponBranch,
+                daysOfWeek,
               },
             };
           }),

@@ -50,7 +50,7 @@ export const App: React.FC = () => {
           <p className="tracking-wide font-medium flex items-center justify-center gap-2">
             <span>Genshin Note</span>
             <span>•</span>
-            <span className="font-mono text-[11px] text-slate-600">v{APP_VERSION}</span>
+            <span className="text-[11px] text-slate-600 font-medium">v{APP_VERSION}</span>
           </p>
         </footer>
       </div>
