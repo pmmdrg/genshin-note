@@ -4,6 +4,8 @@ import { CharacterRosterView } from './components/CharacterRosterView';
 import { TaskTreeTimeline } from './components/TaskTreeTimeline';
 import { CompletedList } from './components/CompletedList';
 import { useStore } from './store/useStore';
+import { APP_VERSION } from './version';
+
 
 export const App: React.FC = () => {
   const { activeNav } = useStore();
@@ -37,8 +39,13 @@ export const App: React.FC = () => {
 
       {/* Ultra-Minimal Footer */}
       <footer className="py-6 text-center text-xs text-slate-500/80 relative z-10">
-        <p className="tracking-wide font-medium">Genshin Note</p>
+        <p className="tracking-wide font-medium flex items-center justify-center gap-2">
+          <span>Genshin Note</span>
+          <span>•</span>
+          <span className="font-mono text-[11px] text-slate-600">v{APP_VERSION}</span>
+        </p>
       </footer>
+
     </div>
   );
 };

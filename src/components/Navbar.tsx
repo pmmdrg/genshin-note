@@ -3,7 +3,10 @@ import { Sparkles, Droplet, Gift, RotateCw, CheckCircle2, User, GitBranch } from
 import { useStore } from '../store/useStore';
 import { calculateResinRecovery, formatSecondsToTime } from '../utils/priority';
 
+import { APP_VERSION } from '../version';
+
 export const Navbar: React.FC = () => {
+
   const {
     activeNav,
     setActiveNav,
@@ -49,7 +52,11 @@ export const Navbar: React.FC = () => {
             <span className="text-base font-bold tracking-tight bg-gradient-to-r from-white via-slate-100 to-slate-400 bg-clip-text text-transparent">
               Genshin Note
             </span>
+            <span className="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded-md bg-white/[0.06] text-slate-400 border border-white/[0.08]">
+              v{APP_VERSION}
+            </span>
           </div>
+
 
           {/* Navigation Menu */}
           <nav className="h-9 flex items-center bg-white/[0.04] backdrop-blur-xl p-1 rounded-2xl border border-white/[0.08] text-xs font-medium shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
