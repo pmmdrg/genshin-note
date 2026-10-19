@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Plus, Sparkles, Sword, Shield, BookOpen, Layers } from 'lucide-react';
+import { Search, Plus, Sparkles, Sword, Shield, BookOpen, Layers, RotateCw } from 'lucide-react';
 import { useStore } from '../store/useStore';
 import { ELEMENT_COLORS } from '../data/genshinData';
 import { calculateLevelTo90Cost, calculateTalentCost } from '../utils/calculator';
@@ -7,7 +7,14 @@ import { isDomainOpenToday } from '../utils/priority';
 import confetti from 'canvas-confetti';
 
 export const CharacterRosterView: React.FC = () => {
-  const { characters, selectedCharacterId, setSelectedCharacterId, addCharacterToTimeline } = useStore();
+  const {
+    characters,
+    selectedCharacterId,
+    setSelectedCharacterId,
+    addCharacterToTimeline,
+    fetchCharactersFromHoyo,
+    characterFetchLoading,
+  } = useStore();
 
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedElement, setSelectedElement] = useState<string>('all');
@@ -64,6 +71,16 @@ export const CharacterRosterView: React.FC = () => {
                 {characters.length}
               </span>
             </h2>
+
+            <button
+              onClick={() => fetchCharactersFromHoyo()}
+              disabled={characterFetchLoading}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] hover:border-white/20 text-xs font-semibold text-slate-200 transition-all active:scale-95 disabled:opacity-50"
+              title="Đồng bộ danh sách nhân vật từ tài khoản HoYoLAB"
+            >
+              <RotateCw className={`w-3.5 h-3.5 text-cyan-400 ${characterFetchLoading ? 'animate-spin' : ''}`} />
+              <span>{characterFetchLoading ? 'Đang tải...' : 'Đồng bộ HoYoLAB'}</span>
+            </button>
           </div>
 
           {/* Search bar */}

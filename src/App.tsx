@@ -7,10 +7,11 @@ import { useStore } from './store/useStore';
 import { APP_VERSION } from './version';
 
 export const App: React.FC = () => {
-  const { activeNav, syncWithHoyo } = useStore();
+  const { activeNav, syncWithHoyo, fetchCharactersFromHoyo } = useStore();
 
   React.useEffect(() => {
     syncWithHoyo();
+    fetchCharactersFromHoyo();
   }, []);
 
 

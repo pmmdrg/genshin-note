@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import type { TaskGoal, HoyoDailyNote, UserCharacter, CharacterBranchTree, NavigationMenu } from '../types';
-import { USER_CHARACTERS_PRESET } from '../data/genshinData';
+import { USER_CHARACTERS_PRESET, CHARACTERS_DATA } from '../data/genshinData';
 import { calculateLevelTo90Cost, calculateTalentCost } from '../utils/calculator';
 
 interface AppState {
@@ -13,6 +13,7 @@ interface AppState {
   characters: UserCharacter[];
   selectedCharacterId: string;
   setSelectedCharacterId: (id: string) => void;
+  characterFetchLoading: boolean;
   fetchCharactersFromHoyo: () => Promise<void>;
 
   // Character Branch Trees (Việc Cần Làm / Timeline)
@@ -63,7 +64,7 @@ interface AppState {
 
 export const useStore = create<AppState>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       activeNav: 'characters',
 
       setActiveNav: (nav) => set({ activeNav: nav }),
@@ -71,21 +72,121 @@ export const useStore = create<AppState>()(
       characters: USER_CHARACTERS_PRESET,
       selectedCharacterId: 'char-furina',
       setSelectedCharacterId: (id) => set({ selectedCharacterId: id }),
+      characterFetchLoading: false,
 
       fetchCharactersFromHoyo: async () => {
+        set({ characterFetchLoading: true });
         try {
           const res = await fetch('/api/characterList', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({}),
           });
-          const data = await res.json();
-          if (data.retcode === 0 && data.data?.avatars) {
-            // Transform HoYoLAB avatars if available
-            // Keep existing presets if HoYoLAB list has fewer or different formats
+          const json = await res.json();
+          if (json.retcode === 0 && Array.isArray(json.data?.avatars) && json.data.avatars.length > 0) {
+            const transformed: UserCharacter[] = json.data.avatars.map((hoyoChar: any) => {
+              const rawName = (hoyoChar.name || '').trim();
+              const userPreset = USER_CHARACTERS_PRESET.find(
+                (p) =>
+                  p.name.toLowerCase() === rawName.toLowerCase() ||
+                  rawName.toLowerCase().includes(p.name.toLowerCase()) ||
+                  p.name.toLowerCase().includes(rawName.toLowerCase())
+              );
+              const dataPreset = CHARACTERS_DATA.find(
+                (p) =>
+                  p.name.toLowerCase() === rawName.toLowerCase() ||
+                  rawName.toLowerCase().includes(p.name.toLowerCase()) ||
+                  p.name.toLowerCase().includes(rawName.toLowerCase())
+              );
+
+              const element = (hoyoChar.element || userPreset?.element || dataPreset?.element || 'pyro').toLowerCase() as any;
+
+              return {
+                id: `char-hoyo-${hoyoChar.id}`,
+                name: rawName,
+                nameVi: userPreset?.nameVi || dataPreset?.nameVi || rawName,
+                element,
+                rarity: (hoyoChar.rarity || userPreset?.rarity || dataPreset?.rarity || 4) as 4 | 5,
+                icon: hoyoChar.image || userPreset?.icon || dataPreset?.avatarUrl || '',
+                image: hoyoChar.card_image || hoyoChar.image,
+                level: hoyoChar.level || 1,
+                maxLevel: 90,
+                constellation: hoyoChar.actived_constellation_num ?? 0,
+                fetter: hoyoChar.fetter ?? 1,
+                weapon: hoyoChar.weapon
+                  ? {
+                      name: hoyoChar.weapon.name,
+                      icon: hoyoChar.weapon.icon,
+                      rarity: hoyoChar.weapon.rarity,
+                      level: hoyoChar.weapon.level,
+                      affixLevel: hoyoChar.weapon.affix_level || 1,
+                      typeName: hoyoChar.weapon.type_name || 'Vũ khí',
+                      domainDays: [1, 4, 0],
+                      materialName: 'Nguyên liệu rèn',
+                    }
+                  : userPreset?.weapon || {
+                      name: 'Vũ Khí Chuyên Dụng',
+                      icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_EquipIcon_Sword_Favonius.png',
+                      rarity: 4,
+                      level: 80,
+                      affixLevel: 1,
+                      typeName: 'Vũ khí',
+                      domainDays: [1, 4, 0],
+                      materialName: 'Nguyên liệu rèn',
+                    },
+                relics: hoyoChar.relics?.length
+                  ? hoyoChar.relics.map((r: any) => ({
+                      name: r.name,
+                      icon: r.icon,
+                      posName: r.pos_name,
+                      rarity: r.rarity,
+                      level: r.level,
+                      setName: r.set?.name || 'Thánh Di Vật',
+                    }))
+                  : userPreset?.relics || [
+                      {
+                        name: 'Hoa Sự Sống',
+                        icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/relic_flower.png',
+                        posName: 'Hoa Sự Sống',
+                        rarity: 5,
+                        level: 20,
+                        setName: 'Bộ Thánh Di Vật Đề Cử',
+                      },
+                    ],
+                talents: userPreset?.talents || {
+                  attack: Math.min(10, Math.max(1, Math.floor((hoyoChar.level || 1) / 10))),
+                  skill: Math.min(10, Math.max(1, Math.floor((hoyoChar.level || 1) / 9))),
+                  burst: Math.min(10, Math.max(1, Math.floor((hoyoChar.level || 1) / 9))),
+                },
+                talentBook: userPreset?.talentBook || dataPreset?.talentBook || 'Sách Thiên Phú',
+                talentDomain: userPreset?.talentDomain || dataPreset?.talentDomain || 'Bí Cảnh Thiên Phú',
+                talentDays: userPreset?.talentDays || dataPreset?.talentDays || [1, 4, 0],
+                weeklyBossMat: userPreset?.weeklyBossMat || dataPreset?.weeklyBossMat || 'Nguyên Liệu Boss Tuần',
+                worldBossMat: userPreset?.worldBossMat || 'Nguyên Liệu Boss Thế Giới',
+                localSpecialty: userPreset?.localSpecialty || 'Đặc Sản Khu Vực',
+              };
+            });
+
+            // Sort: 5-star first, then by level descending, then constellation
+            transformed.sort((a, b) => {
+              if (b.rarity !== a.rarity) return b.rarity - a.rarity;
+              if (b.level !== a.level) return b.level - a.level;
+              return b.constellation - a.constellation;
+            });
+
+            set((state) => ({
+              characters: transformed,
+              selectedCharacterId:
+                transformed.some((c) => c.id === state.selectedCharacterId)
+                  ? state.selectedCharacterId
+                  : transformed[0]?.id || state.selectedCharacterId,
+              characterFetchLoading: false,
+            }));
+          } else {
+            set({ characterFetchLoading: false });
           }
         } catch {
-          // Ignore and use local presets
+          set({ characterFetchLoading: false });
         }
       },
 
@@ -412,7 +513,12 @@ export const useStore = create<AppState>()(
             hoyoSyncLoading: false,
             hoyoSyncError: null,
           });
+
+          // Also synchronize characters list
+          get().fetchCharactersFromHoyo().catch(() => {});
         } catch (error: any) {
+          // Even if daily note has an issue (e.g. 10102 privacy), still attempt to fetch characters
+          get().fetchCharactersFromHoyo().catch(() => {});
           set({
             hoyoSyncLoading: false,
             hoyoSyncError: error.message || 'Không thể đồng bộ với HoYoLAB',

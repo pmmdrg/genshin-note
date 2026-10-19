@@ -37,31 +37,30 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const charUrl = 'https://bbs-api-os.hoyolab.com/game_record/genshin/api/character';
+    const indexUrl = `https://bbs-api-os.hoyolab.com/game_record/genshin/api/index?server=${encodeURIComponent(server)}&role_id=${encodeURIComponent(uid)}`;
 
-    const hoyoRes = await fetch(charUrl, {
-      method: 'POST',
+    const hoyoRes = await fetch(indexUrl, {
+      method: 'GET',
       headers: {
         'Cookie': cookie,
         'Accept': 'application/json, text/plain, */*',
-        'Content-Type': 'application/json',
         'x-rpc-app_version': '1.5.0',
         'x-rpc-client_type': '5',
         'x-rpc-language': 'vi-vn',
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
       },
-      body: JSON.stringify({
-        role_id: uid,
-        server: server,
-      }),
     });
 
     const data = await hoyoRes.json();
 
     if (data.retcode !== 0) {
+      let friendlyMsg = data.message || 'Không thể lấy danh sách nhân vật từ HoYoLAB.';
+      if (data.retcode === 10102 || data.retcode === 10104) {
+        friendlyMsg = 'Dữ liệu Chiến Tích nhân vật chưa mở công khai. Vui lòng vào App HoYoLAB > Cài đặt quyền riêng tư > Bật "Hiển thị Chiến tích nhân vật".';
+      }
       return res.status(200).json({
         retcode: data.retcode,
-        message: data.message || 'Không thể lấy danh sách nhân vật từ HoYoLAB.',
+        message: friendlyMsg,
         data: null,
       });
     }
@@ -69,7 +68,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(200).json({
       retcode: 0,
       message: 'OK',
-      data: data.data,
+      data: {
+        avatars: data.data?.avatars || [],
+        role: data.data?.role || null,
+        stats: data.data?.stats || null,
+      },
     });
   } catch (err: any) {
     return res.status(500).json({
