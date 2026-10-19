@@ -31,7 +31,9 @@ interface AppState {
     cookie: string;
     uid: string;
     server: string;
+    appPin: string;
   };
+
   hoyoData: HoyoDailyNote | null;
   lastHoyoSync: number | null;
   hoyoSyncLoading: boolean;
@@ -206,6 +208,7 @@ export const useStore = create<AppState>()(
         cookie: '',
         uid: '',
         server: 'os_asia',
+        appPin: '',
       },
       hoyoData: null,
       lastHoyoSync: null,
@@ -222,10 +225,6 @@ export const useStore = create<AppState>()(
 
       syncWithHoyo: async () => {
         const { hoyoConfig } = get();
-        if (!hoyoConfig.cookie || !hoyoConfig.uid) {
-          set({ hoyoSyncError: 'Vui lòng cấu hình Cookie và UID trước khi đồng bộ' });
-          return;
-        }
 
         set({ hoyoSyncLoading: true, hoyoSyncError: null });
 
@@ -235,12 +234,14 @@ export const useStore = create<AppState>()(
             headers: {
               'Content-Type': 'application/json',
               'x-hoyolab-cookie': hoyoConfig.cookie,
+              'x-app-pin': hoyoConfig.appPin,
             },
             body: JSON.stringify({
               uid: hoyoConfig.uid,
               server: hoyoConfig.server,
             }),
           });
+
 
           if (!res.ok) {
             const errJson = await res.json().catch(() => ({}));

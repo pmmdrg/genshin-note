@@ -21,6 +21,7 @@ export const HoyoSyncModal: React.FC<HoyoSyncModalProps> = ({ isOpen, onClose })
   const [uid, setUid] = useState(hoyoConfig.uid || '');
   const [cookie, setCookie] = useState(hoyoConfig.cookie || '');
   const [server, setServer] = useState(hoyoConfig.server || 'os_asia');
+  const [appPin, setAppPin] = useState(hoyoConfig.appPin || '');
   const [successMsg, setSuccessMsg] = useState(false);
 
   if (!isOpen) return null;
@@ -30,6 +31,7 @@ export const HoyoSyncModal: React.FC<HoyoSyncModalProps> = ({ isOpen, onClose })
       uid: uid.trim(),
       cookie: cookie.trim(),
       server,
+      appPin: appPin.trim(),
       enabled: true,
     });
 
@@ -37,6 +39,7 @@ export const HoyoSyncModal: React.FC<HoyoSyncModalProps> = ({ isOpen, onClose })
     await syncWithHoyo();
     setSuccessMsg(true);
   };
+
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
@@ -126,7 +129,25 @@ export const HoyoSyncModal: React.FC<HoyoSyncModalProps> = ({ isOpen, onClose })
                 className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-cyan-500 font-mono text-[11px]"
               />
             </div>
+
+            <div>
+              <div className="flex items-center justify-between mb-1">
+                <label className="font-semibold text-slate-300 flex items-center gap-1.5">
+                  <Shield className="w-3.5 h-3.5 text-indigo-400" />
+                  Mã PIN Bảo Mật (Personal Security PIN)
+                </label>
+                <span className="text-[10px] text-slate-500">(Khớp với APP_PIN trên Vercel)</span>
+              </div>
+              <input
+                type="password"
+                value={appPin}
+                onChange={(e) => setAppPin(e.target.value)}
+                placeholder="Nhập mã PIN nếu bạn cấu hình APP_PIN trên Vercel (ví dụ: 123456)"
+                className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 font-mono text-xs"
+              />
+            </div>
           </div>
+
 
           {/* Guide to get cookie */}
           <div className="p-3 bg-slate-900/60 rounded-xl border border-slate-800 text-[11px] text-slate-400 space-y-1.5">
