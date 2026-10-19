@@ -1,6 +1,7 @@
-import React from 'react';
-import { CheckCircle2, RotateCcw, Trash2, Calendar, GitBranch } from 'lucide-react';
+import React, { useState } from 'react';
+import { CheckCircle2, RotateCcw, Trash2, Calendar, GitBranch, Search, X } from 'lucide-react';
 import { useStore } from '../store/useStore';
+import { useDebounce } from '../hooks/useDebounce';
 
 export const CompletedList: React.FC = () => {
   const {
@@ -10,7 +11,14 @@ export const CompletedList: React.FC = () => {
     clearCompletedTrees,
   } = useStore();
 
+  const [searchTerm, setSearchTerm] = useState('');
+  const debouncedSearch = useDebounce(searchTerm, 250);
+
   const completedTrees = characterTrees.filter((t) => t.isCompleted);
+  const displayedTrees = completedTrees.filter((t) => {
+    const q = debouncedSearch.toLowerCase().trim();
+    return !q || t.characterName.toLowerCase().includes(q);
+  });
 
   const formatDate = (timestamp?: number) => {
     if (!timestamp) return '';
@@ -65,7 +73,32 @@ export const CompletedList: React.FC = () => {
         </div>
       ) : (
         <div className="space-y-3">
-          {completedTrees.map((tree) => (
+          {/* Search completed characters */}
+          <div className="relative">
+            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <input
+              type="text"
+              placeholder="Tìm kiếm trong danh sách đã hoàn thành..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full pl-10 pr-9 py-2.5 rounded-2xl bg-white/[0.04] border border-white/[0.08] focus:border-emerald-400/60 focus:bg-white/[0.08] focus:outline-none text-xs sm:text-sm text-slate-100 placeholder:text-slate-500 transition-all font-sans"
+            />
+            {searchTerm && (
+              <button
+                onClick={() => setSearchTerm('')}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-200 p-0.5 cursor-pointer"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            )}
+          </div>
+
+          {displayedTrees.length === 0 ? (
+            <div className="rounded-3xl liquid-glass p-8 text-center text-slate-400 text-xs">
+              Không tìm thấy nhân vật nào phù hợp với từ khóa "{debouncedSearch}".
+            </div>
+          ) : (
+            displayedTrees.map((tree) => (
             <div
               key={tree.id}
               className="rounded-3xl liquid-glass p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 transition-all"
@@ -124,7 +157,7 @@ export const CompletedList: React.FC = () => {
                 </button>
               </div>
             </div>
-          ))}
+          )))}
         </div>
       )}
     </div>

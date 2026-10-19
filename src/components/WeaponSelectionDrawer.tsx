@@ -1,8 +1,9 @@
-import React, { useState, useDeferredValue, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Search, X, Sparkles, Check, Calendar } from 'lucide-react';
 import type { WeaponPreset } from '../types';
 import { WEAPONS_DATA } from '../data/genshinData';
 import { isDomainOpenToday } from '../utils/priority';
+import { useDebounce } from '../hooks/useDebounce';
 
 interface WeaponSelectionDrawerProps {
   isOpen: boolean;
@@ -30,7 +31,7 @@ export const WeaponSelectionDrawer: React.FC<WeaponSelectionDrawerProps> = ({
   characterName,
 }) => {
   const [search, setSearch] = useState('');
-  const deferredSearch = useDeferredValue(search);
+  const debouncedSearch = useDebounce(search, 250);
   const [selectedType, setSelectedType] = useState<string>(characterWeaponType || 'all');
   const [selectedRarity, setSelectedRarity] = useState<string>('all');
 
@@ -68,8 +69,8 @@ export const WeaponSelectionDrawer: React.FC<WeaponSelectionDrawerProps> = ({
     }
 
     // Search query match
-    if (deferredSearch.trim()) {
-      const q = deferredSearch.toLowerCase().trim();
+    if (debouncedSearch.trim()) {
+      const q = debouncedSearch.toLowerCase().trim();
       const matchVi = weapon.nameVi.toLowerCase().includes(q);
       const matchEn = weapon.name.toLowerCase().includes(q);
       const matchMat = weapon.ascensionMat.toLowerCase().includes(q);
@@ -225,7 +226,7 @@ export const WeaponSelectionDrawer: React.FC<WeaponSelectionDrawerProps> = ({
             </div>
           ) : (
             <div
-              key={`${selectedType}-${selectedRarity}-${deferredSearch.trim()}`}
+              key={`${selectedType}-${selectedRarity}-${debouncedSearch.trim()}`}
               className="grid grid-cols-1 sm:grid-cols-2 gap-3 animate-filter-grid"
             >
               {filteredWeapons.map((weapon, idx) => {

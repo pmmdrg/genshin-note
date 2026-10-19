@@ -1,4 +1,4 @@
-import React, { useState, useDeferredValue } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, Plus, Layers, RotateCw, Check, X, Sparkles } from 'lucide-react';
 import { useStore } from '../store/useStore';
@@ -6,6 +6,7 @@ import { ELEMENT_NAMES_VI } from '../data/genshinData';
 import { ElementIcon } from './ElementIcon';
 import type { UserCharacter } from '../types';
 import confetti from 'canvas-confetti';
+import { useDebounce } from '../hooks/useDebounce';
 
 export const CharacterRosterView: React.FC = () => {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ export const CharacterRosterView: React.FC = () => {
   const [onlyC6, setOnlyC6] = useState(false);
   const [addedCharName, setAddedCharName] = useState<string | null>(null);
 
-  const deferredSearch = useDeferredValue(searchTerm);
+  const debouncedSearch = useDebounce(searchTerm, 250);
 
   const isAlreadyOnTimeline = (char: UserCharacter) => {
     return characterTrees.some(
@@ -37,9 +38,11 @@ export const CharacterRosterView: React.FC = () => {
   const c6Count = characters.filter((c) => c.constellation === 6).length;
 
   const filteredCharacters = characters.filter((c) => {
+    const q = debouncedSearch.toLowerCase().trim();
     const matchesSearch =
-      c.name.toLowerCase().includes(deferredSearch.toLowerCase()) ||
-      c.nameVi.toLowerCase().includes(deferredSearch.toLowerCase());
+      !q ||
+      c.name.toLowerCase().includes(q) ||
+      c.nameVi.toLowerCase().includes(q);
     const matchesElement = selectedElement === 'all' || c.element === selectedElement;
     const matchesC6 = !onlyC6 || c.constellation === 6;
     return matchesSearch && matchesElement && matchesC6;
@@ -166,7 +169,7 @@ export const CharacterRosterView: React.FC = () => {
           </div>
         ) : (
           <div
-            key={`${selectedElement}-${deferredSearch.trim()}-${onlyC6}`}
+            key={`${selectedElement}-${debouncedSearch.trim()}-${onlyC6}`}
             className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-3.5 sm:gap-4 animate-filter-grid"
           >
             {filteredCharacters.map((char, index) => {

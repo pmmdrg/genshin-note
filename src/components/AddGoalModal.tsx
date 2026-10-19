@@ -3,6 +3,7 @@ import { X, Search, Sparkles, User, Sword, Shield, FileText, Droplet } from 'luc
 import { useStore } from '../store/useStore';
 import { CHARACTERS_DATA, WEAPONS_DATA, ELEMENT_COLORS } from '../data/genshinData';
 import type { CharacterPreset, WeaponPreset } from '../types';
+import { useDebounce } from '../hooks/useDebounce';
 
 interface AddGoalModalProps {
   isOpen: boolean;
@@ -16,6 +17,7 @@ export const AddGoalModal: React.FC<AddGoalModalProps> = ({ isOpen, onClose }) =
 
   // Search filter
   const [searchTerm, setSearchTerm] = useState('');
+  const debouncedSearch = useDebounce(searchTerm, 250);
 
   // Selected preset states
   const [selectedCharacter, setSelectedCharacter] = useState<CharacterPreset | null>(null);
@@ -29,21 +31,18 @@ export const AddGoalModal: React.FC<AddGoalModalProps> = ({ isOpen, onClose }) =
   const [notes, setNotes] = useState('');
   const [selectedDays] = useState<number[]>([1, 4, 0]);
 
-
   if (!isOpen) return null;
 
-  // Filtered lists
-  const filteredCharacters = CHARACTERS_DATA.filter(
-    (c) =>
-      c.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      c.nameVi.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // Filtered lists with debounce
+  const filteredCharacters = CHARACTERS_DATA.filter((c) => {
+    const q = debouncedSearch.toLowerCase().trim();
+    return !q || c.name.toLowerCase().includes(q) || c.nameVi.toLowerCase().includes(q);
+  });
 
-  const filteredWeapons = WEAPONS_DATA.filter(
-    (w) =>
-      w.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      w.nameVi.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredWeapons = WEAPONS_DATA.filter((w) => {
+    const q = debouncedSearch.toLowerCase().trim();
+    return !q || w.name.toLowerCase().includes(q) || w.nameVi.toLowerCase().includes(q);
+  });
 
   const handleSelectCharacter = (char: CharacterPreset) => {
     setSelectedCharacter(char);
@@ -229,8 +228,17 @@ export const AddGoalModal: React.FC<AddGoalModalProps> = ({ isOpen, onClose }) =
                   placeholder="Tìm nhân vật (Raiden, Furina, Neuvillette, Bennett...)"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full bg-slate-900 border border-slate-700 rounded-xl pl-9 pr-4 py-2 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-500"
+                  className="w-full bg-slate-900 border border-slate-700 rounded-xl pl-9 pr-8 py-2 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-500"
                 />
+                {searchTerm && (
+                  <button
+                    type="button"
+                    onClick={() => setSearchTerm('')}
+                    className="absolute right-2.5 top-2.5 text-slate-500 hover:text-slate-300 p-0.5"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                )}
               </div>
 
               {/* Character Grid */}
@@ -302,8 +310,17 @@ export const AddGoalModal: React.FC<AddGoalModalProps> = ({ isOpen, onClose }) =
                   placeholder="Tìm vũ khí (Ánh Sáng Sương Mù, Đoạn Thảo, Tây Phong...)"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full bg-slate-900 border border-slate-700 rounded-xl pl-9 pr-4 py-2 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-500"
+                  className="w-full bg-slate-900 border border-slate-700 rounded-xl pl-9 pr-8 py-2 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-500"
                 />
+                {searchTerm && (
+                  <button
+                    type="button"
+                    onClick={() => setSearchTerm('')}
+                    className="absolute right-2.5 top-2.5 text-slate-500 hover:text-slate-300 p-0.5"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                )}
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-48 overflow-y-auto p-1">
