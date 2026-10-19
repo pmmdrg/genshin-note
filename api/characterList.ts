@@ -2,6 +2,7 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 
 function detectServer(uid: string): string {
   const cleanUid = (uid || '').trim();
+  if (cleanUid.startsWith('18')) return 'os_asia';
   const first = cleanUid.charAt(0);
   switch (first) {
     case '6': return 'os_usa';
@@ -11,9 +12,7 @@ function detectServer(uid: string): string {
     case '1':
     case '2': return 'cn_gf01';
     case '5': return 'cn_qd01';
-    default:
-      if (cleanUid.startsWith('18')) return 'os_asia';
-      return 'os_asia';
+    default: return 'os_asia';
   }
 }
 
