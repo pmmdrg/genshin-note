@@ -74,6 +74,7 @@ export interface UserCharacter {
   weeklyBossMat: string;
   worldBossMat: string;
   localSpecialty: string;
+  isExactInGameData?: boolean;
 }
 
 export interface CharacterBranchTree {

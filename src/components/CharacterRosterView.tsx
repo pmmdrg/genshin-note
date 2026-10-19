@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Plus, Sparkles, Sword, Shield, BookOpen, Layers, RotateCw } from 'lucide-react';
+import { Search, Plus, Sparkles, Sword, Shield, BookOpen, Layers, RotateCw, SlidersHorizontal, Check, X } from 'lucide-react';
 import { useStore } from '../store/useStore';
 import { ELEMENT_COLORS, ELEMENT_NAMES_VI } from '../data/genshinData';
 import { calculateLevelTo90Cost, calculateTalentCost } from '../utils/calculator';
@@ -15,12 +15,51 @@ export const CharacterRosterView: React.FC = () => {
     addCharacterToTimeline,
     fetchCharactersFromHoyo,
     characterFetchLoading,
+    updateCharacterCustomData,
   } = useStore();
 
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedElement, setSelectedElement] = useState<string>('all');
   const targetLevel = 90;
   const [isAddedToast, setIsAddedToast] = useState(false);
+
+  // Edit custom equipment and talents modal
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [editWeaponName, setEditWeaponName] = useState('');
+  const [editWeaponLevel, setEditWeaponLevel] = useState(90);
+  const [editWeaponAffix, setEditWeaponAffix] = useState(1);
+  const [editRelicSet, setEditRelicSet] = useState('');
+  const [editAttackTalent, setEditAttackTalent] = useState(1);
+  const [editSkillTalent, setEditSkillTalent] = useState(1);
+  const [editBurstTalent, setEditBurstTalent] = useState(1);
+
+  const openEditModal = (char: typeof selectedChar) => {
+    if (!char) return;
+    setEditWeaponName(char.weapon?.name || '');
+    setEditWeaponLevel(char.weapon?.level || 90);
+    setEditWeaponAffix(char.weapon?.affixLevel || 1);
+    setEditRelicSet(char.relics?.[0]?.setName || '');
+    setEditAttackTalent(char.talents?.attack || 1);
+    setEditSkillTalent(char.talents?.skill || 1);
+    setEditBurstTalent(char.talents?.burst || 1);
+    setIsEditModalOpen(true);
+  };
+
+  const handleSaveCustomData = () => {
+    if (!selectedChar) return;
+    updateCharacterCustomData(selectedChar.id, {
+      weaponName: editWeaponName,
+      weaponLevel: editWeaponLevel,
+      weaponAffix: editWeaponAffix,
+      relicSetName: editRelicSet,
+      talents: {
+        attack: editAttackTalent,
+        skill: editSkillTalent,
+        burst: editBurstTalent,
+      },
+    });
+    setIsEditModalOpen(false);
+  };
 
 
   const filteredCharacters = characters.filter((c) => {
@@ -283,6 +322,29 @@ export const CharacterRosterView: React.FC = () => {
               </button>
             </div>
 
+            {/* Status & Customization Bar */}
+            <div className="flex items-center justify-between flex-wrap gap-2.5 pt-4 pb-1">
+              {selectedChar.isExactInGameData ? (
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-semibold shadow-sm">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  Dữ liệu in-game thực tế (Từ Tủ Trưng Bày)
+                </span>
+              ) : (
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-300 text-xs font-semibold shadow-sm">
+                  <span>⚠</span>
+                  Trang bị & Thiên phú mẫu (Nhân vật ngoài Tủ Trưng Bày in-game)
+                </span>
+              )}
+
+              <button
+                onClick={() => openEditModal(selectedChar)}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/[0.06] hover:bg-white/[0.12] border border-white/[0.1] text-xs font-semibold text-slate-200 transition-all active:scale-95 shadow-sm"
+              >
+                <SlidersHorizontal className="w-3.5 h-3.5 text-amber-300" />
+                <span>Tùy chỉnh trang bị & thiên phú</span>
+              </button>
+            </div>
+
             {/* ================= FULL-WIDTH ROW 1: EQUIPPED WEAPON SHOWCASE ================= */}
             <div className="liquid-glass-subtle rounded-3xl p-5 my-4 border border-white/10 hover:border-amber-400/30 transition-all">
               <div className="flex flex-col sm:flex-row items-center sm:items-stretch gap-5">
@@ -538,6 +600,153 @@ export const CharacterRosterView: React.FC = () => {
       {isAddedToast && selectedChar && (
         <div className="fixed bottom-8 right-8 z-50 px-4 py-2.5 rounded-2xl bg-slate-900/90 border border-emerald-400/40 backdrop-blur-xl text-xs font-bold text-emerald-300 shadow-[0_8px_30px_rgba(0,0,0,0.5)] animate-in fade-in slide-in-from-bottom-2 duration-200 flex items-center gap-2">
           <span>✓ Đã thêm {selectedChar.nameVi} vào Việc Cần Làm!</span>
+        </div>
+      )}
+
+      {/* Liquid Glass Edit Custom Equipment & Talents Modal */}
+      {isEditModalOpen && selectedChar && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-200">
+          <div className="liquid-glass rounded-3xl p-6 sm:p-7 max-w-lg w-full border border-white/15 shadow-[0_16px_50px_rgba(0,0,0,0.7)] space-y-5 relative overflow-hidden">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between pb-3 border-b border-white/[0.08]">
+              <div className="flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-300">
+                  <SlidersHorizontal className="w-4 h-4" />
+                </div>
+                <div>
+                  <h3 className="text-base font-bold text-slate-100">
+                    Tùy Chỉnh Trang Bị & Thiên Phú
+                  </h3>
+                  <p className="text-xs text-slate-400">
+                    {selectedChar.nameVi} • Cài đặt trang bị thực tế trong game
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={() => setIsEditModalOpen(false)}
+                className="w-8 h-8 rounded-xl bg-white/[0.06] hover:bg-white/[0.12] text-slate-400 hover:text-white flex items-center justify-center transition-colors"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Note banner explaining why manual edit exists */}
+            <div className="p-3 rounded-2xl bg-white/[0.03] border border-white/[0.08] text-[11px] text-slate-300 space-y-1">
+              <div className="font-semibold text-amber-300 flex items-center gap-1.5">
+                <span>💡 Lưu ý về dữ liệu game:</span>
+              </div>
+              <p className="text-slate-400 leading-relaxed">
+                HoYoLAB không công khai trang bị của nhân vật ngoài Tủ Trưng Bày 12 vị trí in-game. Bạn có thể tự chỉnh sửa thông tin tại đây hoặc đưa nhân vật vào Tủ Trưng Bày trong game để đồng bộ tự động.
+              </p>
+            </div>
+
+            {/* Weapon Settings */}
+            <div className="space-y-3">
+              <label className="text-xs font-bold text-slate-200 block">Vũ Khí Đang Dùng</label>
+              <div>
+                <input
+                  type="text"
+                  placeholder="Tên vũ khí (ví dụ: Kiếm Ly Cốt, Đường Cùng Của Sói, Xích Giác...)"
+                  value={editWeaponName}
+                  onChange={(e) => setEditWeaponName(e.target.value)}
+                  className="w-full bg-white/[0.04] border border-white/[0.1] focus:border-amber-400/50 rounded-xl px-3.5 py-2 text-xs text-slate-100 placeholder-slate-500 focus:outline-none transition-all"
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="text-[11px] text-slate-400 block mb-1">Cấp Độ Vũ Khí (1-90)</label>
+                  <input
+                    type="number"
+                    min={1}
+                    max={90}
+                    value={editWeaponLevel}
+                    onChange={(e) => setEditWeaponLevel(Number(e.target.value))}
+                    className="w-full bg-white/[0.04] border border-white/[0.1] focus:border-amber-400/50 rounded-xl px-3.5 py-2 text-xs text-slate-100 focus:outline-none transition-all"
+                  />
+                </div>
+                <div>
+                  <label className="text-[11px] text-slate-400 block mb-1">Tinh Luyện (1-5)</label>
+                  <input
+                    type="number"
+                    min={1}
+                    max={5}
+                    value={editWeaponAffix}
+                    onChange={(e) => setEditWeaponAffix(Number(e.target.value))}
+                    className="w-full bg-white/[0.04] border border-white/[0.1] focus:border-amber-400/50 rounded-xl px-3.5 py-2 text-xs text-slate-100 focus:outline-none transition-all"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Artifact Set Settings */}
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-slate-200 block">Bộ Thánh Di Vật</label>
+              <input
+                type="text"
+                placeholder="Tên bộ (ví dụ: Diệm Liệt Ma Nữ Cháy Rực, Thợ Săn Marechaussee...)"
+                value={editRelicSet}
+                onChange={(e) => setEditRelicSet(e.target.value)}
+                className="w-full bg-white/[0.04] border border-white/[0.1] focus:border-emerald-400/50 rounded-xl px-3.5 py-2 text-xs text-slate-100 placeholder-slate-500 focus:outline-none transition-all"
+              />
+            </div>
+
+            {/* Talent Levels Settings */}
+            <div className="space-y-2">
+              <label className="text-xs font-bold text-slate-200 block">Cấp Độ Thiên Phú Thực Tế</label>
+              <div className="grid grid-cols-3 gap-3">
+                <div>
+                  <label className="text-[10px] text-slate-400 block mb-1">Đánh thường (1-10)</label>
+                  <input
+                    type="number"
+                    min={1}
+                    max={10}
+                    value={editAttackTalent}
+                    onChange={(e) => setEditAttackTalent(Number(e.target.value))}
+                    className="w-full bg-white/[0.04] border border-white/[0.1] focus:border-indigo-400/50 rounded-xl px-3 py-1.5 text-xs text-center text-slate-100 font-bold focus:outline-none transition-all"
+                  />
+                </div>
+                <div>
+                  <label className="text-[10px] text-slate-400 block mb-1">Kỹ năng E (1-10)</label>
+                  <input
+                    type="number"
+                    min={1}
+                    max={10}
+                    value={editSkillTalent}
+                    onChange={(e) => setEditSkillTalent(Number(e.target.value))}
+                    className="w-full bg-white/[0.04] border border-white/[0.1] focus:border-cyan-400/50 rounded-xl px-3 py-1.5 text-xs text-center text-cyan-300 font-bold focus:outline-none transition-all"
+                  />
+                </div>
+                <div>
+                  <label className="text-[10px] text-slate-400 block mb-1">Nộ Q (1-10)</label>
+                  <input
+                    type="number"
+                    min={1}
+                    max={10}
+                    value={editBurstTalent}
+                    onChange={(e) => setEditBurstTalent(Number(e.target.value))}
+                    className="w-full bg-white/[0.04] border border-white/[0.1] focus:border-amber-400/50 rounded-xl px-3 py-1.5 text-xs text-center text-amber-300 font-bold focus:outline-none transition-all"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Modal Actions */}
+            <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-white/[0.08]">
+              <button
+                onClick={() => setIsEditModalOpen(false)}
+                className="px-4 py-2 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-xs font-semibold text-slate-300 transition-colors"
+              >
+                Hủy
+              </button>
+              <button
+                onClick={handleSaveCustomData}
+                className="px-4 py-2 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs font-bold shadow-md transition-all active:scale-95 flex items-center gap-1.5"
+              >
+                <Check className="w-3.5 h-3.5" />
+                <span>Lưu Thay Đổi</span>
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>

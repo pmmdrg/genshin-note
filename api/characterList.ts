@@ -87,6 +87,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     const WEAPON_NAME_MAP: Record<string, string> = {
+      // Polearms
       UI_EquipIcon_Pole_Kunwu: 'Giáo Nịnh Thần',
       UI_EquipIcon_Pole_BloodMoon: 'Xích Nguyệt Liêm',
       UI_EquipIcon_Pole_Homa: 'Trượng Homa',
@@ -95,6 +96,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       UI_EquipIcon_Pole_Arakalari: 'Trăng Lưỡi Liềm Trôi Dạt',
       UI_EquipIcon_Pole_Ilmarinen: 'Gậy Vệt Cầu Vồng',
       UI_EquipIcon_Pole_TummaLyhty: 'Khúc Ca Đêm Tối',
+      UI_EquipIcon_Pole_TheCatch: 'Lao Xiên Cá',
+      UI_EquipIcon_Pole_Noire: 'Hắc Anh Thương',
+
+      // Swords
       UI_EquipIcon_Sword_Dawn: 'Kiếm Bình Minh',
       UI_EquipIcon_Sword_Favonius: 'Tây Phong Kiếm',
       UI_EquipIcon_Sword_Fossil: 'Kiếm Tế Lễ',
@@ -102,15 +107,42 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       UI_EquipIcon_Sword_GlintstoneSword: 'Hắc Nham Trảm Kiếm',
       UI_EquipIcon_Sword_IronSting: 'Thiết Phong Kích',
       UI_EquipIcon_Sword_Transmutation: 'Khát Vọng Răng Kiếm',
+      UI_EquipIcon_Sword_Regalis: 'Ánh Lửa Tự Do',
+      UI_EquipIcon_Sword_Pleroma: 'Thanh Kiếm Tĩnh Lặng',
+      UI_EquipIcon_Sword_Morion: 'Ánh Trăng Xiphos',
+      UI_EquipIcon_Sword_Amenoma: 'Đoản Đao Amenoma',
+      UI_EquipIcon_Sword_Narukami: 'Ánh Sáng Khói Sương',
+      UI_EquipIcon_Sword_Deshret: 'Chìa Khóa Khaj-Nisut',
+
+      // Claymores
+      UI_EquipIcon_Claymore_Wolfmound: 'Đường Cùng Của Sói',
+      UI_EquipIcon_Claymore_Itadori: 'Xích Giác Phá Thạch Đao',
+      UI_EquipIcon_Claymore_Kurogane: 'Kiếm Ly Cốt',
+      UI_EquipIcon_Claymore_Fish: 'Vua Biển Hàng Hiệu',
+      UI_EquipIcon_Claymore_Perdue: 'Vũ Tài',
+      UI_EquipIcon_Claymore_Mavuika: 'Trấn Mavuika',
+      UI_EquipIcon_Claymore_Zephyrus: 'Đại Kiếm Tây Phong',
+      UI_EquipIcon_Claymore_Fossil: 'Đại Kiếm Tế Lễ',
+      UI_EquipIcon_Claymore_Whiteblind: 'Bạch Ảnh Kiếm',
+      UI_EquipIcon_Claymore_Millennial: 'Tiếng Gió Trong Rừng Thông',
+      UI_EquipIcon_Claymore_TheCatch: 'Hải Đăng Bờ Biển Sậy',
+
+      // Catalysts
       UI_EquipIcon_Catalyst_Brisingamen: 'Chân Ngụy Thiên Ngân',
       UI_EquipIcon_Catalyst_Fossil: 'Mảnh Chương Tế Lễ',
       UI_EquipIcon_Catalyst_Ilmarinen: 'Vòng Xoáy Dập Dềnh',
       UI_EquipIcon_Catalyst_Ayus: 'Cõi Mộng Ngàn Đêm',
       UI_EquipIcon_Catalyst_Iudex: 'Dòng Chảy Giám Sát',
-      UI_EquipIcon_Claymore_Wolfmound: 'Đường Cùng Của Sói',
-      UI_EquipIcon_Claymore_Mavuika: 'Trấn Mavuika',
+      UI_EquipIcon_Catalyst_Zephyrus: 'Tây Phong Bí Điển',
+      UI_EquipIcon_Catalyst_Widsith: 'Chương Nhạc Lang Thang',
+
+      // Bows
       UI_EquipIcon_Bow_Favonius: 'Cung Tây Phong',
+      UI_EquipIcon_Bow_Fossil: 'Cung Tế Lễ',
       UI_EquipIcon_Bow_Troupe: 'Tuyệt Huyền',
+      UI_EquipIcon_Bow_Harp: 'Cánh Thiên Không',
+      UI_EquipIcon_Bow_Amos: 'Cung Amos',
+      UI_EquipIcon_Bow_Kirin: 'Nhược Thủy',
     };
 
     const RELIC_SET_MAP: Record<string, string> = {

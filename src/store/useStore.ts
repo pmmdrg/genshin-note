@@ -16,6 +16,13 @@ interface AppState {
   setSelectedCharacterId: (id: string) => void;
   characterFetchLoading: boolean;
   fetchCharactersFromHoyo: () => Promise<void>;
+  updateCharacterCustomData: (charId: string, updates: {
+    weaponName?: string;
+    weaponLevel?: number;
+    weaponAffix?: number;
+    talents?: { attack: number; skill: number; burst: number };
+    relicSetName?: string;
+  }) => void;
 
   // Character Branch Trees (Việc Cần Làm / Timeline)
   characterTrees: CharacterBranchTree[];
@@ -138,56 +145,93 @@ export const useStore = create<AppState>()(
                   }))
                 : userPreset?.relics || defaultBuild.relics.pieces;
 
+              const talentVals = hoyoChar.showcaseTalents ? (Object.values(hoyoChar.showcaseTalents) as number[]) : null;
+              const hasRealTalents = Boolean(talentVals && talentVals.length >= 3);
+              const talents = hasRealTalents
+                ? { attack: talentVals![0], skill: talentVals![1], burst: talentVals![2] }
+                : (userPreset?.talents || {
+                    attack: Math.min(10, Math.max(1, Math.floor((hoyoChar.level || 1) / 10))),
+                    skill: Math.min(10, Math.max(1, Math.floor((hoyoChar.level || 1) / 9))),
+                    burst: Math.min(10, Math.max(1, Math.floor((hoyoChar.level || 1) / 9))),
+                  });
+
+              const isExactInGameData = Boolean(hoyoChar.showcaseTalents || (hoyoChar.weapon && hoyoChar.weapon.name && hoyoChar.weapon.name !== 'Vũ Khí Trang Bị'));
+
               return {
                 id: `char-hoyo-${hoyoChar.id}`,
-                name: rawName,
-                nameVi: userPreset?.nameVi || dataPreset?.nameVi || rawName,
-                element,
-                rarity: (hoyoChar.rarity || userPreset?.rarity || dataPreset?.rarity || 4) as 4 | 5,
-                icon: hoyoChar.image || userPreset?.icon || dataPreset?.avatarUrl || '',
-                image: hoyoChar.card_image || hoyoChar.image,
-                level: hoyoChar.level || 1,
-                maxLevel: 90,
-                constellation: hoyoChar.actived_constellation_num ?? 0,
-                fetter: hoyoChar.fetter ?? 1,
-                weapon: weaponData,
-                relics: relicsData,
-                talents: userPreset?.talents || {
-                  attack: Math.min(10, Math.max(1, Math.floor((hoyoChar.level || 1) / 10))),
-                  skill: Math.min(10, Math.max(1, Math.floor((hoyoChar.level || 1) / 9))),
-                  burst: Math.min(10, Math.max(1, Math.floor((hoyoChar.level || 1) / 9))),
-                },
-                talentBook: userPreset?.talentBook || dataPreset?.talentBook || 'Sách Thiên Phú',
-                talentDomain: userPreset?.talentDomain || dataPreset?.talentDomain || 'Bí Cảnh Thiên Phú',
-                talentDays: userPreset?.talentDays || dataPreset?.talentDays || [1, 4, 0],
-                weeklyBossMat: userPreset?.weeklyBossMat || dataPreset?.weeklyBossMat || 'Nguyên Liệu Boss Tuần',
-                worldBossMat: userPreset?.worldBossMat || dataPreset?.worldBossMat || 'Nguyên Liệu Boss Thế Giới',
-                localSpecialty: userPreset?.localSpecialty || dataPreset?.localSpecialty || 'Đặc Sản Khu Vực',
-              };
-            });
+                  name: rawName,
+                  nameVi: userPreset?.nameVi || dataPreset?.nameVi || rawName,
+                  element,
+                  rarity: (hoyoChar.rarity || userPreset?.rarity || dataPreset?.rarity || 4) as 4 | 5,
+                  icon: hoyoChar.image || userPreset?.icon || dataPreset?.avatarUrl || '',
+                  image: hoyoChar.card_image || hoyoChar.image,
+                  level: hoyoChar.level || 1,
+                  maxLevel: 90,
+                  constellation: hoyoChar.actived_constellation_num ?? 0,
+                  fetter: hoyoChar.fetter ?? 1,
+                  weapon: weaponData,
+                  relics: relicsData,
+                  talents,
+                  isExactInGameData,
+                  talentBook: userPreset?.talentBook || dataPreset?.talentBook || 'Sách Thiên Phú',
+                  talentDomain: userPreset?.talentDomain || dataPreset?.talentDomain || 'Bí Cảnh Thiên Phú',
+                  talentDays: userPreset?.talentDays || dataPreset?.talentDays || [1, 4, 0],
+                  weeklyBossMat: userPreset?.weeklyBossMat || dataPreset?.weeklyBossMat || 'Nguyên Liệu Boss Tuần',
+                  worldBossMat: userPreset?.worldBossMat || dataPreset?.worldBossMat || 'Nguyên Liệu Boss Thế Giới',
+                  localSpecialty: userPreset?.localSpecialty || dataPreset?.localSpecialty || 'Đặc Sản Khu Vực',
+                };
+              });
 
-            // Sort: 5-star first, then by level descending, then constellation
-            transformed.sort((a, b) => {
-              if (b.rarity !== a.rarity) return b.rarity - a.rarity;
-              if (b.level !== a.level) return b.level - a.level;
-              return b.constellation - a.constellation;
-            });
+              // Sort: 5-star first, then by level descending, then constellation
+              transformed.sort((a, b) => {
+                if (b.rarity !== a.rarity) return b.rarity - a.rarity;
+                if (b.level !== a.level) return b.level - a.level;
+                return b.constellation - a.constellation;
+              });
 
-            set((state) => ({
-              characters: transformed,
-              selectedCharacterId:
-                transformed.some((c) => c.id === state.selectedCharacterId && state.selectedCharacterId.startsWith('char-hoyo-'))
-                  ? state.selectedCharacterId
-                  : transformed[0]?.id || state.selectedCharacterId,
-              characterFetchLoading: false,
-            }));
-          } else {
+              set((state) => ({
+                characters: transformed,
+                selectedCharacterId:
+                  transformed.some((c) => c.id === state.selectedCharacterId && state.selectedCharacterId.startsWith('char-hoyo-'))
+                    ? state.selectedCharacterId
+                    : transformed[0]?.id || state.selectedCharacterId,
+                characterFetchLoading: false,
+              }));
+            } else {
+              set({ characterFetchLoading: false });
+            }
+          } catch {
             set({ characterFetchLoading: false });
           }
-        } catch {
-          set({ characterFetchLoading: false });
-        }
-      },
+        },
+
+        updateCharacterCustomData: (charId, updates) => {
+          set((state) => ({
+            characters: state.characters.map((c) => {
+              if (c.id !== charId) return c;
+              const updatedWeapon = c.weapon
+                ? {
+                    ...c.weapon,
+                    name: updates.weaponName || c.weapon.name,
+                    level: updates.weaponLevel ?? c.weapon.level,
+                    affixLevel: updates.weaponAffix ?? c.weapon.affixLevel,
+                  }
+                : undefined;
+
+              const updatedRelics = updates.relicSetName && c.relics
+                ? c.relics.map((r) => ({ ...r, setName: updates.relicSetName! }))
+                : c.relics;
+
+              return {
+                ...c,
+                weapon: updatedWeapon,
+                talents: updates.talents || c.talents,
+                relics: updatedRelics,
+                isExactInGameData: true,
+              };
+            }),
+          }));
+        },
 
       // Starter character trees on timeline
       characterTrees: [
