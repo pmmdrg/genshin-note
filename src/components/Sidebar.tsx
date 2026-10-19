@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {
-  Sparkles,
   Droplet,
   Gift,
   RotateCw,
@@ -16,6 +15,7 @@ import { useStore } from '../store/useStore';
 import { calculateResinRecovery, formatSecondsToTime, getGenshinServerDate } from '../utils/priority';
 import { DAY_NAMES } from '../data/genshinData';
 import { APP_VERSION } from '../version';
+import flinsLogo from '../assets/flins_chibi.png';
 
 export const Sidebar: React.FC = () => {
   const {
@@ -62,14 +62,16 @@ export const Sidebar: React.FC = () => {
         {/* Brand */}
         <div className="flex items-center justify-between gap-2 pb-3 border-b border-white/[0.08]">
           <div className="flex items-center gap-2.5">
-            <div className="relative w-9 h-9 rounded-2xl bg-gradient-to-tr from-amber-400/20 via-white/10 to-indigo-500/20 p-px shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)] flex items-center justify-center">
-              <div className="w-full h-full bg-[#0a0f1d]/80 backdrop-blur-md rounded-[15px] flex items-center justify-center">
-                <Sparkles className="w-4 h-4 text-amber-300 drop-shadow-[0_0_8px_rgba(245,158,11,0.5)]" />
-              </div>
+            <div className="relative w-11 h-11 rounded-2xl bg-gradient-to-tr from-purple-500/25 via-indigo-500/15 to-transparent p-0.5 shadow-[0_0_20px_rgba(168,85,247,0.35)] flex items-center justify-center shrink-0 border border-purple-400/30">
+              <img
+                src={flinsLogo}
+                alt="Flins Chibi Logo"
+                className="w-full h-full object-contain drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] hover:scale-110 transition-transform duration-300"
+              />
             </div>
             <div>
               <div className="flex items-center gap-1.5">
-                <h1 className="text-base font-bold tracking-tight bg-gradient-to-r from-white via-slate-100 to-slate-400 bg-clip-text text-transparent">
+                <h1 className="text-base font-bold tracking-tight bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent font-genshin">
                   Genshin Note
                 </h1>
                 <span className="text-[10px] font-mono font-bold px-1.5 py-0.2 rounded-md bg-white/[0.06] text-slate-400 border border-white/[0.08]">

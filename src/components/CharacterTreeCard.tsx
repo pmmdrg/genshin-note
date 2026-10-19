@@ -16,7 +16,7 @@ import {
 import confetti from 'canvas-confetti';
 import type { CharacterBranchTree } from '../types';
 import { useStore } from '../store/useStore';
-import { ELEMENT_COLORS } from '../data/genshinData';
+import { ELEMENT_COLORS, ELEMENT_NAMES_VI } from '../data/genshinData';
 import { isDomainOpenToday } from '../utils/priority';
 import { ElementIcon } from './ElementIcon';
 
@@ -107,8 +107,8 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
             <div
               className={`w-12 h-12 rounded-2xl overflow-hidden shrink-0 border relative backdrop-blur-md ${elColor.border} ${elColor.bg}`}
             >
-              <div className="absolute top-1 right-1 z-10 p-0.5 rounded-full bg-black/60 backdrop-blur-sm border border-white/20">
-                <ElementIcon element={tree.element} className="w-3 h-3" />
+              <div className="absolute top-1 right-1 z-10 drop-shadow-[0_2px_4px_rgba(0,0,0,0.85)]">
+                <ElementIcon element={tree.element} className="w-3.5 h-3.5" />
               </div>
               <img src={tree.avatarUrl} alt={tree.characterName} className="w-full h-full object-cover" />
             </div>
@@ -124,9 +124,9 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                 </span>
               </div>
               <div className="text-[11px] text-slate-400 flex items-center gap-1.5 mt-0.5">
-                <span className={`capitalize font-semibold ${elColor.text} flex items-center gap-1`}>
+                <span className={`font-semibold ${elColor.text} flex items-center gap-1`}>
                   <ElementIcon element={tree.element} className="w-3 h-3" />
-                  <span>{tree.element}</span>
+                  <span>Hệ {ELEMENT_NAMES_VI[tree.element] || tree.element}</span>
                 </span>
                 <span>•</span>
                 <span>Mục tiêu: Max Cấp 90 & Thiên Phú</span>

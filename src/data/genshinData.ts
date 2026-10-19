@@ -11,6 +11,16 @@ export const ELEMENT_COLORS: Record<ElementType, { bg: string; text: string; bor
   geo: { bg: 'bg-amber-500/10', text: 'text-amber-400', border: 'border-amber-500/30', glow: 'shadow-amber-500/20' },
 };
 
+export const ELEMENT_NAMES_VI: Record<ElementType, string> = {
+  pyro: 'Hỏa',
+  hydro: 'Thủy',
+  anemo: 'Phong',
+  electro: 'Lôi',
+  dendro: 'Thảo',
+  cryo: 'Băng',
+  geo: 'Nham',
+};
+
 export const DAY_NAMES: Record<number, string> = {
   0: 'Chủ Nhật (Mở tất cả)',
   1: 'Thứ Hai',

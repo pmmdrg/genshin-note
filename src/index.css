@@ -9,12 +9,12 @@ body {
   min-height: 100vh;
   background-color: #07090e;
   color: #f1f5f9;
-  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   overflow-x: hidden;
 }
 
 .font-genshin {
-  font-family: 'Cinzel', serif;
+  font-family: 'Cinzel', 'Inter', serif;
 }
 
 /* Liquid Glass Utilities */
