@@ -42,17 +42,17 @@ export const HoyoSyncModal: React.FC<HoyoSyncModalProps> = ({ isOpen, onClose })
 
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="relative w-full max-w-xl bg-[#0f1424] border border-slate-800 rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-200">
+      <div className="relative w-full max-w-xl bg-[#0a0f1d]/85 backdrop-blur-2xl border border-white/10 rounded-3xl shadow-[0_16px_50px_rgba(0,0,0,0.6),inset_0_1px_1px_rgba(255,255,255,0.1)] overflow-hidden flex flex-col max-h-[90vh]">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800/80 bg-slate-900/60">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-white/[0.08] bg-white/[0.02]">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-xl bg-cyan-500/15 border border-cyan-400/20 text-cyan-300 flex items-center justify-center shadow-[0_0_12px_rgba(6,182,212,0.2)]">
               <CloudSync className="w-4 h-4" />
             </div>
             <div>
               <h3 className="text-base font-bold text-slate-100">
-                Đồng Bộ API HoYoLAB (Vercel Serverless)
+                Cài Đặt Đồng Bộ HoYoLAB
               </h3>
               <p className="text-[11px] text-slate-400 font-medium">
                 Tự động lấy Nhựa, Ủy thác, Boss tuần theo thời gian thực
@@ -61,11 +61,12 @@ export const HoyoSyncModal: React.FC<HoyoSyncModalProps> = ({ isOpen, onClose })
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800 transition-colors"
+            className="p-1.5 rounded-xl text-slate-400 hover:text-slate-200 hover:bg-white/[0.06] transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
+
 
         {/* Body */}
         <div className="p-6 overflow-y-auto space-y-4 text-xs">
