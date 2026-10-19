@@ -103,9 +103,9 @@ export const Sidebar: React.FC = () => {
           {/* 1. Danh Sách Nhân Vật */}
           <button
             onClick={() => setActiveNav('characters')}
-            className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-2xl text-xs font-semibold transition-all ${
+            className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-2xl text-xs font-semibold transition-all duration-300 ease-out cursor-pointer active:scale-95 ${
               activeNav === 'characters'
-                ? 'bg-gradient-to-r from-indigo-500/80 to-blue-600/80 text-white shadow-[0_4px_16px_rgba(99,102,241,0.3)] border border-indigo-400/30'
+                ? 'bg-gradient-to-r from-indigo-500/80 to-blue-600/80 text-white shadow-[0_4px_16px_rgba(99,102,241,0.3)] border border-indigo-400/30 scale-[1.02]'
                 : 'text-slate-400 hover:text-slate-100 hover:bg-white/[0.04]'
             }`}
           >
@@ -114,7 +114,7 @@ export const Sidebar: React.FC = () => {
               <span>Danh Sách Nhân Vật</span>
             </div>
             <span
-              className={`text-[10px] px-2 py-0.5 rounded-full font-mono font-bold ${
+              className={`text-[10px] px-2 py-0.5 rounded-full font-mono font-bold transition-colors duration-300 ${
                 activeNav === 'characters' ? 'bg-white/20 text-white' : 'bg-white/[0.06] text-slate-400'
               }`}
             >
@@ -125,9 +125,9 @@ export const Sidebar: React.FC = () => {
           {/* 2. Việc Cần Làm (Timeline Cây Nhánh) */}
           <button
             onClick={() => setActiveNav('timeline')}
-            className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-2xl text-xs font-semibold transition-all ${
+            className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-2xl text-xs font-semibold transition-all duration-300 ease-out cursor-pointer active:scale-95 ${
               activeNav === 'timeline'
-                ? 'bg-gradient-to-r from-amber-500/80 to-amber-600/80 text-white shadow-[0_4px_16px_rgba(245,158,11,0.3)] border border-amber-400/30'
+                ? 'bg-gradient-to-r from-amber-500/80 to-amber-600/80 text-white shadow-[0_4px_16px_rgba(245,158,11,0.3)] border border-amber-400/30 scale-[1.02]'
                 : 'text-slate-400 hover:text-slate-100 hover:bg-white/[0.04]'
             }`}
           >
@@ -136,7 +136,7 @@ export const Sidebar: React.FC = () => {
               <span>Việc Cần Làm</span>
             </div>
             <span
-              className={`text-[10px] px-2 py-0.5 rounded-full font-mono font-bold ${
+              className={`text-[10px] px-2 py-0.5 rounded-full font-mono font-bold transition-colors duration-300 ${
                 activeNav === 'timeline' ? 'bg-white/20 text-white' : 'bg-white/[0.06] text-amber-300'
               }`}
             >
@@ -147,9 +147,9 @@ export const Sidebar: React.FC = () => {
           {/* 3. Đã Hoàn Thành */}
           <button
             onClick={() => setActiveNav('completed')}
-            className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-2xl text-xs font-semibold transition-all ${
+            className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-2xl text-xs font-semibold transition-all duration-300 ease-out cursor-pointer active:scale-95 ${
               activeNav === 'completed'
-                ? 'bg-gradient-to-r from-emerald-500/80 to-teal-600/80 text-white shadow-[0_4px_16px_rgba(16,185,129,0.3)] border border-emerald-400/30'
+                ? 'bg-gradient-to-r from-emerald-500/80 to-teal-600/80 text-white shadow-[0_4px_16px_rgba(16,185,129,0.3)] border border-emerald-400/30 scale-[1.02]'
                 : 'text-slate-400 hover:text-slate-100 hover:bg-white/[0.04]'
             }`}
           >
@@ -158,7 +158,7 @@ export const Sidebar: React.FC = () => {
               <span>Đã Hoàn Thành</span>
             </div>
             <span
-              className={`text-[10px] px-2 py-0.5 rounded-full font-mono font-bold ${
+              className={`text-[10px] px-2 py-0.5 rounded-full font-mono font-bold transition-colors duration-300 ${
                 activeNav === 'completed' ? 'bg-white/20 text-white' : 'bg-white/[0.06] text-emerald-300'
               }`}
             >

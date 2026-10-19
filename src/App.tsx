@@ -38,9 +38,11 @@ export const App: React.FC = () => {
       {/* Right Main Content Area */}
       <div className="flex-1 min-w-0 flex flex-col justify-between relative z-10 overflow-y-auto max-h-screen">
         <main className="p-4 lg:p-8">
-          {activeNav === 'characters' && <CharacterRosterView />}
-          {activeNav === 'timeline' && <TaskTreeTimeline />}
-          {activeNav === 'completed' && <CompletedList />}
+          <div key={activeNav} className="animate-page-transition">
+            {activeNav === 'characters' && <CharacterRosterView />}
+            {activeNav === 'timeline' && <TaskTreeTimeline />}
+            {activeNav === 'completed' && <CompletedList />}
+          </div>
         </main>
 
         {/* Ultra-Minimal Footer */}

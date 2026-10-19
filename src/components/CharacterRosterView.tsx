@@ -108,23 +108,27 @@ export const CharacterRosterView: React.FC = () => {
       </div>
 
       {/* ================= EXPANDED FULL-WIDTH CHARACTER GRID ================= */}
-      <div className="liquid-glass rounded-3xl p-5 sm:p-6 min-h-[500px]">
+      <div className="liquid-glass rounded-3xl p-5 sm:p-6 min-h-[520px] transition-all duration-300">
         {filteredCharacters.length === 0 ? (
-          <div className="py-20 text-center space-y-3">
+          <div className="py-20 text-center space-y-3 animate-card-fade-in">
             <div className="w-12 h-12 rounded-2xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-center mx-auto text-slate-500">
               <Search className="w-6 h-6" />
             </div>
             <p className="text-sm text-slate-400">Không tìm thấy nhân vật nào phù hợp với bộ lọc.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-3.5 sm:gap-4">
-            {filteredCharacters.map((char) => {
+          <div
+            key={`${selectedElement}`}
+            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-3.5 sm:gap-4"
+          >
+            {filteredCharacters.map((char, index) => {
               const isC6 = char.constellation === 6;
 
               return (
                 <div
                   key={char.id}
-                  className={`group relative rounded-2xl p-2.5 transition-all duration-200 flex flex-col justify-between text-center hover:scale-[1.02] ${
+                  style={{ animationDelay: `${Math.min(index * 15, 200)}ms` }}
+                  className={`animate-card-fade-in group relative rounded-2xl p-2.5 transition-all duration-300 flex flex-col justify-between text-center hover:scale-[1.02] ${
                     isC6
                       ? 'bg-gradient-to-b from-amber-500/[0.09] to-purple-500/[0.05] border border-amber-400/35 hover:border-amber-300/60 shadow-[0_0_12px_rgba(245,158,11,0.12)] hover:shadow-[0_0_24px_rgba(245,158,11,0.25)]'
                       : 'bg-white/[0.03] border border-white/[0.08] hover:border-amber-400/40 hover:bg-white/[0.06] hover:shadow-[0_8px_24px_rgba(0,0,0,0.45)]'

@@ -44,6 +44,37 @@ body {
   box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.45), inset 0 1px 1px 0 rgba(255, 255, 255, 0.15);
 }
 
+/* Smooth Page and Card Transitions */
+@keyframes pageFadeSlide {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-page-transition {
+  animation: pageFadeSlide 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes cardFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-card-fade-in {
+  animation: cardFadeIn 0.26s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
 /* Animated Floating Liquid Glass Bubbles */
 @keyframes bubble-float-1 {
   0%, 100% {
