@@ -271,6 +271,59 @@ export const Sidebar: React.FC = () => {
           )}
         </div>
 
+        {/* REALM CURRENCY (XU ẤM TRẦN CA) WIDGET */}
+        <div className="liquid-glass-subtle rounded-2xl p-3 text-xs space-y-1.5">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <img
+                src="https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_ItemIcon_204.png"
+                alt="Ấm Trần Ca"
+                className="w-4 h-4 object-contain"
+                onError={(e) => {
+                  (e.target as HTMLElement).style.display = 'none';
+                }}
+              />
+              <span className="font-semibold text-slate-200">Xu Ấm Trần Ca</span>
+            </div>
+            <span className="font-mono font-bold text-amber-300 text-xs">
+              {hoyoData?.current_home_coin !== undefined ? hoyoData.current_home_coin.toLocaleString() : 0}
+              <span className="text-slate-500 font-normal text-[10px]">
+                /{hoyoData?.max_home_coin ? hoyoData.max_home_coin.toLocaleString() : 2400}
+              </span>
+            </span>
+          </div>
+
+          {/* Progress bar */}
+          <div className="w-full bg-white/[0.04] rounded-full h-1.5 overflow-hidden border border-white/[0.08]">
+            <div
+              className={`h-full rounded-full transition-all duration-500 ${
+                (hoyoData?.current_home_coin || 0) >= (hoyoData?.max_home_coin || 2400) * 0.9
+                  ? 'bg-gradient-to-r from-amber-400 to-rose-500'
+                  : 'bg-gradient-to-r from-amber-500 to-yellow-400'
+              }`}
+              style={{
+                width: `${Math.min(
+                  100,
+                  ((hoyoData?.current_home_coin || 0) / (hoyoData?.max_home_coin || 2400)) * 100
+                )}%`,
+              }}
+            />
+          </div>
+
+          <div className="flex items-center justify-between text-[10px] text-slate-400 font-mono">
+            <span>
+              {(hoyoData?.current_home_coin || 0) >= (hoyoData?.max_home_coin || 2400)
+                ? 'Đã đầy tiền ấm'
+                : hoyoData?.home_coin_recovery_time && Number(hoyoData.home_coin_recovery_time) > 0
+                ? `Đầy sau: ${formatSecondsToTime(Number(hoyoData.home_coin_recovery_time))}`
+                : 'Tiền Động Tiên'}
+            </span>
+            <span className="text-amber-400/80 font-semibold">
+              {Math.round(((hoyoData?.current_home_coin || 0) / (hoyoData?.max_home_coin || 2400)) * 100)}%
+            </span>
+          </div>
+        </div>
+
         {/* Sync Error Alert Badge if failed */}
         {hoyoSyncError && (
           <div className="rounded-2xl bg-amber-500/10 border border-amber-500/25 p-2.5 text-[11px] text-amber-200/90 flex items-start gap-2 shadow-[0_2px_12px_rgba(245,158,11,0.1)]">

@@ -10,6 +10,7 @@ export const BASE_MATERIAL_ICONS = {
   weaponAscension: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_ItemIcon_114052.png',
   bossDrop: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_ItemIcon_113053.png',
   specialty: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_ItemIcon_101235.png',
+  realmCurrency: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_ItemIcon_204.png',
 };
 
 const SPECIFIC_MATERIAL_MAP: Record<string, string> = {

@@ -126,9 +126,9 @@ export const TaskTreeTimeline: React.FC = () => {
                     id={`tree-node-${tree.id}`}
                     className="relative pl-12 sm:pl-14 transition-all duration-300"
                   >
-                    {/* Timeline Milestone Dot on Spine (w-7 h-7, centered on 20px / 24px) */}
+                    {/* Timeline Milestone Dot on Spine (w-7 h-7, centered vertically with character card at y=134px) */}
                     <div
-                      className={`absolute left-[5px] sm:left-[9px] top-8 w-7 h-7 rounded-full bg-slate-950 border-2 flex items-center justify-center z-10 transition-transform ${
+                      className={`absolute left-[5px] sm:left-[9px] top-[120px] w-7 h-7 rounded-full bg-slate-950 border-2 flex items-center justify-center z-10 transition-transform ${
                         idx === 0
                           ? 'border-amber-400 shadow-[0_0_14px_rgba(245,158,11,0.8)] scale-110'
                           : 'border-amber-400/60 shadow-[0_0_8px_rgba(245,158,11,0.3)]'
@@ -144,7 +144,7 @@ export const TaskTreeTimeline: React.FC = () => {
                     </div>
 
                     {/* Horizontal Connector Line from Milestone Dot to Character Card */}
-                    <div className="absolute left-[20px] sm:left-[24px] top-[46px] w-[28px] sm:w-[32px] h-0.5 bg-gradient-to-r from-amber-400/80 via-amber-400/40 to-white/10 pointer-events-none" />
+                    <div className="absolute left-[20px] sm:left-[24px] top-[133px] w-[28px] sm:w-[32px] h-0.5 bg-gradient-to-r from-amber-400/80 via-amber-400/40 to-white/10 pointer-events-none" />
 
                     {/* Character Tree with Horizontal Branching */}
                     <CharacterTreeCard tree={tree} index={idx} />
