@@ -175,17 +175,22 @@ export const CharacterRosterView: React.FC = () => {
                     />
                   </div>
 
-                  {/* Character Name & Level inline horizontally on row 1, Stars on row 2 */}
-                  <div className="w-full px-1 pt-1.5 text-center">
-                    <div className="flex items-center justify-center gap-1.5 min-w-0">
-                      <span className="text-xs sm:text-sm font-bold text-slate-100 truncate group-hover:text-amber-300 transition-colors font-genshin tracking-wide">
-                        {char.nameVi}
-                      </span>
-                      <span className="text-[10px] sm:text-[11px] font-mono font-black text-amber-300 bg-amber-400/20 px-1.5 py-0.5 rounded-md border border-amber-400/35 shrink-0 shadow-sm">
+                  {/* 3 Separate Rows: Row 1 = Tên, Row 2 = Level, Row 3 = Số sao (Font Inter chuẩn) */}
+                  <div className="w-full px-1 pt-1.5 flex flex-col items-center gap-1 text-center">
+                    {/* Hàng 1: Tên nhân vật (Font Inter rõ nét, không vỡ dấu) */}
+                    <div className="w-full text-xs sm:text-sm font-extrabold text-slate-100 truncate group-hover:text-amber-300 transition-colors tracking-tight">
+                      {char.nameVi}
+                    </div>
+
+                    {/* Hàng 2: Cấp độ */}
+                    <div className="flex items-center justify-center">
+                      <span className="text-[10px] sm:text-[11px] font-bold text-amber-300/90 bg-amber-400/10 px-2 py-0.5 rounded-md border border-amber-400/25 shadow-sm">
                         Lv.{char.level}
                       </span>
                     </div>
-                    <div className="flex items-center justify-center text-amber-400 text-xs sm:text-sm font-bold tracking-wider mt-1 drop-shadow-[0_0_8px_rgba(251,191,36,0.7)]">
+
+                    {/* Hàng 3: Số sao */}
+                    <div className="flex items-center justify-center text-amber-400 text-xs sm:text-sm font-bold tracking-widest drop-shadow-[0_0_8px_rgba(251,191,36,0.7)]">
                       {'★'.repeat(char.rarity)}
                     </div>
                   </div>
@@ -222,12 +227,12 @@ export const CharacterRosterView: React.FC = () => {
                   />
                 </div>
                 <div>
-                  {/* Name & Level inline horizontally (to hơn rõ rệt) */}
+                  {/* Name & Level inline horizontally (Font Inter rõ nét) */}
                   <div className="flex items-center gap-3.5 flex-wrap">
-                    <h3 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-100 font-genshin tracking-wide drop-shadow-md">
+                    <h3 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-100 tracking-tight drop-shadow-md">
                       {selectedChar.nameVi}
                     </h3>
-                    <span className="text-sm sm:text-base font-mono font-black px-3.5 py-1 rounded-2xl bg-amber-400/20 text-amber-300 border border-amber-400/40 shadow-md">
+                    <span className="text-sm sm:text-base font-bold px-3.5 py-1 rounded-2xl bg-amber-400/20 text-amber-300 border border-amber-400/40 shadow-md">
                       Lv.{selectedChar.level}
                     </span>
                   </div>

@@ -14,7 +14,7 @@ body {
 }
 
 .font-genshin {
-  font-family: 'Cinzel', 'Inter', serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 /* Liquid Glass Utilities */

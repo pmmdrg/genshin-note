@@ -116,7 +116,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
             {/* Name & Target summary */}
             <div className="min-w-0">
               <div className="flex items-center gap-2">
-                <h3 className="text-base font-bold text-slate-100 truncate font-genshin tracking-wide">
+                <h3 className="text-base font-bold text-slate-100 truncate tracking-tight">
                   {tree.characterName}
                 </h3>
                 <span className="text-xs text-amber-400 font-bold">
