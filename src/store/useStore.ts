@@ -6,6 +6,7 @@ import { USER_CHARACTERS_PRESET, CHARACTERS_DATA } from '../data/genshinData';
 import { getCharacterDefaultBuild } from '../data/characterEquipData';
 import { calculateLevelTo90Cost, calculateTalentCost } from '../utils/calculator';
 import { DEFAULT_WALLPAPER } from '../data/wallpapers';
+import { getCharacterMaterialDetail } from '../data/characterMaterialsData';
 
 interface AppState {
   // Navigation Menu
@@ -184,6 +185,8 @@ export const useStore = create<AppState>()(
 
               const isExactInGameData = Boolean(hoyoChar.showcaseTalents || (hoyoChar.weapon && hoyoChar.weapon.name && hoyoChar.weapon.name !== 'Vũ Khí Trang Bị'));
 
+              const matDetail = getCharacterMaterialDetail(userPreset?.nameVi || dataPreset?.nameVi || rawName || hoyoChar.name);
+
               return {
                 id: `char-hoyo-${hoyoChar.id}`,
                   name: rawName,
@@ -203,9 +206,9 @@ export const useStore = create<AppState>()(
                   talentBook: userPreset?.talentBook || dataPreset?.talentBook || 'Sách Thiên Phú',
                   talentDomain: userPreset?.talentDomain || dataPreset?.talentDomain || 'Bí Cảnh Thiên Phú',
                   talentDays: userPreset?.talentDays || dataPreset?.talentDays || [1, 4, 0],
-                  weeklyBossMat: userPreset?.weeklyBossMat || dataPreset?.weeklyBossMat || 'Nguyên Liệu Boss Tuần',
-                  worldBossMat: userPreset?.worldBossMat || dataPreset?.worldBossMat || 'Nguyên Liệu Boss Thế Giới',
-                  localSpecialty: userPreset?.localSpecialty || dataPreset?.localSpecialty || 'Đặc Sản Khu Vực',
+                  weeklyBossMat: matDetail.weeklyBossMat !== 'Nguyên Liệu Boss Tuần' ? matDetail.weeklyBossMat : (userPreset?.weeklyBossMat || dataPreset?.weeklyBossMat || 'Nguyên Liệu Boss Tuần'),
+                  worldBossMat: matDetail.worldBossMat !== 'Nguyên Liệu Boss Thế Giới' ? matDetail.worldBossMat : (userPreset?.worldBossMat || dataPreset?.worldBossMat || 'Nguyên Liệu Boss Thế Giới'),
+                  localSpecialty: matDetail.localSpecialty !== 'Đặc Sản Khu Vực' ? matDetail.localSpecialty : (userPreset?.localSpecialty || dataPreset?.localSpecialty || 'Đặc Sản Khu Vực'),
                 };
               });
 
@@ -408,6 +411,17 @@ export const useStore = create<AppState>()(
           };
         });
 
+        const matDetail = getCharacterMaterialDetail(char.nameVi || char.name);
+        const worldBossMat = char.worldBossMat && !char.worldBossMat.includes('Nguyên Liệu')
+          ? char.worldBossMat
+          : matDetail.worldBossMat;
+        const localSpecialty = char.localSpecialty && !char.localSpecialty.includes('Đặc Sản')
+          ? char.localSpecialty
+          : matDetail.localSpecialty;
+        const weeklyBossMatName = char.weeklyBossMat && !char.weeklyBossMat.includes('Nguyên Liệu')
+          ? char.weeklyBossMat
+          : matDetail.weeklyBossMat;
+
         const newTree: CharacterBranchTree = {
           id: `tree-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
           characterId: char.id,
@@ -427,8 +441,8 @@ export const useStore = create<AppState>()(
             moraNeeded: levelCost.mora,
             bossDropNeeded: levelCost.bossDrops,
             specialtyNeeded: levelCost.localSpecialty,
-            worldBossMat: char.worldBossMat,
-            localSpecialty: char.localSpecialty,
+            worldBossMat,
+            localSpecialty,
             isCompleted: char.level >= 90,
           },
           weaponBranch: {
@@ -447,7 +461,7 @@ export const useStore = create<AppState>()(
             talentBookName: char.talentBook,
             domainName: char.talentDomain,
             daysOfWeek: char.talentDays,
-            weeklyBossMatName: char.weeklyBossMat,
+            weeklyBossMatName,
             currentLevels: char.talents || { attack: 1, skill: 1, burst: 1 },
             targetLevels: { attack: 10, skill: 10, burst: 10 },
             booksGoldNeeded: talentCost.goldBooks,
@@ -467,7 +481,6 @@ export const useStore = create<AppState>()(
         set((state) => ({
           characterTrees: [newTree, ...state.characterTrees],
           lastAddedTreeId: newTree.id,
-          activeNav: 'timeline',
         }));
       },
 
@@ -803,7 +816,7 @@ export const useStore = create<AppState>()(
             checkInLoading: false,
             checkInStatus: data.message || (data.retcode === 0 ? 'Điểm danh thành công!' : 'Hôm nay đã điểm danh rồi'),
           });
-        } catch (err: any) {
+        } catch {
           set({
             checkInLoading: false,
             checkInStatus: 'Lỗi kết nối điểm danh',

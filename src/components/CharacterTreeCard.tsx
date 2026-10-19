@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import {
@@ -23,6 +23,7 @@ import { getMaterialIconUrl, BASE_MATERIAL_ICONS } from '../utils/materialIcons'
 import { WeaponSelectionDrawer } from './WeaponSelectionDrawer';
 import { calculateWeaponTo90Cost } from '../utils/calculator';
 import { CHARACTERS_DATA } from '../data/genshinData';
+import { getCharacterMaterialDetail } from '../data/characterMaterialsData';
 
 interface CharacterTreeCardProps {
   tree: CharacterBranchTree;
@@ -127,6 +128,49 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
       ? 170
       : 240;
 
+  // Accurate Character Material resolution (World boss, weekly boss, specialty)
+  const matDetail = getCharacterMaterialDetail(tree.characterName);
+  const displayWorldBossMat =
+    tree.levelBranch.worldBossMat &&
+    !tree.levelBranch.worldBossMat.includes('Nguyên Liệu') &&
+    !tree.levelBranch.worldBossMat.includes('Boss Thế Giới')
+      ? tree.levelBranch.worldBossMat
+      : matDetail.worldBossMat;
+
+  const displayWeeklyBossMat =
+    tree.talentBranch.weeklyBossMatName &&
+    !tree.talentBranch.weeklyBossMatName.includes('Nguyên Liệu') &&
+    !tree.talentBranch.weeklyBossMatName.includes('Boss Tuần')
+      ? tree.talentBranch.weeklyBossMatName
+      : matDetail.weeklyBossMat;
+
+  const displaySpecialty =
+    tree.levelBranch.localSpecialty &&
+    !tree.levelBranch.localSpecialty.includes('Đặc Sản')
+      ? tree.levelBranch.localSpecialty
+      : matDetail.localSpecialty;
+
+  // Measure content height for smooth vertical transition to eliminate sibling jumping below
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [contentHeight, setContentHeight] = useState<number>(268);
+
+  useEffect(() => {
+    const el = contentRef.current;
+    if (!el) return;
+
+    const observer = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const h = Math.round(entry.contentRect.height);
+        if (h > 0) {
+          setContentHeight(h);
+        }
+      }
+    });
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div
       ref={setNodeRef}
@@ -142,8 +186,20 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
         </div>
       )}
 
-      {/* Main Horizontal Tree Layout (No outer big box!) */}
-      <div className="flex items-start gap-0 overflow-x-auto pb-2 custom-scrollbar">
+      {/* Smooth Height-Animated Card Container (Prevents sibling characters below from jumping down) */}
+      <div
+        style={{
+          minHeight: '268px',
+          height: activeBranch ? `${Math.max(268, contentHeight + 8)}px` : '268px',
+          transition: 'height 320ms cubic-bezier(0.16, 1, 0.3, 1)',
+        }}
+        className="overflow-visible"
+      >
+        {/* Main Horizontal Tree Layout (No outer big box!) */}
+        <div
+          ref={contentRef}
+          className="flex items-start gap-0 overflow-x-auto pb-2 custom-scrollbar"
+        >
         {/* ========================================================= */}
         {/* 1. CHARACTER CARD NODE (Root node, strictly locked size)  */}
         {/* ========================================================= */}
@@ -539,15 +595,15 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                     <div className="p-2 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between gap-2 col-span-2">
                       <div className="flex items-center gap-2 min-w-0">
                         <img
-                          src={getMaterialIconUrl(tree.levelBranch.worldBossMat, 'bossDrop')}
-                          alt={tree.levelBranch.worldBossMat}
+                          src={getMaterialIconUrl(displayWorldBossMat, 'bossDrop')}
+                          alt={displayWorldBossMat}
                           className="w-7 h-7 rounded-lg object-contain bg-slate-800/80 p-0.5 shrink-0"
                           onError={(e) => {
                             (e.target as HTMLImageElement).src = BASE_MATERIAL_ICONS.bossDrop;
                           }}
                         />
                         <span className="text-slate-300 text-xs truncate">
-                          {tree.levelBranch.worldBossMat}
+                          {displayWorldBossMat}
                         </span>
                       </div>
                       <span className="font-bold text-emerald-300 shrink-0 font-sans">
@@ -559,15 +615,15 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                     <div className="p-2 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between gap-2 col-span-2">
                       <div className="flex items-center gap-2 min-w-0">
                         <img
-                          src={getMaterialIconUrl(tree.levelBranch.localSpecialty, 'specialty')}
-                          alt={tree.levelBranch.localSpecialty}
+                          src={getMaterialIconUrl(displaySpecialty, 'specialty')}
+                          alt={displaySpecialty}
                           className="w-7 h-7 rounded-lg object-contain bg-slate-800/80 p-0.5 shrink-0"
                           onError={(e) => {
                             (e.target as HTMLImageElement).src = BASE_MATERIAL_ICONS.specialty;
                           }}
                         />
                         <span className="text-slate-300 text-xs truncate">
-                          {tree.levelBranch.localSpecialty}
+                          {displaySpecialty}
                         </span>
                       </div>
                       <span className="font-bold text-sky-300 shrink-0 font-sans">
@@ -1030,15 +1086,15 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                   <div className="p-2 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between gap-2">
                     <div className="flex items-center gap-2 min-w-0">
                       <img
-                        src={getMaterialIconUrl(tree.talentBranch.weeklyBossMatName, 'bossDrop')}
-                        alt={tree.talentBranch.weeklyBossMatName}
+                        src={getMaterialIconUrl(displayWeeklyBossMat, 'bossDrop')}
+                        alt={displayWeeklyBossMat}
                         className="w-7 h-7 rounded-lg object-contain bg-slate-800/80 p-0.5 shrink-0"
                         onError={(e) => {
                           (e.target as HTMLImageElement).src = BASE_MATERIAL_ICONS.bossDrop;
                         }}
                       />
                       <span className="text-slate-300 text-xs truncate">
-                        {tree.talentBranch.weeklyBossMatName}
+                        {displayWeeklyBossMat}
                       </span>
                     </div>
                     <span className="font-bold text-purple-300 shrink-0 font-sans">
@@ -1221,6 +1277,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
           </div>
         </div>
       </div>
+    </div>
 
       {/* Slide-in Weapon Selection Drawer from Right */}
       <WeaponSelectionDrawer

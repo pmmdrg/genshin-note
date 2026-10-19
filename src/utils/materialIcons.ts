@@ -70,12 +70,24 @@ const SPECIFIC_MATERIAL_MAP: Record<string, string> = {
   'Giọt Nước Tinh Linh': 'https://enka.network/ui/UI_ItemIcon_112078.png',
 };
 
+import { CHARACTER_MATERIALS } from '../data/characterMaterialsData';
+
 export function getMaterialIconUrl(
   materialName?: string,
   category: keyof typeof BASE_MATERIAL_ICONS = 'bossDrop'
 ): string {
-  if (materialName && SPECIFIC_MATERIAL_MAP[materialName]) {
+  if (!materialName) return BASE_MATERIAL_ICONS[category];
+
+  if (SPECIFIC_MATERIAL_MAP[materialName]) {
     return SPECIFIC_MATERIAL_MAP[materialName];
   }
+
+  // Dynamic match from character materials database
+  for (const detail of Object.values(CHARACTER_MATERIALS)) {
+    if (detail.worldBossMat === materialName) return detail.worldBossMatIcon;
+    if (detail.weeklyBossMat === materialName) return detail.weeklyBossMatIcon;
+    if (detail.localSpecialty === materialName) return detail.localSpecialtyIcon;
+  }
+
   return BASE_MATERIAL_ICONS[category];
 }

@@ -48,7 +48,9 @@ export const ENKA_WEAPON_NAMES: Record<string, { name: string; typeName: string;
 
   // Swords
   UI_EquipIcon_Sword_Dawn: { name: 'Kiếm Bình Minh', typeName: 'Kiếm Đơn', rarity: 3 },
+  UI_EquipIcon_Sword_Zephyrus: { name: 'Tây Phong Kiếm', typeName: 'Kiếm Đơn', rarity: 4 },
   UI_EquipIcon_Sword_Favonius: { name: 'Tây Phong Kiếm', typeName: 'Kiếm Đơn', rarity: 4 },
+  UI_EquipIcon_Sword_Machination: { name: 'Ống Đồng Vùng Fleuve Cendre', typeName: 'Kiếm Đơn', rarity: 4 },
   UI_EquipIcon_Sword_Fossil: { name: 'Kiếm Tế Lễ', typeName: 'Kiếm Đơn', rarity: 4 },
   UI_EquipIcon_Sword_OuterSword: { name: 'Ám Vũ Skirk', typeName: 'Kiếm Đơn', rarity: 5 },
   UI_EquipIcon_Sword_GlintstoneSword: { name: 'Hắc Nham Trảm Kiếm', typeName: 'Kiếm Đơn', rarity: 4 },
@@ -64,15 +66,22 @@ export const ENKA_WEAPON_NAMES: Record<string, { name: string; typeName: string;
   UI_EquipIcon_Catalyst_Ayus: { name: 'Cõi Mộng Ngàn Đêm', typeName: 'Pháp Khí', rarity: 5 },
   UI_EquipIcon_Catalyst_Iudex: { name: 'Dòng Chảy Giám Sát', typeName: 'Pháp Khí', rarity: 5 },
   UI_EquipIcon_Catalyst_Zephyrus: { name: 'Tây Phong Bí Điển', typeName: 'Pháp Khí', rarity: 4 },
+  UI_EquipIcon_Catalyst_Troupe: { name: 'Chương Nhạc Lang Thang', typeName: 'Pháp Khí', rarity: 4 },
   UI_EquipIcon_Catalyst_Widsith: { name: 'Chương Nhạc Lang Thang', typeName: 'Pháp Khí', rarity: 4 },
+  UI_EquipIcon_Catalyst_Apprentice: { name: 'Câu Chuyện Diệt Rồng', typeName: 'Pháp Khí', rarity: 3 },
 
   // Claymores
   UI_EquipIcon_Claymore_Wolfmound: { name: 'Đường Cùng Của Sói', typeName: 'Trọng Kiếm', rarity: 5 },
-  UI_EquipIcon_Claymore_Mavuika: { name: 'Trấn Mavuika', typeName: 'Trọng Kiếm', rarity: 5 },
+  UI_EquipIcon_Claymore_RadianceSword: { name: 'Thiên Nhật Thiêu Đốt', typeName: 'Trọng Kiếm', rarity: 5 },
+  UI_EquipIcon_Claymore_Mavuika: { name: 'Thiên Nhật Thiêu Đốt', typeName: 'Trọng Kiếm', rarity: 5 },
+  UI_EquipIcon_Claymore_Itadorimaru: { name: 'Xích Giác Phá Thạch Đao', typeName: 'Trọng Kiếm', rarity: 5 },
+  UI_EquipIcon_Claymore_Kione: { name: 'Kiếm Li Cốt', typeName: 'Trọng Kiếm', rarity: 4 },
   UI_EquipIcon_Claymore_Zephyrus: { name: 'Đại Kiếm Tây Phong', typeName: 'Trọng Kiếm', rarity: 4 },
+  UI_EquipIcon_Claymore_Exotic: { name: 'Bạch Ảnh Kiếm', typeName: 'Trọng Kiếm', rarity: 4 },
   UI_EquipIcon_Claymore_Whiteblind: { name: 'Bạch Ảnh Kiếm', typeName: 'Trọng Kiếm', rarity: 4 },
 
   // Bows
+  UI_EquipIcon_Bow_Zephyrus: { name: 'Cung Tây Phong', typeName: 'Cung', rarity: 4 },
   UI_EquipIcon_Bow_Favonius: { name: 'Cung Tây Phong', typeName: 'Cung', rarity: 4 },
   UI_EquipIcon_Bow_Fossil: { name: 'Cung Tế Lễ', typeName: 'Cung', rarity: 4 },
   UI_EquipIcon_Bow_Troupe: { name: 'Tuyệt Huyền', typeName: 'Cung', rarity: 4 },

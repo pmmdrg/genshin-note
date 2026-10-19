@@ -344,7 +344,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     weeklyBossMat: 'Lông Vũ Dvalin',
     worldBossMat: 'Hạt Bão Phong (Phong Nguyên Bản)',
     localSpecialty: 'Hạt Bồ Công Anh',
-    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Jean.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Qin.png',
   },
   {
     name: 'Kuki Shinobu',
@@ -456,7 +456,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     weeklyBossMat: 'Dây Tơ Không Ám',
     worldBossMat: 'Bánh Răng Khớp Nối',
     localSpecialty: 'Hoa Chuông Lumidouce',
-    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Lynette.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Linette.png',
   },
   {
     name: 'Ningguang',
@@ -484,7 +484,7 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     weeklyBossMat: 'Móng Vuốt Dvalin',
     worldBossMat: 'Tháp Huyền Nham',
     localSpecialty: 'Hoa Cẩm Chướng',
-    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Noelle.png',
+    avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Noel.png',
   },
   {
     name: 'Diona',
@@ -909,7 +909,7 @@ export const WEAPONS_DATA: WeaponPreset[] = [
     eliteMatIcon: 'https://enka.network/ui/UI_ItemIcon_112015.png',
     commonMatName: 'Mũi Tên Sắc Bén',
     commonMatIcon: 'https://enka.network/ui/UI_ItemIcon_112007.png',
-    avatarUrl: 'https://enka.network/ui/UI_EquipIcon_Sword_Favonius.png',
+    avatarUrl: 'https://enka.network/ui/UI_EquipIcon_Sword_Zephyrus.png',
   },
   {
     name: 'Sacrificial Sword',
@@ -939,7 +939,7 @@ export const WEAPONS_DATA: WeaponPreset[] = [
     eliteMatIcon: 'https://enka.network/ui/UI_ItemIcon_112078.png',
     commonMatName: 'Bánh Răng Khớp Nối',
     commonMatIcon: 'https://enka.network/ui/UI_ItemIcon_112082.png',
-    avatarUrl: 'https://enka.network/ui/UI_EquipIcon_Sword_Fleuve.png',
+    avatarUrl: 'https://enka.network/ui/UI_EquipIcon_Sword_Machination.png',
   },
   {
     name: 'Harbinger of Dawn',
@@ -986,7 +986,7 @@ export const WEAPONS_DATA: WeaponPreset[] = [
     eliteMatIcon: 'https://enka.network/ui/UI_ItemIcon_112067.png',
     commonMatName: 'Kiếm Cách Sắc Bén',
     commonMatIcon: 'https://enka.network/ui/UI_ItemIcon_112046.png',
-    avatarUrl: 'https://enka.network/ui/UI_EquipIcon_Claymore_Itto.png',
+    avatarUrl: 'https://enka.network/ui/UI_EquipIcon_Claymore_Itadorimaru.png',
   },
   {
     name: 'Serpent Spine',
@@ -1001,7 +1001,7 @@ export const WEAPONS_DATA: WeaponPreset[] = [
     eliteMatIcon: 'https://enka.network/ui/UI_ItemIcon_112026.png',
     commonMatName: 'Dịch Slime',
     commonMatIcon: 'https://enka.network/ui/UI_ItemIcon_112002.png',
-    avatarUrl: 'https://enka.network/ui/UI_EquipIcon_Claymore_Keqing.png',
+    avatarUrl: 'https://enka.network/ui/UI_EquipIcon_Claymore_Kione.png',
   },
   {
     name: 'Favonius Greatsword',
@@ -1031,7 +1031,7 @@ export const WEAPONS_DATA: WeaponPreset[] = [
     eliteMatIcon: 'https://enka.network/ui/UI_ItemIcon_112026.png',
     commonMatName: 'Cuộn Giấy Cấm Kỵ',
     commonMatIcon: 'https://enka.network/ui/UI_ItemIcon_112002.png',
-    avatarUrl: 'https://enka.network/ui/UI_EquipIcon_Claymore_Whiteblind.png',
+    avatarUrl: 'https://enka.network/ui/UI_EquipIcon_Claymore_Exotic.png',
   },
 
   // Bows (Cung)
@@ -1093,7 +1093,7 @@ export const WEAPONS_DATA: WeaponPreset[] = [
     eliteMatIcon: 'https://enka.network/ui/UI_ItemIcon_112012.png',
     commonMatName: 'Mặt Nạ Bị Hỏng',
     commonMatIcon: 'https://enka.network/ui/UI_ItemIcon_112007.png',
-    avatarUrl: 'https://enka.network/ui/UI_EquipIcon_Bow_Favonius.png',
+    avatarUrl: 'https://enka.network/ui/UI_EquipIcon_Bow_Zephyrus.png',
   },
   {
     name: 'The Stringless',
@@ -1185,7 +1185,7 @@ export const WEAPONS_DATA: WeaponPreset[] = [
     eliteMatIcon: 'https://enka.network/ui/UI_ItemIcon_112012.png',
     commonMatName: 'Mặt Nạ Bị Hỏng',
     commonMatIcon: 'https://enka.network/ui/UI_ItemIcon_112007.png',
-    avatarUrl: 'https://enka.network/ui/UI_EquipIcon_Catalyst_Widsith.png',
+    avatarUrl: 'https://enka.network/ui/UI_EquipIcon_Catalyst_Troupe.png',
   },
   {
     name: 'Sacrificial Fragments',
@@ -1215,7 +1215,7 @@ export const WEAPONS_DATA: WeaponPreset[] = [
     eliteMatIcon: 'https://enka.network/ui/UI_ItemIcon_112012.png',
     commonMatName: 'Cuộn Giấy Cấm Kỵ',
     commonMatIcon: 'https://enka.network/ui/UI_ItemIcon_112002.png',
-    avatarUrl: 'https://enka.network/ui/UI_EquipIcon_Catalyst_Dragon.png',
+    avatarUrl: 'https://enka.network/ui/UI_EquipIcon_Catalyst_Apprentice.png',
   },
 ];
 
@@ -1242,7 +1242,7 @@ export const USER_CHARACTERS_PRESET: UserCharacter[] = [
       domainDays: [2, 5, 0],
     },
     relics: [
-      { name: 'Đoàn Kịch Hoàng Kim', icon: 'https://enka.network/ui/relic_flower.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Đoàn Kịch Hoàng Kim (4 món)' },
+      { name: 'Đoàn Kịch Hoàng Kim', icon: 'https://enka.network/ui/UI_ItemIcon_104003.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Đoàn Kịch Hoàng Kim (4 món)' },
     ],
     talents: { attack: 6, skill: 8, burst: 9 },
     talentBook: 'Công Lý (Justice)',
@@ -1274,7 +1274,7 @@ export const USER_CHARACTERS_PRESET: UserCharacter[] = [
       domainDays: [3, 6, 0],
     },
     relics: [
-      { name: 'Dấu Ấn Ngăn Trở', icon: 'https://enka.network/ui/relic_flower.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Dấu Ấn Ngăn Trở (4 món)' },
+      { name: 'Dấu Ấn Ngăn Trở', icon: 'https://enka.network/ui/UI_ItemIcon_104003.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Dấu Ấn Ngăn Trở (4 món)' },
     ],
     talents: { attack: 6, skill: 9, burst: 10 },
     talentBook: 'Ánh Sáng (Light)',
@@ -1306,7 +1306,7 @@ export const USER_CHARACTERS_PRESET: UserCharacter[] = [
       domainDays: [1, 4, 0],
     },
     relics: [
-      { name: 'Thợ Săn Marechaussee', icon: 'https://enka.network/ui/relic_flower.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Thợ Săn Marechaussee (4 món)' },
+      { name: 'Thợ Săn Marechaussee', icon: 'https://enka.network/ui/UI_ItemIcon_104003.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Thợ Săn Marechaussee (4 món)' },
     ],
     talents: { attack: 10, skill: 8, burst: 8 },
     talentBook: 'Công Bằng (Equity)',
@@ -1338,7 +1338,7 @@ export const USER_CHARACTERS_PRESET: UserCharacter[] = [
       domainDays: [1, 4, 0],
     },
     relics: [
-      { name: 'Ký Ức Rừng Sâu', icon: 'https://enka.network/ui/relic_flower.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Ký Ức Rừng Sâu (4 món)' },
+      { name: 'Ký Ức Rừng Sâu', icon: 'https://enka.network/ui/UI_ItemIcon_104003.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Ký Ức Rừng Sâu (4 món)' },
     ],
     talents: { attack: 1, skill: 9, burst: 9 },
     talentBook: 'Khuyên Nhủ (Ingenuity)',
@@ -1361,7 +1361,7 @@ export const USER_CHARACTERS_PRESET: UserCharacter[] = [
     fetter: 6,
     weapon: {
       name: 'Tây Phong Kiếm',
-      icon: 'https://enka.network/ui/UI_EquipIcon_Sword_Favonius.png',
+      icon: 'https://enka.network/ui/UI_EquipIcon_Sword_Zephyrus.png',
       rarity: 4,
       level: 80,
       affixLevel: 5,
@@ -1370,7 +1370,7 @@ export const USER_CHARACTERS_PRESET: UserCharacter[] = [
       domainDays: [3, 6, 0],
     },
     relics: [
-      { name: 'Dũng Sĩ Hỏa Diệm', icon: 'https://enka.network/ui/relic_flower.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Bí Cảnh Dũng Sĩ Natlan' },
+      { name: 'Dũng Sĩ Hỏa Diệm', icon: 'https://enka.network/ui/UI_ItemIcon_104003.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Bí Cảnh Dũng Sĩ Natlan' },
     ],
     talents: { attack: 1, skill: 8, burst: 8 },
     talentBook: 'Hàn Huyên (Kindling)',
@@ -1393,7 +1393,7 @@ export const USER_CHARACTERS_PRESET: UserCharacter[] = [
     fetter: 4,
     weapon: {
       name: 'Trấn Mavuika',
-      icon: 'https://enka.network/ui/UI_EquipIcon_Claymore_Mavuika.png',
+      icon: 'https://enka.network/ui/UI_EquipIcon_Claymore_RadianceSword.png',
       rarity: 5,
       level: 70,
       affixLevel: 1,
@@ -1402,7 +1402,7 @@ export const USER_CHARACTERS_PRESET: UserCharacter[] = [
       domainDays: [1, 4, 0],
     },
     relics: [
-      { name: 'Dũng Sĩ Hỏa Diệm', icon: 'https://enka.network/ui/relic_flower.png', posName: 'Hoa Sự Sống', rarity: 5, level: 16, setName: 'Bí Cảnh Dũng Sĩ Natlan' },
+      { name: 'Dũng Sĩ Hỏa Diệm', icon: 'https://enka.network/ui/UI_ItemIcon_104003.png', posName: 'Hoa Sự Sống', rarity: 5, level: 16, setName: 'Bí Cảnh Dũng Sĩ Natlan' },
     ],
     talents: { attack: 1, skill: 6, burst: 6 },
     talentBook: 'Bất Diệt (Contention)',
@@ -1425,7 +1425,7 @@ export const USER_CHARACTERS_PRESET: UserCharacter[] = [
     fetter: 9,
     weapon: {
       name: 'Xích Nguyệt Liêm',
-      icon: 'https://enka.network/ui/UI_EquipIcon_Pole_CrimsonMoon.png',
+      icon: 'https://enka.network/ui/UI_EquipIcon_Pole_BloodMoon.png',
       rarity: 5,
       level: 90,
       affixLevel: 1,
@@ -1434,7 +1434,7 @@ export const USER_CHARACTERS_PRESET: UserCharacter[] = [
       domainDays: [1, 4, 0],
     },
     relics: [
-      { name: 'Mảnh Hài Hòa Hư Ảo', icon: 'https://enka.network/ui/relic_flower.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Mảnh Hài Hòa Hư Ảo (4 món)' },
+      { name: 'Mảnh Hài Hòa Hư Ảo', icon: 'https://enka.network/ui/UI_ItemIcon_104003.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Mảnh Hài Hòa Hư Ảo (4 món)' },
     ],
     talents: { attack: 10, skill: 8, burst: 8 },
     talentBook: 'Trật Tự (Order)',
@@ -1457,7 +1457,7 @@ export const USER_CHARACTERS_PRESET: UserCharacter[] = [
     fetter: 10,
     weapon: {
       name: 'Tây Phong Kiếm',
-      icon: 'https://enka.network/ui/UI_EquipIcon_Sword_Favonius.png',
+      icon: 'https://enka.network/ui/UI_EquipIcon_Sword_Zephyrus.png',
       rarity: 4,
       level: 90,
       affixLevel: 5,
@@ -1466,7 +1466,7 @@ export const USER_CHARACTERS_PRESET: UserCharacter[] = [
       domainDays: [3, 6, 0],
     },
     relics: [
-      { name: 'Bóng Hình Màu Xanh', icon: 'https://enka.network/ui/relic_flower.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Bóng Hình Màu Xanh (4 món)' },
+      { name: 'Bóng Hình Màu Xanh', icon: 'https://enka.network/ui/UI_ItemIcon_104003.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Bóng Hình Màu Xanh (4 món)' },
     ],
     talents: { attack: 6, skill: 8, burst: 8 },
     talentBook: 'Cần Thiết (Diligence)',
@@ -1498,7 +1498,7 @@ export const USER_CHARACTERS_PRESET: UserCharacter[] = [
       domainDays: [1, 4, 0],
     },
     relics: [
-      { name: 'Thiên Nham Vững Chắc', icon: 'https://enka.network/ui/relic_flower.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Thiên Nham Vững Chắc (4 món)' },
+      { name: 'Thiên Nham Vững Chắc', icon: 'https://enka.network/ui/UI_ItemIcon_104003.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Thiên Nham Vững Chắc (4 món)' },
     ],
     talents: { attack: 1, skill: 9, burst: 9 },
     talentBook: 'Vàng Kim (Gold)',
@@ -1530,7 +1530,7 @@ export const USER_CHARACTERS_PRESET: UserCharacter[] = [
       domainDays: [3, 6, 0],
     },
     relics: [
-      { name: 'Diệm Ma Rực Cháy', icon: 'https://enka.network/ui/relic_flower.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Diệm Ma Rực Cháy (4 món)' },
+      { name: 'Diệm Ma Rực Cháy', icon: 'https://enka.network/ui/UI_ItemIcon_104003.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Diệm Ma Rực Cháy (4 món)' },
     ],
     talents: { attack: 10, skill: 10, burst: 9 },
     talentBook: 'Cần Thiết (Diligence)',
@@ -1553,7 +1553,7 @@ export const USER_CHARACTERS_PRESET: UserCharacter[] = [
     fetter: 10,
     weapon: {
       name: 'Cung Tây Phong',
-      icon: 'https://enka.network/ui/UI_EquipIcon_Bow_Favonius.png',
+      icon: 'https://enka.network/ui/UI_EquipIcon_Bow_Zephyrus.png',
       rarity: 4,
       level: 90,
       affixLevel: 5,
@@ -1562,7 +1562,7 @@ export const USER_CHARACTERS_PRESET: UserCharacter[] = [
       domainDays: [3, 6, 0],
     },
     relics: [
-      { name: 'Dấu Ấn Ngăn Trở', icon: 'https://enka.network/ui/relic_flower.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Dấu Ấn Ngăn Trở (4 món)' },
+      { name: 'Dấu Ấn Ngăn Trở', icon: 'https://enka.network/ui/UI_ItemIcon_104003.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Dấu Ấn Ngăn Trở (4 món)' },
     ],
     talents: { attack: 1, skill: 9, burst: 10 },
     talentBook: 'Thịnh Vượng (Prosperity)',
@@ -1585,7 +1585,7 @@ export const USER_CHARACTERS_PRESET: UserCharacter[] = [
     fetter: 10,
     weapon: {
       name: 'Tây Phong Kiếm',
-      icon: 'https://enka.network/ui/UI_EquipIcon_Sword_Favonius.png',
+      icon: 'https://enka.network/ui/UI_EquipIcon_Sword_Zephyrus.png',
       rarity: 4,
       level: 90,
       affixLevel: 5,
@@ -1594,7 +1594,7 @@ export const USER_CHARACTERS_PRESET: UserCharacter[] = [
       domainDays: [3, 6, 0],
     },
     relics: [
-      { name: 'Nghi Thức Tông Thất Cổ', icon: 'https://enka.network/ui/relic_flower.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Nghi Thức Tông Thất Cổ (4 món)' },
+      { name: 'Nghi Thức Tông Thất Cổ', icon: 'https://enka.network/ui/UI_ItemIcon_104003.png', posName: 'Hoa Sự Sống', rarity: 5, level: 20, setName: 'Nghi Thức Tông Thất Cổ (4 món)' },
     ],
     talents: { attack: 1, skill: 6, burst: 10 },
     talentBook: 'Kháng Chiến (Resistance)',
