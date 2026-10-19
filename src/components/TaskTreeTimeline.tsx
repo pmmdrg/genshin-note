@@ -125,7 +125,7 @@ export const TaskTreeTimeline: React.FC = () => {
                   <div
                     key={tree.id}
                     id={`tree-node-${tree.id}`}
-                    className="relative pl-12 sm:pl-14 transition-all duration-300"
+                    className="relative pl-12 sm:pl-14"
                   >
                     {/* Timeline Milestone Dot on Spine (w-7 h-7, centered vertically with character card at y=134px) */}
                     <div

@@ -80,7 +80,7 @@ export const WallpaperModal: React.FC = () => {
       <div className="absolute inset-0" onClick={() => setIsWallpaperModalOpen(false)} />
 
       {/* Modal Dialog */}
-      <div className="relative w-full max-w-3xl max-h-[90vh] bg-slate-900/90 border border-white/[0.12] rounded-3xl shadow-2xl backdrop-blur-2xl flex flex-col overflow-hidden text-slate-100 z-10 animate-drawer-open">
+      <div className="relative w-full max-w-3xl max-h-[90vh] bg-slate-900/90 border border-white/[0.12] rounded-3xl shadow-2xl backdrop-blur-2xl flex flex-col overflow-hidden text-slate-100 z-10 animate-card-pop">
         {/* Header */}
         <div className="p-4 sm:p-5 border-b border-white/[0.08] flex items-center justify-between bg-white/[0.02]">
           <div className="flex items-center gap-3">

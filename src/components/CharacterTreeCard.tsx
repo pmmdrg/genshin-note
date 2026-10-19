@@ -44,8 +44,20 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
   } = useStore();
 
   const [activeBranch, setActiveBranch] = useState<ActiveBranchType>('level');
+  const [displayedBranch, setDisplayedBranch] = useState<'level' | 'weapon' | 'talent' | 'artifact'>('level');
   const [isDeleting, setIsDeleting] = useState(false);
   const [isWeaponDrawerOpen, setIsWeaponDrawerOpen] = useState(false);
+
+  const handleBranchToggle = (branch: 'level' | 'weapon' | 'talent' | 'artifact') => {
+    if (activeBranch === branch) {
+      setActiveBranch(null);
+    } else {
+      setActiveBranch(branch);
+      setDisplayedBranch(branch);
+    }
+  };
+
+  const effectiveBranch = activeBranch || displayedBranch;
 
   const {
     attributes,
@@ -105,13 +117,13 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
   const weaponRarity = tree.weaponBranch.weaponRarity || 5;
   const weaponCost = calculateWeaponTo90Cost(tree.weaponBranch.currentLevel, weaponRarity);
 
-  // Active branch Y coordinate for clean branch line to drawer
+  // Active branch Y coordinate for clean branch line to drawer (uses effectiveBranch during close animation)
   const activeBranchY =
-    activeBranch === 'level'
+    effectiveBranch === 'level'
       ? 28
-      : activeBranch === 'weapon'
+      : effectiveBranch === 'weapon'
       ? 98
-      : activeBranch === 'talent'
+      : effectiveBranch === 'talent'
       ? 170
       : 240;
 
@@ -119,7 +131,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
     <div
       ref={setNodeRef}
       style={style}
-      className={`relative transition-all duration-300 py-1 ${
+      className={`relative py-1 transition-opacity duration-200 ${
         isDeleting ? 'animate-card-delete' : ''
       } ${isDragging ? 'opacity-50 z-50 scale-102 shadow-2xl' : ''}`}
     >
@@ -268,7 +280,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
         <div className="w-[175px] sm:w-[190px] h-[268px] shrink-0 flex flex-col justify-between self-start">
           {/* Branch 1: Cấp độ (Level) */}
           <button
-            onClick={() => setActiveBranch(activeBranch === 'level' ? null : 'level')}
+            onClick={() => handleBranchToggle('level')}
             className={`w-full h-[55px] px-3.5 py-2 rounded-2xl text-left border transition-all flex items-center justify-between group/branch cursor-pointer ${
               activeBranch === 'level'
                 ? 'bg-sky-500/20 border-sky-400/60 shadow-[0_0_16px_rgba(56,189,248,0.25)] text-sky-200'
@@ -294,7 +306,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
 
           {/* Branch 2: Vũ Khí (Weapon) - Không có icon phía trước, không có tên vũ khí */}
           <button
-            onClick={() => setActiveBranch(activeBranch === 'weapon' ? null : 'weapon')}
+            onClick={() => handleBranchToggle('weapon')}
             className={`w-full h-[55px] px-3.5 py-2 rounded-2xl text-left border transition-all flex items-center justify-between group/branch cursor-pointer ${
               activeBranch === 'weapon'
                 ? 'bg-sky-500/20 border-sky-400/60 shadow-[0_0_16px_rgba(56,189,248,0.25)] text-sky-200'
@@ -320,7 +332,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
 
           {/* Branch 3: Thiên Phú (Talents) */}
           <button
-            onClick={() => setActiveBranch(activeBranch === 'talent' ? null : 'talent')}
+            onClick={() => handleBranchToggle('talent')}
             className={`w-full h-[55px] px-3.5 py-2 rounded-2xl text-left border transition-all flex items-center justify-between group/branch cursor-pointer ${
               activeBranch === 'talent'
                 ? 'bg-sky-500/20 border-sky-400/60 shadow-[0_0_16px_rgba(56,189,248,0.25)] text-sky-200'
@@ -346,7 +358,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
 
           {/* Branch 4: Thánh Di Vật (Artifacts) */}
           <button
-            onClick={() => setActiveBranch(activeBranch === 'artifact' ? null : 'artifact')}
+            onClick={() => handleBranchToggle('artifact')}
             className={`w-full h-[55px] px-3.5 py-2 rounded-2xl text-left border transition-all flex items-center justify-between group/branch cursor-pointer ${
               activeBranch === 'artifact'
                 ? 'bg-sky-500/20 border-sky-400/60 shadow-[0_0_16px_rgba(56,189,248,0.25)] text-sky-200'
@@ -372,9 +384,21 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
         </div>
 
         {/* ========================================================= */}
-        {/* BRANCH LINE TO DRAWER (Same simple branch, no arrows)     */}
+        {/* 4. ANIMATED EXPANDED DRAWER CONTAINER (Smooth expansion)  */}
         {/* ========================================================= */}
-        {activeBranch && (
+        <div
+          className={`flex items-start shrink-0 origin-left transition-all duration-300 ease-out ${
+            activeBranch
+              ? 'max-w-[560px] opacity-100 translate-x-0'
+              : 'max-w-0 opacity-0 -translate-x-3 pointer-events-none overflow-hidden'
+          }`}
+          style={{
+            transitionProperty: 'max-width, opacity, transform',
+            transitionDuration: '320ms',
+            transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
+          }}
+        >
+          {/* Branch Line Connector (Smoothly connects active branch to drawer) */}
           <div className="w-[36px] sm:w-[50px] h-[268px] shrink-0 relative pointer-events-none">
             <svg
               className="w-full h-full overflow-visible"
@@ -386,24 +410,22 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                 d={`M 0 ${activeBranchY} L 50 ${activeBranchY}`}
                 stroke="rgba(255, 255, 255, 0.25)"
                 strokeWidth="1.5"
-                className="transition-all duration-300"
+                className="transition-all duration-300 ease-out"
               />
             </svg>
           </div>
-        )}
 
-        {/* ========================================================= */}
-        {/* 4. EXPANDED DRAWER DETAIL PANEL ("mở ra như ngăn kéo")     */}
-        {/* ========================================================= */}
-        {activeBranch && (
-          <div
-            key={activeBranch}
-            className="w-[360px] sm:w-[450px] lg:w-[480px] shrink-0 p-4 rounded-2xl bg-slate-900/70 border border-white/[0.1] backdrop-blur-xl shadow-2xl flex flex-col justify-between animate-drawer-open self-start"
-          >
-            {/* -------------------------------------------------- */}
-            {/* DETAIL: BRANCH 1 - LEVEL                           */}
-            {/* -------------------------------------------------- */}
-            {activeBranch === 'level' && (
+          {/* Drawer Detail Panel (Fluid layout, stays mounted during branch switches) */}
+          <div className="w-[360px] sm:w-[450px] lg:w-[480px] shrink-0 p-4 rounded-2xl bg-slate-900/80 border border-white/[0.1] backdrop-blur-xl shadow-2xl flex flex-col justify-between self-start transition-all duration-300 ease-out min-h-[268px]">
+            {/* Inner Content with smooth cross-fade when switching activeBranch */}
+            <div
+              key={effectiveBranch}
+              className="animate-card-fade-in transition-opacity duration-200"
+            >
+              {/* -------------------------------------------------- */}
+              {/* DETAIL: BRANCH 1 - LEVEL                           */}
+              {/* -------------------------------------------------- */}
+              {effectiveBranch === 'level' && (
               <div className="space-y-3.5">
                 <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
                   <div>
@@ -560,7 +582,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
             {/* -------------------------------------------------- */}
             {/* DETAIL: BRANCH 2 - WEAPON (Level & Chọn Vũ Khí)    */}
             {/* -------------------------------------------------- */}
-            {activeBranch === 'weapon' && (
+            {effectiveBranch === 'weapon' && (
               <div className="space-y-3">
                 {/* Header */}
                 <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
@@ -842,7 +864,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
             {/* -------------------------------------------------- */}
             {/* DETAIL: BRANCH 3 - TALENTS (3 Separate Skills)    */}
             {/* -------------------------------------------------- */}
-            {activeBranch === 'talent' && (
+            {effectiveBranch === 'talent' && (
               <div className="space-y-3.5">
                 <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
                   <div>
@@ -1055,7 +1077,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
             {/* -------------------------------------------------- */}
             {/* DETAIL: BRANCH 4 - ARTIFACTS (Không hiện tên bộ)   */}
             {/* -------------------------------------------------- */}
-            {activeBranch === 'artifact' && (
+            {effectiveBranch === 'artifact' && (
               <div className="space-y-3.5">
                 <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
                   <div>
@@ -1195,8 +1217,9 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                 </div>
               </div>
             )}
+            </div>
           </div>
-        )}
+        </div>
       </div>
 
       {/* Slide-in Weapon Selection Drawer from Right */}
