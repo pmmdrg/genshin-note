@@ -46,6 +46,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
   } = useStore();
 
   const [activeBranch, setActiveBranch] = useState<ActiveBranchType>('level');
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const {
     attributes,
@@ -76,6 +77,14 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
     toggleCompleteCharacterTree(tree.id);
   };
 
+  const handleDeleteWithAnimation = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsDeleting(true);
+    setTimeout(() => {
+      deleteCharacterTree(tree.id);
+    }, 350);
+  };
+
   const isC6 = (tree.constellation ?? 0) >= 6;
   const currentCharLevel = tree.level ?? tree.levelBranch.currentLevel;
 
@@ -100,27 +109,37 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
 
   const weaponCost = calculateWeaponCost(tree.weaponBranch.currentLevel);
 
+  // Active connector arrow Y offset
+  const activeArrowY =
+    activeBranch === 'level'
+      ? 'top-[26px]'
+      : activeBranch === 'weapon'
+      ? 'top-[96px]'
+      : activeBranch === 'talent'
+      ? 'top-[166px]'
+      : 'top-[236px]';
+
   return (
     <div
       ref={setNodeRef}
       style={style}
       className={`relative rounded-3xl transition-all duration-300 ${
-        isDragging ? 'opacity-50 z-50 scale-102 shadow-2xl' : ''
-      } ${
+        isDeleting ? 'animate-card-delete' : ''
+      } ${isDragging ? 'opacity-50 z-50 scale-102 shadow-2xl' : ''} ${
         isTopPriority
           ? 'bg-gradient-to-r from-amber-500/[0.08] via-slate-900/60 to-slate-900/60 border border-amber-400/40 shadow-[0_8px_32px_rgba(245,158,11,0.15),inset_0_1px_1px_rgba(255,255,255,0.15)] backdrop-blur-2xl'
           : 'liquid-glass liquid-glass-interactive'
       }`}
     >
       <div className="p-4 sm:p-5">
-        {/* Main Horizontal Tree Layout: Branches extend to the RIGHT with items-start to prevent vertical distortion */}
-        <div className="flex items-start gap-3 sm:gap-4 overflow-x-auto pb-2 custom-scrollbar">
+        {/* Main Horizontal Tree Layout: Branches extend to the RIGHT */}
+        <div className="flex items-start gap-0 overflow-x-auto pb-2 custom-scrollbar">
           {/* ========================================================= */}
-          {/* 1. CHARACTER CARD NODE (Locked fixed dimensions)          */}
+          {/* 1. CHARACTER CARD NODE (Root node, strictly locked size)  */}
           {/* ========================================================= */}
-          <div className="w-[140px] sm:w-[150px] min-w-[140px] max-w-[150px] shrink-0 flex flex-col p-3 rounded-2xl bg-slate-900/50 border border-white/[0.08] backdrop-blur-xl relative group/card self-start">
+          <div className="w-[144px] sm:w-[155px] h-[268px] min-h-[268px] max-h-[268px] shrink-0 flex flex-col justify-between p-3 rounded-2xl bg-slate-900/50 border border-white/[0.08] backdrop-blur-xl relative group/card self-start shadow-lg">
             {/* Top Quick Actions: Drag Handle, Delete & Complete */}
-            <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center justify-between mb-1">
               <button
                 {...attributes}
                 {...listeners}
@@ -133,14 +152,14 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
               <div className="flex items-center gap-1">
                 <button
                   onClick={handleFinishAll}
-                  className="p-1 rounded-lg text-slate-400 hover:text-emerald-300 hover:bg-emerald-500/15 transition-colors"
+                  className="p-1 rounded-lg text-slate-400 hover:text-emerald-300 hover:bg-emerald-500/15 transition-colors cursor-pointer"
                   title="Đánh dấu hoàn thành toàn bộ"
                 >
                   <Check className="w-3.5 h-3.5" />
                 </button>
                 <button
-                  onClick={() => deleteCharacterTree(tree.id)}
-                  className="p-1 rounded-lg text-slate-500 hover:text-rose-400 hover:bg-rose-500/15 transition-colors"
+                  onClick={handleDeleteWithAnimation}
+                  className="p-1 rounded-lg text-slate-500 hover:text-rose-400 hover:bg-rose-500/15 transition-colors cursor-pointer"
                   title="Xóa khỏi Timeline"
                 >
                   <Trash2 className="w-3.5 h-3.5" />
@@ -150,7 +169,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
 
             {/* Avatar Box (Identical to Roster Card) */}
             <div
-              className={`w-full aspect-square rounded-2xl overflow-hidden mb-2 relative border ${
+              className={`w-full aspect-square rounded-2xl overflow-hidden mb-1.5 relative border ${
                 isC6
                   ? 'border-amber-400/60 ring-1 ring-amber-400/50 bg-gradient-to-b from-amber-500/15 to-purple-500/10 shadow-[0_0_10px_rgba(245,158,11,0.25)]'
                   : tree.rarity === 5
@@ -185,14 +204,14 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
             </div>
 
             {/* 3 Separate Rows (Identical to Roster Card) */}
-            <div className="w-full px-0.5 flex flex-col items-center gap-1 text-center">
+            <div className="w-full px-0.5 flex flex-col items-center gap-0.5 text-center">
               {/* Hàng 1: Tên nhân vật (Cinzel font-genshin) */}
               <div className="w-full text-xs sm:text-sm font-bold text-slate-100 truncate group-hover/card:text-amber-300 transition-colors font-genshin tracking-wide">
                 {tree.characterName}
               </div>
 
               {/* Hàng 2: Cấp độ (Inter) */}
-              <div className="flex items-center justify-center">
+              <div className="flex items-center justify-center my-0.5">
                 <span className="text-[10px] sm:text-[11px] font-bold text-amber-300/90 bg-amber-400/10 px-2 py-0.5 rounded-md border border-amber-400/25 shadow-sm font-sans">
                   Lv.{currentCharLevel}
                 </span>
@@ -206,23 +225,218 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
           </div>
 
           {/* ========================================================= */}
-          {/* CONNECTOR LINE & ARROW (Branching out to the right)       */}
+          {/* 2. SVG CURVED BRANCHING CANVAS (True Mindmap Tree Form)    */}
           {/* ========================================================= */}
-          <div className="flex items-center justify-center shrink-0 text-amber-400/40 pt-16">
-            <div className="w-3 sm:w-5 h-0.5 bg-gradient-to-r from-amber-400/60 to-amber-400/20" />
-            <ChevronRight className="w-4 h-4 -ml-1.5 text-amber-400/60" />
+          <div className="w-[60px] sm:w-[84px] h-[268px] shrink-0 relative pointer-events-none">
+            <svg
+              className="w-full h-full overflow-visible"
+              viewBox="0 0 84 268"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                {/* Active Cyan Arrow Marker */}
+                <marker
+                  id={`arrow-active-${tree.id}`}
+                  viewBox="0 0 8 8"
+                  refX="6"
+                  refY="4"
+                  markerWidth="6"
+                  markerHeight="6"
+                  orient="auto"
+                >
+                  <path d="M 1 1 L 7 4 L 1 7 z" fill="#38bdf8" />
+                </marker>
+
+                {/* Completed Emerald Arrow Marker */}
+                <marker
+                  id={`arrow-completed-${tree.id}`}
+                  viewBox="0 0 8 8"
+                  refX="6"
+                  refY="4"
+                  markerWidth="6"
+                  markerHeight="6"
+                  orient="auto"
+                >
+                  <path d="M 1 1 L 7 4 L 1 7 z" fill="#34d399" />
+                </marker>
+
+                {/* Inactive Subdued Arrow Marker */}
+                <marker
+                  id={`arrow-inactive-${tree.id}`}
+                  viewBox="0 0 8 8"
+                  refX="6"
+                  refY="4"
+                  markerWidth="6"
+                  markerHeight="6"
+                  orient="auto"
+                >
+                  <path d="M 1 1 L 7 4 L 1 7 z" fill="rgba(255, 255, 255, 0.3)" />
+                </marker>
+
+                {/* Glow Filter for Active Branches */}
+                <filter id={`branch-glow-${tree.id}`} x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="2.5" result="blur" />
+                  <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                </filter>
+              </defs>
+
+              {/* Branch 1: Cấp độ (Target y = 28) */}
+              <path
+                d="M 0 134 C 40 134, 44 28, 80 28"
+                stroke={
+                  activeBranch === 'level'
+                    ? '#38bdf8'
+                    : tree.levelBranch.isCompleted
+                    ? '#34d399'
+                    : 'rgba(255, 255, 255, 0.22)'
+                }
+                strokeWidth={activeBranch === 'level' ? '2.5' : '1.5'}
+                filter={activeBranch === 'level' ? `url(#branch-glow-${tree.id})` : undefined}
+                markerEnd={
+                  activeBranch === 'level'
+                    ? `url(#arrow-active-${tree.id})`
+                    : tree.levelBranch.isCompleted
+                    ? `url(#arrow-completed-${tree.id})`
+                    : `url(#arrow-inactive-${tree.id})`
+                }
+                className="transition-all duration-300"
+              />
+              {/* Midpoint Dot 1 */}
+              <circle
+                cx="42"
+                cy="81"
+                r={activeBranch === 'level' ? '3' : '2'}
+                className={
+                  activeBranch === 'level'
+                    ? 'fill-sky-400 drop-shadow-[0_0_6px_rgba(56,189,248,0.9)]'
+                    : tree.levelBranch.isCompleted
+                    ? 'fill-emerald-400'
+                    : 'fill-white/30'
+                }
+              />
+
+              {/* Branch 2: Vũ Khí (Target y = 98) */}
+              <path
+                d="M 0 134 C 40 134, 44 98, 80 98"
+                stroke={
+                  activeBranch === 'weapon'
+                    ? '#38bdf8'
+                    : tree.weaponBranch.isCompleted
+                    ? '#34d399'
+                    : 'rgba(255, 255, 255, 0.22)'
+                }
+                strokeWidth={activeBranch === 'weapon' ? '2.5' : '1.5'}
+                filter={activeBranch === 'weapon' ? `url(#branch-glow-${tree.id})` : undefined}
+                markerEnd={
+                  activeBranch === 'weapon'
+                    ? `url(#arrow-active-${tree.id})`
+                    : tree.weaponBranch.isCompleted
+                    ? `url(#arrow-completed-${tree.id})`
+                    : `url(#arrow-inactive-${tree.id})`
+                }
+                className="transition-all duration-300"
+              />
+              {/* Midpoint Dot 2 */}
+              <circle
+                cx="42"
+                cy="116"
+                r={activeBranch === 'weapon' ? '3' : '2'}
+                className={
+                  activeBranch === 'weapon'
+                    ? 'fill-sky-400 drop-shadow-[0_0_6px_rgba(56,189,248,0.9)]'
+                    : tree.weaponBranch.isCompleted
+                    ? 'fill-emerald-400'
+                    : 'fill-white/30'
+                }
+              />
+
+              {/* Branch 3: Thiên Phú (Target y = 170) */}
+              <path
+                d="M 0 134 C 40 134, 44 170, 80 170"
+                stroke={
+                  activeBranch === 'talent'
+                    ? '#38bdf8'
+                    : tree.talentBranch.isCompleted
+                    ? '#34d399'
+                    : 'rgba(255, 255, 255, 0.22)'
+                }
+                strokeWidth={activeBranch === 'talent' ? '2.5' : '1.5'}
+                filter={activeBranch === 'talent' ? `url(#branch-glow-${tree.id})` : undefined}
+                markerEnd={
+                  activeBranch === 'talent'
+                    ? `url(#arrow-active-${tree.id})`
+                    : tree.talentBranch.isCompleted
+                    ? `url(#arrow-completed-${tree.id})`
+                    : `url(#arrow-inactive-${tree.id})`
+                }
+                className="transition-all duration-300"
+              />
+              {/* Midpoint Dot 3 */}
+              <circle
+                cx="42"
+                cy="152"
+                r={activeBranch === 'talent' ? '3' : '2'}
+                className={
+                  activeBranch === 'talent'
+                    ? 'fill-sky-400 drop-shadow-[0_0_6px_rgba(56,189,248,0.9)]'
+                    : tree.talentBranch.isCompleted
+                    ? 'fill-emerald-400'
+                    : 'fill-white/30'
+                }
+              />
+
+              {/* Branch 4: Thánh Di Vật (Target y = 240) */}
+              <path
+                d="M 0 134 C 40 134, 44 240, 80 240"
+                stroke={
+                  activeBranch === 'artifact'
+                    ? '#38bdf8'
+                    : tree.artifactBranch.isCompleted
+                    ? '#34d399'
+                    : 'rgba(255, 255, 255, 0.22)'
+                }
+                strokeWidth={activeBranch === 'artifact' ? '2.5' : '1.5'}
+                filter={activeBranch === 'artifact' ? `url(#branch-glow-${tree.id})` : undefined}
+                markerEnd={
+                  activeBranch === 'artifact'
+                    ? `url(#arrow-active-${tree.id})`
+                    : tree.artifactBranch.isCompleted
+                    ? `url(#arrow-completed-${tree.id})`
+                    : `url(#arrow-inactive-${tree.id})`
+                }
+                className="transition-all duration-300"
+              />
+              {/* Midpoint Dot 4 */}
+              <circle
+                cx="42"
+                cy="187"
+                r={activeBranch === 'artifact' ? '3' : '2'}
+                className={
+                  activeBranch === 'artifact'
+                    ? 'fill-sky-400 drop-shadow-[0_0_6px_rgba(56,189,248,0.9)]'
+                    : tree.artifactBranch.isCompleted
+                    ? 'fill-emerald-400'
+                    : 'fill-white/30'
+                }
+              />
+
+              {/* Origin Root Node Halo & Dot */}
+              <circle cx="2" cy="134" r="5" className="fill-sky-400/60 drop-shadow-[0_0_8px_rgba(56,189,248,0.9)]" />
+              <circle cx="2" cy="134" r="2.5" className="fill-white" />
+            </svg>
           </div>
 
           {/* ========================================================= */}
-          {/* 2. THE 4 MAIN BRANCH SELECTORS                            */}
+          {/* 3. THE 4 MAIN BRANCH SELECTORS (Height synchronized: 268) */}
           {/* ========================================================= */}
-          <div className="flex flex-col gap-2.5 w-[180px] sm:w-[195px] shrink-0 self-start">
+          <div className="w-[185px] sm:w-[200px] h-[268px] shrink-0 flex flex-col justify-between self-start">
             {/* Branch 1: Cấp độ (Level) */}
             <button
               onClick={() => setActiveBranch(activeBranch === 'level' ? null : 'level')}
-              className={`w-full p-2.5 rounded-2xl text-left border transition-all flex items-center justify-between group/branch cursor-pointer ${
+              className={`w-full h-[55px] p-2.5 rounded-2xl text-left border transition-all flex items-center justify-between group/branch cursor-pointer ${
                 activeBranch === 'level'
-                  ? 'bg-amber-400/15 border-amber-400/60 shadow-[0_0_16px_rgba(245,158,11,0.25)] text-amber-200'
+                  ? 'bg-sky-500/15 border-sky-400/60 shadow-[0_0_16px_rgba(56,189,248,0.25)] text-sky-200'
                   : tree.levelBranch.isCompleted
                   ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300 hover:bg-emerald-500/15'
                   : 'bg-white/[0.03] border-white/[0.08] text-slate-300 hover:bg-white/[0.06] hover:border-white/20'
@@ -249,7 +463,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                 {tree.levelBranch.isCompleted ? (
                   <CheckCircle2 className="w-4 h-4 text-emerald-400 fill-emerald-400/20" />
                 ) : (
-                  <Circle className="w-4 h-4 text-slate-500 group-hover/branch:text-amber-400/70" />
+                  <Circle className="w-4 h-4 text-slate-500 group-hover/branch:text-sky-400/70" />
                 )}
               </div>
             </button>
@@ -257,9 +471,9 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
             {/* Branch 2: Vũ Khí (Weapon) - Không để tên vũ khí */}
             <button
               onClick={() => setActiveBranch(activeBranch === 'weapon' ? null : 'weapon')}
-              className={`w-full p-2.5 rounded-2xl text-left border transition-all flex items-center justify-between group/branch cursor-pointer ${
+              className={`w-full h-[55px] p-2.5 rounded-2xl text-left border transition-all flex items-center justify-between group/branch cursor-pointer ${
                 activeBranch === 'weapon'
-                  ? 'bg-amber-400/15 border-amber-400/60 shadow-[0_0_16px_rgba(245,158,11,0.25)] text-amber-200'
+                  ? 'bg-sky-500/15 border-sky-400/60 shadow-[0_0_16px_rgba(56,189,248,0.25)] text-sky-200'
                   : tree.weaponBranch.isCompleted
                   ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300 hover:bg-emerald-500/15'
                   : 'bg-white/[0.03] border-white/[0.08] text-slate-300 hover:bg-white/[0.06] hover:border-white/20'
@@ -294,9 +508,9 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
             {/* Branch 3: Thiên Phú (Talents - 3 skills) */}
             <button
               onClick={() => setActiveBranch(activeBranch === 'talent' ? null : 'talent')}
-              className={`w-full p-2.5 rounded-2xl text-left border transition-all flex items-center justify-between group/branch cursor-pointer ${
+              className={`w-full h-[55px] p-2.5 rounded-2xl text-left border transition-all flex items-center justify-between group/branch cursor-pointer ${
                 activeBranch === 'talent'
-                  ? 'bg-amber-400/15 border-amber-400/60 shadow-[0_0_16px_rgba(245,158,11,0.25)] text-amber-200'
+                  ? 'bg-sky-500/15 border-sky-400/60 shadow-[0_0_16px_rgba(56,189,248,0.25)] text-sky-200'
                   : tree.talentBranch.isCompleted
                   ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300 hover:bg-emerald-500/15'
                   : 'bg-white/[0.03] border-white/[0.08] text-slate-300 hover:bg-white/[0.06] hover:border-white/20'
@@ -331,9 +545,9 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
             {/* Branch 4: Thánh Di Vật (Artifacts - 5 pieces) - Không để tên bộ */}
             <button
               onClick={() => setActiveBranch(activeBranch === 'artifact' ? null : 'artifact')}
-              className={`w-full p-2.5 rounded-2xl text-left border transition-all flex items-center justify-between group/branch cursor-pointer ${
+              className={`w-full h-[55px] p-2.5 rounded-2xl text-left border transition-all flex items-center justify-between group/branch cursor-pointer ${
                 activeBranch === 'artifact'
-                  ? 'bg-amber-400/15 border-amber-400/60 shadow-[0_0_16px_rgba(245,158,11,0.25)] text-amber-200'
+                  ? 'bg-sky-500/15 border-sky-400/60 shadow-[0_0_16px_rgba(56,189,248,0.25)] text-sky-200'
                   : tree.artifactBranch.isCompleted
                   ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300 hover:bg-emerald-500/15'
                   : 'bg-white/[0.03] border-white/[0.08] text-slate-300 hover:bg-white/[0.06] hover:border-white/20'
@@ -367,17 +581,21 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
           </div>
 
           {/* ========================================================= */}
-          {/* CONNECTOR LINE TO EXPANDED DRAWER PANEL                   */}
+          {/* CONNECTOR ARROW POINTING TO DRAWER PANEL                  */}
           {/* ========================================================= */}
           {activeBranch && (
-            <div className="flex items-center justify-center shrink-0 text-amber-400/40 pt-16">
-              <div className="w-3 sm:w-5 h-0.5 bg-gradient-to-r from-amber-400/60 to-amber-400/20" />
-              <ChevronRight className="w-4 h-4 -ml-1.5 text-amber-400/60" />
+            <div className="relative h-[268px] w-6 sm:w-8 shrink-0 pointer-events-none">
+              <div
+                className={`absolute ${activeArrowY} left-0 flex items-center transition-all duration-300`}
+              >
+                <div className="w-3 sm:w-5 h-0.5 bg-gradient-to-r from-sky-400 to-sky-400/50" />
+                <ChevronRight className="w-4 h-4 -ml-1 text-sky-400 drop-shadow-[0_0_8px_rgba(56,189,248,0.9)]" />
+              </div>
             </div>
           )}
 
           {/* ========================================================= */}
-          {/* 3. EXPANDED DRAWER DETAIL PANEL ("mở ra như ngăn kéo")     */}
+          {/* 4. EXPANDED DRAWER DETAIL PANEL ("mở ra như ngăn kéo")     */}
           {/* ========================================================= */}
           {activeBranch && (
             <div
@@ -391,7 +609,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                 <div className="space-y-3.5">
                   <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
                     <div className="flex items-center gap-2">
-                      <div className="p-1.5 rounded-xl bg-amber-400/15 text-amber-300 border border-amber-400/30">
+                      <div className="p-1.5 rounded-xl bg-sky-400/15 text-sky-300 border border-sky-400/30">
                         <TrendingUp className="w-4 h-4" />
                       </div>
                       <div>
@@ -409,7 +627,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                       className={`px-2.5 py-1 rounded-xl text-xs font-bold border transition-all flex items-center gap-1.5 cursor-pointer ${
                         tree.levelBranch.isCompleted
                           ? 'bg-emerald-500/20 border-emerald-500/40 text-emerald-300'
-                          : 'bg-white/[0.04] border-white/10 text-slate-300 hover:border-amber-400/40'
+                          : 'bg-white/[0.04] border-white/10 text-slate-300 hover:border-sky-400/40'
                       }`}
                     >
                       <Check className="w-3.5 h-3.5" />
@@ -450,7 +668,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                           onClick={() => updateTreeLevel(tree.id, lvl)}
                           className={`px-2 py-0.5 rounded-md text-[10px] font-bold border transition-colors cursor-pointer ${
                             currentCharLevel === lvl
-                              ? 'bg-amber-400/20 border-amber-400/50 text-amber-300'
+                              ? 'bg-sky-400/20 border-sky-400/50 text-sky-300'
                               : 'bg-white/[0.04] border-white/[0.08] text-slate-400 hover:text-slate-200'
                           }`}
                         >
