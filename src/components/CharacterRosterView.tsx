@@ -276,104 +276,134 @@ export const CharacterRosterView: React.FC = () => {
               </button>
             </div>
 
-            {/* Equipment & Talents Status Grid - Tối ưu hiển thị hình ảnh vũ khí & thánh di vật */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 my-5">
-              {/* Equipped Weapon */}
-              <div className="liquid-glass-subtle rounded-2xl p-4 flex items-center gap-3.5 border border-white/10 hover:border-amber-400/30 transition-all">
-                <div className={`w-14 h-14 rounded-2xl overflow-hidden shrink-0 border relative flex items-center justify-center p-1 ${
-                  (selectedChar.weapon?.rarity || 4) === 5
-                    ? 'bg-gradient-to-b from-amber-500/25 via-amber-600/10 to-transparent border-amber-400/40 shadow-[0_0_14px_rgba(245,158,11,0.2)]'
-                    : 'bg-gradient-to-b from-purple-500/25 via-purple-600/10 to-transparent border-purple-400/40 shadow-[0_0_14px_rgba(168,85,247,0.2)]'
-                }`}>
+            {/* ================= FULL-WIDTH ROW 1: EQUIPPED WEAPON SHOWCASE ================= */}
+            <div className="liquid-glass-subtle rounded-3xl p-5 my-4 border border-white/10 hover:border-amber-400/30 transition-all">
+              <div className="flex flex-col sm:flex-row items-center sm:items-stretch gap-5">
+                {/* Large Weapon Image Frame */}
+                <div
+                  className={`w-28 h-28 sm:w-32 sm:h-32 rounded-3xl overflow-hidden shrink-0 border relative flex items-center justify-center p-2.5 shadow-lg ${
+                    (selectedChar.weapon?.rarity || 4) === 5
+                      ? 'bg-gradient-to-br from-amber-500/25 via-amber-600/15 to-slate-900/40 border-amber-400/50 shadow-[0_0_24px_rgba(245,158,11,0.25)]'
+                      : 'bg-gradient-to-br from-purple-500/25 via-purple-600/15 to-slate-900/40 border-purple-400/50 shadow-[0_0_24px_rgba(168,85,247,0.25)]'
+                  }`}
+                >
                   {selectedChar.weapon?.icon ? (
                     <img
                       src={selectedChar.weapon.icon}
                       alt={selectedChar.weapon.name}
-                      className="w-full h-full object-contain drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]"
+                      className="w-full h-full object-contain drop-shadow-[0_6px_16px_rgba(0,0,0,0.85)] hover:scale-110 transition-transform duration-300"
                       onError={(e) => {
                         (e.target as HTMLElement).style.display = 'none';
                       }}
                     />
                   ) : (
-                    <Sword className="w-6 h-6 text-slate-400" />
+                    <Sword className="w-12 h-12 text-slate-400" />
                   )}
+
+                  {/* Corner Rarity Pill */}
+                  <div className="absolute top-2 right-2 px-1.5 py-0.5 rounded-md bg-black/70 backdrop-blur-md text-[9px] font-bold text-amber-300 border border-white/20">
+                    {selectedChar.weapon?.rarity || 4}★
+                  </div>
                 </div>
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center gap-1 text-[11px] text-slate-400 font-medium">
-                    <span>Vũ khí trang bị</span>
-                    <span className="text-amber-400 font-bold ml-1">
-                      {'★'.repeat(selectedChar.weapon?.rarity || 4)}
-                    </span>
+
+                {/* Weapon Info Details */}
+                <div className="flex-1 min-w-0 flex flex-col justify-between py-0.5 text-center sm:text-left">
+                  <div>
+                    <div className="flex items-center justify-center sm:justify-start gap-2 text-xs text-slate-400 font-medium">
+                      <span className="px-2 py-0.5 rounded-md bg-white/[0.06] text-slate-300 font-semibold border border-white/[0.08]">
+                        Vũ Khí Trang Bị
+                      </span>
+                      <span>•</span>
+                      <span className="text-amber-300 font-medium">{selectedChar.weapon?.typeName || 'Vũ Khí'}</span>
+                      <span>•</span>
+                      <span className="text-amber-400 font-bold tracking-wider">
+                        {'★'.repeat(selectedChar.weapon?.rarity || 4)}
+                      </span>
+                    </div>
+
+                    <h4 className="text-xl sm:text-2xl font-black text-slate-100 font-genshin tracking-wide mt-1.5">
+                      {selectedChar.weapon?.name || 'Chưa trang bị'}
+                    </h4>
                   </div>
-                  <div className="text-sm font-bold text-slate-100 truncate mt-0.5">
-                    {selectedChar.weapon?.name || 'Chưa trang bị'}
-                  </div>
-                  <div className="text-xs text-amber-300 font-mono flex items-center gap-2 mt-1">
-                    <span className="bg-amber-400/10 px-2 py-0.5 rounded-md border border-amber-400/20 font-bold">
-                      Lv.{selectedChar.weapon?.level || 1}
+
+                  <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2.5 mt-3 pt-3 border-t border-white/[0.06] text-xs">
+                    <span className="px-3 py-1 rounded-xl bg-amber-400/15 border border-amber-400/30 text-amber-300 font-mono font-extrabold shadow-sm">
+                      Lv.{selectedChar.weapon?.level || 1} / 90
                     </span>
-                    <span className="bg-white/[0.04] px-2 py-0.5 rounded-md text-slate-300 border border-white/[0.08]">
-                      Tinh luyện {selectedChar.weapon?.affixLevel || 1}
+                    <span className="px-3 py-1 rounded-xl bg-white/[0.06] border border-white/[0.1] text-slate-200 font-bold">
+                      Tinh Luyện {selectedChar.weapon?.affixLevel || 1}
+                    </span>
+                    <span className="text-slate-400 text-xs italic">
+                      {selectedChar.weapon?.materialName || 'Nguyên liệu rèn & đột phá'}
                     </span>
                   </div>
                 </div>
               </div>
+            </div>
 
-              {/* Equipped Relics */}
-              <div className="liquid-glass-subtle rounded-2xl p-4 flex flex-col justify-between border border-white/10 hover:border-emerald-400/30 transition-all">
-                <div className="flex items-center gap-3.5 mb-2.5">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-b from-emerald-500/20 via-teal-600/10 to-transparent border border-emerald-400/40 flex items-center justify-center shrink-0 p-1 shadow-[0_0_14px_rgba(16,185,129,0.2)] overflow-hidden">
-                    {selectedChar.relics?.[0]?.icon ? (
-                      <img
-                        src={selectedChar.relics[0].icon}
-                        alt="relic"
-                        className="w-full h-full object-contain drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]"
-                        onError={(e) => {
-                          (e.target as HTMLElement).style.display = 'none';
-                        }}
-                      />
-                    ) : (
-                      <Shield className="w-6 h-6 text-emerald-400" />
-                    )}
+            {/* ================= FULL-WIDTH ROW 2: EQUIPPED ARTIFACTS SHOWCASE ================= */}
+            <div className="liquid-glass-subtle rounded-3xl p-5 mb-5 border border-white/10 hover:border-emerald-400/30 transition-all">
+              {/* Artifacts Header */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3.5 border-b border-white/[0.08]">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center shrink-0 text-emerald-400 shadow-[0_0_12px_rgba(16,185,129,0.2)]">
+                    <Shield className="w-5 h-5" />
                   </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="text-[11px] text-slate-400 font-medium">Thánh di vật</div>
-                    <div className="text-sm font-bold text-slate-100 truncate mt-0.5">
+                  <div>
+                    <div className="text-[11px] text-slate-400 font-medium">Bộ Thánh Di Vật Kích Hoạt</div>
+                    <h4 className="text-lg font-black text-slate-100 font-genshin tracking-wide text-emerald-300">
                       {selectedChar.relics?.[0]?.setName || 'Bộ Thánh Di Vật'}
-                    </div>
-                    <div className="text-[11px] text-emerald-400 font-semibold mt-0.5 flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                      <span>5 món đã trang bị (+20)</span>
-                    </div>
+                    </h4>
                   </div>
                 </div>
 
-                {/* 5 Relic slots with icons, labels, levels */}
-                {selectedChar.relics && selectedChar.relics.length > 0 && (
-                  <div className="grid grid-cols-5 gap-1.5 pt-2.5 border-t border-white/[0.06]">
-                    {selectedChar.relics.slice(0, 5).map((r, idx) => {
-                      const shortSlot = ['Hoa', 'Lông', 'Cát', 'Ly', 'Nón'][idx] || r.posName;
-                      return (
-                        <div
-                          key={idx}
-                          className="bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.08] hover:border-amber-400/40 rounded-xl p-1 text-center flex flex-col items-center transition-all group/relic"
-                          title={`${r.name} (${r.posName}) - Cấp ${r.level}`}
-                        >
-                          <div className="w-7 h-7 relative flex items-center justify-center">
-                            <img
-                              src={r.icon}
-                              alt={r.name}
-                              className="w-full h-full object-contain drop-shadow-[0_1px_3px_rgba(0,0,0,0.5)] group-hover/relic:scale-110 transition-transform"
-                              onError={(e) => {
-                                (e.target as HTMLElement).style.display = 'none';
-                              }}
-                            />
-                          </div>
-                          <span className="text-[8px] font-mono font-bold text-amber-300 mt-0.5">+{r.level}</span>
-                          <span className="text-[7.5px] text-slate-400 truncate max-w-full leading-tight">{shortSlot}</span>
+                <div className="flex items-center gap-2">
+                  <span className="px-3 py-1 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 font-bold text-xs flex items-center gap-1.5 shadow-sm">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    Bộ 5 món (+20 Max)
+                  </span>
+                </div>
+              </div>
+
+              {/* 5 Big Relic Pieces Cards */}
+              <div className="grid grid-cols-5 gap-2.5 sm:gap-3.5 mt-4">
+                {selectedChar.relics && selectedChar.relics.length > 0 ? (
+                  selectedChar.relics.slice(0, 5).map((r, idx) => {
+                    const slotNames = ['Hoa Sự Sống', 'Lông Vũ', 'Cát T.Gian', 'Ly K.Gian', 'Nón Lý Trí'];
+                    const fullSlotNames = ['Hoa Sự Sống (HP)', 'Lông Vũ Tử Thần (ATK)', 'Cát Thời Gian', 'Ly Không Gian', 'Nón Lý Trí'];
+                    return (
+                      <div
+                        key={idx}
+                        className="rounded-2xl p-2.5 sm:p-3 bg-white/[0.03] hover:bg-white/[0.08] border border-white/[0.08] hover:border-emerald-400/50 flex flex-col items-center justify-between transition-all group/relic shadow-sm hover:shadow-[0_0_20px_rgba(16,185,129,0.25)] relative overflow-hidden"
+                        title={`${r.name} - ${fullSlotNames[idx] || r.posName}`}
+                      >
+                        {/* Level badge */}
+                        <span className="text-[9px] sm:text-[10px] font-mono font-black text-amber-300 bg-black/60 px-2 py-0.5 rounded-md border border-amber-400/30 shadow-sm">
+                          +{r.level}
+                        </span>
+
+                        {/* Large Relic Image */}
+                        <div className="w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center my-2">
+                          <img
+                            src={r.icon}
+                            alt={r.name}
+                            className="w-full h-full object-contain drop-shadow-[0_4px_10px_rgba(0,0,0,0.7)] group-hover/relic:scale-115 transition-transform duration-200"
+                            onError={(e) => {
+                              (e.target as HTMLElement).style.display = 'none';
+                            }}
+                          />
                         </div>
-                      );
-                    })}
+
+                        {/* Slot label */}
+                        <span className="text-[9px] sm:text-[11px] font-bold text-slate-300 text-center truncate max-w-full leading-tight">
+                          {slotNames[idx] || r.posName}
+                        </span>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <div className="col-span-5 text-center py-4 text-xs text-slate-500">
+                    Chưa có thông tin thánh di vật
                   </div>
                 )}
               </div>
