@@ -50,11 +50,11 @@ export const CharacterRosterView: React.FC = () => {
               <div className="flex items-center gap-2">
                 <h2 className="text-lg font-bold text-slate-100">Danh Sách Nhân Vật</h2>
                 <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-amber-400/15 text-amber-300 border border-amber-400/30">
-                  {filteredCharacters.length} / {characters.length}
+                  {filteredCharacters.length}
                 </span>
               </div>
               <p className="text-xs text-slate-400 mt-0.5">
-                Nhấn vào nút <span className="text-amber-300 font-semibold">+ Timeline</span> ở mỗi nhân vật để thêm vào kế hoạch cày cuốc
+                Nhấn vào nút <span className="text-amber-300 font-semibold">Timeline</span> ở mỗi nhân vật để thêm vào kế hoạch cày cuốc
               </p>
             </div>
           </div>
@@ -198,7 +198,7 @@ export const CharacterRosterView: React.FC = () => {
                     title={`Thêm ${char.nameVi} vào Việc Cần Làm (Timeline)`}
                   >
                     <Plus className="w-3.5 h-3.5 group-hover/btn:rotate-90 transition-transform duration-200" />
-                    <span>+ Timeline</span>
+                    <span>Timeline</span>
                   </button>
                 </div>
               );
