@@ -7,7 +7,12 @@ import { useStore } from './store/useStore';
 import { APP_VERSION } from './version';
 
 export const App: React.FC = () => {
-  const { activeNav } = useStore();
+  const { activeNav, syncWithHoyo } = useStore();
+
+  React.useEffect(() => {
+    syncWithHoyo();
+  }, []);
+
 
   return (
     <div className="min-h-screen bg-[#07090e] text-slate-100 flex flex-col md:flex-row selection:bg-amber-400/30 selection:text-amber-200 relative overflow-hidden">

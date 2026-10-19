@@ -45,6 +45,7 @@ interface AppState {
   commissionsCount: number;
   weeklyBossCount: number;
   setCommissionsCount: (count: number) => void;
+  cycleCommissionsCount: () => void;
   setWeeklyBossCount: (count: number) => void;
 
   // HoYoLAB Daily Note Sync & Check-In
@@ -375,6 +376,8 @@ export const useStore = create<AppState>()(
       commissionsCount: 0,
       weeklyBossCount: 0,
       setCommissionsCount: (count) => set({ commissionsCount: count }),
+      cycleCommissionsCount: () =>
+        set((state) => ({ commissionsCount: (state.commissionsCount + 1) % 5 })),
       setWeeklyBossCount: (count) => set({ weeklyBossCount: count }),
 
       // HoYoLAB Daily Note Sync
@@ -391,13 +394,12 @@ export const useStore = create<AppState>()(
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({}),
           });
+          const responseData = await res.json().catch(() => ({}));
           if (!res.ok) {
-            const errJson = await res.json().catch(() => ({}));
-            throw new Error(errJson.message || `Lỗi kết nối (${res.status})`);
+            throw new Error(responseData.message || `Lỗi kết nối (${res.status})`);
           }
-          const responseData = await res.json();
-          if (responseData.retcode !== 0 && responseData.message) {
-            throw new Error(responseData.message);
+          if (responseData.retcode !== 0) {
+            throw new Error(responseData.message || 'Lỗi khi gọi API HoYoLAB');
           }
           const data: HoyoDailyNote = responseData.data;
           set({

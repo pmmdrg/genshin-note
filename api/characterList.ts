@@ -1,5 +1,22 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
+function detectServer(uid: string): string {
+  const cleanUid = (uid || '').trim();
+  const first = cleanUid.charAt(0);
+  switch (first) {
+    case '6': return 'os_usa';
+    case '7': return 'os_euro';
+    case '8': return 'os_asia';
+    case '9': return 'os_cht';
+    case '1':
+    case '2': return 'cn_gf01';
+    case '5': return 'cn_qd01';
+    default:
+      if (cleanUid.startsWith('18')) return 'os_asia';
+      return 'os_asia';
+  }
+}
+
 /**
  * Vercel Serverless Function to fetch full character list and equipment from HoYoLAB
  */
@@ -10,12 +27,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   const cookie = process.env.HOYOLAB_COOKIE || (req.headers['x-hoyolab-cookie'] as string);
   const uid = process.env.HOYOLAB_UID || req.body?.uid;
-  const server = process.env.HOYOLAB_SERVER || req.body?.server || 'os_asia';
+  const server = process.env.HOYOLAB_SERVER || req.body?.server || (uid ? detectServer(uid) : 'os_asia');
 
   if (!cookie || !uid) {
     return res.status(400).json({
       retcode: -1,
-      message: 'Thiếu Cookie hoặc UID trong biến môi trường.',
+      message: 'Thiếu HOYOLAB_COOKIE hoặc HOYOLAB_UID trong biến môi trường.',
       data: null,
     });
   }

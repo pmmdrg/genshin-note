@@ -10,6 +10,7 @@ import {
   Calendar,
   Clock,
   Compass,
+  AlertCircle,
 } from 'lucide-react';
 import { useStore } from '../store/useStore';
 import { calculateResinRecovery, formatSecondsToTime, getGenshinServerDate } from '../utils/priority';
@@ -23,9 +24,12 @@ export const Sidebar: React.FC = () => {
     manualResin,
     lastResinUpdate,
     hoyoData,
+    lastHoyoSync,
     commissionsCount,
+    cycleCommissionsCount,
     syncWithHoyo,
     hoyoSyncLoading,
+    hoyoSyncError,
     executeDailyCheckIn,
     checkInLoading,
     checkInStatus,
@@ -214,21 +218,67 @@ export const Sidebar: React.FC = () => {
         </div>
 
         {/* DAILY COMMISSIONS WIDGET */}
-        <div className="liquid-glass-subtle rounded-2xl p-3 flex items-center justify-between text-xs">
-          <div className="flex items-center gap-2">
-            <Compass className="w-4 h-4 text-amber-300" />
-            <span className="font-semibold text-slate-200">Ủy thác ngày</span>
+        <div className="liquid-glass-subtle rounded-2xl p-3 text-xs space-y-1.5">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Compass className="w-4 h-4 text-amber-300" />
+              <span className="font-semibold text-slate-200">Ủy thác ngày</span>
+            </div>
+            <button
+              onClick={() => {
+                if (!hoyoData) cycleCommissionsCount();
+              }}
+              title={!hoyoData ? 'Nhấp để thay đổi thủ công (0 -> 4)' : 'Được đồng bộ từ HoYoLAB'}
+              className={`font-mono font-bold px-2 py-0.5 rounded-lg border text-[11px] transition-transform ${
+                !hoyoData ? 'hover:scale-105 cursor-pointer active:scale-95' : 'cursor-default'
+              } ${
+                actualCommissions === 4
+                  ? 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30'
+                  : 'bg-amber-500/15 text-amber-300 border-amber-500/30'
+              }`}
+            >
+              {actualCommissions} / 4 {actualCommissions === 4 ? '✓' : ''}
+            </button>
           </div>
-          <span
-            className={`font-mono font-bold px-2 py-0.5 rounded-lg border text-[11px] ${
-              actualCommissions === 4
-                ? 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30'
-                : 'bg-amber-500/15 text-amber-300 border-amber-500/30'
-            }`}
-          >
-            {actualCommissions} / 4 {actualCommissions === 4 ? '✓' : ''}
-          </span>
+
+          {/* Sub-status: Katheryne reward claim or manual hint */}
+          {hoyoData ? (
+            <div className="flex items-center justify-between text-[10px] pt-0.5 border-t border-white/[0.04]">
+              <span
+                className={
+                  hoyoData.is_extra_task_reward_received
+                    ? 'text-emerald-400 font-medium'
+                    : 'text-amber-400 font-medium animate-pulse'
+                }
+              >
+                {hoyoData.is_extra_task_reward_received
+                  ? '• Đã nhận thưởng Katheryne'
+                  : '• Chưa nhận thưởng Katheryne (20 NT)'}
+              </span>
+              {lastHoyoSync && (
+                <span className="text-slate-500 font-mono text-[9px]">
+                  {new Date(lastHoyoSync).toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })}
+                </span>
+              )}
+            </div>
+          ) : (
+            <div className="text-[10px] text-slate-500 flex items-center justify-between pt-0.5 border-t border-white/[0.04]">
+              <span>Chế độ thủ công</span>
+              <span className="text-[9px] text-slate-600 font-mono">(nhấn số để đổi)</span>
+            </div>
+          )}
         </div>
+
+        {/* Sync Error Alert Badge if failed */}
+        {hoyoSyncError && (
+          <div className="rounded-2xl bg-amber-500/10 border border-amber-500/25 p-2.5 text-[11px] text-amber-200/90 flex items-start gap-2 shadow-[0_2px_12px_rgba(245,158,11,0.1)]">
+            <AlertCircle className="w-3.5 h-3.5 text-amber-400 shrink-0 mt-0.5" />
+            <div className="flex-1 space-y-0.5 leading-tight">
+              <p className="font-semibold text-amber-300 text-[11px]">Chưa đồng bộ HoYoLAB</p>
+              <p className="text-[10px] text-amber-200/70">{hoyoSyncError}</p>
+            </div>
+          </div>
+        )}
 
         {/* ACTION BUTTONS: CHECK-IN & REFRESH */}
         <div className="grid grid-cols-2 gap-2">

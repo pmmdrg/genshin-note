@@ -3,6 +3,23 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 // In-memory cache to prevent spamming HoYoLAB servers (minimum 3 seconds interval per IP)
 const ipRequestTimestamps = new Map<string, number>();
 
+function detectServer(uid: string): string {
+  const cleanUid = (uid || '').trim();
+  const first = cleanUid.charAt(0);
+  switch (first) {
+    case '6': return 'os_usa';
+    case '7': return 'os_euro';
+    case '8': return 'os_asia';
+    case '9': return 'os_cht';
+    case '1':
+    case '2': return 'cn_gf01';
+    case '5': return 'cn_qd01';
+    default:
+      if (cleanUid.startsWith('18')) return 'os_asia';
+      return 'os_asia';
+  }
+}
+
 /**
  * Vercel Serverless Function to proxy HoYoLAB Daily Note API
  * For personal use: Reads credentials directly from environment variables.
@@ -17,7 +34,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const now = Date.now();
   const lastRequest = ipRequestTimestamps.get(clientIp) || 0;
   
-  if (now - lastRequest < 3000) {
+  if (now - lastRequest < 2500) {
     return res.status(429).json({
       retcode: -429,
       message: 'Vui lòng chờ vài giây trước khi làm mới lại.',
@@ -32,12 +49,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     // Priority: Environment variables first, then request body/headers
     const cookie = process.env.HOYOLAB_COOKIE || (req.headers['x-hoyolab-cookie'] as string);
     const uid = process.env.HOYOLAB_UID || bodyUid;
-    const server = process.env.HOYOLAB_SERVER || bodyServer || 'os_asia';
+    const server = process.env.HOYOLAB_SERVER || bodyServer || (uid ? detectServer(uid) : 'os_asia');
 
     if (!cookie) {
       return res.status(400).json({
         retcode: -1,
-        message: 'Chưa cấu hình biến môi trường HOYOLAB_COOKIE. Vui lòng thêm vào .env.local hoặc Vercel Environment Variables.',
+        message: 'Chưa cấu hình biến môi trường HOYOLAB_COOKIE trong .env.local hoặc Vercel Environment Variables.',
         data: null,
       });
     }
@@ -45,7 +62,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (!uid) {
       return res.status(400).json({
         retcode: -1,
-        message: 'Chưa cấu hình biến môi trường HOYOLAB_UID. Vui lòng thêm vào .env.local hoặc Vercel Environment Variables.',
+        message: 'Chưa cấu hình biến môi trường HOYOLAB_UID trong .env.local hoặc Vercel Environment Variables.',
         data: null,
       });
     }
@@ -68,9 +85,18 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const data = await hoyoResponse.json();
 
     if (data.retcode !== 0) {
+      let friendlyMsg = data.message || 'Lỗi khi gọi API HoYoLAB.';
+      if (data.retcode === 10102 || data.retcode === 10104) {
+        friendlyMsg = 'Dữ liệu Thời Gian Thực (Daily Note) chưa mở công khai. Vui lòng vào App HoYoLAB > Cài đặt quyền riêng tư > Bật "Hiển thị dữ liệu thời gian thực".';
+      } else if (data.retcode === 10001 || data.retcode === -100) {
+        friendlyMsg = 'Cookie HoYoLAB đã hết hạn hoặc không hợp lệ. Vui lòng cập nhật Cookie trong env.';
+      } else if (data.retcode === 10101) {
+        friendlyMsg = `Không tìm thấy nhân vật với UID ${uid} trên máy chủ ${server}. Hãy kiểm tra lại UID hoặc Server.`;
+      }
+
       return res.status(200).json({
         retcode: data.retcode,
-        message: data.message || 'Lỗi khi gọi API HoYoLAB. Hãy kiểm tra Cookie & UID trong env.',
+        message: friendlyMsg,
         data: null,
       });
     }
