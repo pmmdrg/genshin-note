@@ -378,6 +378,19 @@ export const useStore = create<AppState>()(
       ],
 
       addCharacterToTimeline: (char) => {
+        const existing = get().characterTrees.find(
+          (t) =>
+            !t.isCompleted &&
+            (t.characterId === char.id ||
+              t.characterName.toLowerCase() === (char.nameVi || char.name).toLowerCase() ||
+              (char.name && t.characterName.toLowerCase() === char.name.toLowerCase()))
+        );
+
+        if (existing) {
+          set({ lastAddedTreeId: existing.id });
+          return;
+        }
+
         const levelCost = calculateLevelTo90Cost(char.level, 90);
         const talentCost = calculateTalentCost(
           char.talents || { attack: 1, skill: 1, burst: 1 },

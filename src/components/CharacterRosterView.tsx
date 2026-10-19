@@ -1,6 +1,6 @@
 import React, { useState, useDeferredValue } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, Plus, Layers, RotateCw, Check, X } from 'lucide-react';
+import { Search, Plus, Layers, RotateCw, Check, X, Sparkles } from 'lucide-react';
 import { useStore } from '../store/useStore';
 import { ELEMENT_NAMES_VI } from '../data/genshinData';
 import { ElementIcon } from './ElementIcon';
@@ -11,6 +11,7 @@ export const CharacterRosterView: React.FC = () => {
   const navigate = useNavigate();
   const {
     characters,
+    characterTrees,
     addCharacterToTimeline,
     fetchCharactersFromHoyo,
     characterFetchLoading,
@@ -18,19 +19,37 @@ export const CharacterRosterView: React.FC = () => {
 
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedElement, setSelectedElement] = useState<string>('all');
+  const [onlyC6, setOnlyC6] = useState(false);
   const [addedCharName, setAddedCharName] = useState<string | null>(null);
 
   const deferredSearch = useDeferredValue(searchTerm);
+
+  const isAlreadyOnTimeline = (char: UserCharacter) => {
+    return characterTrees.some(
+      (t) =>
+        !t.isCompleted &&
+        (t.characterId === char.id ||
+          t.characterName.toLowerCase() === (char.nameVi || char.name).toLowerCase() ||
+          (char.name && t.characterName.toLowerCase() === char.name.toLowerCase()))
+    );
+  };
+
+  const c6Count = characters.filter((c) => c.constellation === 6).length;
 
   const filteredCharacters = characters.filter((c) => {
     const matchesSearch =
       c.name.toLowerCase().includes(deferredSearch.toLowerCase()) ||
       c.nameVi.toLowerCase().includes(deferredSearch.toLowerCase());
     const matchesElement = selectedElement === 'all' || c.element === selectedElement;
-    return matchesSearch && matchesElement;
+    const matchesC6 = !onlyC6 || c.constellation === 6;
+    return matchesSearch && matchesElement && matchesC6;
   });
 
   const handleAddCharacter = (char: UserCharacter) => {
+    if (isAlreadyOnTimeline(char)) {
+      navigate('/timeline');
+      return;
+    }
     confetti({
       particleCount: 50,
       spread: 60,
@@ -95,8 +114,24 @@ export const CharacterRosterView: React.FC = () => {
           )}
         </div>
 
-        {/* Element Filter Pills (Vietnamese) */}
+        {/* Element Filter Pills (Vietnamese) & C6 Toggle */}
         <div className="flex items-center gap-2 overflow-x-auto pb-1 text-xs font-semibold scrollbar-none">
+          {/* C6 Quick Toggle Filter */}
+          <button
+            onClick={() => setOnlyC6(!onlyC6)}
+            className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl transition-all shrink-0 cursor-pointer text-xs font-bold ${
+              onlyC6
+                ? 'bg-gradient-to-r from-amber-400 via-rose-500 to-purple-600 text-white border border-amber-300 shadow-[0_0_14px_rgba(245,158,11,0.5)] scale-105'
+                : 'text-amber-300/80 hover:text-amber-200 bg-amber-400/10 hover:bg-amber-400/15 border border-amber-400/25'
+            }`}
+            title="Lọc các nhân vật đã mở khóa Cung Mệnh 6 (C6)"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-amber-300 fill-current" />
+            <span>Đạt C6 ({c6Count})</span>
+          </button>
+
+          <div className="w-[1px] h-5 bg-white/10 shrink-0 mx-0.5" />
+
           {['all', 'pyro', 'hydro', 'anemo', 'electro', 'dendro', 'cryo', 'geo'].map((elem) => {
             const label = elem === 'all' ? 'Tất cả hệ' : `Hệ ${ELEMENT_NAMES_VI[elem as keyof typeof ELEMENT_NAMES_VI] || elem}`;
             const isSelected = selectedElement === elem;
@@ -131,18 +166,21 @@ export const CharacterRosterView: React.FC = () => {
           </div>
         ) : (
           <div
-            key={`${selectedElement}-${deferredSearch.trim()}`}
+            key={`${selectedElement}-${deferredSearch.trim()}-${onlyC6}`}
             className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-3.5 sm:gap-4 animate-filter-grid"
           >
             {filteredCharacters.map((char, index) => {
               const isC6 = char.constellation === 6;
+              const onTimeline = isAlreadyOnTimeline(char);
 
               return (
                 <div
                   key={char.id}
                   style={{ animationDelay: `${Math.min(index * 12, 120)}ms` }}
                   className={`animate-card-pop group relative rounded-2xl p-2.5 transition-all duration-300 flex flex-col justify-between text-center hover:scale-[1.02] ${
-                    isC6
+                    onTimeline
+                      ? 'border-emerald-500/50 bg-emerald-950/20 ring-1 ring-emerald-500/30 shadow-[0_0_16px_rgba(16,185,129,0.15)]'
+                      : isC6
                       ? 'bg-gradient-to-b from-amber-500/[0.09] to-purple-500/[0.05] border border-amber-400/35 hover:border-amber-300/60 shadow-[0_0_12px_rgba(245,158,11,0.12)] hover:shadow-[0_0_24px_rgba(245,158,11,0.25)]'
                       : 'bg-white/[0.03] border border-white/[0.08] hover:border-amber-400/40 hover:bg-white/[0.06] hover:shadow-[0_8px_24px_rgba(0,0,0,0.45)]'
                   }`}
@@ -151,7 +189,9 @@ export const CharacterRosterView: React.FC = () => {
                   <div className="w-full flex flex-col items-center">
                     <div
                       className={`w-full aspect-square rounded-2xl overflow-hidden mb-2.5 relative border ${
-                        isC6
+                        onTimeline
+                          ? 'border-emerald-400/60'
+                          : isC6
                           ? 'border-amber-400/60 ring-1 ring-amber-400/50 bg-gradient-to-b from-amber-500/15 to-purple-500/10 shadow-[0_0_10px_rgba(245,158,11,0.25)]'
                           : char.rarity === 5
                           ? 'border-amber-400/40 bg-gradient-to-b from-amber-500/10 to-transparent'
@@ -182,6 +222,14 @@ export const CharacterRosterView: React.FC = () => {
                           (e.target as HTMLElement).style.display = 'none';
                         }}
                       />
+
+                      {/* Indicator: Đang trên Timeline */}
+                      {onTimeline && (
+                        <div className="absolute bottom-1.5 inset-x-1.5 z-10 px-1 py-0.5 rounded-lg bg-emerald-950/90 backdrop-blur-md text-[9px] font-bold text-emerald-300 border border-emerald-500/40 shadow-md flex items-center justify-center gap-1">
+                          <Check className="w-3 h-3 text-emerald-400 stroke-[3]" />
+                          <span>Trên Timeline</span>
+                        </div>
+                      )}
                     </div>
 
                     {/* 3 Separate Rows */}
@@ -205,18 +253,32 @@ export const CharacterRosterView: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Nút Thêm vào Timeline cho từng nhân vật */}
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleAddCharacter(char);
-                    }}
-                    className="w-full mt-3 py-1.5 px-2 rounded-xl bg-gradient-to-r from-amber-400/15 to-yellow-500/15 hover:from-amber-400 hover:to-yellow-500 text-amber-300 hover:text-slate-950 font-bold text-xs border border-amber-400/30 hover:border-amber-400 transition-all duration-200 active:scale-95 flex items-center justify-center gap-1.5 shadow-sm group/btn cursor-pointer"
-                    title={`Thêm ${char.nameVi} vào Việc Cần Làm (Timeline)`}
-                  >
-                    <Plus className="w-3.5 h-3.5 group-hover/btn:rotate-90 transition-transform duration-200" />
-                    <span>Timeline</span>
-                  </button>
+                  {/* Nút Hành Động: Đã thêm (Xem trên Timeline) hoặc Thêm mới */}
+                  {onTimeline ? (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        navigate('/timeline');
+                      }}
+                      className="w-full mt-3 py-1.5 px-2 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 font-bold text-xs border border-emerald-500/35 transition-all duration-200 active:scale-95 flex items-center justify-center gap-1.5 shadow-sm cursor-pointer"
+                      title={`${char.nameVi} đã có trong kế hoạch Timeline. Nhấn để xem ngay.`}
+                    >
+                      <Check className="w-3.5 h-3.5 text-emerald-400 stroke-[3]" />
+                      <span>Đã thêm</span>
+                    </button>
+                  ) : (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleAddCharacter(char);
+                      }}
+                      className="w-full mt-3 py-1.5 px-2 rounded-xl bg-gradient-to-r from-amber-400/15 to-yellow-500/15 hover:from-amber-400 hover:to-yellow-500 text-amber-300 hover:text-slate-950 font-bold text-xs border border-amber-400/30 hover:border-amber-400 transition-all duration-200 active:scale-95 flex items-center justify-center gap-1.5 shadow-sm group/btn cursor-pointer"
+                      title={`Thêm ${char.nameVi} vào Việc Cần Làm (Timeline)`}
+                    >
+                      <Plus className="w-3.5 h-3.5 group-hover/btn:rotate-90 transition-transform duration-200" />
+                      <span>Timeline</span>
+                    </button>
+                  )}
                 </div>
               );
             })}
