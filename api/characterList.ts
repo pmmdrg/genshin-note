@@ -65,11 +65,146 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       });
     }
 
+    // Best-effort: Fetch Enka.Network in-game showcase data to extract exact equipped weapons & artifacts
+    let enkaAvatars: any[] = [];
+    try {
+      const enkaCtrl = new AbortController();
+      const timer = setTimeout(() => enkaCtrl.abort(), 4000);
+      const enkaRes = await fetch(`https://enka.network/api/uid/${encodeURIComponent(uid)}`, {
+        signal: enkaCtrl.signal,
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+          'Accept': 'application/json',
+        },
+      });
+      clearTimeout(timer);
+      if (enkaRes.ok) {
+        const enkaJson = await enkaRes.json();
+        enkaAvatars = enkaJson.avatarInfoList || [];
+      }
+    } catch {
+      // Ignore if Enka times out or is temporarily unavailable
+    }
+
+    const WEAPON_NAME_MAP: Record<string, string> = {
+      UI_EquipIcon_Pole_Kunwu: 'Giáo Nịnh Thần',
+      UI_EquipIcon_Pole_BloodMoon: 'Xích Nguyệt Liêm',
+      UI_EquipIcon_Pole_Homa: 'Trượng Homa',
+      UI_EquipIcon_Pole_Narukami: 'Đoạn Thảo Trảm Quang',
+      UI_EquipIcon_Pole_Zephyrus: 'Thương Tây Phong',
+      UI_EquipIcon_Pole_Arakalari: 'Trăng Lưỡi Liềm Trôi Dạt',
+      UI_EquipIcon_Pole_Ilmarinen: 'Gậy Vệt Cầu Vồng',
+      UI_EquipIcon_Pole_TummaLyhty: 'Khúc Ca Đêm Tối',
+      UI_EquipIcon_Sword_Dawn: 'Kiếm Bình Minh',
+      UI_EquipIcon_Sword_Favonius: 'Tây Phong Kiếm',
+      UI_EquipIcon_Sword_Fossil: 'Kiếm Tế Lễ',
+      UI_EquipIcon_Sword_OuterSword: 'Ám Vũ Skirk',
+      UI_EquipIcon_Sword_GlintstoneSword: 'Hắc Nham Trảm Kiếm',
+      UI_EquipIcon_Sword_IronSting: 'Thiết Phong Kích',
+      UI_EquipIcon_Sword_Transmutation: 'Khát Vọng Răng Kiếm',
+      UI_EquipIcon_Catalyst_Brisingamen: 'Chân Ngụy Thiên Ngân',
+      UI_EquipIcon_Catalyst_Fossil: 'Mảnh Chương Tế Lễ',
+      UI_EquipIcon_Catalyst_Ilmarinen: 'Vòng Xoáy Dập Dềnh',
+      UI_EquipIcon_Catalyst_Ayus: 'Cõi Mộng Ngàn Đêm',
+      UI_EquipIcon_Catalyst_Iudex: 'Dòng Chảy Giám Sát',
+      UI_EquipIcon_Claymore_Wolfmound: 'Đường Cùng Của Sói',
+      UI_EquipIcon_Claymore_Mavuika: 'Trấn Mavuika',
+      UI_EquipIcon_Bow_Favonius: 'Cung Tây Phong',
+      UI_EquipIcon_Bow_Troupe: 'Tuyệt Huyền',
+    };
+
+    const RELIC_SET_MAP: Record<string, string> = {
+      '15003': 'Đoàn Hát Lang Thang',
+      '15005': 'Bóng Hình Màu Xanh',
+      '15006': 'Nghi Thức Tông Thất Cổ',
+      '15008': 'Diệm Liệt Ma Nữ Cháy Rực',
+      '15009': 'Băng Giá Dũng Sĩ',
+      '15014': 'Bạch Ngân Sấm Sét',
+      '15017': 'Thiên Nham Vững Chắc',
+      '15020': 'Dấu Ấn Ngăn Trở',
+      '15021': 'Giáp Hoa Nở Rộ',
+      '15025': 'Ký Ức Rừng Sâu',
+      '15026': 'Giấc Mộng Hoàng Kim',
+      '15027': 'Đoá Hoa Trang Viên Lạc Lối',
+      '15032': 'Thợ Săn Marechaussee',
+      '15033': 'Đoàn Kịch Hoàng Kim',
+      '15035': 'Mảnh Hài Hòa Hư Ảo',
+      '15040': 'Nguyện Ước Dị Giới (Skirk)',
+      '15041': 'Cuộn Bí Ẩn Dũng Sĩ Tro Tàn',
+      '15042': 'Dũng Sĩ Hỏa Diệm Khắc Họa',
+      '15043': 'Khúc Ca Băng Tuyết Dạ Thần',
+      '15048': 'Vết Tích Đêm Huyền Bí',
+    };
+
+    const POS_NAME_MAP: Record<string, string> = {
+      EQUIP_BRACER: 'Hoa Sự Sống',
+      EQUIP_NECKLACE: 'Lông Vũ Tử Thần',
+      EQUIP_SHOES: 'Cát Thời Gian',
+      EQUIP_RING: 'Ly Không Gian',
+      EQUIP_DRESS: 'Nón Lý Trí',
+    };
+
+    // Merge exact equipment from Enka showcase into HoYoLAB avatars
+    const mergedAvatars = (data.data?.avatars || []).map((avatar: any) => {
+      const enkaMatch = enkaAvatars.find((ea: any) => ea.avatarId === avatar.id);
+      if (enkaMatch) {
+        const enkaWeapon = enkaMatch.equipList?.find((e: any) => e.weapon);
+        const enkaRelics = enkaMatch.equipList?.filter((e: any) => e.flat?.itemType === 'ITEM_RELIQUARY') || [];
+
+        const weaponIcon = enkaWeapon?.flat?.icon;
+        const weaponName = weaponIcon && WEAPON_NAME_MAP[weaponIcon]
+          ? WEAPON_NAME_MAP[weaponIcon]
+          : (avatar.weapon?.name || 'Vũ Khí Trang Bị');
+
+        // Extract primary relic set from the 5 equipped relics
+        let mainSetName = 'Bộ Thánh Di Vật';
+        if (enkaRelics.length > 0) {
+          const firstRelicIcon = enkaRelics[0].flat?.icon || '';
+          const match = firstRelicIcon.match(/150\d{2}/);
+          if (match && RELIC_SET_MAP[match[0]]) {
+            mainSetName = `${RELIC_SET_MAP[match[0]]} (4 món)`;
+          }
+        }
+
+        return {
+          ...avatar,
+          weapon: enkaWeapon
+            ? {
+                name: weaponName,
+                icon: weaponIcon ? `https://enka.network/ui/${weaponIcon}.png` : null,
+                rarity: enkaWeapon.flat?.rankLevel || 4,
+                level: enkaWeapon.weapon?.level || 90,
+                affix_level: ((Object.values(enkaWeapon.weapon?.affixMap || {})[0] as number) ?? 0) + 1,
+                rawIcon: weaponIcon,
+              }
+            : avatar.weapon,
+          relics: enkaRelics.length
+            ? enkaRelics.map((r: any) => {
+                const rIcon = r.flat?.icon || '';
+                const setMatch = rIcon.match(/150\d{2}/);
+                const sName = setMatch && RELIC_SET_MAP[setMatch[0]] ? RELIC_SET_MAP[setMatch[0]] : mainSetName;
+                const posName = POS_NAME_MAP[r.flat?.equipType] || 'Hoa Sự Sống';
+                return {
+                  name: `${sName} - ${posName}`,
+                  icon: rIcon ? `https://enka.network/ui/${rIcon}.png` : null,
+                  pos_name: posName,
+                  rarity: r.flat?.rankLevel || 5,
+                  level: r.reliquary?.level ? r.reliquary.level - 1 : 20,
+                  set: { name: sName },
+                };
+              })
+            : avatar.relics,
+          showcaseTalents: enkaMatch.skillLevelMap || null,
+        };
+      }
+      return avatar;
+    });
+
     return res.status(200).json({
       retcode: 0,
       message: 'OK',
       data: {
-        avatars: data.data?.avatars || [],
+        avatars: mergedAvatars,
         role: data.data?.role || null,
         stats: data.data?.stats || null,
       },

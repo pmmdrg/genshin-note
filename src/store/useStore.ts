@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import type { TaskGoal, HoyoDailyNote, UserCharacter, CharacterBranchTree, NavigationMenu } from '../types';
 import { USER_CHARACTERS_PRESET, CHARACTERS_DATA } from '../data/genshinData';
+import { getCharacterDefaultBuild } from '../data/characterEquipData';
 import { calculateLevelTo90Cost, calculateTalentCost } from '../utils/calculator';
 
 interface AppState {
@@ -102,14 +103,40 @@ export const useStore = create<AppState>()(
               const element = (hoyoChar.element || userPreset?.element || dataPreset?.element || 'pyro').toLowerCase() as any;
 
               const weaponType = dataPreset?.weaponType || 'sword';
-              const weaponDefaults: Record<string, { name: string; icon: string; typeName: string }> = {
-                sword: { name: 'Tây Phong Kiếm', icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_EquipIcon_Sword_Favonius.png', typeName: 'Kiếm Đơn' },
-                claymore: { name: 'Đường Cùng Của Sói', icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_EquipIcon_Claymore_Wolfmound.png', typeName: 'Trọng Kiếm' },
-                polearm: { name: 'Thương Tây Phong', icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_EquipIcon_Pole_Favonius.png', typeName: 'Vũ Khí Cán Dài' },
-                bow: { name: 'Cung Tây Phong', icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_EquipIcon_Bow_Favonius.png', typeName: 'Cung' },
-                catalyst: { name: 'Mảnh Chương Tế Lễ', icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_EquipIcon_Catalyst_Fossil.png', typeName: 'Pháp Khí' },
-              };
-              const defaultWeapon = weaponDefaults[weaponType] || weaponDefaults.sword;
+              const defaultBuild = getCharacterDefaultBuild(rawName, weaponType);
+
+              const weaponData = hoyoChar.weapon && hoyoChar.weapon.name && hoyoChar.weapon.name !== 'Vũ Khí Trang Bị'
+                ? {
+                    name: hoyoChar.weapon.name,
+                    icon: hoyoChar.weapon.icon || defaultBuild.weapon.icon,
+                    rarity: hoyoChar.weapon.rarity || defaultBuild.weapon.rarity,
+                    level: hoyoChar.weapon.level || 90,
+                    affixLevel: hoyoChar.weapon.affix_level || 1,
+                    typeName: hoyoChar.weapon.type_name || defaultBuild.weapon.typeName,
+                    domainDays: [1, 4, 0],
+                    materialName: 'Nguyên liệu rèn',
+                  }
+                : userPreset?.weapon || {
+                    name: defaultBuild.weapon.name,
+                    icon: defaultBuild.weapon.icon,
+                    rarity: defaultBuild.weapon.rarity,
+                    level: Math.min(90, Math.max(70, hoyoChar.level || 80)),
+                    affixLevel: defaultBuild.weapon.affixLevel,
+                    typeName: defaultBuild.weapon.typeName,
+                    domainDays: [1, 4, 0],
+                    materialName: 'Nguyên liệu rèn',
+                  };
+
+              const relicsData = hoyoChar.relics?.length
+                ? hoyoChar.relics.map((r: any) => ({
+                    name: r.name,
+                    icon: r.icon,
+                    posName: r.pos_name,
+                    rarity: r.rarity,
+                    level: r.level,
+                    setName: r.set?.name || 'Thánh Di Vật',
+                  }))
+                : userPreset?.relics || defaultBuild.relics.pieces;
 
               return {
                 id: `char-hoyo-${hoyoChar.id}`,
@@ -123,46 +150,8 @@ export const useStore = create<AppState>()(
                 maxLevel: 90,
                 constellation: hoyoChar.actived_constellation_num ?? 0,
                 fetter: hoyoChar.fetter ?? 1,
-                weapon: hoyoChar.weapon
-                  ? {
-                      name: hoyoChar.weapon.name,
-                      icon: hoyoChar.weapon.icon,
-                      rarity: hoyoChar.weapon.rarity,
-                      level: hoyoChar.weapon.level,
-                      affixLevel: hoyoChar.weapon.affix_level || 1,
-                      typeName: hoyoChar.weapon.type_name || defaultWeapon.typeName,
-                      domainDays: [1, 4, 0],
-                      materialName: 'Nguyên liệu rèn',
-                    }
-                  : userPreset?.weapon || {
-                      name: defaultWeapon.name,
-                      icon: defaultWeapon.icon,
-                      rarity: 4,
-                      level: Math.min(90, Math.max(70, hoyoChar.level || 80)),
-                      affixLevel: 1,
-                      typeName: defaultWeapon.typeName,
-                      domainDays: [1, 4, 0],
-                      materialName: 'Nguyên liệu rèn',
-                    },
-                relics: hoyoChar.relics?.length
-                  ? hoyoChar.relics.map((r: any) => ({
-                      name: r.name,
-                      icon: r.icon,
-                      posName: r.pos_name,
-                      rarity: r.rarity,
-                      level: r.level,
-                      setName: r.set?.name || 'Thánh Di Vật',
-                    }))
-                  : userPreset?.relics || [
-                      {
-                        name: 'Hoa Sự Sống',
-                        icon: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/relic_flower.png',
-                        posName: 'Hoa Sự Sống',
-                        rarity: 5,
-                        level: 20,
-                        setName: 'Bộ Thánh Di Vật Đề Cử',
-                      },
-                    ],
+                weapon: weaponData,
+                relics: relicsData,
                 talents: userPreset?.talents || {
                   attack: Math.min(10, Math.max(1, Math.floor((hoyoChar.level || 1) / 10))),
                   skill: Math.min(10, Math.max(1, Math.floor((hoyoChar.level || 1) / 9))),

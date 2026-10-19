@@ -18,6 +18,7 @@ import type { CharacterBranchTree } from '../types';
 import { useStore } from '../store/useStore';
 import { ELEMENT_COLORS } from '../data/genshinData';
 import { isDomainOpenToday } from '../utils/priority';
+import { ElementIcon } from './ElementIcon';
 
 interface CharacterTreeCardProps {
   tree: CharacterBranchTree;
@@ -106,13 +107,16 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
             <div
               className={`w-12 h-12 rounded-2xl overflow-hidden shrink-0 border relative backdrop-blur-md ${elColor.border} ${elColor.bg}`}
             >
+              <div className="absolute top-1 right-1 z-10 p-0.5 rounded-full bg-black/60 backdrop-blur-sm border border-white/20">
+                <ElementIcon element={tree.element} className="w-3 h-3" />
+              </div>
               <img src={tree.avatarUrl} alt={tree.characterName} className="w-full h-full object-cover" />
             </div>
 
             {/* Name & Target summary */}
             <div className="min-w-0">
               <div className="flex items-center gap-2">
-                <h3 className="text-base font-bold text-slate-100 truncate">
+                <h3 className="text-base font-bold text-slate-100 truncate font-genshin tracking-wide">
                   {tree.characterName}
                 </h3>
                 <span className="text-xs text-amber-400 font-bold">
@@ -120,7 +124,10 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                 </span>
               </div>
               <div className="text-[11px] text-slate-400 flex items-center gap-1.5 mt-0.5">
-                <span className={`capitalize font-semibold ${elColor.text}`}>{tree.element}</span>
+                <span className={`capitalize font-semibold ${elColor.text} flex items-center gap-1`}>
+                  <ElementIcon element={tree.element} className="w-3 h-3" />
+                  <span>{tree.element}</span>
+                </span>
                 <span>•</span>
                 <span>Mục tiêu: Max Cấp 90 & Thiên Phú</span>
               </div>

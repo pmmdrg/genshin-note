@@ -4,6 +4,7 @@ import { useStore } from '../store/useStore';
 import { ELEMENT_COLORS } from '../data/genshinData';
 import { calculateLevelTo90Cost, calculateTalentCost } from '../utils/calculator';
 import { isDomainOpenToday } from '../utils/priority';
+import { ElementIcon } from './ElementIcon';
 import confetti from 'canvas-confetti';
 
 export const CharacterRosterView: React.FC = () => {
@@ -101,13 +102,16 @@ export const CharacterRosterView: React.FC = () => {
               <button
                 key={elem}
                 onClick={() => setSelectedElement(elem)}
-                className={`px-2.5 py-1 rounded-xl transition-all capitalize shrink-0 ${
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl transition-all capitalize shrink-0 ${
                   selectedElement === elem
-                    ? 'bg-white/[0.15] text-white border border-white/20 shadow-sm'
+                    ? 'bg-white/[0.15] text-white border border-white/20 shadow-md font-bold'
                     : 'text-slate-400 hover:text-slate-200 hover:bg-white/[0.04]'
                 }`}
               >
-                {elem === 'all' ? 'Tất cả' : elem}
+                {elem !== 'all' && (
+                  <ElementIcon element={elem as any} className="w-3.5 h-3.5" />
+                )}
+                <span>{elem === 'all' ? 'Tất cả' : elem}</span>
               </button>
             ))}
           </div>
@@ -118,29 +122,35 @@ export const CharacterRosterView: React.FC = () => {
           <div className="grid grid-cols-4 gap-2.5">
             {filteredCharacters.map((char) => {
               const isSelected = selectedChar?.id === char.id;
-              const elColor = ELEMENT_COLORS[char.element];
 
               return (
                 <div
                   key={char.id}
                   onClick={() => setSelectedCharacterId(char.id)}
-                  className={`group relative rounded-2xl p-1.5 cursor-pointer transition-all duration-200 flex flex-col items-center text-center ${
+                  className={`group relative rounded-2xl p-2 cursor-pointer transition-all duration-200 flex flex-col items-center text-center ${
                     isSelected
                       ? 'bg-amber-400/15 border-2 border-amber-400 shadow-[0_0_16px_rgba(245,158,11,0.3)] scale-[1.03]'
                       : 'bg-white/[0.03] border border-white/[0.08] hover:border-white/20 hover:bg-white/[0.06]'
                   }`}
                 >
-                  {/* Constellation Badge */}
-                  <div className="absolute top-2 left-2 z-10 px-1 py-0.2 rounded-md bg-black/60 backdrop-blur-md text-[9px] font-bold text-amber-300 border border-white/10">
-                    C{char.constellation}
-                  </div>
-
-                  {/* Character Avatar */}
+                  {/* Character Avatar Box */}
                   <div
-                    className={`w-full aspect-square rounded-xl overflow-hidden mb-1.5 relative border ${
-                      char.rarity === 5 ? 'border-amber-400/40 bg-gradient-to-b from-amber-500/10 to-transparent' : 'border-purple-400/40 bg-gradient-to-b from-purple-500/10 to-transparent'
+                    className={`w-full aspect-square rounded-xl overflow-hidden mb-2 relative border ${
+                      char.rarity === 5
+                        ? 'border-amber-400/40 bg-gradient-to-b from-amber-500/10 to-transparent'
+                        : 'border-purple-400/40 bg-gradient-to-b from-purple-500/10 to-transparent'
                     }`}
                   >
+                    {/* Constellation Badge - cleanly padded inside avatar */}
+                    <div className="absolute top-1.5 left-1.5 z-10 px-1.5 py-0.5 rounded-md bg-black/75 backdrop-blur-md text-[10px] font-black text-amber-300 border border-white/20 shadow-sm">
+                      C{char.constellation}
+                    </div>
+
+                    {/* Element Icon Badge */}
+                    <div className="absolute top-1.5 right-1.5 z-10 p-0.5 rounded-md bg-black/60 backdrop-blur-md border border-white/20 shadow-sm flex items-center justify-center">
+                      <ElementIcon element={char.element} className="w-3.5 h-3.5" />
+                    </div>
+
                     <img
                       src={char.icon}
                       alt={char.name}
@@ -156,9 +166,11 @@ export const CharacterRosterView: React.FC = () => {
                     <div className="text-[11px] font-bold text-slate-200 truncate group-hover:text-amber-300 transition-colors">
                       {char.nameVi}
                     </div>
-                    <div className="flex items-center justify-center gap-1 text-[10px] mt-0.5">
+                    <div className="flex items-center justify-center gap-1.5 text-[10px] mt-0.5">
                       <span className="font-mono font-semibold text-slate-400">Lv.{char.level}</span>
-                      <span className={`w-1.5 h-1.5 rounded-full ${elColor.bg} border ${elColor.border}`} />
+                      <span className="text-amber-400 text-[9px] font-bold">
+                        {'★'.repeat(char.rarity)}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -194,22 +206,40 @@ export const CharacterRosterView: React.FC = () => {
                   />
                 </div>
                 <div>
-                  <div className="flex items-center gap-2">
-                    <h3 className="text-xl font-extrabold text-slate-100">
+                  {/* Name & Level inline horizontally */}
+                  <div className="flex items-center gap-2.5 flex-wrap">
+                    <h3 className="text-xl sm:text-2xl font-black text-slate-100 font-genshin tracking-wide">
                       {selectedChar.nameVi}
                     </h3>
-                    <span className="text-xs text-amber-400 font-bold">
-                      {'★'.repeat(selectedChar.rarity)}
+                    <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded-lg bg-amber-400/15 text-amber-300 border border-amber-400/30 shadow-sm">
+                      Lv.{selectedChar.level}
                     </span>
                   </div>
-                  <div className="flex items-center gap-2 text-xs text-slate-400 mt-0.5">
-                    <span className={`font-semibold capitalize ${ELEMENT_COLORS[selectedChar.element].text}`}>
-                      {selectedChar.element}
+
+                  {/* Stars rating directly below name */}
+                  <div className="flex items-center gap-1.5 mt-1">
+                    <div className="flex text-amber-400 text-sm tracking-widest drop-shadow-[0_0_6px_rgba(251,191,36,0.6)]">
+                      {'★'.repeat(selectedChar.rarity)}
+                    </div>
+                    <span className="text-[11px] text-amber-300/80 font-bold">
+                      ({selectedChar.rarity} Sao)
+                    </span>
+                  </div>
+
+                  {/* Element, Constellation, and Fetter below stars */}
+                  <div className="flex items-center gap-2.5 text-xs text-slate-400 mt-1.5 flex-wrap">
+                    <span className="inline-flex items-center gap-1.5 font-bold capitalize">
+                      <ElementIcon element={selectedChar.element} className="w-4 h-4" />
+                      <span className={ELEMENT_COLORS[selectedChar.element].text}>{selectedChar.element}</span>
                     </span>
                     <span>•</span>
-                    <span>Cung Mệnh: C{selectedChar.constellation}</span>
+                    <span className="px-2 py-0.5 rounded-md bg-white/[0.06] text-amber-300 font-semibold border border-white/[0.08]">
+                      Cung Mệnh: C{selectedChar.constellation}
+                    </span>
                     <span>•</span>
-                    <span>Yêu thích: Lv.{selectedChar.fetter}</span>
+                    <span className="text-slate-300 font-medium">
+                      Độ Yêu Thích: Lv.{selectedChar.fetter}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -228,11 +258,11 @@ export const CharacterRosterView: React.FC = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 my-5">
               {/* Equipped Weapon */}
               <div className="liquid-glass-subtle rounded-2xl p-3.5 flex items-center gap-3">
-                <div className="w-11 h-11 rounded-xl overflow-hidden bg-slate-800/80 border border-white/10 shrink-0">
+                <div className="w-12 h-12 rounded-xl overflow-hidden bg-slate-800/80 border border-white/10 shrink-0 flex items-center justify-center">
                   {selectedChar.weapon?.icon ? (
                     <img src={selectedChar.weapon.icon} alt="weapon" className="w-full h-full object-cover" />
                   ) : (
-                    <Sword className="w-5 h-5 text-slate-400 m-3" />
+                    <Sword className="w-5 h-5 text-slate-400" />
                   )}
                 </div>
                 <div className="min-w-0 flex-1">
@@ -240,26 +270,52 @@ export const CharacterRosterView: React.FC = () => {
                   <div className="text-xs font-bold text-slate-200 truncate">
                     {selectedChar.weapon?.name || 'Chưa trang bị'}
                   </div>
-                  <div className="text-[10px] text-amber-300 font-mono">
-                    Lv.{selectedChar.weapon?.level || 1} • Tinh luyện {selectedChar.weapon?.affixLevel || 1}
+                  <div className="text-[10px] text-amber-300 font-mono flex items-center gap-2 mt-0.5">
+                    <span>Lv.{selectedChar.weapon?.level || 1}</span>
+                    <span>•</span>
+                    <span>Tinh luyện {selectedChar.weapon?.affixLevel || 1}</span>
+                    <span>•</span>
+                    <span className="text-amber-400">{'★'.repeat(selectedChar.weapon?.rarity || 4)}</span>
                   </div>
                 </div>
               </div>
 
               {/* Equipped Relics */}
-              <div className="liquid-glass-subtle rounded-2xl p-3.5 flex items-center gap-3">
-                <div className="w-11 h-11 rounded-xl bg-slate-800/80 border border-white/10 flex items-center justify-center shrink-0 text-slate-300">
-                  <Shield className="w-5 h-5 text-emerald-400" />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <div className="text-[11px] text-slate-400 font-medium">Thánh di vật</div>
-                  <div className="text-xs font-bold text-slate-200 truncate">
-                    {selectedChar.relics?.[0]?.setName || 'Bộ Thánh Di Vật'}
+              <div className="liquid-glass-subtle rounded-2xl p-3.5 flex flex-col justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-xl bg-slate-800/80 border border-white/10 flex items-center justify-center shrink-0 overflow-hidden">
+                    {selectedChar.relics?.[0]?.icon ? (
+                      <img src={selectedChar.relics[0].icon} alt="relic" className="w-full h-full object-cover" />
+                    ) : (
+                      <Shield className="w-5 h-5 text-emerald-400" />
+                    )}
                   </div>
-                  <div className="text-[10px] text-emerald-400">
-                    5 món đã tối ưu
+                  <div className="min-w-0 flex-1">
+                    <div className="text-[11px] text-slate-400 font-medium">Thánh di vật</div>
+                    <div className="text-xs font-bold text-slate-200 truncate">
+                      {selectedChar.relics?.[0]?.setName || 'Bộ Thánh Di Vật'}
+                    </div>
+                    <div className="text-[10px] text-emerald-400 font-semibold mt-0.5">
+                      5 món đã tối ưu (+20)
+                    </div>
                   </div>
                 </div>
+
+                {/* Mini preview of 5 relic slots */}
+                {selectedChar.relics && selectedChar.relics.length > 0 && (
+                  <div className="grid grid-cols-5 gap-1 pt-2.5 mt-2 border-t border-white/[0.06]">
+                    {selectedChar.relics.slice(0, 5).map((r, idx) => (
+                      <div
+                        key={idx}
+                        className="bg-white/[0.03] border border-white/[0.06] rounded-lg p-1 text-center flex flex-col items-center"
+                        title={`${r.name} (${r.posName}) - Lv.${r.level}`}
+                      >
+                        <img src={r.icon} alt={r.name} className="w-5 h-5 object-contain" />
+                        <span className="text-[8px] font-mono font-bold text-amber-300 mt-0.5">+{r.level}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
 
