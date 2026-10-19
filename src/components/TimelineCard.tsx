@@ -3,10 +3,11 @@ import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { GripVertical, Check, Trash2, Calendar, Droplet, Sparkles, Plus, Minus } from 'lucide-react';
 import confetti from 'canvas-confetti';
-import type { TaskGoal } from '../types';
+import type { TaskGoal, ElementType } from '../types';
 import { useStore } from '../store/useStore';
 import { isDomainOpenToday } from '../utils/priority';
 import { ELEMENT_COLORS } from '../data/genshinData';
+
 
 interface TimelineCardProps {
   goal: TaskGoal;
@@ -32,7 +33,9 @@ export const TimelineCard: React.FC<TimelineCardProps> = ({ goal, index }) => {
 
   const isTopPriority = index === 0;
   const openToday = isDomainOpenToday(goal.farmTarget?.daysOfWeek);
-  const elementStyle = goal.element ? ELEMENT_COLORS[goal.element] : null;
+  const elementStyle = goal.element ? ELEMENT_COLORS[goal.element as ElementType] : null;
+
+
 
   const handleComplete = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -150,8 +153,9 @@ export const TimelineCard: React.FC<TimelineCardProps> = ({ goal, index }) => {
                 ) : (
                   <span className="inline-flex items-center gap-1 text-[11px] font-medium text-slate-400 bg-white/[0.04] border border-white/[0.08] px-2 py-0.5 rounded-lg">
                     <Calendar className="w-3 h-3 text-slate-500" />
-                    Mở: {goal.farmTarget.daysOfWeek.map((d) => (d === 0 ? 'CN' : `T${d + 1}`)).join(', ')}
+                    Mở: {goal.farmTarget.daysOfWeek.map((d: number) => (d === 0 ? 'CN' : `T${d + 1}`)).join(', ')}
                   </span>
+
                 )
               )}
 

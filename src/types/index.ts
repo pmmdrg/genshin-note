@@ -2,13 +2,15 @@ export type TaskCategory = 'character' | 'weapon' | 'artifact' | 'boss' | 'custo
 
 export type ElementType = 'pyro' | 'hydro' | 'anemo' | 'electro' | 'dendro' | 'cryo' | 'geo';
 
+export type NavigationMenu = 'timeline' | 'characters' | 'completed';
+
 export interface FarmMaterial {
   materialName: string;
   materialType: 'talent' | 'weapon' | 'boss' | 'weekly_boss' | 'artifact' | 'custom';
   domainName?: string;
   region?: string;
-  daysOfWeek: number[]; // 0: Sun, 1: Mon, 2: Tue, 3: Wed, 4: Thu, 5: Fri, 6: Sat. (0 is Sunday, all open)
-  resinCost: number; // 20 for domain/artifact, 40 for world boss, 30/60 for weekly boss
+  daysOfWeek: number[]; // 0: Sun, 1: Mon, ... 6: Sat
+  resinCost: number;
   currentCount?: number;
   targetCount?: number;
 }
@@ -18,23 +20,116 @@ export interface TaskGoal {
   title: string;
   category: TaskCategory;
   description?: string;
-  
-  // Target identity
   targetName?: string;
   targetAvatar?: string;
   element?: ElementType;
   rarity?: 4 | 5;
-  
-  // Farm & Schedule details
   farmTarget?: FarmMaterial;
-  
-  // Stack ordering & state
-  order: number; // 0 is top of stack (highest priority)
+  order: number;
+  isCompleted: boolean;
+  createdAt: number;
+  completedAt?: number;
+  notes?: string;
+}
+
+
+export interface UserCharacter {
+  id: string;
+  name: string;
+  nameVi: string;
+  element: ElementType;
+  rarity: 4 | 5;
+  icon: string;
+  image?: string;
+  level: number;
+  maxLevel: number;
+  constellation: number;
+  fetter: number;
+  weapon?: {
+    name: string;
+    icon: string;
+    rarity: number;
+    level: number;
+    affixLevel: number;
+    typeName: string;
+    domainDays?: number[];
+    materialName?: string;
+  };
+  relics?: Array<{
+    name: string;
+    icon: string;
+    posName: string;
+    rarity: number;
+    level: number;
+    setName: string;
+  }>;
+  talents?: {
+    attack: number;
+    skill: number;
+    burst: number;
+  };
+  talentBook: string;
+  talentDomain: string;
+  talentDays: number[];
+  weeklyBossMat: string;
+  worldBossMat: string;
+  localSpecialty: string;
+}
+
+export interface CharacterBranchTree {
+  id: string;
+  characterId: string;
+  characterName: string;
+  avatarUrl: string;
+  element: ElementType;
+  rarity: 4 | 5;
+  order: number;
   isCompleted: boolean;
   createdAt: number;
   completedAt?: number;
   
-  notes?: string;
+  // 4 Main Branches
+  levelBranch: {
+    currentLevel: number;
+    targetLevel: number;
+    heroWitNeeded: number;
+    moraNeeded: number;
+    bossDropNeeded: number;
+    specialtyNeeded: number;
+    worldBossMat: string;
+    localSpecialty: string;
+    isCompleted: boolean;
+  };
+
+  weaponBranch: {
+    weaponName: string;
+    weaponIcon?: string;
+    currentLevel: number;
+    targetLevel: number;
+    materialName: string;
+    daysOfWeek: number[];
+    isCompleted: boolean;
+  };
+
+  talentBranch: {
+    talentBookName: string;
+    domainName: string;
+    daysOfWeek: number[];
+    weeklyBossMatName: string;
+    currentLevels: { attack: number; skill: number; burst: number };
+    targetLevels: { attack: number; skill: number; burst: number };
+    booksGoldNeeded: number;
+    weeklyBossMatsNeeded: number;
+    crownsNeeded: number;
+    isCompleted: boolean;
+  };
+
+  artifactBranch: {
+    setName: string;
+    domainName?: string;
+    recommendPieces: string[];
+    isCompleted: boolean;
+  };
 }
 
 export interface HoyoDailyNote {
@@ -51,6 +146,11 @@ export interface HoyoDailyNote {
   home_coin_recovery_time: string;
   current_expedition_num?: number;
   max_expedition_num?: number;
+  expeditions?: Array<{
+    avatar_side_icon: string;
+    status: 'Ongoing' | 'Finished';
+    remained_time: string;
+  }>;
   transformer?: {
     obtained: boolean;
     recovery_time?: {
@@ -71,7 +171,7 @@ export interface CharacterPreset {
   weaponType: 'sword' | 'claymore' | 'polearm' | 'bow' | 'catalyst';
   talentBook: string;
   talentDomain: string;
-  talentDays: number[]; // e.g. [1, 4, 0]
+  talentDays: number[];
   weeklyBossMat: string;
   avatarUrl: string;
 }
@@ -83,6 +183,6 @@ export interface WeaponPreset {
   type: 'sword' | 'claymore' | 'polearm' | 'bow' | 'catalyst';
   ascensionMat: string;
   domainName: string;
-  daysOfWeek: number[]; // e.g. [2, 5, 0]
+  daysOfWeek: number[];
   avatarUrl: string;
 }

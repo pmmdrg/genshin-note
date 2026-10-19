@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Navbar } from './components/Navbar';
-import { ResinTracker } from './components/ResinTracker';
-import { TimelineView } from './components/TimelineView';
+import { CharacterRosterView } from './components/CharacterRosterView';
+import { TaskTreeTimeline } from './components/TaskTreeTimeline';
 import { CompletedList } from './components/CompletedList';
-import { AddGoalModal } from './components/AddGoalModal';
+import { useStore } from './store/useStore';
 
 export const App: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'timeline' | 'completed'>('timeline');
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const { activeNav } = useStore();
 
   return (
     <div className="min-h-screen bg-[#07090e] text-slate-100 flex flex-col selection:bg-amber-400/30 selection:text-amber-200 relative overflow-hidden">
@@ -26,35 +25,20 @@ export const App: React.FC = () => {
         <div className="absolute top-1/4 left-1/2 w-48 h-48 rounded-full bg-cyan-400/10 blur-[80px] animate-bubble-subtle" />
       </div>
 
-      {/* Top Navigation */}
-      <Navbar
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-      />
+      {/* Top Navigation Bar with Resin & Dailies */}
+      <Navbar />
 
-      {/* Main Content Area */}
-      <main className="flex-1 max-w-6xl w-full mx-auto px-4 lg:px-8 py-6 relative z-10">
-        {/* Real-time Resin & Dailies Bar */}
-        <ResinTracker />
-
-        {/* Content depending on selected tab */}
-        {activeTab === 'timeline' ? (
-          <TimelineView onOpenAddModal={() => setIsAddModalOpen(true)} />
-        ) : (
-          <CompletedList />
-        )}
+      {/* Main Content Area based on Active Nav */}
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 lg:px-8 py-6 relative z-10">
+        {activeNav === 'characters' && <CharacterRosterView />}
+        {activeNav === 'timeline' && <TaskTreeTimeline />}
+        {activeNav === 'completed' && <CompletedList />}
       </main>
 
       {/* Ultra-Minimal Footer */}
       <footer className="py-6 text-center text-xs text-slate-500/80 relative z-10">
         <p className="tracking-wide font-medium">Genshin Note</p>
       </footer>
-
-      {/* Add Goal Modal */}
-      <AddGoalModal
-        isOpen={isAddModalOpen}
-        onClose={() => setIsAddModalOpen(false)}
-      />
     </div>
   );
 };
