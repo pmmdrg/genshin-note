@@ -175,14 +175,14 @@ export const CharacterRosterView: React.FC = () => {
                     />
                   </div>
 
-                  {/* 3 Separate Rows: Row 1 = Tên, Row 2 = Level, Row 3 = Số sao (Font Inter chuẩn) */}
+                  {/* 3 Separate Rows: Row 1 = Tên (font-genshin), Row 2 = Level (Inter), Row 3 = Số sao */}
                   <div className="w-full px-1 pt-1.5 flex flex-col items-center gap-1 text-center">
-                    {/* Hàng 1: Tên nhân vật (Font Inter rõ nét, không vỡ dấu) */}
-                    <div className="w-full text-xs sm:text-sm font-extrabold text-slate-100 truncate group-hover:text-amber-300 transition-colors tracking-tight">
+                    {/* Hàng 1: Tên nhân vật (giữ font-genshin Cinzel) */}
+                    <div className="w-full text-xs sm:text-sm font-bold text-slate-100 truncate group-hover:text-amber-300 transition-colors font-genshin tracking-wide">
                       {char.nameVi}
                     </div>
 
-                    {/* Hàng 2: Cấp độ */}
+                    {/* Hàng 2: Cấp độ (font Inter chuẩn) */}
                     <div className="flex items-center justify-center">
                       <span className="text-[10px] sm:text-[11px] font-bold text-amber-300/90 bg-amber-400/10 px-2 py-0.5 rounded-md border border-amber-400/25 shadow-sm">
                         Lv.{char.level}
@@ -227,9 +227,9 @@ export const CharacterRosterView: React.FC = () => {
                   />
                 </div>
                 <div>
-                  {/* Name & Level inline horizontally (Font Inter rõ nét) */}
+                  {/* Name (font-genshin) & Level (Inter) inline horizontally */}
                   <div className="flex items-center gap-3.5 flex-wrap">
-                    <h3 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-100 tracking-tight drop-shadow-md">
+                    <h3 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-100 font-genshin tracking-wide drop-shadow-md">
                       {selectedChar.nameVi}
                     </h3>
                     <span className="text-sm sm:text-base font-bold px-3.5 py-1 rounded-2xl bg-amber-400/20 text-amber-300 border border-amber-400/40 shadow-md">
