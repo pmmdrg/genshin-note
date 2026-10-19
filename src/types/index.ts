@@ -23,7 +23,7 @@ export interface TaskGoal {
   targetName?: string;
   targetAvatar?: string;
   element?: ElementType;
-  rarity?: 4 | 5;
+  rarity?: 3 | 4 | 5;
   farmTarget?: FarmMaterial;
   order: number;
   isCompleted: boolean;
@@ -122,10 +122,18 @@ export interface CharacterBranchTree {
   weaponBranch: {
     weaponName: string;
     weaponIcon?: string;
+    weaponRarity?: number;
+    weaponType?: 'sword' | 'claymore' | 'polearm' | 'bow' | 'catalyst';
     currentLevel: number;
     targetLevel: number;
     materialName: string;
+    materialIcon?: string;
+    domainName?: string;
     daysOfWeek: number[];
+    eliteMatName?: string;
+    eliteMatIcon?: string;
+    commonMatName?: string;
+    commonMatIcon?: string;
     isCompleted: boolean;
   };
 
@@ -200,11 +208,16 @@ export interface CharacterPreset {
 export interface WeaponPreset {
   name: string;
   nameVi: string;
-  rarity: 4 | 5;
+  rarity: 3 | 4 | 5;
   type: 'sword' | 'claymore' | 'polearm' | 'bow' | 'catalyst';
   ascensionMat: string;
+  ascensionMatIcon?: string;
   domainName: string;
   daysOfWeek: number[];
+  eliteMatName?: string;
+  eliteMatIcon?: string;
+  commonMatName?: string;
+  commonMatIcon?: string;
   avatarUrl: string;
 }
 

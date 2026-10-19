@@ -88,3 +88,140 @@ export function calculateTalentCost(
 
   return { goldBooks, weeklyBossMats, crowns, mora };
 }
+
+export interface WeaponCostBreakdown {
+  domainMats: {
+    green: number;
+    blue: number;
+    purple: number;
+    gold: number;
+    total: number;
+  };
+  eliteMats: {
+    green: number;
+    blue: number;
+    purple: number;
+    total: number;
+  };
+  commonMats: {
+    gray: number;
+    green: number;
+    blue: number;
+    total: number;
+  };
+  ascensionMora: number;
+  enhancementMora: number;
+  totalMora: number;
+  mysticOre: number;
+}
+
+export function calculateWeaponTo90Cost(
+  currentLevel: number,
+  rarity: number = 5
+): WeaponCostBreakdown {
+  const cur = Math.max(1, Math.min(90, currentLevel));
+  if (cur >= 90) {
+    return {
+      domainMats: { green: 0, blue: 0, purple: 0, gold: 0, total: 0 },
+      eliteMats: { green: 0, blue: 0, purple: 0, total: 0 },
+      commonMats: { gray: 0, green: 0, blue: 0, total: 0 },
+      ascensionMora: 0,
+      enhancementMora: 0,
+      totalMora: 0,
+      mysticOre: 0,
+    };
+  }
+
+  interface PhaseCost {
+    lvlReq: number;
+    domain: { green: number; blue: number; purple: number; gold: number };
+    elite: { green: number; blue: number; purple: number };
+    common: { gray: number; green: number; blue: number };
+    mora: number;
+  }
+
+  const phase5Star: PhaseCost[] = [
+    { lvlReq: 20, domain: { green: 5, blue: 0, purple: 0, gold: 0 }, elite: { green: 5, blue: 0, purple: 0 }, common: { gray: 3, green: 0, blue: 0 }, mora: 10000 },
+    { lvlReq: 40, domain: { green: 0, blue: 5, purple: 0, gold: 0 }, elite: { green: 18, blue: 0, purple: 0 }, common: { gray: 12, green: 0, blue: 0 }, mora: 20000 },
+    { lvlReq: 50, domain: { green: 0, blue: 9, purple: 0, gold: 0 }, elite: { green: 0, blue: 9, purple: 0 }, common: { gray: 0, green: 9, blue: 0 }, mora: 30000 },
+    { lvlReq: 60, domain: { green: 0, blue: 0, purple: 5, gold: 0 }, elite: { green: 0, blue: 18, purple: 0 }, common: { gray: 0, green: 14, blue: 0 }, mora: 45000 },
+    { lvlReq: 70, domain: { green: 0, blue: 0, purple: 9, gold: 0 }, elite: { green: 0, blue: 0, purple: 14 }, common: { gray: 0, green: 0, blue: 9 }, mora: 55000 },
+    { lvlReq: 80, domain: { green: 0, blue: 0, purple: 0, gold: 6 }, elite: { green: 0, blue: 0, purple: 27 }, common: { gray: 0, green: 0, blue: 18 }, mora: 65000 },
+  ];
+
+  const phase4Star: PhaseCost[] = [
+    { lvlReq: 20, domain: { green: 3, blue: 0, purple: 0, gold: 0 }, elite: { green: 3, blue: 0, purple: 0 }, common: { gray: 2, green: 0, blue: 0 }, mora: 5000 },
+    { lvlReq: 40, domain: { green: 0, blue: 3, purple: 0, gold: 0 }, elite: { green: 12, blue: 0, purple: 0 }, common: { gray: 8, green: 0, blue: 0 }, mora: 15000 },
+    { lvlReq: 50, domain: { green: 0, blue: 6, purple: 0, gold: 0 }, elite: { green: 0, blue: 6, purple: 0 }, common: { gray: 0, green: 6, blue: 0 }, mora: 20000 },
+    { lvlReq: 60, domain: { green: 0, blue: 0, purple: 3, gold: 0 }, elite: { green: 0, blue: 12, purple: 0 }, common: { gray: 0, green: 9, blue: 0 }, mora: 30000 },
+    { lvlReq: 70, domain: { green: 0, blue: 0, purple: 6, gold: 0 }, elite: { green: 0, blue: 0, purple: 9 }, common: { gray: 0, green: 0, blue: 6 }, mora: 35000 },
+    { lvlReq: 80, domain: { green: 0, blue: 0, purple: 0, gold: 4 }, elite: { green: 0, blue: 0, purple: 18 }, common: { gray: 0, green: 0, blue: 12 }, mora: 45000 },
+  ];
+
+  const phase3Star: PhaseCost[] = [
+    { lvlReq: 20, domain: { green: 2, blue: 0, purple: 0, gold: 0 }, elite: { green: 2, blue: 0, purple: 0 }, common: { gray: 1, green: 0, blue: 0 }, mora: 5000 },
+    { lvlReq: 40, domain: { green: 0, blue: 2, purple: 0, gold: 0 }, elite: { green: 8, blue: 0, purple: 0 }, common: { gray: 5, green: 0, blue: 0 }, mora: 10000 },
+    { lvlReq: 50, domain: { green: 0, blue: 4, purple: 0, gold: 0 }, elite: { green: 0, blue: 4, purple: 0 }, common: { gray: 0, green: 4, blue: 0 }, mora: 15000 },
+    { lvlReq: 60, domain: { green: 0, blue: 0, purple: 2, gold: 0 }, elite: { green: 0, blue: 8, purple: 0 }, common: { gray: 0, green: 6, blue: 0 }, mora: 20000 },
+    { lvlReq: 70, domain: { green: 0, blue: 0, purple: 4, gold: 0 }, elite: { green: 0, blue: 0, purple: 6 }, common: { gray: 0, green: 0, blue: 4 }, mora: 25000 },
+    { lvlReq: 80, domain: { green: 0, blue: 0, purple: 0, gold: 3 }, elite: { green: 0, blue: 0, purple: 12 }, common: { gray: 0, green: 0, blue: 8 }, mora: 30000 },
+  ];
+
+  const phases = rarity === 5 ? phase5Star : rarity === 3 ? phase3Star : phase4Star;
+
+  const domainMats = { green: 0, blue: 0, purple: 0, gold: 0, total: 0 };
+  const eliteMats = { green: 0, blue: 0, purple: 0, total: 0 };
+  const commonMats = { gray: 0, green: 0, blue: 0, total: 0 };
+  let ascensionMora = 0;
+
+  for (const p of phases) {
+    if (cur < p.lvlReq) {
+      domainMats.green += p.domain.green;
+      domainMats.blue += p.domain.blue;
+      domainMats.purple += p.domain.purple;
+      domainMats.gold += p.domain.gold;
+
+      eliteMats.green += p.elite.green;
+      eliteMats.blue += p.elite.blue;
+      eliteMats.purple += p.elite.purple;
+
+      commonMats.gray += p.common.gray;
+      commonMats.green += p.common.green;
+      commonMats.blue += p.common.blue;
+
+      ascensionMora += p.mora;
+    }
+  }
+
+  domainMats.total = domainMats.green + domainMats.blue + domainMats.purple + domainMats.gold;
+  eliteMats.total = eliteMats.green + eliteMats.blue + eliteMats.purple;
+  commonMats.total = commonMats.gray + commonMats.green + commonMats.blue;
+
+  const getExpProgressRatio = (lvl: number) => {
+    if (lvl <= 20) return 0.02;
+    if (lvl <= 40) return 0.08;
+    if (lvl <= 50) return 0.16;
+    if (lvl <= 60) return 0.28;
+    if (lvl <= 70) return 0.44;
+    if (lvl <= 80) return 0.65;
+    return 1.0;
+  };
+
+  const remainingRatio = Math.max(0, 1 - getExpProgressRatio(cur));
+  const baseOre = rarity === 5 ? 907 : rarity === 3 ? 400 : 605;
+  const baseEnhanceMora = rarity === 5 ? 906420 : rarity === 3 ? 398820 : 604260;
+
+  const mysticOre = Math.round(baseOre * remainingRatio);
+  const enhancementMora = Math.round(baseEnhanceMora * remainingRatio);
+  const totalMora = ascensionMora + enhancementMora;
+
+  return {
+    domainMats,
+    eliteMats,
+    commonMats,
+    ascensionMora,
+    enhancementMora,
+    totalMora,
+    mysticOre,
+  };
+}

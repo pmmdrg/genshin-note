@@ -11,6 +11,9 @@ export const BASE_MATERIAL_ICONS = {
   bossDrop: 'https://enka.network/ui/UI_ItemIcon_113059.png',
   specialty: 'https://enka.network/ui/UI_ItemIcon_101235.png',
   realmCurrency: 'https://enka.network/ui/UI_ItemIcon_204.png',
+  mysticOre: 'https://enka.network/ui/UI_ItemIcon_104013.png',
+  eliteMonster: 'https://enka.network/ui/UI_ItemIcon_112012.png',
+  commonMonster: 'https://enka.network/ui/UI_ItemIcon_112002.png',
 };
 
 const SPECIFIC_MATERIAL_MAP: Record<string, string> = {
@@ -37,7 +40,34 @@ const SPECIFIC_MATERIAL_MAP: Record<string, string> = {
 
   // Weapon Ascension Mats
   'Giọt Sương Tinh Khiết': 'https://enka.network/ui/UI_ItemIcon_114052.png',
-  'Mặt Nạ Hổ Phách': 'https://enka.network/ui/UI_ItemIcon_114028.png',
+  'Mặt Nạ Hổ Phách': 'https://enka.network/ui/UI_ItemIcon_114032.png',
+  'Cát Đen Thiên Thạch Liyue': 'https://enka.network/ui/UI_ItemIcon_114020.png',
+  'Hạt Muối Đen Liyue': 'https://enka.network/ui/UI_ItemIcon_114020.png',
+  'Thạch Lựu Sáng Guyun': 'https://enka.network/ui/UI_ItemIcon_114016.png',
+  'Mảnh Xiềng Xích Dandelion': 'https://enka.network/ui/UI_ItemIcon_114012.png',
+  'Gia Huy Decarabian': 'https://enka.network/ui/UI_ItemIcon_114004.png',
+  'Răng Nanh Sói Bắc Phong': 'https://enka.network/ui/UI_ItemIcon_114008.png',
+  'Nhánh Biển Xanh San Hô': 'https://enka.network/ui/UI_ItemIcon_114028.png',
+  'Thánh Tích Fontaine': 'https://enka.network/ui/UI_ItemIcon_114060.png',
+  'Trái Tim Rực Lửa Tế Lễ': 'https://enka.network/ui/UI_ItemIcon_114064.png',
+  'Bộ Cốt Tế Thần': 'https://enka.network/ui/UI_ItemIcon_114068.png',
+  'Dây Cót Hợp Âm Fontaine': 'https://enka.network/ui/UI_ItemIcon_114056.png',
+
+  // Elite Monster Drops
+  'Chi Khô Địa Mạch': 'https://enka.network/ui/UI_ItemIcon_112012.png',
+  'Cốt Chùy U Tối': 'https://enka.network/ui/UI_ItemIcon_112015.png',
+  'Trục Cơ Quan': 'https://enka.network/ui/UI_ItemIcon_112085.png',
+  'Bánh Răng Khớp Nối': 'https://enka.network/ui/UI_ItemIcon_112082.png',
+  'Dao Săn Nham': 'https://enka.network/ui/UI_ItemIcon_112026.png',
+  'Tượng Hắc Ám': 'https://enka.network/ui/UI_ItemIcon_112067.png',
+
+  // Common Monster Drops
+  'Dịch Slime': 'https://enka.network/ui/UI_ItemIcon_112002.png',
+  'Mặt Nạ Bị Hỏng': 'https://enka.network/ui/UI_ItemIcon_112007.png',
+  'Huy Hiệu Sĩ Quan': 'https://enka.network/ui/UI_ItemIcon_112034.png',
+  'Kiếm Cách Sắc Bén': 'https://enka.network/ui/UI_ItemIcon_112046.png',
+  'Bào Tử Nấm': 'https://enka.network/ui/UI_ItemIcon_112061.png',
+  'Giọt Nước Tinh Linh': 'https://enka.network/ui/UI_ItemIcon_112078.png',
 };
 
 export function getMaterialIconUrl(

@@ -11,6 +11,7 @@ import {
   Circle,
   Calendar,
   Layers,
+  Sparkles,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import type { CharacterBranchTree } from '../types';
@@ -19,6 +20,9 @@ import { useStore } from '../store/useStore';
 import { isDomainOpenToday } from '../utils/priority';
 import { ElementIcon } from './ElementIcon';
 import { getMaterialIconUrl, BASE_MATERIAL_ICONS } from '../utils/materialIcons';
+import { WeaponSelectionDrawer } from './WeaponSelectionDrawer';
+import { calculateWeaponTo90Cost } from '../utils/calculator';
+import { CHARACTERS_DATA } from '../data/genshinData';
 
 interface CharacterTreeCardProps {
   tree: CharacterBranchTree;
@@ -27,12 +31,6 @@ interface CharacterTreeCardProps {
 
 type ActiveBranchType = 'level' | 'weapon' | 'talent' | 'artifact' | null;
 
-const WEAPON_ROTATION_SCHEDULES = [
-  { id: 't2_t5', label: 'T2, T5, CN', days: [1, 4, 0] },
-  { id: 't3_t6', label: 'T3, T6, CN', days: [2, 5, 0] },
-  { id: 't4_t7', label: 'T4, T7, CN', days: [3, 6, 0] },
-];
-
 export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, index }) => {
   const {
     toggleBranchComplete,
@@ -40,13 +38,14 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
     deleteCharacterTree,
     updateTreeLevel,
     updateTreeWeaponLevel,
-    updateTreeWeaponDays,
+    setTreeWeapon,
     updateTreeTalentLevel,
     updateTreeArtifactPiece,
   } = useStore();
 
   const [activeBranch, setActiveBranch] = useState<ActiveBranchType>('level');
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isWeaponDrawerOpen, setIsWeaponDrawerOpen] = useState(false);
 
   const {
     attributes,
@@ -96,18 +95,15 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
 
   const optimizedArtifactCount = artifactPieces.filter((p) => p.isOptimized).length;
 
-  // Weapon cost calculation
-  const calculateWeaponCost = (lvl: number) => {
-    const cur = Math.max(1, Math.min(90, lvl));
-    if (cur >= 90) return { mats: 0, mora: 0 };
-    if (cur >= 80) return { mats: 6, mora: 225000 };
-    if (cur >= 70) return { mats: 12, mora: 450000 };
-    if (cur >= 60) return { mats: 16, mora: 600000 };
-    if (cur >= 50) return { mats: 20, mora: 750000 };
-    return { mats: 24, mora: 900000 };
-  };
-
-  const weaponCost = calculateWeaponCost(tree.weaponBranch.currentLevel);
+  // Character Weapon Type & Accurate Cost Calculation
+  const characterPreset = CHARACTERS_DATA.find(
+    (c) =>
+      c.nameVi.toLowerCase() === tree.characterName.toLowerCase() ||
+      c.name.toLowerCase() === tree.characterName.toLowerCase()
+  );
+  const characterWeaponType = tree.weaponBranch.weaponType || characterPreset?.weaponType;
+  const weaponRarity = tree.weaponBranch.weaponRarity || 5;
+  const weaponCost = calculateWeaponTo90Cost(tree.weaponBranch.currentLevel, weaponRarity);
 
   // Active branch Y coordinate for clean branch line to drawer
   const activeBranchY =
@@ -562,10 +558,11 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
             )}
 
             {/* -------------------------------------------------- */}
-            {/* DETAIL: BRANCH 2 - WEAPON (Không hiện tên vũ khí)  */}
+            {/* DETAIL: BRANCH 2 - WEAPON (Level & Chọn Vũ Khí)    */}
             {/* -------------------------------------------------- */}
             {activeBranch === 'weapon' && (
-              <div className="space-y-3.5">
+              <div className="space-y-3">
+                {/* Header */}
                 <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
                   <div>
                     <h4 className="text-xs sm:text-sm font-bold text-slate-100">
@@ -589,7 +586,56 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                   </button>
                 </div>
 
-                {/* Weapon Level Stepper */}
+                {/* 1. Thẻ Vũ Khí Hiện Tại & Nút Chọn Vũ Khí (Drawer) */}
+                <div className="p-3 rounded-2xl bg-white/[0.03] border border-white/[0.08] flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-3 min-w-0">
+                    <div
+                      className={`w-12 h-12 rounded-xl overflow-hidden shrink-0 border relative flex items-center justify-center ${
+                        weaponRarity === 5
+                          ? 'border-amber-400/50 bg-gradient-to-b from-amber-500/20 to-transparent'
+                          : weaponRarity === 4
+                          ? 'border-purple-400/50 bg-gradient-to-b from-purple-500/20 to-transparent'
+                          : 'border-sky-400/50 bg-gradient-to-b from-sky-500/20 to-transparent'
+                      }`}
+                    >
+                      <img
+                        src={tree.weaponBranch.weaponIcon || BASE_MATERIAL_ICONS.weaponAscension}
+                        alt={tree.weaponBranch.weaponName}
+                        className="w-full h-full object-contain p-0.5"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = BASE_MATERIAL_ICONS.weaponAscension;
+                        }}
+                      />
+                    </div>
+
+                    <div className="min-w-0">
+                      <div className="text-xs sm:text-sm font-bold text-slate-100 truncate">
+                        {tree.weaponBranch.weaponName && tree.weaponBranch.weaponName !== 'Vũ Khí'
+                          ? tree.weaponBranch.weaponName
+                          : 'Chưa Chọn Vũ Khí'}
+                      </div>
+                      <div className="flex items-center gap-1.5 mt-0.5">
+                        <span className="text-[10px] font-black tracking-widest text-amber-400">
+                          {'★'.repeat(weaponRarity)}
+                        </span>
+                        <span className="text-[10px] text-slate-400 font-sans">
+                          Lv.{tree.weaponBranch.currentLevel}/90
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={() => setIsWeaponDrawerOpen(true)}
+                    className="px-3 py-1.5 rounded-xl bg-gradient-to-r from-amber-400/20 to-yellow-500/20 hover:from-amber-400 hover:to-yellow-500 text-amber-300 hover:text-slate-950 font-bold text-xs border border-amber-400/30 hover:border-amber-400 transition-all flex items-center gap-1.5 shrink-0 shadow-sm cursor-pointer active:scale-95"
+                    title="Mở danh sách chọn vũ khí"
+                  >
+                    <Sparkles className="w-3.5 h-3.5" />
+                    <span>{tree.weaponBranch.weaponName && tree.weaponBranch.weaponName !== 'Vũ Khí' ? 'Đổi Vũ Khí' : 'Chọn Vũ Khí'}</span>
+                  </button>
+                </div>
+
+                {/* 2. Tùy Chỉnh Level Vũ Khí */}
                 <div className="flex items-center justify-between bg-white/[0.03] p-2.5 rounded-xl border border-white/[0.06]">
                   <div className="text-xs text-slate-300 font-semibold">Cấp hiện tại:</div>
                   <div className="flex items-center gap-2">
@@ -613,11 +659,11 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                   </div>
 
                   <div className="flex items-center gap-1">
-                    {[70, 80, 90].map((lvl) => (
+                    {[20, 50, 70, 80, 90].map((lvl) => (
                       <button
                         key={lvl}
                         onClick={() => updateTreeWeaponLevel(tree.id, lvl)}
-                        className={`px-2 py-0.5 rounded-md text-[10px] font-bold border transition-colors cursor-pointer ${
+                        className={`px-1.5 sm:px-2 py-0.5 rounded-md text-[10px] font-bold border transition-colors cursor-pointer ${
                           tree.weaponBranch.currentLevel === lvl
                             ? 'bg-sky-400/20 border-sky-400/50 text-sky-300'
                             : 'bg-white/[0.04] border-white/[0.08] text-slate-400 hover:text-slate-200'
@@ -629,91 +675,165 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                   </div>
                 </div>
 
-                {/* Required Materials & Schedule (Lịch mở, số NL đột phá, Mora) */}
+                {/* 3. Nguyên Liệu Cần Để Nâng Max (Lv.90) kèm Hình Ảnh */}
                 <div className="space-y-2 text-xs">
-                  {/* Chọn lịch mở bí cảnh nguyên liệu */}
-                  <div className="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.06] space-y-2">
-                    <div className="flex items-center justify-between">
-                      <span className="text-slate-400 flex items-center gap-1.5 font-medium">
-                        <Calendar className="w-3.5 h-3.5 text-amber-400" />
-                        Lịch mở nguyên liệu:
+                  <div className="flex items-center justify-between px-0.5 pt-1">
+                    <span className="text-[11px] font-bold text-amber-300 flex items-center gap-1.5">
+                      <Sparkles className="w-3.5 h-3.5 fill-current" />
+                      Nguyên liệu nâng cấp tối đa (Lv.{tree.weaponBranch.currentLevel} → 90):
+                    </span>
+                    {tree.weaponBranch.currentLevel >= 90 && (
+                      <span className="text-[10px] font-bold text-emerald-400 bg-emerald-500/15 px-2 py-0.5 rounded-full border border-emerald-500/30">
+                        Đã tối đa
                       </span>
-                      {isWeaponOpenToday ? (
-                        <span className="px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[10px] font-bold">
-                          Hôm nay mở!
-                        </span>
-                      ) : (
-                        <span className="text-[10px] text-slate-500 font-medium">
-                          Hôm nay đóng
-                        </span>
-                      )}
-                    </div>
-
-                    {/* 3 Interactive Buttons for Rotations */}
-                    <div className="grid grid-cols-3 gap-1.5">
-                      {WEAPON_ROTATION_SCHEDULES.map((sched) => {
-                        const isSelected =
-                          tree.weaponBranch.daysOfWeek.length === sched.days.length &&
-                          sched.days.every((d) => tree.weaponBranch.daysOfWeek.includes(d));
-                        return (
-                          <button
-                            key={sched.id}
-                            type="button"
-                            onClick={() => updateTreeWeaponDays(tree.id, sched.days)}
-                            className={`px-2 py-1.5 rounded-lg text-[11px] font-bold border transition-all cursor-pointer flex items-center justify-center text-center ${
-                              isSelected
-                                ? 'bg-amber-400/20 border-amber-400/60 text-amber-300 shadow-[0_0_12px_rgba(245,158,11,0.2)]'
-                                : 'bg-white/[0.03] border-white/[0.08] text-slate-400 hover:text-slate-200 hover:bg-white/[0.06]'
-                            }`}
-                            title={`Chọn lịch mở: ${sched.label}`}
-                          >
-                            {sched.label}
-                          </button>
-                        );
-                      })}
-                    </div>
+                    )}
                   </div>
 
-                  {/* Số nguyên liệu đột phá cần */}
-                  <div className="p-2 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between gap-2">
-                    <div className="flex items-center gap-2 min-w-0">
-                      <img
-                        src={getMaterialIconUrl(tree.weaponBranch.materialName, 'weaponAscension')}
-                        alt="Nguyên liệu đột phá"
-                        className="w-7 h-7 rounded-lg object-contain bg-slate-800/80 p-0.5 shrink-0"
-                        onError={(e) => {
-                          (e.target as HTMLImageElement).src = BASE_MATERIAL_ICONS.weaponAscension;
-                        }}
-                      />
-                      <span className="text-slate-300 text-xs truncate">
-                        {tree.weaponBranch.materialName &&
-                        tree.weaponBranch.materialName !== 'Nguyên liệu rèn' &&
-                        tree.weaponBranch.materialName !== 'Nguyên liệu đột phá'
-                          ? `Nguyên liệu đột phá (${tree.weaponBranch.materialName})`
-                          : 'Nguyên liệu đột phá'}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {/* NL 1: Nguyên liệu Bí cảnh (Domain Material) */}
+                    <div className="p-2 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between gap-2 col-span-1 sm:col-span-2">
+                      <div className="flex items-center gap-2.5 min-w-0">
+                        <img
+                          src={tree.weaponBranch.materialIcon || getMaterialIconUrl(tree.weaponBranch.materialName, 'weaponAscension')}
+                          alt=""
+                          className="w-8 h-8 rounded-lg object-contain bg-slate-800/80 p-0.5 shrink-0 border border-white/10"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).src = BASE_MATERIAL_ICONS.weaponAscension;
+                          }}
+                        />
+                        <div className="min-w-0">
+                          <div className="text-slate-200 text-xs font-semibold truncate">
+                            {tree.weaponBranch.materialName || 'Nguyên liệu Bí Cảnh'}
+                          </div>
+                          <div className="flex items-center gap-1.5 text-[10px] text-slate-400 mt-0.5 font-sans">
+                            <Calendar className="w-3 h-3 text-amber-400/80 shrink-0" />
+                            <span>
+                              {tree.weaponBranch.daysOfWeek && tree.weaponBranch.daysOfWeek.length > 0
+                                ? tree.weaponBranch.daysOfWeek.map((d) => (d === 0 ? 'CN' : `T${d + 1}`)).join(', ')
+                                : 'Thứ 4, 7, CN'}
+                            </span>
+                            {isWeaponOpenToday ? (
+                              <span className="text-emerald-300 font-bold ml-1">● Mở hôm nay</span>
+                            ) : (
+                              <span className="text-slate-500 ml-1">Đóng</span>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="text-right shrink-0">
+                        <div className="font-bold text-sky-300 font-sans text-xs">
+                          {weaponCost.domainMats.total} cái
+                        </div>
+                        {weaponCost.domainMats.total > 0 && (
+                          <div className="text-[10px] text-slate-400 font-sans tracking-tight">
+                            {weaponCost.domainMats.green}🟢 {weaponCost.domainMats.blue}🔵 {weaponCost.domainMats.purple}🟣 {weaponCost.domainMats.gold}🟡
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* NL 2: Nguyên liệu Quái Tinh Anh */}
+                    <div className="p-2 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <img
+                          src={tree.weaponBranch.eliteMatIcon || getMaterialIconUrl(tree.weaponBranch.eliteMatName, 'eliteMonster')}
+                          alt=""
+                          className="w-7 h-7 rounded-lg object-contain bg-slate-800/80 p-0.5 shrink-0 border border-white/10"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).src = BASE_MATERIAL_ICONS.eliteMonster;
+                          }}
+                        />
+                        <div className="min-w-0">
+                          <div className="text-slate-300 text-xs truncate">
+                            {tree.weaponBranch.eliteMatName || 'NL Quái Tinh Anh'}
+                          </div>
+                          <div className="text-[10px] text-slate-500 font-sans">Tinh anh</div>
+                        </div>
+                      </div>
+                      <div className="text-right shrink-0">
+                        <div className="font-bold text-purple-300 font-sans">
+                          {weaponCost.eliteMats.total} cái
+                        </div>
+                        {weaponCost.eliteMats.total > 0 && (
+                          <div className="text-[9px] text-slate-400 font-sans">
+                            {weaponCost.eliteMats.green}🟢 {weaponCost.eliteMats.blue}🔵 {weaponCost.eliteMats.purple}🟣
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* NL 3: Nguyên liệu Quái Thường */}
+                    <div className="p-2 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <img
+                          src={tree.weaponBranch.commonMatIcon || getMaterialIconUrl(tree.weaponBranch.commonMatName, 'commonMonster')}
+                          alt=""
+                          className="w-7 h-7 rounded-lg object-contain bg-slate-800/80 p-0.5 shrink-0 border border-white/10"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).src = BASE_MATERIAL_ICONS.commonMonster;
+                          }}
+                        />
+                        <div className="min-w-0">
+                          <div className="text-slate-300 text-xs truncate">
+                            {tree.weaponBranch.commonMatName || 'NL Quái Thường'}
+                          </div>
+                          <div className="text-[10px] text-slate-500 font-sans">Quái thường</div>
+                        </div>
+                      </div>
+                      <div className="text-right shrink-0">
+                        <div className="font-bold text-slate-200 font-sans">
+                          {weaponCost.commonMats.total} cái
+                        </div>
+                        {weaponCost.commonMats.total > 0 && (
+                          <div className="text-[9px] text-slate-400 font-sans">
+                            {weaponCost.commonMats.gray}⚪ {weaponCost.commonMats.green}🟢 {weaponCost.commonMats.blue}🔵
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* NL 4: Ma Khoáng Tinh Đúc */}
+                    <div className="p-2 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <img
+                          src={BASE_MATERIAL_ICONS.mysticOre}
+                          alt="Ma Khoáng"
+                          className="w-7 h-7 rounded-lg object-contain bg-slate-800/80 p-0.5 shrink-0 border border-white/10"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).src = BASE_MATERIAL_ICONS.weaponAscension;
+                          }}
+                        />
+                        <div className="min-w-0">
+                          <div className="text-slate-300 text-xs truncate">Ma Khoáng Tinh Đúc</div>
+                          <div className="text-[10px] text-slate-500 font-sans">Cường hóa</div>
+                        </div>
+                      </div>
+                      <span className="font-bold text-cyan-300 shrink-0 font-sans">
+                        {weaponCost.mysticOre.toLocaleString()} viên
                       </span>
                     </div>
-                    <span className="font-bold text-sky-300 shrink-0 font-sans">
-                      {weaponCost.mats} cái
-                    </span>
-                  </div>
 
-                  {/* Mora cần */}
-                  <div className="p-2 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between gap-2">
-                    <div className="flex items-center gap-2 min-w-0">
-                      <img
-                        src={BASE_MATERIAL_ICONS.mora}
-                        alt="Mora"
-                        className="w-7 h-7 rounded-lg object-contain bg-slate-800/80 p-0.5 shrink-0"
-                        onError={(e) => {
-                          (e.target as HTMLElement).style.display = 'none';
-                        }}
-                      />
-                      <span className="text-slate-300 text-xs truncate">Mora đột phá</span>
+                    {/* NL 5: Mora Cần */}
+                    <div className="p-2 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <img
+                          src={BASE_MATERIAL_ICONS.mora}
+                          alt="Mora"
+                          className="w-7 h-7 rounded-lg object-contain bg-slate-800/80 p-0.5 shrink-0 border border-white/10"
+                          onError={(e) => {
+                            (e.target as HTMLElement).style.display = 'none';
+                          }}
+                        />
+                        <div className="min-w-0">
+                          <div className="text-slate-300 text-xs truncate">Tổng Mora</div>
+                          <div className="text-[10px] text-slate-500 font-sans">Đột phá + EXP</div>
+                        </div>
+                      </div>
+                      <span className="font-bold text-yellow-300 shrink-0 font-sans">
+                        {weaponCost.totalMora.toLocaleString()}
+                      </span>
                     </div>
-                    <span className="font-bold text-yellow-300 shrink-0 font-sans">
-                      {weaponCost.mora.toLocaleString()}
-                    </span>
                   </div>
                 </div>
               </div>
@@ -1078,6 +1198,18 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
           </div>
         )}
       </div>
+
+      {/* Slide-in Weapon Selection Drawer from Right */}
+      <WeaponSelectionDrawer
+        isOpen={isWeaponDrawerOpen}
+        onClose={() => setIsWeaponDrawerOpen(false)}
+        onSelectWeapon={(weapon) => {
+          setTreeWeapon(tree.id, weapon);
+        }}
+        currentWeaponName={tree.weaponBranch.weaponName}
+        characterWeaponType={characterWeaponType}
+        characterName={tree.characterName}
+      />
     </div>
   );
 };

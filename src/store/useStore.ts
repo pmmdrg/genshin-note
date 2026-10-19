@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import type { TaskGoal, HoyoDailyNote, UserCharacter, CharacterBranchTree, NavigationMenu, ArtifactPieceItem, WallpaperConfig } from '../types';
+import type { TaskGoal, HoyoDailyNote, UserCharacter, CharacterBranchTree, NavigationMenu, ArtifactPieceItem, WallpaperConfig, WeaponPreset } from '../types';
 import { DEFAULT_ARTIFACT_PIECES } from '../types';
 import { USER_CHARACTERS_PRESET, CHARACTERS_DATA } from '../data/genshinData';
 import { getCharacterDefaultBuild } from '../data/characterEquipData';
@@ -36,6 +36,7 @@ interface AppState {
   updateTreeLevel: (treeId: string, newLevel: number) => void;
   updateTreeWeaponLevel: (treeId: string, newLevel: number) => void;
   updateTreeWeaponDays: (treeId: string, daysOfWeek: number[]) => void;
+  setTreeWeapon: (treeId: string, weapon: WeaponPreset) => void;
   updateTreeTalentLevel: (treeId: string, skill: 'attack' | 'skill' | 'burst', newLevel: number) => void;
   updateTreeArtifactPiece: (treeId: string, slotIndex: number, updates: { level?: number; isOptimized?: boolean }) => void;
   toggleCompleteCharacterTree: (treeId: string) => void;
@@ -549,6 +550,32 @@ export const useStore = create<AppState>()(
               weaponBranch: {
                 ...tree.weaponBranch,
                 daysOfWeek,
+              },
+            };
+          }),
+        }));
+      },
+
+      setTreeWeapon: (treeId, weapon) => {
+        set((state) => ({
+          characterTrees: state.characterTrees.map((tree) => {
+            if (tree.id !== treeId) return tree;
+            return {
+              ...tree,
+              weaponBranch: {
+                ...tree.weaponBranch,
+                weaponName: weapon.nameVi || weapon.name,
+                weaponIcon: weapon.avatarUrl,
+                weaponRarity: weapon.rarity,
+                weaponType: weapon.type,
+                materialName: weapon.ascensionMat,
+                materialIcon: weapon.ascensionMatIcon,
+                domainName: weapon.domainName,
+                daysOfWeek: weapon.daysOfWeek,
+                eliteMatName: weapon.eliteMatName,
+                eliteMatIcon: weapon.eliteMatIcon,
+                commonMatName: weapon.commonMatName,
+                commonMatIcon: weapon.commonMatIcon,
               },
             };
           }),
