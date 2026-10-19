@@ -100,12 +100,12 @@ export const WeaponSelectionDrawer: React.FC<WeaponSelectionDrawerProps> = ({
 
       {/* Slide-in Drawer from Right */}
       <aside
-        className={`fixed inset-y-0 right-0 top-0 bottom-0 h-screen h-[100dvh] w-full sm:w-[480px] md:w-[540px] max-w-[100vw] bg-slate-900/98 border-l border-white/10 backdrop-blur-2xl shadow-[-20px_0_50px_rgba(0,0,0,0.85)] flex flex-col z-[100000] transition-transform duration-300 ease-out ${
+        className={`fixed inset-y-0 right-0 top-0 bottom-0 h-screen h-[100dvh] w-full sm:w-[480px] md:w-[560px] max-w-[100vw] liquid-glass !border-y-0 !border-r-0 border-l border-white/20 backdrop-blur-3xl shadow-[-25px_0_60px_rgba(0,0,0,0.9)] flex flex-col z-[100000] transition-transform duration-300 ease-out ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
         {/* Top Header */}
-        <div className="p-4 sm:p-5 border-b border-white/[0.08] flex items-center justify-between shrink-0 bg-white/[0.02]">
+        <div className="p-4 sm:p-5 border-b border-white/[0.1] flex items-center justify-between shrink-0 bg-white/[0.03] backdrop-blur-md">
           <div className="flex items-center gap-3 min-w-0">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400/20 to-yellow-500/10 border border-amber-400/30 flex items-center justify-center text-amber-300 shadow-[0_0_15px_rgba(245,158,11,0.2)]">
               <Sparkles className="w-5 h-5 fill-current" />
@@ -135,7 +135,7 @@ export const WeaponSelectionDrawer: React.FC<WeaponSelectionDrawerProps> = ({
         </div>
 
         {/* Search & Filter Controls */}
-        <div className="p-4 space-y-3 shrink-0 border-b border-white/[0.06] bg-slate-900/60">
+        <div className="p-4 space-y-3 shrink-0 border-b border-white/[0.08] bg-slate-900/40 backdrop-blur-xl">
           {/* Search Input */}
           <div className="relative">
             <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
@@ -144,7 +144,7 @@ export const WeaponSelectionDrawer: React.FC<WeaponSelectionDrawerProps> = ({
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Tìm theo tên vũ khí, nguyên liệu, bí cảnh..."
-              className="w-full pl-10 pr-9 py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] focus:border-amber-400/60 focus:bg-white/[0.08] focus:outline-none text-xs sm:text-sm text-slate-100 placeholder:text-slate-500 transition-all font-sans"
+              className="w-full pl-10 pr-9 py-2.5 rounded-2xl liquid-glass-subtle border border-white/[0.12] focus:border-amber-400/70 focus:bg-white/[0.08] focus:outline-none text-xs sm:text-sm text-slate-100 placeholder:text-slate-500 transition-all font-sans shadow-inner"
               autoFocus={isOpen}
             />
             {search && (
@@ -161,10 +161,10 @@ export const WeaponSelectionDrawer: React.FC<WeaponSelectionDrawerProps> = ({
           <div className="flex items-center gap-1.5 overflow-x-auto pb-1 custom-scrollbar text-xs">
             <button
               onClick={() => setSelectedType('all')}
-              className={`px-3 py-1 rounded-lg font-bold shrink-0 transition-all cursor-pointer ${
+              className={`px-3 py-1.5 rounded-xl font-bold shrink-0 transition-all cursor-pointer liquid-glass-interactive ${
                 selectedType === 'all'
-                  ? 'bg-amber-400 text-slate-950 shadow-[0_0_12px_rgba(245,158,11,0.3)]'
-                  : 'bg-white/[0.04] text-slate-400 hover:text-slate-200 border border-white/[0.06]'
+                  ? '!bg-amber-400 !text-slate-950 !border-amber-300 shadow-[0_0_16px_rgba(245,158,11,0.4)]'
+                  : 'liquid-glass-subtle text-slate-400 hover:text-slate-200 hover:border-white/20'
               }`}
             >
               Tất cả
@@ -176,12 +176,12 @@ export const WeaponSelectionDrawer: React.FC<WeaponSelectionDrawerProps> = ({
                 <button
                   key={key}
                   onClick={() => setSelectedType(key)}
-                  className={`px-2.5 py-1 rounded-lg font-bold shrink-0 transition-all cursor-pointer flex items-center gap-1 ${
+                  className={`px-2.5 py-1.5 rounded-xl font-bold shrink-0 transition-all cursor-pointer flex items-center gap-1.5 liquid-glass-interactive ${
                     isSelected
-                      ? 'bg-amber-400 text-slate-950 shadow-[0_0_12px_rgba(245,158,11,0.3)]'
+                      ? '!bg-amber-400 !text-slate-950 !border-amber-300 shadow-[0_0_16px_rgba(245,158,11,0.4)]'
                       : isCharType
-                      ? 'bg-amber-400/15 text-amber-300 border border-amber-400/30 hover:bg-amber-400/25'
-                      : 'bg-white/[0.04] text-slate-400 hover:text-slate-200 border border-white/[0.06]'
+                      ? 'bg-amber-400/20 text-amber-300 border border-amber-400/40 hover:bg-amber-400/30'
+                      : 'liquid-glass-subtle text-slate-400 hover:text-slate-200 hover:border-white/20'
                   }`}
                 >
                   <span>{label}</span>
@@ -204,10 +204,10 @@ export const WeaponSelectionDrawer: React.FC<WeaponSelectionDrawerProps> = ({
                 <button
                   key={r.id}
                   onClick={() => setSelectedRarity(r.id)}
-                  className={`px-2 py-0.5 rounded-md font-bold text-[11px] transition-all cursor-pointer border ${
+                  className={`px-2.5 py-1 rounded-lg font-bold text-[11px] transition-all cursor-pointer border liquid-glass-interactive ${
                     selectedRarity === r.id
-                      ? 'bg-white/15 border-white/30 text-white shadow-sm'
-                      : 'bg-transparent border-transparent text-slate-500 hover:text-slate-300'
+                      ? '!bg-white/20 border-white/40 text-white shadow-[0_0_12px_rgba(255,255,255,0.15)]'
+                      : 'bg-transparent border-transparent text-slate-500 hover:text-slate-300 hover:bg-white/[0.04]'
                   }`}
                 >
                   <span className={r.color}>{r.label}</span>
@@ -241,22 +241,22 @@ export const WeaponSelectionDrawer: React.FC<WeaponSelectionDrawerProps> = ({
                   weapon.rarity === 5
                     ? {
                         border: 'border-amber-400/40 hover:border-amber-300',
-                        bg: 'bg-gradient-to-br from-amber-500/[0.08] to-purple-500/[0.04]',
+                        bg: 'bg-gradient-to-br from-amber-500/[0.12] to-purple-500/[0.06]',
                         starColor: 'text-amber-400 drop-shadow-[0_0_8px_rgba(245,158,11,0.6)]',
-                        avatarBg: 'bg-gradient-to-b from-amber-500/20 to-transparent border-amber-400/40',
+                        avatarBg: 'bg-gradient-to-b from-amber-500/25 to-transparent border-amber-400/40',
                       }
                     : weapon.rarity === 4
                     ? {
                         border: 'border-purple-400/35 hover:border-purple-300',
-                        bg: 'bg-gradient-to-br from-purple-500/[0.08] to-blue-500/[0.04]',
+                        bg: 'bg-gradient-to-br from-purple-500/[0.1] to-blue-500/[0.05]',
                         starColor: 'text-purple-300 drop-shadow-[0_0_8px_rgba(192,132,252,0.6)]',
-                        avatarBg: 'bg-gradient-to-b from-purple-500/20 to-transparent border-purple-400/40',
+                        avatarBg: 'bg-gradient-to-b from-purple-500/25 to-transparent border-purple-400/40',
                       }
                     : {
                         border: 'border-sky-400/30 hover:border-sky-300',
-                        bg: 'bg-gradient-to-br from-sky-500/[0.06] to-transparent',
+                        bg: 'bg-gradient-to-br from-sky-500/[0.08] to-transparent',
                         starColor: 'text-sky-300',
-                        avatarBg: 'bg-gradient-to-b from-sky-500/20 to-transparent border-sky-400/30',
+                        avatarBg: 'bg-gradient-to-b from-sky-500/25 to-transparent border-sky-400/30',
                       };
 
                 return (
@@ -267,10 +267,10 @@ export const WeaponSelectionDrawer: React.FC<WeaponSelectionDrawerProps> = ({
                       onClose();
                     }}
                     style={{ animationDelay: `${Math.min(idx * 15, 150)}ms` }}
-                    className={`animate-card-pop relative p-3 rounded-2xl border text-left flex flex-col justify-between transition-all duration-200 group/item cursor-pointer hover:scale-[1.02] shadow-sm hover:shadow-xl ${
+                    className={`animate-card-pop relative p-3 rounded-2xl border text-left flex flex-col justify-between transition-all duration-200 group/item cursor-pointer hover:scale-[1.02] liquid-glass-subtle liquid-glass-interactive ${
                       isSelected
-                        ? 'border-emerald-400/70 bg-emerald-950/25 ring-1 ring-emerald-400/50 shadow-[0_0_20px_rgba(16,185,129,0.2)]'
-                        : `${rarityStyle.bg} ${rarityStyle.border} hover:bg-white/[0.07]`
+                        ? '!border-emerald-400/80 !bg-emerald-950/40 ring-1 ring-emerald-400/50 shadow-[0_0_24px_rgba(16,185,129,0.25)]'
+                        : `${rarityStyle.bg} ${rarityStyle.border}`
                     }`}
                   >
                     {/* Top Row: Avatar + Info */}
@@ -316,7 +316,7 @@ export const WeaponSelectionDrawer: React.FC<WeaponSelectionDrawerProps> = ({
                     </div>
 
                     {/* Bottom Row: Material & Schedule Tag */}
-                    <div className="mt-2.5 pt-2 border-t border-white/[0.06] flex items-center justify-between text-[11px] w-full">
+                    <div className="mt-2.5 pt-2 border-t border-white/[0.08] flex items-center justify-between text-[11px] w-full">
                       <div className="flex items-center gap-1.5 min-w-0 text-slate-400">
                         {weapon.ascensionMatIcon && (
                           <img
@@ -331,9 +331,11 @@ export const WeaponSelectionDrawer: React.FC<WeaponSelectionDrawerProps> = ({
                       <div className="shrink-0 flex items-center gap-1 pl-1 font-sans">
                         <Calendar className="w-3 h-3 text-amber-400/80" />
                         {isOpenToday ? (
-                          <span className="text-emerald-300 font-bold text-[10px]">Hôm nay mở!</span>
+                          <span className="px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 font-bold text-[10px] border border-emerald-500/30">
+                            Hôm nay mở!
+                          </span>
                         ) : (
-                          <span className="text-slate-500 text-[10px]">
+                          <span className="px-2 py-0.5 rounded-md bg-white/[0.04] text-slate-400 text-[10px] border border-white/[0.06]">
                             {weapon.daysOfWeek.map((d) => (d === 0 ? 'CN' : `T${d + 1}`)).join(', ')}
                           </span>
                         )}

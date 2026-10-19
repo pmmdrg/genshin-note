@@ -80,7 +80,7 @@ export const WallpaperModal: React.FC = () => {
       <div className="absolute inset-0" onClick={() => setIsWallpaperModalOpen(false)} />
 
       {/* Modal Dialog */}
-      <div className="relative w-full max-w-3xl max-h-[90vh] bg-slate-900/90 border border-white/[0.12] rounded-3xl shadow-2xl backdrop-blur-2xl flex flex-col overflow-hidden text-slate-100 z-10 animate-card-pop">
+      <div className="relative w-full max-w-3xl max-h-[90vh] liquid-glass border border-white/20 rounded-3xl shadow-2xl backdrop-blur-3xl flex flex-col overflow-hidden text-slate-100 z-10 animate-card-pop">
         {/* Header */}
         <div className="p-4 sm:p-5 border-b border-white/[0.08] flex items-center justify-between bg-white/[0.02]">
           <div className="flex items-center gap-3">
@@ -135,7 +135,7 @@ export const WallpaperModal: React.FC = () => {
                     className={`group relative rounded-2xl overflow-hidden border p-2 text-left transition-all duration-300 cursor-pointer flex flex-col justify-between aspect-[16/10] ${
                       isSelected
                         ? 'border-purple-400/80 ring-2 ring-purple-400/50 shadow-[0_0_20px_rgba(168,85,247,0.35)] scale-[1.02]'
-                        : 'border-white/[0.08] hover:border-white/20 hover:scale-[1.01] bg-white/[0.03]'
+                        : 'border-white/[0.1] hover:border-white/30 hover:scale-[1.01] liquid-glass-subtle'
                     }`}
                   >
                     {/* Background Preview */}
@@ -177,7 +177,7 @@ export const WallpaperModal: React.FC = () => {
           </div>
 
           {/* 2. CUSTOM WALLPAPER SECTION */}
-          <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06] space-y-3">
+          <div className="p-4 rounded-2xl liquid-glass-subtle space-y-3">
             <div className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
               <Upload className="w-3.5 h-3.5 text-cyan-400" />
               Sử Dụng Ảnh Của Bạn
@@ -247,7 +247,7 @@ export const WallpaperModal: React.FC = () => {
           {/* 3. VISUAL TUNING (BLUR & DIM OVERLAY) */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
             {/* Blur adjustment */}
-            <div className="p-3.5 rounded-2xl bg-white/[0.02] border border-white/[0.06] space-y-2">
+            <div className="p-3.5 rounded-2xl liquid-glass-subtle space-y-2">
               <div className="flex items-center justify-between text-xs">
                 <span className="text-slate-300 font-semibold flex items-center gap-1.5">
                   <Sliders className="w-3.5 h-3.5 text-amber-400" />
@@ -272,7 +272,7 @@ export const WallpaperModal: React.FC = () => {
             </div>
 
             {/* Darkening / Dim overlay */}
-            <div className="p-3.5 rounded-2xl bg-white/[0.02] border border-white/[0.06] space-y-2">
+            <div className="p-3.5 rounded-2xl liquid-glass-subtle space-y-2">
               <div className="flex items-center justify-between text-xs">
                 <span className="text-slate-300 font-semibold flex items-center gap-1.5">
                   <Sliders className="w-3.5 h-3.5 text-sky-400" />

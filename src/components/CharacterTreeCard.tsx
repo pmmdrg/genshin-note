@@ -203,7 +203,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
         {/* ========================================================= */}
         {/* 1. CHARACTER CARD NODE (Root node, strictly locked size)  */}
         {/* ========================================================= */}
-        <div className="w-[144px] sm:w-[155px] h-[268px] min-h-[268px] max-h-[268px] shrink-0 flex flex-col justify-between p-3 rounded-2xl bg-slate-900/60 border border-white/[0.1] backdrop-blur-xl relative group/card self-start shadow-xl">
+        <div className="w-[144px] sm:w-[155px] h-[268px] min-h-[268px] max-h-[268px] shrink-0 flex flex-col justify-between p-3 rounded-3xl liquid-glass liquid-glass-interactive relative group/card self-start shadow-xl border border-white/[0.12]">
           {/* Top Quick Actions: Drag Handle, Delete & Complete */}
           <div className="flex items-center justify-between mb-1">
             <button
@@ -337,12 +337,12 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
           {/* Branch 1: Cấp độ (Level) */}
           <button
             onClick={() => handleBranchToggle('level')}
-            className={`w-full h-[55px] px-3.5 py-2 rounded-2xl text-left border transition-all flex items-center justify-between group/branch cursor-pointer ${
+            className={`w-full h-[55px] px-3.5 py-2 rounded-2xl text-left border transition-all flex items-center justify-between group/branch cursor-pointer liquid-glass-interactive ${
               activeBranch === 'level'
-                ? 'bg-sky-500/20 border-sky-400/60 shadow-[0_0_16px_rgba(56,189,248,0.25)] text-sky-200'
+                ? '!bg-sky-500/25 !border-sky-400/70 shadow-[0_0_20px_rgba(56,189,248,0.3)] text-sky-200 backdrop-blur-xl'
                 : tree.levelBranch.isCompleted
-                ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300 hover:bg-emerald-500/15'
-                : 'bg-slate-900/50 border-white/[0.08] text-slate-300 hover:bg-white/[0.06] hover:border-white/20'
+                ? '!bg-emerald-500/15 !border-emerald-500/40 text-emerald-300 hover:!bg-emerald-500/20 backdrop-blur-md'
+                : 'liquid-glass-subtle text-slate-300 hover:text-white hover:border-white/25'
             }`}
           >
             <div className="min-w-0 flex flex-col justify-center">
@@ -363,12 +363,12 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
           {/* Branch 2: Vũ Khí (Weapon) - Không có icon phía trước, không có tên vũ khí */}
           <button
             onClick={() => handleBranchToggle('weapon')}
-            className={`w-full h-[55px] px-3.5 py-2 rounded-2xl text-left border transition-all flex items-center justify-between group/branch cursor-pointer ${
+            className={`w-full h-[55px] px-3.5 py-2 rounded-2xl text-left border transition-all flex items-center justify-between group/branch cursor-pointer liquid-glass-interactive ${
               activeBranch === 'weapon'
-                ? 'bg-sky-500/20 border-sky-400/60 shadow-[0_0_16px_rgba(56,189,248,0.25)] text-sky-200'
+                ? '!bg-sky-500/25 !border-sky-400/70 shadow-[0_0_20px_rgba(56,189,248,0.3)] text-sky-200 backdrop-blur-xl'
                 : tree.weaponBranch.isCompleted
-                ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300 hover:bg-emerald-500/15'
-                : 'bg-slate-900/50 border-white/[0.08] text-slate-300 hover:bg-white/[0.06] hover:border-white/20'
+                ? '!bg-emerald-500/15 !border-emerald-500/40 text-emerald-300 hover:!bg-emerald-500/20 backdrop-blur-md'
+                : 'liquid-glass-subtle text-slate-300 hover:text-white hover:border-white/25'
             }`}
           >
             <div className="min-w-0 flex flex-col justify-center">
@@ -389,12 +389,12 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
           {/* Branch 3: Thiên Phú (Talents) */}
           <button
             onClick={() => handleBranchToggle('talent')}
-            className={`w-full h-[55px] px-3.5 py-2 rounded-2xl text-left border transition-all flex items-center justify-between group/branch cursor-pointer ${
+            className={`w-full h-[55px] px-3.5 py-2 rounded-2xl text-left border transition-all flex items-center justify-between group/branch cursor-pointer liquid-glass-interactive ${
               activeBranch === 'talent'
-                ? 'bg-sky-500/20 border-sky-400/60 shadow-[0_0_16px_rgba(56,189,248,0.25)] text-sky-200'
+                ? '!bg-sky-500/25 !border-sky-400/70 shadow-[0_0_20px_rgba(56,189,248,0.3)] text-sky-200 backdrop-blur-xl'
                 : tree.talentBranch.isCompleted
-                ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300 hover:bg-emerald-500/15'
-                : 'bg-slate-900/50 border-white/[0.08] text-slate-300 hover:bg-white/[0.06] hover:border-white/20'
+                ? '!bg-emerald-500/15 !border-emerald-500/40 text-emerald-300 hover:!bg-emerald-500/20 backdrop-blur-md'
+                : 'liquid-glass-subtle text-slate-300 hover:text-white hover:border-white/25'
             }`}
           >
             <div className="min-w-0 flex flex-col justify-center">
@@ -415,12 +415,12 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
           {/* Branch 4: Thánh Di Vật (Artifacts) */}
           <button
             onClick={() => handleBranchToggle('artifact')}
-            className={`w-full h-[55px] px-3.5 py-2 rounded-2xl text-left border transition-all flex items-center justify-between group/branch cursor-pointer ${
+            className={`w-full h-[55px] px-3.5 py-2 rounded-2xl text-left border transition-all flex items-center justify-between group/branch cursor-pointer liquid-glass-interactive ${
               activeBranch === 'artifact'
-                ? 'bg-sky-500/20 border-sky-400/60 shadow-[0_0_16px_rgba(56,189,248,0.25)] text-sky-200'
+                ? '!bg-sky-500/25 !border-sky-400/70 shadow-[0_0_20px_rgba(56,189,248,0.3)] text-sky-200 backdrop-blur-xl'
                 : tree.artifactBranch.isCompleted
-                ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300 hover:bg-emerald-500/15'
-                : 'bg-slate-900/50 border-white/[0.08] text-slate-300 hover:bg-white/[0.06] hover:border-white/20'
+                ? '!bg-emerald-500/15 !border-emerald-500/40 text-emerald-300 hover:!bg-emerald-500/20 backdrop-blur-md'
+                : 'liquid-glass-subtle text-slate-300 hover:text-white hover:border-white/25'
             }`}
           >
             <div className="min-w-0 flex flex-col justify-center">
@@ -472,7 +472,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
           </div>
 
           {/* Drawer Detail Panel (Fluid layout, stays mounted during branch switches) */}
-          <div className="w-[360px] sm:w-[450px] lg:w-[480px] shrink-0 p-4 rounded-2xl bg-slate-900/80 border border-white/[0.1] backdrop-blur-xl shadow-2xl flex flex-col justify-between self-start transition-all duration-300 ease-out min-h-[268px]">
+          <div className="w-[360px] sm:w-[450px] lg:w-[480px] shrink-0 p-4 sm:p-5 rounded-3xl liquid-glass border border-white/15 shadow-2xl flex flex-col justify-between self-start transition-all duration-300 ease-out min-h-[268px]">
             {/* Inner Content with smooth cross-fade when switching activeBranch */}
             <div
               key={effectiveBranch}
@@ -507,7 +507,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                 </div>
 
                 {/* Level Stepper & Quick presets */}
-                <div className="flex items-center justify-between bg-white/[0.03] p-2.5 rounded-xl border border-white/[0.06]">
+                <div className="flex items-center justify-between liquid-glass-subtle p-3 rounded-2xl border border-white/[0.08]">
                   <div className="text-xs text-slate-300 font-semibold">Cấp hiện tại:</div>
                   <div className="flex items-center gap-2">
                     <button
@@ -556,7 +556,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                   </div>
                   <div className="grid grid-cols-2 gap-2 text-xs">
                     {/* Sách Kinh Nghiệm Anh Hùng */}
-                    <div className="p-2 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between gap-2">
+                    <div className="p-2.5 rounded-xl liquid-glass-subtle liquid-glass-interactive border border-white/[0.08] flex items-center justify-between gap-2">
                       <div className="flex items-center gap-2 min-w-0">
                         <img
                           src={BASE_MATERIAL_ICONS.heroWit}
@@ -574,7 +574,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                     </div>
 
                     {/* Mora */}
-                    <div className="p-2 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between gap-2">
+                    <div className="p-2.5 rounded-xl liquid-glass-subtle liquid-glass-interactive border border-white/[0.08] flex items-center justify-between gap-2">
                       <div className="flex items-center gap-2 min-w-0">
                         <img
                           src={BASE_MATERIAL_ICONS.mora}
@@ -592,7 +592,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                     </div>
 
                     {/* Boss Thế Giới */}
-                    <div className="p-2 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between gap-2 col-span-2">
+                    <div className="p-2.5 rounded-xl liquid-glass-subtle liquid-glass-interactive border border-white/[0.08] flex items-center justify-between gap-2 col-span-2">
                       <div className="flex items-center gap-2 min-w-0">
                         <img
                           src={getMaterialIconUrl(displayWorldBossMat, 'bossDrop')}
@@ -612,7 +612,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                     </div>
 
                     {/* Đặc Sản Khu Vực */}
-                    <div className="p-2 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between gap-2 col-span-2">
+                    <div className="p-2.5 rounded-xl liquid-glass-subtle liquid-glass-interactive border border-white/[0.08] flex items-center justify-between gap-2 col-span-2">
                       <div className="flex items-center gap-2 min-w-0">
                         <img
                           src={getMaterialIconUrl(displaySpecialty, 'specialty')}
@@ -665,7 +665,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                 </div>
 
                 {/* 1. Thẻ Vũ Khí Hiện Tại & Nút Chọn Vũ Khí (Drawer) */}
-                <div className="p-3 rounded-2xl bg-white/[0.03] border border-white/[0.08] flex items-center justify-between gap-3">
+                <div className="p-3.5 rounded-2xl liquid-glass-subtle liquid-glass-interactive border border-white/[0.1] flex items-center justify-between gap-3">
                   <div className="flex items-center gap-3 min-w-0">
                     <div
                       className={`w-12 h-12 rounded-xl overflow-hidden shrink-0 border relative flex items-center justify-center ${
@@ -714,7 +714,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                 </div>
 
                 {/* 2. Tùy Chỉnh Level Vũ Khí */}
-                <div className="flex items-center justify-between bg-white/[0.03] p-2.5 rounded-xl border border-white/[0.06]">
+                <div className="flex items-center justify-between liquid-glass-subtle p-3 rounded-2xl border border-white/[0.08]">
                   <div className="text-xs text-slate-300 font-semibold">Cấp hiện tại:</div>
                   <div className="flex items-center gap-2">
                     <button
@@ -769,7 +769,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {/* NL 1: Nguyên liệu Bí cảnh (Domain Material) */}
-                    <div className="p-2 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between gap-2 col-span-1 sm:col-span-2">
+                    <div className="p-2.5 rounded-xl liquid-glass-subtle liquid-glass-interactive border border-white/[0.08] flex items-center justify-between gap-2 col-span-1 sm:col-span-2">
                       <div className="flex items-center gap-2.5 min-w-0">
                         <img
                           src={tree.weaponBranch.materialIcon || getMaterialIconUrl(tree.weaponBranch.materialName, 'weaponAscension')}
@@ -812,7 +812,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                     </div>
 
                     {/* NL 2: Nguyên liệu Quái Tinh Anh */}
-                    <div className="p-2 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between gap-2">
+                    <div className="p-2.5 rounded-xl liquid-glass-subtle liquid-glass-interactive border border-white/[0.08] flex items-center justify-between gap-2">
                       <div className="flex items-center gap-2 min-w-0">
                         <img
                           src={tree.weaponBranch.eliteMatIcon || getMaterialIconUrl(tree.weaponBranch.eliteMatName, 'eliteMonster')}
@@ -842,7 +842,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                     </div>
 
                     {/* NL 3: Nguyên liệu Quái Thường */}
-                    <div className="p-2 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between gap-2">
+                    <div className="p-2.5 rounded-xl liquid-glass-subtle liquid-glass-interactive border border-white/[0.08] flex items-center justify-between gap-2">
                       <div className="flex items-center gap-2 min-w-0">
                         <img
                           src={tree.weaponBranch.commonMatIcon || getMaterialIconUrl(tree.weaponBranch.commonMatName, 'commonMonster')}
@@ -872,7 +872,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                     </div>
 
                     {/* NL 4: Ma Khoáng Tinh Đúc */}
-                    <div className="p-2 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between gap-2">
+                    <div className="p-2.5 rounded-xl liquid-glass-subtle liquid-glass-interactive border border-white/[0.08] flex items-center justify-between gap-2">
                       <div className="flex items-center gap-2 min-w-0">
                         <img
                           src={BASE_MATERIAL_ICONS.mysticOre}
@@ -893,7 +893,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                     </div>
 
                     {/* NL 5: Mora Cần */}
-                    <div className="p-2 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between gap-2">
+                    <div className="p-2.5 rounded-xl liquid-glass-subtle liquid-glass-interactive border border-white/[0.08] flex items-center justify-between gap-2">
                       <div className="flex items-center gap-2 min-w-0">
                         <img
                           src={BASE_MATERIAL_ICONS.mora}
@@ -952,7 +952,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                   </div>
 
                   {/* Skill 1: Đánh Thường */}
-                  <div className="flex items-center justify-between p-2 rounded-xl bg-white/[0.03] border border-white/[0.06]">
+                  <div className="flex items-center justify-between p-2.5 rounded-xl liquid-glass-subtle border border-white/[0.08]">
                     <span className="text-xs font-semibold text-slate-200">Đánh Thường</span>
                     <div className="flex items-center gap-2">
                       <button
@@ -988,7 +988,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                   </div>
 
                   {/* Skill 2: Kỹ Năng Nguyên Tố (E) */}
-                  <div className="flex items-center justify-between p-2 rounded-xl bg-white/[0.03] border border-white/[0.06]">
+                  <div className="flex items-center justify-between p-2.5 rounded-xl liquid-glass-subtle border border-white/[0.08]">
                     <span className="text-xs font-semibold text-slate-200">Kỹ Năng E</span>
                     <div className="flex items-center gap-2">
                       <button
@@ -1024,7 +1024,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                   </div>
 
                   {/* Skill 3: Kỹ Năng Nộ (Q) */}
-                  <div className="flex items-center justify-between p-2 rounded-xl bg-white/[0.03] border border-white/[0.06]">
+                  <div className="flex items-center justify-between p-2.5 rounded-xl liquid-glass-subtle border border-white/[0.08]">
                     <span className="text-xs font-semibold text-slate-200">Kỹ Năng Nộ Q</span>
                     <div className="flex items-center gap-2">
                       <button
@@ -1063,7 +1063,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                 {/* Required Materials with images */}
                 <div className="space-y-1.5 text-xs">
                   {/* Sách Thiên Phú Vàng */}
-                  <div className="p-2 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between gap-2">
+                  <div className="p-2.5 rounded-xl liquid-glass-subtle liquid-glass-interactive border border-white/[0.08] flex items-center justify-between gap-2">
                     <div className="flex items-center gap-2 min-w-0">
                       <img
                         src={BASE_MATERIAL_ICONS.talentBook}
@@ -1083,7 +1083,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                   </div>
 
                   {/* Nguyên liệu Boss Tuần */}
-                  <div className="p-2 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between gap-2">
+                  <div className="p-2.5 rounded-xl liquid-glass-subtle liquid-glass-interactive border border-white/[0.08] flex items-center justify-between gap-2">
                     <div className="flex items-center gap-2 min-w-0">
                       <img
                         src={getMaterialIconUrl(displayWeeklyBossMat, 'bossDrop')}
@@ -1103,7 +1103,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                   </div>
 
                   {/* Vương Miện Trí Thức */}
-                  <div className="p-2 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-between gap-2">
+                  <div className="p-2.5 rounded-xl liquid-glass-subtle liquid-glass-interactive border border-white/[0.08] flex items-center justify-between gap-2">
                     <div className="flex items-center gap-2 min-w-0">
                       <img
                         src={BASE_MATERIAL_ICONS.crown}
@@ -1159,7 +1159,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                 </div>
 
                 {/* Summary Progress Bar */}
-                <div className="p-2.5 rounded-xl bg-white/[0.03] border border-white/[0.06]">
+                <div className="p-3 rounded-2xl liquid-glass-subtle border border-white/[0.08]">
                   <div className="flex items-center justify-between text-xs mb-1.5">
                     <span className="text-slate-300 font-semibold flex items-center gap-1.5">
                       <Layers className="w-3.5 h-3.5 text-rose-400" />
@@ -1197,10 +1197,10 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                     return (
                       <div
                         key={piece.slotKey}
-                        className={`p-2.5 rounded-xl border transition-all flex items-center justify-between gap-2 ${
+                        className={`p-2.5 rounded-xl border transition-all flex items-center justify-between gap-2 liquid-glass-subtle liquid-glass-interactive ${
                           piece.isOptimized
-                            ? 'bg-emerald-500/[0.08] border-emerald-500/30'
-                            : 'bg-white/[0.02] border-white/[0.06]'
+                            ? '!bg-emerald-500/[0.12] !border-emerald-500/40'
+                            : 'border-white/[0.08]'
                         }`}
                       >
                         <div className="flex items-center gap-2 min-w-0">
