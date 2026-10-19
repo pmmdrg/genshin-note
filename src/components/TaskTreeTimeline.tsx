@@ -13,15 +13,16 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
+import { useNavigate } from 'react-router-dom';
 import { GitBranch, Plus, Sparkles } from 'lucide-react';
 import { useStore } from '../store/useStore';
 import { CharacterTreeCard } from './CharacterTreeCard';
 
 export const TaskTreeTimeline: React.FC = () => {
+  const navigate = useNavigate();
   const {
     characterTrees,
     reorderCharacterTrees,
-    setActiveNav,
     lastAddedTreeId,
     setLastAddedTreeId,
   } = useStore();
@@ -75,7 +76,7 @@ export const TaskTreeTimeline: React.FC = () => {
         </div>
 
         <button
-          onClick={() => setActiveNav('characters')}
+          onClick={() => navigate('/characters')}
           className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] backdrop-blur-xl border border-white/[0.08] hover:border-amber-400/30 text-slate-200 text-xs font-semibold transition-all active:scale-95 shadow-sm cursor-pointer"
         >
           <Plus className="w-4 h-4 text-amber-400" />
@@ -96,7 +97,7 @@ export const TaskTreeTimeline: React.FC = () => {
             Chuyển qua tab "Nhân vật" để chọn và thêm các nhân vật bạn muốn bồi dưỡng vào cây nhiệm vụ.
           </p>
           <button
-            onClick={() => setActiveNav('characters')}
+            onClick={() => navigate('/characters')}
             className="flex items-center gap-1.5 px-4 py-2 rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-600 text-slate-950 font-bold text-xs shadow-lg shadow-amber-500/20 transition-all hover:scale-105 cursor-pointer"
           >
             <Plus className="w-4 h-4 stroke-[2.5]" />

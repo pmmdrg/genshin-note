@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { Search, Plus, Layers, RotateCw, Check } from 'lucide-react';
+import React, { useState, useDeferredValue } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Search, Plus, Layers, RotateCw, Check, X } from 'lucide-react';
 import { useStore } from '../store/useStore';
 import { ELEMENT_NAMES_VI } from '../data/genshinData';
 import { ElementIcon } from './ElementIcon';
@@ -7,6 +8,7 @@ import type { UserCharacter } from '../types';
 import confetti from 'canvas-confetti';
 
 export const CharacterRosterView: React.FC = () => {
+  const navigate = useNavigate();
   const {
     characters,
     addCharacterToTimeline,
@@ -18,10 +20,12 @@ export const CharacterRosterView: React.FC = () => {
   const [selectedElement, setSelectedElement] = useState<string>('all');
   const [addedCharName, setAddedCharName] = useState<string | null>(null);
 
+  const deferredSearch = useDeferredValue(searchTerm);
+
   const filteredCharacters = characters.filter((c) => {
     const matchesSearch =
-      c.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      c.nameVi.toLowerCase().includes(searchTerm.toLowerCase());
+      c.name.toLowerCase().includes(deferredSearch.toLowerCase()) ||
+      c.nameVi.toLowerCase().includes(deferredSearch.toLowerCase());
     const matchesElement = selectedElement === 'all' || c.element === selectedElement;
     return matchesSearch && matchesElement;
   });
@@ -34,7 +38,7 @@ export const CharacterRosterView: React.FC = () => {
     });
     addCharacterToTimeline(char);
     setAddedCharName(char.nameVi || char.name);
-    setTimeout(() => setAddedCharName(null), 3000);
+    navigate('/timeline');
   };
 
   return (
@@ -62,7 +66,7 @@ export const CharacterRosterView: React.FC = () => {
           <button
             onClick={() => fetchCharactersFromHoyo()}
             disabled={characterFetchLoading}
-            className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.1] hover:border-cyan-400/40 text-xs font-semibold text-slate-200 transition-all active:scale-95 disabled:opacity-50 shadow-sm"
+            className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.1] hover:border-cyan-400/40 text-xs font-semibold text-slate-200 transition-all active:scale-95 disabled:opacity-50 shadow-sm cursor-pointer"
             title="Đồng bộ danh sách nhân vật thực tế từ tài khoản HoYoLAB"
           >
             <RotateCw className={`w-4 h-4 text-cyan-400 ${characterFetchLoading ? 'animate-spin' : ''}`} />
@@ -70,7 +74,7 @@ export const CharacterRosterView: React.FC = () => {
           </button>
         </div>
 
-        {/* Search Input */}
+        {/* Search Input with Clear Button */}
         <div className="relative flex items-center">
           <Search className="w-4 h-4 absolute left-4 text-slate-400 pointer-events-none" />
           <input
@@ -78,8 +82,17 @@ export const CharacterRosterView: React.FC = () => {
             placeholder="Tìm kiếm nhân vật theo tên (Diluc, Furina, Raiden, Zhongli, Bennett...)"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full bg-white/[0.04] border border-white/[0.1] focus:border-amber-400/50 rounded-2xl pl-11 pr-4 py-2.5 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:outline-none transition-all shadow-inner"
+            className="w-full bg-white/[0.04] border border-white/[0.1] focus:border-amber-400/50 rounded-2xl pl-11 pr-10 py-2.5 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:outline-none transition-all shadow-inner"
           />
+          {searchTerm && (
+            <button
+              onClick={() => setSearchTerm('')}
+              className="absolute right-3 p-1 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+              title="Xoá tìm kiếm"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          )}
         </div>
 
         {/* Element Filter Pills (Vietnamese) */}
@@ -91,7 +104,7 @@ export const CharacterRosterView: React.FC = () => {
               <button
                 key={elem}
                 onClick={() => setSelectedElement(elem)}
-                className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl transition-all capitalize shrink-0 ${
+                className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl transition-all capitalize shrink-0 cursor-pointer ${
                   isSelected
                     ? 'bg-amber-400/20 text-amber-300 border border-amber-400/40 shadow-md font-bold'
                     : 'text-slate-400 hover:text-slate-200 hover:bg-white/[0.05] border border-transparent'
@@ -118,8 +131,8 @@ export const CharacterRosterView: React.FC = () => {
           </div>
         ) : (
           <div
-            key={`${selectedElement}`}
-            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-3.5 sm:gap-4"
+            key={`${selectedElement}-${deferredSearch.trim()}`}
+            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-3.5 sm:gap-4 animate-filter-grid"
           >
             {filteredCharacters.map((char, index) => {
               const isC6 = char.constellation === 6;
@@ -127,8 +140,8 @@ export const CharacterRosterView: React.FC = () => {
               return (
                 <div
                   key={char.id}
-                  style={{ animationDelay: `${Math.min(index * 15, 200)}ms` }}
-                  className={`animate-card-fade-in group relative rounded-2xl p-2.5 transition-all duration-300 flex flex-col justify-between text-center hover:scale-[1.02] ${
+                  style={{ animationDelay: `${Math.min(index * 12, 120)}ms` }}
+                  className={`animate-card-pop group relative rounded-2xl p-2.5 transition-all duration-300 flex flex-col justify-between text-center hover:scale-[1.02] ${
                     isC6
                       ? 'bg-gradient-to-b from-amber-500/[0.09] to-purple-500/[0.05] border border-amber-400/35 hover:border-amber-300/60 shadow-[0_0_12px_rgba(245,158,11,0.12)] hover:shadow-[0_0_24px_rgba(245,158,11,0.25)]'
                       : 'bg-white/[0.03] border border-white/[0.08] hover:border-amber-400/40 hover:bg-white/[0.06] hover:shadow-[0_8px_24px_rgba(0,0,0,0.45)]'

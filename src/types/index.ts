@@ -207,3 +207,10 @@ export interface WeaponPreset {
   daysOfWeek: number[];
   avatarUrl: string;
 }
+
+export interface WallpaperConfig {
+  presetId: string;
+  customUrl?: string;
+  blur: 'none' | 'sm' | 'md' | 'lg';
+  overlayOpacity: number;
+}

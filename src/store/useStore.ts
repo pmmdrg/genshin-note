@@ -1,10 +1,11 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import type { TaskGoal, HoyoDailyNote, UserCharacter, CharacterBranchTree, NavigationMenu, ArtifactPieceItem } from '../types';
+import type { TaskGoal, HoyoDailyNote, UserCharacter, CharacterBranchTree, NavigationMenu, ArtifactPieceItem, WallpaperConfig } from '../types';
 import { DEFAULT_ARTIFACT_PIECES } from '../types';
 import { USER_CHARACTERS_PRESET, CHARACTERS_DATA } from '../data/genshinData';
 import { getCharacterDefaultBuild } from '../data/characterEquipData';
 import { calculateLevelTo90Cost, calculateTalentCost } from '../utils/calculator';
+import { DEFAULT_WALLPAPER } from '../data/wallpapers';
 
 interface AppState {
   // Navigation Menu
@@ -76,6 +77,13 @@ interface AppState {
   checkInLoading: boolean;
   checkInStatus: string | null;
   executeDailyCheckIn: () => Promise<void>;
+
+  // Wallpaper
+  wallpaper: WallpaperConfig;
+  setWallpaper: (updates: Partial<WallpaperConfig>) => void;
+  resetWallpaper: () => void;
+  isWallpaperModalOpen: boolean;
+  setIsWallpaperModalOpen: (open: boolean) => void;
 }
 
 export const useStore = create<AppState>()(
@@ -84,6 +92,16 @@ export const useStore = create<AppState>()(
       activeNav: 'characters',
 
       setActiveNav: (nav) => set({ activeNav: nav }),
+
+      // Wallpaper
+      wallpaper: DEFAULT_WALLPAPER,
+      setWallpaper: (updates) =>
+        set((state) => ({
+          wallpaper: { ...(state.wallpaper || DEFAULT_WALLPAPER), ...updates },
+        })),
+      resetWallpaper: () => set({ wallpaper: DEFAULT_WALLPAPER }),
+      isWallpaperModalOpen: false,
+      setIsWallpaperModalOpen: (open) => set({ isWallpaperModalOpen: open }),
 
       characters: USER_CHARACTERS_PRESET,
       selectedCharacterId: 'char-furina',

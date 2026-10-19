@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import {
   Droplet,
   Gift,
@@ -10,6 +11,7 @@ import {
   Clock,
   Compass,
   AlertCircle,
+  Image as ImageIcon,
 } from 'lucide-react';
 import { useStore } from '../store/useStore';
 import { calculateResinRecovery, formatSecondsToTime, getGenshinServerDate } from '../utils/priority';
@@ -18,9 +20,10 @@ import { APP_VERSION } from '../version';
 import flinsLogo from '../assets/flins_chibi.png';
 
 export const Sidebar: React.FC = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const {
-    activeNav,
-    setActiveNav,
     manualResin,
     lastResinUpdate,
     hoyoData,
@@ -35,7 +38,12 @@ export const Sidebar: React.FC = () => {
     checkInStatus,
     characterTrees,
     characters,
+    setIsWallpaperModalOpen,
   } = useStore();
+
+  const isCharacters = location.pathname === '/' || location.pathname.startsWith('/characters');
+  const isTimeline = location.pathname.startsWith('/timeline');
+  const isCompleted = location.pathname.startsWith('/completed');
 
   const [showCheckInToast, setShowCheckInToast] = useState(false);
 
@@ -100,11 +108,11 @@ export const Sidebar: React.FC = () => {
             Menu Chính
           </div>
 
-          {/* 1. Danh Sách Nhân Vật */}
+          {/* 1. Danh Sách Nhân Vật (/characters) */}
           <button
-            onClick={() => setActiveNav('characters')}
+            onClick={() => navigate('/characters')}
             className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-2xl text-xs font-semibold transition-all duration-300 ease-out cursor-pointer active:scale-95 ${
-              activeNav === 'characters'
+              isCharacters
                 ? 'bg-gradient-to-r from-indigo-500/80 to-blue-600/80 text-white shadow-[0_4px_16px_rgba(99,102,241,0.3)] border border-indigo-400/30 scale-[1.02]'
                 : 'text-slate-400 hover:text-slate-100 hover:bg-white/[0.04]'
             }`}
@@ -115,18 +123,18 @@ export const Sidebar: React.FC = () => {
             </div>
             <span
               className={`text-[10px] px-2 py-0.5 rounded-full font-bold transition-colors duration-300 ${
-                activeNav === 'characters' ? 'bg-white/20 text-white' : 'bg-white/[0.06] text-slate-400'
+                isCharacters ? 'bg-white/20 text-white' : 'bg-white/[0.06] text-slate-400'
               }`}
             >
               {characters.length}
             </span>
           </button>
 
-          {/* 2. Việc Cần Làm (Timeline Cây Nhánh) */}
+          {/* 2. Việc Cần Làm (Timeline Cây Nhánh) (/timeline) */}
           <button
-            onClick={() => setActiveNav('timeline')}
+            onClick={() => navigate('/timeline')}
             className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-2xl text-xs font-semibold transition-all duration-300 ease-out cursor-pointer active:scale-95 ${
-              activeNav === 'timeline'
+              isTimeline
                 ? 'bg-gradient-to-r from-amber-500/80 to-amber-600/80 text-white shadow-[0_4px_16px_rgba(245,158,11,0.3)] border border-amber-400/30 scale-[1.02]'
                 : 'text-slate-400 hover:text-slate-100 hover:bg-white/[0.04]'
             }`}
@@ -137,18 +145,18 @@ export const Sidebar: React.FC = () => {
             </div>
             <span
               className={`text-[10px] px-2 py-0.5 rounded-full font-bold transition-colors duration-300 ${
-                activeNav === 'timeline' ? 'bg-white/20 text-white' : 'bg-white/[0.06] text-amber-300'
+                isTimeline ? 'bg-white/20 text-white' : 'bg-white/[0.06] text-amber-300'
               }`}
             >
               {activeTreeCount}
             </span>
           </button>
 
-          {/* 3. Đã Hoàn Thành */}
+          {/* 3. Đã Hoàn Thành (/completed) */}
           <button
-            onClick={() => setActiveNav('completed')}
+            onClick={() => navigate('/completed')}
             className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-2xl text-xs font-semibold transition-all duration-300 ease-out cursor-pointer active:scale-95 ${
-              activeNav === 'completed'
+              isCompleted
                 ? 'bg-gradient-to-r from-emerald-500/80 to-teal-600/80 text-white shadow-[0_4px_16px_rgba(16,185,129,0.3)] border border-emerald-400/30 scale-[1.02]'
                 : 'text-slate-400 hover:text-slate-100 hover:bg-white/[0.04]'
             }`}
@@ -159,10 +167,25 @@ export const Sidebar: React.FC = () => {
             </div>
             <span
               className={`text-[10px] px-2 py-0.5 rounded-full font-bold transition-colors duration-300 ${
-                activeNav === 'completed' ? 'bg-white/20 text-white' : 'bg-white/[0.06] text-emerald-300'
+                isCompleted ? 'bg-white/20 text-white' : 'bg-white/[0.06] text-emerald-300'
               }`}
             >
               {completedCount}
+            </span>
+          </button>
+
+          {/* 4. Đổi Hình Nền Trang Web */}
+          <button
+            onClick={() => setIsWallpaperModalOpen(true)}
+            className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-2xl text-xs font-semibold text-slate-400 hover:text-purple-300 hover:bg-white/[0.04] border border-transparent hover:border-purple-400/20 transition-all cursor-pointer group mt-2"
+            title="Mở bảng chọn hình nền trang web"
+          >
+            <div className="flex items-center gap-2.5">
+              <ImageIcon className="w-4 h-4 text-purple-400 group-hover:scale-110 transition-transform" />
+              <span>Hình Nền Web</span>
+            </div>
+            <span className="text-[10px] px-2 py-0.5 rounded-lg bg-purple-500/15 text-purple-300 border border-purple-500/25 font-bold">
+              Đổi
             </span>
           </button>
         </div>

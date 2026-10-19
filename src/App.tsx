@@ -1,23 +1,62 @@
 import React from 'react';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { Sidebar } from './components/Sidebar';
 import { CharacterRosterView } from './components/CharacterRosterView';
 import { TaskTreeTimeline } from './components/TaskTreeTimeline';
 import { CompletedList } from './components/CompletedList';
+import { WallpaperModal } from './components/WallpaperModal';
 import { useStore } from './store/useStore';
 import { APP_VERSION } from './version';
+import { getActiveWallpaperUrl, getBlurClass, DEFAULT_WALLPAPER } from './data/wallpapers';
 
 export const App: React.FC = () => {
-  const { activeNav, syncWithHoyo, fetchCharactersFromHoyo } = useStore();
+  const { syncWithHoyo, fetchCharactersFromHoyo, wallpaper = DEFAULT_WALLPAPER, setActiveNav } = useStore();
+  const location = useLocation();
 
   React.useEffect(() => {
     syncWithHoyo();
     fetchCharactersFromHoyo();
   }, []);
 
+  // Synchronize store activeNav with current route
+  React.useEffect(() => {
+    const path = location.pathname;
+    if (path.startsWith('/timeline')) {
+      setActiveNav('timeline');
+    } else if (path.startsWith('/completed')) {
+      setActiveNav('completed');
+    } else {
+      setActiveNav('characters');
+    }
+  }, [location.pathname]);
+
+  const activeWallpaperUrl = getActiveWallpaperUrl(wallpaper);
+  const blurClass = getBlurClass(wallpaper.blur);
+  const overlayOpacity = wallpaper.overlayOpacity ?? 0.65;
 
   return (
     <div className="min-h-screen bg-[#07090e] text-slate-100 flex flex-col md:flex-row selection:bg-amber-400/30 selection:text-amber-200 relative overflow-hidden">
-      {/* Liquid Glass Background - Animated Floating Water Droplets / Blobs */}
+      {/* 1. Custom Wallpaper Layer (if selected) */}
+      {activeWallpaperUrl && (
+        <div
+          className={`fixed inset-0 pointer-events-none z-0 transition-all duration-700 bg-cover bg-center ${blurClass}`}
+          style={{
+            backgroundImage: `url(${activeWallpaperUrl})`,
+          }}
+        />
+      )}
+
+      {/* 2. Glass Dim / Overlay Layer */}
+      <div
+        className="fixed inset-0 pointer-events-none z-0 transition-colors duration-500"
+        style={{
+          backgroundColor: activeWallpaperUrl
+            ? `rgba(7, 9, 14, ${overlayOpacity})`
+            : '#07090e',
+        }}
+      />
+
+      {/* 3. Liquid Glass Background - Animated Floating Water Droplets / Blobs */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
         {/* Blob 1: Top-Left Deep Indigo / Purple */}
         <div className="absolute -top-24 -left-24 w-[34rem] h-[34rem] rounded-full bg-gradient-to-br from-indigo-600/20 via-purple-600/15 to-transparent blur-[110px] animate-bubble-1" />
@@ -38,10 +77,14 @@ export const App: React.FC = () => {
       {/* Right Main Content Area */}
       <div className="flex-1 min-w-0 flex flex-col justify-between relative z-10 overflow-y-auto max-h-screen">
         <main className="p-4 lg:p-8">
-          <div key={activeNav} className="animate-page-transition">
-            {activeNav === 'characters' && <CharacterRosterView />}
-            {activeNav === 'timeline' && <TaskTreeTimeline />}
-            {activeNav === 'completed' && <CompletedList />}
+          <div key={location.pathname} className="animate-page-transition">
+            <Routes>
+              <Route path="/" element={<Navigate to="/characters" replace />} />
+              <Route path="/characters" element={<CharacterRosterView />} />
+              <Route path="/timeline" element={<TaskTreeTimeline />} />
+              <Route path="/completed" element={<CompletedList />} />
+              <Route path="*" element={<Navigate to="/characters" replace />} />
+            </Routes>
           </div>
         </main>
 
@@ -54,6 +97,9 @@ export const App: React.FC = () => {
           </p>
         </footer>
       </div>
+
+      {/* Wallpaper Picker Modal */}
+      <WallpaperModal />
     </div>
   );
 };

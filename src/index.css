@@ -79,6 +79,37 @@ body {
   animation: cardFadeIn 0.26s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
+/* Smooth search filter pop & grid transitions */
+@keyframes filterGridFade {
+  0% {
+    opacity: 0.65;
+    transform: translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-filter-grid {
+  animation: filterGridFade 0.22s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes cardSmoothPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.93) translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-card-pop {
+  animation: cardSmoothPop 0.26s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
 /* Animated Floating Liquid Glass Bubbles */
 @keyframes bubble-float-1 {
   0%, 100% {
