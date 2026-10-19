@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import type { TaskGoal, HoyoDailyNote, UserCharacter, CharacterBranchTree, NavigationMenu } from '../types';
+import type { TaskGoal, HoyoDailyNote, UserCharacter, CharacterBranchTree, NavigationMenu, ArtifactPieceItem } from '../types';
+import { DEFAULT_ARTIFACT_PIECES } from '../types';
 import { USER_CHARACTERS_PRESET, CHARACTERS_DATA } from '../data/genshinData';
 import { getCharacterDefaultBuild } from '../data/characterEquipData';
 import { calculateLevelTo90Cost, calculateTalentCost } from '../utils/calculator';
@@ -29,6 +30,10 @@ interface AppState {
   addCharacterToTimeline: (character: UserCharacter) => void;
   reorderCharacterTrees: (activeId: string, overId: string) => void;
   toggleBranchComplete: (treeId: string, branchKey: 'levelBranch' | 'weaponBranch' | 'talentBranch' | 'artifactBranch') => void;
+  updateTreeLevel: (treeId: string, newLevel: number) => void;
+  updateTreeWeaponLevel: (treeId: string, newLevel: number) => void;
+  updateTreeTalentLevel: (treeId: string, skill: 'attack' | 'skill' | 'burst', newLevel: number) => void;
+  updateTreeArtifactPiece: (treeId: string, slotIndex: number, updates: { level?: number; isOptimized?: boolean }) => void;
   toggleCompleteCharacterTree: (treeId: string) => void;
   restoreCharacterTree: (treeId: string) => void;
   deleteCharacterTree: (treeId: string) => void;
@@ -242,6 +247,8 @@ export const useStore = create<AppState>()(
           avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Furina.png',
           element: 'hydro',
           rarity: 5,
+          constellation: 6,
+          level: 70,
           order: 0,
           isCompleted: false,
           createdAt: Date.now() - 3600000,
@@ -282,6 +289,11 @@ export const useStore = create<AppState>()(
             domainName: 'Bí Cảnh Tội Lỗi Tận Cùng',
             recommendPieces: ['Hoa', 'Lông', 'Đồng Hồ HP%', 'Ly Sát Thương Thủy', 'Nón Tỉ Lệ Bạo'],
             isCompleted: false,
+            pieces: DEFAULT_ARTIFACT_PIECES.map((p) => ({
+              ...p,
+              level: 20,
+              isOptimized: p.slotKey === 'flower' || p.slotKey === 'plume',
+            })),
           },
         },
         {
@@ -291,6 +303,8 @@ export const useStore = create<AppState>()(
           avatarUrl: 'https://raw.githubusercontent.com/FortOfFans/GenShin/master/UI/UI_AvatarIcon_Shougun.png',
           element: 'electro',
           rarity: 5,
+          constellation: 2,
+          level: 80,
           order: 1,
           isCompleted: false,
           createdAt: Date.now() - 7200000,
@@ -331,6 +345,11 @@ export const useStore = create<AppState>()(
             domainName: 'Sân Đình Momiji',
             recommendPieces: ['Hoa', 'Lông', 'Đồng Hồ Hiệu Quả Nạp', 'Ly Sát Thương Lôi', 'Nón Tỉ Lệ Bạo'],
             isCompleted: true,
+            pieces: DEFAULT_ARTIFACT_PIECES.map((p) => ({
+              ...p,
+              level: 20,
+              isOptimized: true,
+            })),
           },
         },
       ],
@@ -342,6 +361,16 @@ export const useStore = create<AppState>()(
           { attack: 10, skill: 10, burst: 10 }
         );
 
+        const initialPieces: ArtifactPieceItem[] = DEFAULT_ARTIFACT_PIECES.map((piece, idx) => {
+          const relic = char.relics?.[idx];
+          const relicLvl = relic ? relic.level : 20;
+          return {
+            ...piece,
+            level: relicLvl,
+            isOptimized: relicLvl >= 20,
+          };
+        });
+
         const newTree: CharacterBranchTree = {
           id: `tree-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
           characterId: char.id,
@@ -349,6 +378,8 @@ export const useStore = create<AppState>()(
           avatarUrl: char.icon,
           element: char.element,
           rarity: char.rarity,
+          constellation: char.constellation,
+          level: char.level,
           order: 0,
           isCompleted: false,
           createdAt: Date.now(),
@@ -388,7 +419,8 @@ export const useStore = create<AppState>()(
             setName: char.relics?.[0]?.setName || 'Bộ Thánh Di Vật',
             domainName: 'Bí Cảnh Thánh Di Vật',
             recommendPieces: ['Hoa', 'Lông', 'Đồng Hồ', 'Ly', 'Nón'],
-            isCompleted: false,
+            isCompleted: initialPieces.every((p) => p.isOptimized),
+            pieces: initialPieces,
           },
         };
 
@@ -423,6 +455,111 @@ export const useStore = create<AppState>()(
             return {
               ...tree,
               [branchKey]: updatedBranch,
+            };
+          }),
+        }));
+      },
+
+      updateTreeLevel: (treeId, newLevel) => {
+        const clampedLevel = Math.max(1, Math.min(90, newLevel));
+        const levelCost = calculateLevelTo90Cost(clampedLevel, 90);
+        set((state) => ({
+          characterTrees: state.characterTrees.map((tree) => {
+            if (tree.id !== treeId) return tree;
+            return {
+              ...tree,
+              level: clampedLevel,
+              levelBranch: {
+                ...tree.levelBranch,
+                currentLevel: clampedLevel,
+                heroWitNeeded: levelCost.heroWit,
+                moraNeeded: levelCost.mora,
+                bossDropNeeded: levelCost.bossDrops,
+                specialtyNeeded: levelCost.localSpecialty,
+                isCompleted: clampedLevel >= 90,
+              },
+            };
+          }),
+        }));
+      },
+
+      updateTreeWeaponLevel: (treeId, newLevel) => {
+        const clampedLevel = Math.max(1, Math.min(90, newLevel));
+        set((state) => ({
+          characterTrees: state.characterTrees.map((tree) => {
+            if (tree.id !== treeId) return tree;
+            return {
+              ...tree,
+              weaponBranch: {
+                ...tree.weaponBranch,
+                currentLevel: clampedLevel,
+                isCompleted: clampedLevel >= 90,
+              },
+            };
+          }),
+        }));
+      },
+
+      updateTreeTalentLevel: (treeId, skill, newLevel) => {
+        const clamped = Math.max(1, Math.min(10, newLevel));
+        set((state) => ({
+          characterTrees: state.characterTrees.map((tree) => {
+            if (tree.id !== treeId) return tree;
+            const updatedLevels = {
+              ...tree.talentBranch.currentLevels,
+              [skill]: clamped,
+            };
+            const talentCost = calculateTalentCost(updatedLevels, tree.talentBranch.targetLevels);
+            const isCompleted =
+              updatedLevels.attack >= tree.talentBranch.targetLevels.attack &&
+              updatedLevels.skill >= tree.talentBranch.targetLevels.skill &&
+              updatedLevels.burst >= tree.talentBranch.targetLevels.burst;
+            return {
+              ...tree,
+              talentBranch: {
+                ...tree.talentBranch,
+                currentLevels: updatedLevels,
+                booksGoldNeeded: talentCost.goldBooks,
+                weeklyBossMatsNeeded: talentCost.weeklyBossMats,
+                crownsNeeded: talentCost.crowns,
+                isCompleted,
+              },
+            };
+          }),
+        }));
+      },
+
+      updateTreeArtifactPiece: (treeId, slotIndex, updates) => {
+        set((state) => ({
+          characterTrees: state.characterTrees.map((tree) => {
+            if (tree.id !== treeId) return tree;
+            const currentPieces =
+              tree.artifactBranch.pieces && tree.artifactBranch.pieces.length === 5
+                ? [...tree.artifactBranch.pieces]
+                : [...DEFAULT_ARTIFACT_PIECES];
+
+            if (!currentPieces[slotIndex]) return tree;
+            currentPieces[slotIndex] = {
+              ...currentPieces[slotIndex],
+              level:
+                updates.level !== undefined
+                  ? Math.max(0, Math.min(20, updates.level))
+                  : currentPieces[slotIndex].level,
+              isOptimized:
+                updates.isOptimized !== undefined
+                  ? updates.isOptimized
+                  : currentPieces[slotIndex].isOptimized,
+            };
+
+            const allOptimized = currentPieces.every((p) => p.isOptimized);
+
+            return {
+              ...tree,
+              artifactBranch: {
+                ...tree.artifactBranch,
+                pieces: currentPieces,
+                isCompleted: allOptimized,
+              },
             };
           }),
         }));

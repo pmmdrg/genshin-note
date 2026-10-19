@@ -77,6 +77,21 @@ export interface UserCharacter {
   isExactInGameData?: boolean;
 }
 
+export interface ArtifactPieceItem {
+  slotKey: 'flower' | 'plume' | 'sands' | 'goblet' | 'circlet';
+  slotName: string;
+  level: number;
+  isOptimized: boolean;
+}
+
+export const DEFAULT_ARTIFACT_PIECES: ArtifactPieceItem[] = [
+  { slotKey: 'flower', slotName: 'Hoa Sự Sống', level: 20, isOptimized: false },
+  { slotKey: 'plume', slotName: 'Lông Vũ Tử Thần', level: 20, isOptimized: false },
+  { slotKey: 'sands', slotName: 'Cát Thời Gian', level: 20, isOptimized: false },
+  { slotKey: 'goblet', slotName: 'Ly Không Gian', level: 20, isOptimized: false },
+  { slotKey: 'circlet', slotName: 'Nón Lý Trí', level: 20, isOptimized: false },
+];
+
 export interface CharacterBranchTree {
   id: string;
   characterId: string;
@@ -84,6 +99,8 @@ export interface CharacterBranchTree {
   avatarUrl: string;
   element: ElementType;
   rarity: 4 | 5;
+  constellation?: number;
+  level?: number;
   order: number;
   isCompleted: boolean;
   createdAt: number;
@@ -130,6 +147,7 @@ export interface CharacterBranchTree {
     domainName?: string;
     recommendPieces: string[];
     isCompleted: boolean;
+    pieces?: ArtifactPieceItem[];
   };
 }
 

@@ -56,7 +56,7 @@ export const TaskTreeTimeline: React.FC = () => {
 
         <button
           onClick={() => setActiveNav('characters')}
-          className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] backdrop-blur-xl border border-white/[0.08] hover:border-amber-400/30 text-slate-200 text-xs font-semibold transition-all active:scale-95 shadow-sm"
+          className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] backdrop-blur-xl border border-white/[0.08] hover:border-amber-400/30 text-slate-200 text-xs font-semibold transition-all active:scale-95 shadow-sm cursor-pointer"
         >
           <Plus className="w-4 h-4 text-amber-400" />
           <span>Thêm nhân vật khác</span>
@@ -77,30 +77,59 @@ export const TaskTreeTimeline: React.FC = () => {
           </p>
           <button
             onClick={() => setActiveNav('characters')}
-            className="flex items-center gap-1.5 px-4 py-2 rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-600 text-slate-950 font-bold text-xs shadow-lg shadow-amber-500/20 transition-all hover:scale-105"
+            className="flex items-center gap-1.5 px-4 py-2 rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-600 text-slate-950 font-bold text-xs shadow-lg shadow-amber-500/20 transition-all hover:scale-105 cursor-pointer"
           >
             <Plus className="w-4 h-4 stroke-[2.5]" />
             Mở Danh Sách Nhân Vật
           </button>
         </div>
       ) : (
-        /* DnD Sortable Character Trees List */
-        <DndContext
-          sensors={sensors}
-          collisionDetection={closestCenter}
-          onDragEnd={handleDragEnd}
-        >
-          <SortableContext
-            items={activeTrees.map((t) => t.id)}
-            strategy={verticalListSortingStrategy}
+        /* Continuous Timeline Spine with Anchored Character Trees */
+        <div className="relative pl-6 sm:pl-8 pt-2">
+          {/* Main Timeline Line (Vertical Spine) */}
+          <div className="absolute left-[11px] sm:left-[15px] top-6 bottom-6 w-0.5 bg-gradient-to-b from-amber-400 via-amber-400/40 to-purple-500/20 shadow-[0_0_8px_rgba(245,158,11,0.4)] pointer-events-none" />
+
+          {/* DnD Sortable Character Trees along Timeline */}
+          <DndContext
+            sensors={sensors}
+            collisionDetection={closestCenter}
+            onDragEnd={handleDragEnd}
           >
-            <div className="space-y-5">
-              {activeTrees.map((tree, idx) => (
-                <CharacterTreeCard key={tree.id} tree={tree} index={idx} />
-              ))}
-            </div>
-          </SortableContext>
-        </DndContext>
+            <SortableContext
+              items={activeTrees.map((t) => t.id)}
+              strategy={verticalListSortingStrategy}
+            >
+              <div className="space-y-6">
+                {activeTrees.map((tree, idx) => (
+                  <div key={tree.id} className="relative">
+                    {/* Timeline Milestone Dot on Spine */}
+                    <div
+                      className={`absolute -left-6 sm:-left-8 top-10 w-6 h-6 rounded-full bg-slate-950 border-2 flex items-center justify-center z-10 transition-transform ${
+                        idx === 0
+                          ? 'border-amber-400 shadow-[0_0_14px_rgba(245,158,11,0.8)] scale-110'
+                          : 'border-white/40 shadow-[0_0_8px_rgba(255,255,255,0.2)]'
+                      }`}
+                    >
+                      <span
+                        className={`text-[10px] font-black font-sans ${
+                          idx === 0 ? 'text-amber-300' : 'text-slate-300'
+                        }`}
+                      >
+                        {idx + 1}
+                      </span>
+                    </div>
+
+                    {/* Horizontal Connector Line from Milestone Node to Tree Card */}
+                    <div className="absolute -left-3 sm:-left-4 top-[51px] w-3 sm:w-4 h-0.5 bg-gradient-to-r from-amber-400/70 to-white/20 pointer-events-none" />
+
+                    {/* Character Tree with Horizontal Branching */}
+                    <CharacterTreeCard tree={tree} index={idx} />
+                  </div>
+                ))}
+              </div>
+            </SortableContext>
+          </DndContext>
+        </div>
       )}
     </div>
   );
