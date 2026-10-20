@@ -7,6 +7,7 @@ import { getCharacterDefaultBuild } from '../data/characterEquipData';
 import { calculateLevelTo90Cost, calculateTalentCost } from '../utils/calculator';
 import { DEFAULT_WALLPAPER } from '../data/wallpapers';
 import { getCharacterMaterialDetail } from '../data/characterMaterialsData';
+import { getCharacterTalentDetail } from '../data/characterTalentsData';
 import { COMPREHENSIVE_WEAPONS } from '../data/weaponsData';
 import { getTalentDomainInfo } from '../utils/materialIcons';
 
@@ -211,6 +212,7 @@ export const useStore = create<AppState>()(
               const isExactInGameData = Boolean(hoyoChar.showcaseTalents || (hoyoChar.weapon && hoyoChar.weapon.name && hoyoChar.weapon.name !== 'Vũ Khí Trang Bị'));
 
               const matDetail = getCharacterMaterialDetail(userPreset?.nameVi || dataPreset?.nameVi || rawName || hoyoChar.name);
+              const talentDetail = getCharacterTalentDetail(userPreset?.nameVi || dataPreset?.nameVi || rawName || hoyoChar.name);
 
               return {
                 id: `char-hoyo-${hoyoChar.id}`,
@@ -228,10 +230,27 @@ export const useStore = create<AppState>()(
                   relics: relicsData,
                   talents,
                   isExactInGameData,
-                  talentBook: userPreset?.talentBook || dataPreset?.talentBook || 'Sách Thiên Phú',
-                  talentDomain: userPreset?.talentDomain || dataPreset?.talentDomain || 'Bí Cảnh Thiên Phú',
-                  talentDays: userPreset?.talentDays || dataPreset?.talentDays || [1, 4, 0],
-                  weeklyBossMat: matDetail.weeklyBossMat !== 'Nguyên Liệu Boss Tuần' ? matDetail.weeklyBossMat : (userPreset?.weeklyBossMat || dataPreset?.weeklyBossMat || 'Nguyên Liệu Boss Tuần'),
+                  talentBook:
+                    talentDetail.talentBookName ||
+                    userPreset?.talentBook ||
+                    dataPreset?.talentBook ||
+                    'Sách Thiên Phú',
+                  talentDomain:
+                    talentDetail.domainName ||
+                    userPreset?.talentDomain ||
+                    dataPreset?.talentDomain ||
+                    'Bí Cảnh Thiên Phú',
+                  talentDays:
+                    talentDetail.daysOfWeek ||
+                    userPreset?.talentDays ||
+                    dataPreset?.talentDays ||
+                    [1, 4, 0],
+                  weeklyBossMat:
+                    talentDetail.weeklyBossMat !== 'Nguyên Liệu Boss Tuần'
+                      ? talentDetail.weeklyBossMat
+                      : matDetail.weeklyBossMat !== 'Nguyên Liệu Boss Tuần'
+                      ? matDetail.weeklyBossMat
+                      : userPreset?.weeklyBossMat || dataPreset?.weeklyBossMat || 'Nguyên Liệu Boss Tuần',
                   worldBossMat: matDetail.worldBossMat !== 'Nguyên Liệu Boss Thế Giới' ? matDetail.worldBossMat : (userPreset?.worldBossMat || dataPreset?.worldBossMat || 'Nguyên Liệu Boss Thế Giới'),
                   localSpecialty: matDetail.localSpecialty !== 'Đặc Sản Khu Vực' ? matDetail.localSpecialty : (userPreset?.localSpecialty || dataPreset?.localSpecialty || 'Đặc Sản Khu Vực'),
                 };
@@ -333,8 +352,8 @@ export const useStore = create<AppState>()(
             isCompleted: false,
           },
           talentBranch: {
-            talentBookName: 'Sách Công Lý (Justice)',
-            domainName: 'Vinh Quang Nhạt Nhòa (Fontaine)',
+            talentBookName: 'Triết Học Của "Chính Nghĩa"',
+            domainName: 'Bí Cảnh Tinh Thông: Lòng Tiếc Thương',
             daysOfWeek: [2, 5, 0],
             weeklyBossMatName: 'Khối Không Ánh Sáng',
             currentLevels: { attack: 6, skill: 8, burst: 9 },
@@ -397,8 +416,8 @@ export const useStore = create<AppState>()(
             isCompleted: true,
           },
           talentBranch: {
-            talentBookName: 'Sách Ánh Sáng (Light)',
-            domainName: 'Sân Đình Violet (Inazuma)',
+            talentBookName: 'Triết Học Của "Ánh Sáng"',
+            domainName: 'Bí Cảnh Tinh Thông: Lời Răn Tránh Kiếp',
             daysOfWeek: [3, 6, 0],
             weeklyBossMatName: 'Thời Khắc Tan Biến (Signora)',
             currentLevels: { attack: 6, skill: 9, burst: 10 },
@@ -453,15 +472,14 @@ export const useStore = create<AppState>()(
         });
 
         const matDetail = getCharacterMaterialDetail(char.nameVi || char.name);
+        const talentDetail = getCharacterTalentDetail(char.nameVi || char.name);
+
         const worldBossMat = char.worldBossMat && !char.worldBossMat.includes('Nguyên Liệu')
           ? char.worldBossMat
           : matDetail.worldBossMat;
         const localSpecialty = char.localSpecialty && !char.localSpecialty.includes('Đặc Sản')
           ? char.localSpecialty
           : matDetail.localSpecialty;
-        const weeklyBossMatName = char.weeklyBossMat && !char.weeklyBossMat.includes('Nguyên Liệu')
-          ? char.weeklyBossMat
-          : matDetail.weeklyBossMat;
 
         const matchedCharPreset = CHARACTERS_DATA.find(
           (c) =>
@@ -471,19 +489,33 @@ export const useStore = create<AppState>()(
         );
 
         const talentBookName =
-          char.talentBook && !char.talentBook.includes('/')
+          char.talentBook && !char.talentBook.includes('/') && char.talentBook !== 'Sách Thiên Phú'
             ? char.talentBook
-            : matchedCharPreset?.talentBook || 'Sách Thiên Phú';
+            : matchedCharPreset?.talentBook && matchedCharPreset.talentBook !== 'Sách Thiên Phú'
+            ? matchedCharPreset.talentBook
+            : talentDetail.talentBookName;
 
-        const talentDomainInfo = getTalentDomainInfo(talentBookName);
+        const talentDomainInfo = getTalentDomainInfo(talentBookName, char.nameVi || char.name);
         const domainName =
-          char.talentDomain || matchedCharPreset?.talentDomain || talentDomainInfo.domainName;
+          char.talentDomain && char.talentDomain !== 'Bí Cảnh Thiên Phú'
+            ? char.talentDomain
+            : matchedCharPreset?.talentDomain && matchedCharPreset.talentDomain !== 'Bí Cảnh Thiên Phú'
+            ? matchedCharPreset.talentDomain
+            : talentDetail.domainName || talentDomainInfo.domainName;
+
         const daysOfWeek =
           char.talentDays && char.talentDays.length > 0
             ? char.talentDays
             : matchedCharPreset?.talentDays && matchedCharPreset.talentDays.length > 0
             ? matchedCharPreset.talentDays
-            : talentDomainInfo.daysOfWeek;
+            : talentDetail.daysOfWeek || talentDomainInfo.daysOfWeek;
+
+        const weeklyBossMatName =
+          talentDetail.weeklyBossMat && talentDetail.weeklyBossMat !== 'Nguyên Liệu Boss Tuần'
+            ? talentDetail.weeklyBossMat
+            : char.weeklyBossMat && !char.weeklyBossMat.includes('Nguyên Liệu')
+            ? char.weeklyBossMat
+            : matDetail.weeklyBossMat;
 
         const charWeaponName = char.weapon?.name;
         const matchedWeapon = charWeaponName

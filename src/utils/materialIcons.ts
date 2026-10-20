@@ -5,6 +5,7 @@
 
 import { CHARACTER_MATERIALS } from '../data/characterMaterialsData';
 import { COMPREHENSIVE_WEAPONS } from '../data/weaponsData';
+import { getCharacterTalentDetail } from '../data/characterTalentsData';
 
 export const BASE_MATERIAL_ICONS = {
   heroWit: 'https://gi.yatta.moe/assets/UI/UI_ItemIcon_104003.png',
@@ -67,15 +68,18 @@ export const TALENT_BOOK_ICONS: Record<string, string> = {
   // Fontaine - Pale Forgotten Glory
   'công bằng': 'https://gi.yatta.moe/assets/UI/UI_ItemIcon_104340.png',
   'equity': 'https://gi.yatta.moe/assets/UI/UI_ItemIcon_104340.png',
+  'chính nghĩa': 'https://gi.yatta.moe/assets/UI/UI_ItemIcon_104343.png',
   'công lý': 'https://gi.yatta.moe/assets/UI/UI_ItemIcon_104343.png',
   'justice': 'https://gi.yatta.moe/assets/UI/UI_ItemIcon_104343.png',
   'trật tự': 'https://gi.yatta.moe/assets/UI/UI_ItemIcon_104346.png',
   'order': 'https://gi.yatta.moe/assets/UI/UI_ItemIcon_104346.png',
 
   // Natlan - Blazing Ruins
+  'tranh đấu': 'https://gi.yatta.moe/assets/UI/UI_ItemIcon_104349.png',
   'bất diệt': 'https://gi.yatta.moe/assets/UI/UI_ItemIcon_104349.png',
   'tranh đua': 'https://gi.yatta.moe/assets/UI/UI_ItemIcon_104349.png',
   'contention': 'https://gi.yatta.moe/assets/UI/UI_ItemIcon_104349.png',
+  'thiêu đốt': 'https://gi.yatta.moe/assets/UI/UI_ItemIcon_104352.png',
   'hàn huyên': 'https://gi.yatta.moe/assets/UI/UI_ItemIcon_104352.png',
   'hoàng huyên': 'https://gi.yatta.moe/assets/UI/UI_ItemIcon_104352.png',
   'đốt lửa': 'https://gi.yatta.moe/assets/UI/UI_ItemIcon_104352.png',
@@ -85,16 +89,39 @@ export const TALENT_BOOK_ICONS: Record<string, string> = {
 };
 
 /**
- * Resolves the authentic gold talent book icon from the talent book name
+ * Resolves the authentic gold talent book icon from talent book name or character name
  */
-export function getTalentBookIcon(talentBookName?: string): string {
-  if (!talentBookName) return BASE_MATERIAL_ICONS.talentBook;
+export function getTalentBookIcon(talentBookName?: string, characterName?: string): string {
+  // If character name is provided and talentBookName is empty or generic, check character direct talent profile
+  if (characterName) {
+    const charTalent = getCharacterTalentDetail(characterName);
+    if (charTalent && charTalent.talentBookIcon) {
+      if (!talentBookName || talentBookName === 'Sách Thiên Phú' || talentBookName.includes('Bất Diệt / Công Lý')) {
+        return charTalent.talentBookIcon;
+      }
+    }
+  }
+
+  if (!talentBookName) {
+    if (characterName) {
+      return getCharacterTalentDetail(characterName).talentBookIcon;
+    }
+    return BASE_MATERIAL_ICONS.talentBook;
+  }
+
   const lower = talentBookName.toLowerCase();
   for (const [key, icon] of Object.entries(TALENT_BOOK_ICONS)) {
     if (lower.includes(key)) {
       return icon;
     }
   }
+
+  // Fallback to character name if not matched in dictionary
+  if (characterName) {
+    const charTalent = getCharacterTalentDetail(characterName);
+    if (charTalent?.talentBookIcon) return charTalent.talentBookIcon;
+  }
+
   return BASE_MATERIAL_ICONS.talentBook;
 }
 
@@ -105,10 +132,29 @@ export interface TalentDomainInfo {
 }
 
 /**
- * Resolves domain schedule and location for any talent book
+ * Resolves domain schedule and location for any talent book or character
  */
-export function getTalentDomainInfo(talentBookName?: string): TalentDomainInfo {
+export function getTalentDomainInfo(talentBookName?: string, characterName?: string): TalentDomainInfo {
+  if (characterName) {
+    const charTalent = getCharacterTalentDetail(characterName);
+    if (charTalent && charTalent.domainName && (!talentBookName || talentBookName === 'Sách Thiên Phú')) {
+      return {
+        domainName: charTalent.domainName,
+        daysOfWeek: charTalent.daysOfWeek,
+        region: 'Teyvat',
+      };
+    }
+  }
+
   if (!talentBookName) {
+    if (characterName) {
+      const charTalent = getCharacterTalentDetail(characterName);
+      return {
+        domainName: charTalent.domainName,
+        daysOfWeek: charTalent.daysOfWeek,
+        region: 'Teyvat',
+      };
+    }
     return { domainName: 'Bí Cảnh Thiên Phú', daysOfWeek: [1, 4, 0], region: 'Mondstadt' };
   }
   const name = talentBookName.toLowerCase();
@@ -161,7 +207,7 @@ export function getTalentDomainInfo(talentBookName?: string): TalentDomainInfo {
   if (name.includes('công bằng') || name.includes('equity')) {
     return { domainName: 'Vinh Quang Nhạt Nhòa (Fontaine)', daysOfWeek: [1, 4, 0], region: 'Fontaine' };
   }
-  if (name.includes('công lý') || name.includes('justice')) {
+  if (name.includes('chính nghĩa') || name.includes('công lý') || name.includes('justice')) {
     return { domainName: 'Vinh Quang Nhạt Nhòa (Fontaine)', daysOfWeek: [2, 5, 0], region: 'Fontaine' };
   }
   if (name.includes('trật tự') || name.includes('order')) {
@@ -169,14 +215,23 @@ export function getTalentDomainInfo(talentBookName?: string): TalentDomainInfo {
   }
 
   // Natlan
-  if (name.includes('bất diệt') || name.includes('tranh đua') || name.includes('contention')) {
+  if (name.includes('tranh đấu') || name.includes('bất diệt') || name.includes('tranh đua') || name.includes('contention')) {
     return { domainName: 'Tàn Tích Bốc Cháy (Natlan)', daysOfWeek: [1, 4, 0], region: 'Natlan' };
   }
-  if (name.includes('hàn huyên') || name.includes('hoàng huyên') || name.includes('đốt lửa') || name.includes('kindling')) {
+  if (name.includes('thiêu đốt') || name.includes('hàn huyên') || name.includes('hoàng huyên') || name.includes('đốt lửa') || name.includes('kindling')) {
     return { domainName: 'Tàn Tích Bốc Cháy (Natlan)', daysOfWeek: [2, 5, 0], region: 'Natlan' };
   }
   if (name.includes('xung đột') || name.includes('conflict')) {
     return { domainName: 'Tàn Tích Bốc Cháy (Natlan)', daysOfWeek: [3, 6, 0], region: 'Natlan' };
+  }
+
+  if (characterName) {
+    const charTalent = getCharacterTalentDetail(characterName);
+    return {
+      domainName: charTalent.domainName,
+      daysOfWeek: charTalent.daysOfWeek,
+      region: 'Teyvat',
+    };
   }
 
   return { domainName: 'Bí Cảnh Thiên Phú', daysOfWeek: [1, 4, 0], region: 'Teyvat' };

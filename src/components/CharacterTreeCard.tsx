@@ -22,13 +22,13 @@ import { ElementIcon } from './ElementIcon';
 import {
   getMaterialIconUrl,
   getTalentBookIcon,
-  getTalentDomainInfo,
   BASE_MATERIAL_ICONS,
 } from '../utils/materialIcons';
 import { WeaponSelectionDrawer } from './WeaponSelectionDrawer';
 import { calculateWeaponTo90Cost, calculateTalentCost, calculateLevelTo90Cost } from '../utils/calculator';
 import { CHARACTERS_DATA } from '../data/genshinData';
 import { getCharacterMaterialDetail } from '../data/characterMaterialsData';
+import { getCharacterTalentDetail } from '../data/characterTalentsData';
 import { COMPREHENSIVE_WEAPONS } from '../data/weaponsData';
 
 interface CharacterTreeCardProps {
@@ -81,13 +81,92 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
   };
 
   const isTopPriority = index === 0;
-  const talentDomainInfo = getTalentDomainInfo(tree.talentBranch.talentBookName);
+
+  // Accurate Character Talent & Weapon Material resolution
+  const talentDetail = getCharacterTalentDetail(tree.characterName);
+  const matDetail = getCharacterMaterialDetail(tree.characterName);
+
+  const displayTalentBookName =
+    tree.talentBranch.talentBookName &&
+    tree.talentBranch.talentBookName !== 'Sách Thiên Phú' &&
+    !tree.talentBranch.talentBookName.includes('Bất Diệt / Công Lý')
+      ? tree.talentBranch.talentBookName
+      : talentDetail.talentBookName;
+
+  const displayTalentBookIcon =
+    talentDetail.talentBookIcon ||
+    getTalentBookIcon(displayTalentBookName, tree.characterName);
+
+  const displayTalentDomainName =
+    tree.talentBranch.domainName &&
+    tree.talentBranch.domainName !== 'Bí Cảnh Thiên Phú'
+      ? tree.talentBranch.domainName
+      : talentDetail.domainName;
+
   const talentDaysList =
     tree.talentBranch.daysOfWeek && tree.talentBranch.daysOfWeek.length > 0
       ? tree.talentBranch.daysOfWeek
-      : talentDomainInfo.daysOfWeek;
+      : talentDetail.daysOfWeek;
+
   const isTalentOpenToday = isDomainOpenToday(talentDaysList);
-  const isWeaponOpenToday = isDomainOpenToday(tree.weaponBranch.daysOfWeek);
+
+  // Dynamic weapon material resolution from COMPREHENSIVE_WEAPONS
+  const matchedWeaponPreset = COMPREHENSIVE_WEAPONS.find(
+    (w) =>
+      w.nameVi.toLowerCase() === tree.weaponBranch.weaponName.toLowerCase() ||
+      w.name.toLowerCase() === tree.weaponBranch.weaponName.toLowerCase() ||
+      (tree.weaponBranch.weaponName &&
+        (w.nameVi.toLowerCase().includes(tree.weaponBranch.weaponName.toLowerCase()) ||
+          tree.weaponBranch.weaponName.toLowerCase().includes(w.nameVi.toLowerCase())))
+  );
+
+  const displayWeaponMatName =
+    matchedWeaponPreset?.ascensionMat ||
+    (tree.weaponBranch.materialName &&
+    tree.weaponBranch.materialName !== 'Nguyên liệu đột phá' &&
+    tree.weaponBranch.materialName !== 'Nguyên liệu rèn'
+      ? tree.weaponBranch.materialName
+      : 'Xiềng Xích Đấu Sĩ Nanh Sư Tử');
+
+  const displayWeaponMatIcon =
+    matchedWeaponPreset?.ascensionMatIcon ||
+    tree.weaponBranch.materialIcon ||
+    getMaterialIconUrl(displayWeaponMatName, 'weaponAscension');
+
+  const rawEliteMatName =
+    matchedWeaponPreset?.eliteMatName ||
+    (tree.weaponBranch.eliteMatName && tree.weaponBranch.eliteMatName !== 'Chi Khô Địa Mạch'
+      ? tree.weaponBranch.eliteMatName
+      : 'Cấu Trúc Hỗn Độn');
+
+  const displayEliteMatName =
+    rawEliteMatName === 'Cành Cây Địa Mạch' || rawEliteMatName === 'Chi Khô Địa Mạch'
+      ? 'Chi Khô Địa Mạch (Pháp Sư Vực Sâu)'
+      : rawEliteMatName;
+
+  const displayEliteMatIcon =
+    matchedWeaponPreset?.eliteMatIcon ||
+    tree.weaponBranch.eliteMatIcon ||
+    getMaterialIconUrl(rawEliteMatName, 'eliteMonster');
+
+  const displayCommonMatName =
+    matchedWeaponPreset?.commonMatName ||
+    tree.weaponBranch.commonMatName ||
+    'Dịch Slime';
+
+  const displayCommonMatIcon =
+    matchedWeaponPreset?.commonMatIcon ||
+    tree.weaponBranch.commonMatIcon ||
+    getMaterialIconUrl(displayCommonMatName, 'commonMonster');
+
+  const displayWeaponDays =
+    matchedWeaponPreset?.daysOfWeek && matchedWeaponPreset.daysOfWeek.length > 0
+      ? matchedWeaponPreset.daysOfWeek
+      : tree.weaponBranch.daysOfWeek && tree.weaponBranch.daysOfWeek.length > 0
+      ? tree.weaponBranch.daysOfWeek
+      : [1, 4, 0];
+
+  const isWeaponOpenToday = isDomainOpenToday(displayWeaponDays);
   const talentCost = calculateTalentCost(tree.talentBranch.currentLevels, tree.talentBranch.targetLevels);
 
   const handleFinishAll = (e: React.MouseEvent) => {
@@ -142,7 +221,6 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
       : 240;
 
   // Accurate Character Material resolution (World boss, weekly boss, specialty)
-  const matDetail = getCharacterMaterialDetail(tree.characterName);
   const displayWorldBossMat =
     tree.levelBranch.worldBossMat &&
     !tree.levelBranch.worldBossMat.includes('Nguyên Liệu') &&
@@ -159,9 +237,10 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
     !tree.talentBranch.weeklyBossMatName.includes('Nguyên Liệu') &&
     !tree.talentBranch.weeklyBossMatName.includes('Boss Tuần')
       ? tree.talentBranch.weeklyBossMatName
-      : matDetail.weeklyBossMat;
+      : talentDetail.weeklyBossMat || matDetail.weeklyBossMat;
 
   const displayWeeklyBossIcon =
+    talentDetail.weeklyBossMatIcon ||
     getMaterialIconUrl(displayWeeklyBossMat, 'bossDrop') ||
     matDetail.weeklyBossMatIcon;
 
@@ -189,48 +268,6 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
       target.src = BASE_MATERIAL_ICONS[fallbackCategory];
     }
   };
-
-  // Dynamic weapon material resolution from COMPREHENSIVE_WEAPONS
-  const matchedWeaponPreset = COMPREHENSIVE_WEAPONS.find(
-    (w) =>
-      w.nameVi.toLowerCase() === tree.weaponBranch.weaponName.toLowerCase() ||
-      w.name.toLowerCase() === tree.weaponBranch.weaponName.toLowerCase() ||
-      (tree.weaponBranch.weaponName &&
-        (w.nameVi.toLowerCase().includes(tree.weaponBranch.weaponName.toLowerCase()) ||
-          tree.weaponBranch.weaponName.toLowerCase().includes(w.nameVi.toLowerCase())))
-  );
-
-  const displayWeaponMatName =
-    tree.weaponBranch.materialName &&
-    tree.weaponBranch.materialName !== 'Nguyên liệu đột phá' &&
-    tree.weaponBranch.materialName !== 'Nguyên liệu rèn'
-      ? tree.weaponBranch.materialName
-      : matchedWeaponPreset?.ascensionMat || 'Xiềng Xích Đấu Sĩ Nanh Sư Tử';
-
-  const displayWeaponMatIcon =
-    tree.weaponBranch.materialIcon ||
-    matchedWeaponPreset?.ascensionMatIcon ||
-    getMaterialIconUrl(displayWeaponMatName, 'weaponAscension');
-
-  const displayEliteMatName =
-    tree.weaponBranch.eliteMatName ||
-    matchedWeaponPreset?.eliteMatName ||
-    'Cấu Trúc Hỗn Độn';
-
-  const displayEliteMatIcon =
-    tree.weaponBranch.eliteMatIcon ||
-    matchedWeaponPreset?.eliteMatIcon ||
-    getMaterialIconUrl(displayEliteMatName, 'eliteMonster');
-
-  const displayCommonMatName =
-    tree.weaponBranch.commonMatName ||
-    matchedWeaponPreset?.commonMatName ||
-    'Dịch Slime';
-
-  const displayCommonMatIcon =
-    tree.weaponBranch.commonMatIcon ||
-    matchedWeaponPreset?.commonMatIcon ||
-    getMaterialIconUrl(displayCommonMatName, 'commonMonster');
 
   // Measure content height for smooth vertical transition to eliminate sibling jumping below
   const contentRef = useRef<HTMLDivElement>(null);
@@ -862,9 +899,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                           <div className="flex items-center gap-1.5 text-[10px] text-slate-400 mt-0.5 font-sans">
                             <Calendar className="w-3 h-3 text-amber-400/80 shrink-0" />
                             <span>
-                              {tree.weaponBranch.daysOfWeek && tree.weaponBranch.daysOfWeek.length > 0
-                                ? tree.weaponBranch.daysOfWeek.map((d) => (d === 0 ? 'CN' : `T${d + 1}`)).join(', ')
-                                : (matchedWeaponPreset?.daysOfWeek ? matchedWeaponPreset.daysOfWeek.map((d) => (d === 0 ? 'CN' : `T${d + 1}`)).join(', ') : 'Thứ 4, 7, CN')}
+                              {displayWeaponDays.map((d) => (d === 0 ? 'CN' : `T${d + 1}`)).join(', ')}
                             </span>
                             {isWeaponOpenToday ? (
                               <span className="text-emerald-300 font-bold ml-1">● Mở hôm nay</span>
@@ -1023,8 +1058,8 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                   <div className="flex items-center gap-3 min-w-0">
                     <div className="w-12 h-12 rounded-xl overflow-hidden shrink-0 border border-purple-400/50 bg-gradient-to-b from-purple-500/20 to-transparent relative flex items-center justify-center p-1">
                       <img
-                        src={getTalentBookIcon(tree.talentBranch.talentBookName)}
-                        alt={tree.talentBranch.talentBookName || 'Sách Thiên Phú'}
+                        src={displayTalentBookIcon}
+                        alt={displayTalentBookName}
                         className="w-full h-full object-contain"
                         onError={(e) => handleImageError(e, 'talentBook')}
                       />
@@ -1032,12 +1067,12 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
 
                     <div className="min-w-0">
                       <div className="text-xs sm:text-sm font-bold text-slate-100 truncate">
-                        {tree.talentBranch.talentBookName || 'Sách Thiên Phú'}
+                        {displayTalentBookName}
                       </div>
                       <div className="flex items-center gap-1.5 mt-0.5 text-[10px] text-slate-400 font-sans">
                         <Calendar className="w-3 h-3 text-purple-400/80 shrink-0" />
                         <span className="truncate">
-                          {tree.talentBranch.domainName || talentDomainInfo.domainName}
+                          {displayTalentDomainName}
                         </span>
                       </div>
                       <div className="flex items-center gap-1.5 text-[10px] mt-0.5 font-sans">
@@ -1227,14 +1262,14 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                     <div className="p-2.5 rounded-xl liquid-glass-subtle liquid-glass-interactive border border-white/[0.08] flex items-center justify-between gap-2 col-span-1 sm:col-span-2">
                       <div className="flex items-center gap-2.5 min-w-0">
                         <img
-                          src={getTalentBookIcon(tree.talentBranch.talentBookName)}
-                          alt={tree.talentBranch.talentBookName || 'Sách Thiên Phú'}
+                          src={displayTalentBookIcon}
+                          alt={displayTalentBookName}
                           className="w-8 h-8 rounded-lg object-contain bg-slate-800/80 p-0.5 shrink-0 border border-white/10"
                           onError={(e) => handleImageError(e, 'talentBook')}
                         />
                         <div className="min-w-0">
                           <div className="text-slate-200 text-xs font-semibold truncate">
-                            {tree.talentBranch.talentBookName || 'Sách Thiên Phú'}
+                            {displayTalentBookName}
                           </div>
                           <div className="flex items-center gap-1.5 text-[10px] text-slate-400 mt-0.5 font-sans">
                             <Calendar className="w-3 h-3 text-amber-400/80 shrink-0" />
