@@ -5,5 +5,5 @@
  * - MINOR: backward-compatible functionality additions
  * - PATCH: backward-compatible bug fixes
  */
-export const APP_VERSION = '1.5.8';
+export const APP_VERSION = '1.5.9';
 export const APP_NAME = 'Genshin Note';

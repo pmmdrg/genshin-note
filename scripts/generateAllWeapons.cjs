@@ -46,11 +46,9 @@ for (const name of wNames) {
   // Resolve costs
   const costs = wEn.costs || {};
   const stage1 = costs.ascend1 || [];
-  const maxStage = costs.ascend6 || costs.ascend4 || stage1;
 
   // Domain material
   const domainItemEn = stage1[1];
-  const maxDomainItemEn = maxStage[1] || domainItemEn;
   let domainMatVi = '';
   let domainNameVi = '';
   let daysOfWeek = [1, 4, 0];
@@ -58,8 +56,7 @@ for (const name of wNames) {
 
   if (domainItemEn) {
     const matVi = genshin.materials(domainItemEn.name, { resultLanguage: 'Vietnamese' });
-    const maxMatVi = maxDomainItemEn ? genshin.materials(maxDomainItemEn.name, { resultLanguage: 'Vietnamese' }) : matVi;
-    domainMatVi = maxMatVi?.name || matVi?.name || domainItemEn.name;
+    domainMatVi = matVi?.name || domainItemEn.name;
     domainNameVi = matVi?.dropDomainName || 'Bí Cảnh Luyện Võ';
     daysOfWeek = parseDays(matVi?.daysOfWeek);
     if (matVi?.images?.filename_icon) {
@@ -69,13 +66,11 @@ for (const name of wNames) {
 
   // Elite material
   const eliteItemEn = stage1[2];
-  const maxEliteItemEn = maxStage[2] || eliteItemEn;
   let eliteMatVi = '';
   let eliteIcon = '';
   if (eliteItemEn) {
     const matVi = genshin.materials(eliteItemEn.name, { resultLanguage: 'Vietnamese' });
-    const maxMatVi = maxEliteItemEn ? genshin.materials(maxEliteItemEn.name, { resultLanguage: 'Vietnamese' }) : matVi;
-    eliteMatVi = maxMatVi?.name || matVi?.name || eliteItemEn.name;
+    eliteMatVi = matVi?.name || eliteItemEn.name;
     if (matVi?.images?.filename_icon) {
       eliteIcon = `https://enka.network/ui/${matVi.images.filename_icon}.png`;
     }
@@ -83,13 +78,11 @@ for (const name of wNames) {
 
   // Common material
   const commonItemEn = stage1[3];
-  const maxCommonItemEn = maxStage[3] || commonItemEn;
   let commonMatVi = '';
   let commonIcon = '';
   if (commonItemEn) {
     const matVi = genshin.materials(commonItemEn.name, { resultLanguage: 'Vietnamese' });
-    const maxMatVi = maxCommonItemEn ? genshin.materials(maxCommonItemEn.name, { resultLanguage: 'Vietnamese' }) : matVi;
-    commonMatVi = maxMatVi?.name || matVi?.name || commonItemEn.name;
+    commonMatVi = matVi?.name || commonItemEn.name;
     if (matVi?.images?.filename_icon) {
       commonIcon = `https://enka.network/ui/${matVi.images.filename_icon}.png`;
     }

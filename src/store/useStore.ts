@@ -7,6 +7,7 @@ import { getCharacterDefaultBuild } from '../data/characterEquipData';
 import { calculateLevelTo90Cost, calculateTalentCost } from '../utils/calculator';
 import { DEFAULT_WALLPAPER } from '../data/wallpapers';
 import { getCharacterMaterialDetail } from '../data/characterMaterialsData';
+import { COMPREHENSIVE_WEAPONS } from '../data/weaponsData';
 
 interface AppState {
   // Navigation Menu
@@ -140,7 +141,30 @@ export const useStore = create<AppState>()(
               const weaponType = dataPreset?.weaponType || 'sword';
               const defaultBuild = getCharacterDefaultBuild(rawName, weaponType);
 
-              const weaponData = hoyoChar.weapon && hoyoChar.weapon.name && hoyoChar.weapon.name !== 'Vũ Khí Trang Bị'
+              const hoyoWepName = hoyoChar.weapon?.name;
+              const matchedHoyoWep =
+                hoyoWepName && hoyoWepName !== 'Vũ Khí Trang Bị'
+                  ? COMPREHENSIVE_WEAPONS.find(
+                      (w) =>
+                        w.nameVi.toLowerCase() === hoyoWepName.toLowerCase() ||
+                        w.name.toLowerCase() === hoyoWepName.toLowerCase() ||
+                        w.nameVi.toLowerCase().includes(hoyoWepName.toLowerCase()) ||
+                        hoyoWepName.toLowerCase().includes(w.nameVi.toLowerCase())
+                    )
+                  : undefined;
+
+              const weaponData = matchedHoyoWep
+                ? {
+                    name: matchedHoyoWep.nameVi,
+                    icon: hoyoChar.weapon?.icon || matchedHoyoWep.avatarUrl,
+                    rarity: hoyoChar.weapon?.rarity || matchedHoyoWep.rarity,
+                    level: hoyoChar.weapon?.level || 90,
+                    affixLevel: hoyoChar.weapon?.affix_level || 1,
+                    typeName: hoyoChar.weapon?.type_name || defaultBuild.weapon.typeName,
+                    domainDays: matchedHoyoWep.daysOfWeek,
+                    materialName: matchedHoyoWep.ascensionMat,
+                  }
+                : hoyoChar.weapon && hoyoChar.weapon.name && hoyoChar.weapon.name !== 'Vũ Khí Trang Bị'
                 ? {
                     name: hoyoChar.weapon.name,
                     icon: hoyoChar.weapon.icon || defaultBuild.weapon.icon,
@@ -291,12 +315,20 @@ export const useStore = create<AppState>()(
             isCompleted: false,
           },
           weaponBranch: {
-            weaponName: 'Sắc Nước Tĩnh Lặng',
+            weaponName: 'Sắc Nước Lộng Lẫy',
             weaponIcon: 'https://enka.network/ui/UI_EquipIcon_Sword_Regalis.png',
+            weaponRarity: 5,
+            weaponType: 'sword',
             currentLevel: 80,
             targetLevel: 90,
-            materialName: 'Giọt Sương Tinh Khiết',
+            materialName: 'Cặn Bẩn Giọt Sương Thánh Thuần',
+            materialIcon: 'https://enka.network/ui/UI_ItemIcon_114053.png',
+            domainName: 'Bí Cảnh Luyện Võ: Kỹ Thuật',
             daysOfWeek: [2, 5, 0],
+            eliteMatName: 'Giọt Nước Đục',
+            eliteMatIcon: 'https://enka.network/ui/UI_ItemIcon_112086.png',
+            commonMatName: 'Ngọc Vụn Đại Dương',
+            commonMatIcon: 'https://enka.network/ui/UI_ItemIcon_112080.png',
             isCompleted: false,
           },
           talentBranch: {
@@ -347,12 +379,20 @@ export const useStore = create<AppState>()(
             isCompleted: false,
           },
           weaponBranch: {
-            weaponName: 'Đoạn Thảo Trảm Quang',
+            weaponName: 'Đoạn Thảo Trường Đao',
             weaponIcon: 'https://enka.network/ui/UI_EquipIcon_Pole_Narukami.png',
+            weaponRarity: 5,
+            weaponType: 'polearm',
             currentLevel: 90,
             targetLevel: 90,
-            materialName: 'Mặt Nạ Hổ Phách',
+            materialName: 'Mặt Nạ Tà Ác',
+            materialIcon: 'https://enka.network/ui/UI_ItemIcon_114033.png',
+            domainName: 'Bí Cảnh Luyện Võ: Tang Lễ Của Cát',
             daysOfWeek: [3, 6, 0],
+            eliteMatName: 'Cơ Quan Hỗn Độn',
+            eliteMatIcon: 'https://enka.network/ui/UI_ItemIcon_112047.png',
+            commonMatName: 'Kiếm Cách Cũ Nát',
+            commonMatIcon: 'https://enka.network/ui/UI_ItemIcon_112044.png',
             isCompleted: true,
           },
           talentBranch: {
@@ -422,6 +462,34 @@ export const useStore = create<AppState>()(
           ? char.weeklyBossMat
           : matDetail.weeklyBossMat;
 
+        const charWeaponName = char.weapon?.name;
+        const matchedWeapon = charWeaponName
+          ? COMPREHENSIVE_WEAPONS.find(
+              (w) =>
+                w.nameVi.toLowerCase() === charWeaponName.toLowerCase() ||
+                w.name.toLowerCase() === charWeaponName.toLowerCase() ||
+                w.nameVi.toLowerCase().includes(charWeaponName.toLowerCase()) ||
+                charWeaponName.toLowerCase().includes(w.nameVi.toLowerCase())
+            )
+          : undefined;
+
+        const charWeaponType = char.weapon?.typeName
+          ? (char.weapon.typeName.includes('Cán Dài')
+              ? 'polearm'
+              : char.weapon.typeName.includes('Trọng')
+              ? 'claymore'
+              : char.weapon.typeName.includes('Cung')
+              ? 'bow'
+              : char.weapon.typeName.includes('Pháp')
+              ? 'catalyst'
+              : 'sword')
+          : 'sword';
+
+        const defaultWeapon =
+          matchedWeapon ||
+          COMPREHENSIVE_WEAPONS.find((w) => w.type === charWeaponType) ||
+          COMPREHENSIVE_WEAPONS[0];
+
         const newTree: CharacterBranchTree = {
           id: `tree-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
           characterId: char.id,
@@ -446,15 +514,20 @@ export const useStore = create<AppState>()(
             isCompleted: char.level >= 90,
           },
           weaponBranch: {
-            weaponName: char.weapon?.name || 'Vũ Khí',
-            weaponIcon: char.weapon?.icon,
+            weaponName: defaultWeapon.nameVi,
+            weaponIcon: defaultWeapon.avatarUrl,
+            weaponRarity: defaultWeapon.rarity,
+            weaponType: defaultWeapon.type,
             currentLevel: char.weapon?.level || 1,
             targetLevel: 90,
-            materialName:
-              char.weapon?.materialName && char.weapon.materialName !== 'Nguyên liệu rèn'
-                ? char.weapon.materialName
-                : 'Nguyên liệu đột phá',
-            daysOfWeek: char.weapon?.domainDays || [1, 4, 0],
+            materialName: defaultWeapon.ascensionMat,
+            materialIcon: defaultWeapon.ascensionMatIcon,
+            domainName: defaultWeapon.domainName,
+            daysOfWeek: defaultWeapon.daysOfWeek,
+            eliteMatName: defaultWeapon.eliteMatName,
+            eliteMatIcon: defaultWeapon.eliteMatIcon,
+            commonMatName: defaultWeapon.commonMatName,
+            commonMatIcon: defaultWeapon.commonMatIcon,
             isCompleted: (char.weapon?.level || 1) >= 90,
           },
           talentBranch: {

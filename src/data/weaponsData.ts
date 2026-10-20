@@ -11,7 +11,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Bi Ca Lumidouce",
     "rarity": 5,
     "type": "polearm",
-    "ascensionMat": "Ly Vàng Của Biển Nguyên Sơ",
+    "ascensionMat": "Ly Vỡ Của Biển Nguyên Sơ",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114057.png",
     "domainName": "Bí Cảnh Luyện Võ: Máy Móc",
     "daysOfWeek": [
@@ -19,9 +19,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Cán Kiếm Chưa Tắt",
+    "eliteMatName": "Cán Kiếm Nát Vụn",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112098.png",
-    "commonMatName": "Mật Hoa Nguyên Tố",
+    "commonMatName": "Mật Hoa Lừa Dối",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112038.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Pole_Muguet.png"
   },
@@ -30,7 +30,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Đoạn Thảo Trường Đao",
     "rarity": 5,
     "type": "polearm",
-    "ascensionMat": "Mặt Nạ Kijin",
+    "ascensionMat": "Mặt Nạ Tà Ác",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114033.png",
     "domainName": "Bí Cảnh Luyện Võ: Tang Lễ Của Cát",
     "daysOfWeek": [
@@ -38,9 +38,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Con Ngươi Hỗn Độn",
+    "eliteMatName": "Cơ Quan Hỗn Độn",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112047.png",
-    "commonMatName": "Kiếm Cách Trứ Danh",
+    "commonMatName": "Kiếm Cách Cũ Nát",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112044.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Pole_Narukami.png"
   },
@@ -49,7 +49,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Giáo Nịnh Thần",
     "rarity": 5,
     "type": "polearm",
-    "ascensionMat": "Miếng Thiên Thạch Đen",
+    "ascensionMat": "Hạt Thiên Thạch Đen",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114021.png",
     "domainName": "Bí Cảnh Luyện Võ: Thử Thách Sấm Sét",
     "daysOfWeek": [
@@ -57,9 +57,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Mảnh Xương Hóa Thạch",
+    "eliteMatName": "Mảnh Xương Giòn Yếu",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112041.png",
-    "commonMatName": "Ấn Quạ Trộm Vàng",
+    "commonMatName": "Ấn Quạ Tầm Bảo",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112035.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Pole_Kunwu.png"
   },
@@ -68,7 +68,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Hình Thái Xích Nguyệt",
     "rarity": 5,
     "type": "polearm",
-    "ascensionMat": "Ly Vàng Của Biển Nguyên Sơ",
+    "ascensionMat": "Ly Vỡ Của Biển Nguyên Sơ",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114057.png",
     "domainName": "Bí Cảnh Luyện Võ: Máy Móc",
     "daysOfWeek": [
@@ -76,9 +76,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Cán Kiếm Chưa Tắt",
+    "eliteMatName": "Cán Kiếm Nát Vụn",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112098.png",
-    "commonMatName": "Bánh Răng Lõi Trung Tâm",
+    "commonMatName": "Bánh Răng Liên Kết",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112083.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Pole_BloodMoon.png"
   },
@@ -87,7 +87,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Hòa Phác Diên",
     "rarity": 5,
     "type": "polearm",
-    "ascensionMat": "Thần Thể Rừng Băng Giá",
+    "ascensionMat": "Ánh Sáng Rừng Băng Giá",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114013.png",
     "domainName": "Bí Cảnh Luyện Võ: Tế Đàn Lôi Vân",
     "daysOfWeek": [
@@ -95,9 +95,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Dao Đô Thám Trưởng",
+    "eliteMatName": "Dao Săn Bắt",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112029.png",
-    "commonMatName": "Phù Hiệu Hiệu Úy",
+    "commonMatName": "Phù Hiệu Tân Binh",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112032.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Pole_Morax.png"
   },
@@ -106,7 +106,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Hủy Diệt",
     "rarity": 5,
     "type": "polearm",
-    "ascensionMat": "Sự Chuyển Dời Của Biển Sương Mù",
+    "ascensionMat": "Diên Đơn Biển Sương Mù",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114017.png",
     "domainName": "Bí Cảnh Luyện Võ: Tiếng Sấm Thành Cổ",
     "daysOfWeek": [
@@ -114,9 +114,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Đuốc Hư Vô",
+    "eliteMatName": "Phấn Hoa Hư Vô",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112026.png",
-    "commonMatName": "Mật Hoa Nguyên Tố",
+    "commonMatName": "Mật Hoa Lừa Dối",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112038.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Pole_Santika.png"
   },
@@ -125,7 +125,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Quyền Trượng Cát Đỏ",
     "rarity": 5,
     "type": "polearm",
-    "ascensionMat": "Chân Lý Vườn Hoa Ốc Đảo",
+    "ascensionMat": "Hồi Ức Vườn Hoa Ốc Đảo",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114041.png",
     "domainName": "Bí Cảnh Luyện Võ: Tư Hoặc",
     "daysOfWeek": [
@@ -133,9 +133,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Chốt Neo Hỗn Độn",
+    "eliteMatName": "Vật Chứa Hỗn Độn",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112068.png",
-    "commonMatName": "Bụi Tinh Thể",
+    "commonMatName": "Bào Tử Nấm Quỷ",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112059.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Pole_Deshret.png"
   },
@@ -144,7 +144,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Trượng Hộ Ma",
     "rarity": 5,
     "type": "polearm",
-    "ascensionMat": "Miếng Thiên Thạch Đen",
+    "ascensionMat": "Hạt Thiên Thạch Đen",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114021.png",
     "domainName": "Bí Cảnh Luyện Võ: Thử Thách Sấm Sét",
     "daysOfWeek": [
@@ -152,9 +152,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Chồi Non Địa Mạch",
+    "eliteMatName": "Cành Cây Địa Mạch",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112020.png",
-    "commonMatName": "Bột Slime",
+    "commonMatName": "Dịch Slime",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112002.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Pole_Homa.png"
   },
@@ -163,7 +163,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Xương Sống Thiên Không",
     "rarity": 5,
     "type": "polearm",
-    "ascensionMat": "Lý Tưởng Của Đấu Sĩ Nanh Sư Tử",
+    "ascensionMat": "Xiềng Xích Đấu Sĩ Nanh Sư Tử",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114009.png",
     "domainName": "Bí Cảnh Luyện Võ: Phế Đô Khát Nước",
     "daysOfWeek": [
@@ -171,9 +171,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Trái Tim Hỗn Độn",
+    "eliteMatName": "Cấu Trúc Hỗn Độn",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112023.png",
-    "commonMatName": "Bản Vẽ Cấm Chú",
+    "commonMatName": "Bản Vẽ Hướng Dẫn",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112008.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Pole_Dvalin.png"
   },
@@ -182,7 +182,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Đối Thoại Của Hiền Giả Sa Mạc",
     "rarity": 4,
     "type": "polearm",
-    "ascensionMat": "Bùa Rừng Xanh Sương Đọng - Vàng",
+    "ascensionMat": "Bùa Rừng Xanh Sương Đọng - Đồng",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114037.png",
     "domainName": "Bí Cảnh Luyện Võ: Mây Bẩn",
     "daysOfWeek": [
@@ -190,9 +190,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Vây Thú Ánh Sáng Vực Thẳm",
+    "eliteMatName": "Vây Thú Dạng Lông",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112095.png",
-    "commonMatName": "Hạt Bay Lượn Kết Tinh",
+    "commonMatName": "Hạt Bay Lượn Khô Héo",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112053.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Pole_Caduceus.png"
   },
@@ -201,7 +201,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Giáo Thập Tự Kitain",
     "rarity": 4,
     "type": "polearm",
-    "ascensionMat": "Mặt Nạ Kijin",
+    "ascensionMat": "Mặt Nạ Tà Ác",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114033.png",
     "domainName": "Bí Cảnh Luyện Võ: Tang Lễ Của Cát",
     "daysOfWeek": [
@@ -209,9 +209,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Con Ngươi Hỗn Độn",
+    "eliteMatName": "Cơ Quan Hỗn Độn",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112047.png",
-    "commonMatName": "Ấn Quạ Trộm Vàng",
+    "commonMatName": "Ấn Quạ Tầm Bảo",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112035.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Pole_Bakufu.png"
   },
@@ -220,7 +220,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Khúc Ca Vịnh Hẹp",
     "rarity": 4,
     "type": "polearm",
-    "ascensionMat": "Ly Vàng Của Biển Nguyên Sơ",
+    "ascensionMat": "Ly Vỡ Của Biển Nguyên Sơ",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114057.png",
     "domainName": "Bí Cảnh Luyện Võ: Máy Móc",
     "daysOfWeek": [
@@ -228,9 +228,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Hoa Nở Rộ Của Kẻ Lang Thang",
+    "eliteMatName": "Hoa Chưa Nở Từ Nơi Nào Đó",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112077.png",
-    "commonMatName": "Mật Hoa Nguyên Tố",
+    "commonMatName": "Mật Hoa Lừa Dối",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112038.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Pole_Shanty.png"
   },
@@ -239,7 +239,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Lao Xiên Cá",
     "rarity": 4,
     "type": "polearm",
-    "ascensionMat": "Mặt Nạ Kijin",
+    "ascensionMat": "Mặt Nạ Tà Ác",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114033.png",
     "domainName": "Bí Cảnh Luyện Võ: Tang Lễ Của Cát",
     "daysOfWeek": [
@@ -247,9 +247,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Con Ngươi Hỗn Độn",
+    "eliteMatName": "Cơ Quan Hỗn Độn",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112047.png",
-    "commonMatName": "Hạt Bay Lượn Kết Tinh",
+    "commonMatName": "Hạt Bay Lượn Khô Héo",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112053.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Pole_Mori.png"
   },
@@ -258,7 +258,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Lưu Nguyệt Châm",
     "rarity": 4,
     "type": "polearm",
-    "ascensionMat": "Thần Thể Rừng Băng Giá",
+    "ascensionMat": "Ánh Sáng Rừng Băng Giá",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114013.png",
     "domainName": "Bí Cảnh Luyện Võ: Tế Đàn Lôi Vân",
     "daysOfWeek": [
@@ -266,9 +266,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Dao Đô Thám Trưởng",
+    "eliteMatName": "Dao Săn Bắt",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112029.png",
-    "commonMatName": "Ấn Quạ Trộm Vàng",
+    "commonMatName": "Ấn Quạ Tầm Bảo",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112035.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Pole_Exotic.png"
   },
@@ -277,7 +277,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Mẫu Tinh Liêm",
     "rarity": 4,
     "type": "polearm",
-    "ascensionMat": "Miếng Thiên Thạch Đen",
+    "ascensionMat": "Hạt Thiên Thạch Đen",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114021.png",
     "domainName": "Bí Cảnh Luyện Võ: Thử Thách Sấm Sét",
     "daysOfWeek": [
@@ -285,9 +285,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Mảnh Xương Hóa Thạch",
+    "eliteMatName": "Mảnh Xương Giòn Yếu",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112041.png",
-    "commonMatName": "Mặt Nạ Xui Xẻo",
+    "commonMatName": "Mặt Nạ Vỡ",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112005.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Pole_Proto.png"
   },
@@ -296,7 +296,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Mũi Đinh Trấn Núi",
     "rarity": 4,
     "type": "polearm",
-    "ascensionMat": "Thần Tính Của Thánh Chủ Mê Sảng",
+    "ascensionMat": "Sự Sa Ngã Của Thánh Chủ Mê Sảng",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114065.png",
     "domainName": "Bí Cảnh Luyện Võ: Nghiền Ngẫm",
     "daysOfWeek": [
@@ -304,9 +304,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Con Mắt Rực Cháy",
+    "eliteMatName": "Hòn Đá Rực Cháy",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112110.png",
-    "commonMatName": "Mật Hoa Nguyên Tố",
+    "commonMatName": "Mật Hoa Lừa Dối",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112038.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Pole_Umpakati.png"
   },
@@ -315,7 +315,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Mũi Khoan Thăm Dò",
     "rarity": 4,
     "type": "polearm",
-    "ascensionMat": "Tiếng Vọng Cung Đàn Cổ Xưa",
+    "ascensionMat": "Mảnh Cung Đàn Cổ Xưa",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114049.png",
     "domainName": "Bí Cảnh Luyện Võ: Tư Duy Robot",
     "daysOfWeek": [
@@ -323,9 +323,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Thời Khắc Của Đặc Vụ",
+    "eliteMatName": "Đồng Hồ Cũ Kỹ Của Đặc Vụ",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112092.png",
-    "commonMatName": "Bánh Răng Lõi Trung Tâm",
+    "commonMatName": "Bánh Răng Liên Kết",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112083.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Pole_Mechanic.png"
   },
@@ -334,7 +334,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Mũi Nhọn Của Gió",
     "rarity": 4,
     "type": "polearm",
-    "ascensionMat": "Nỗi Nhớ Của Sói Bão",
+    "ascensionMat": "Răng Sữa Sói Bão",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114005.png",
     "domainName": "Bí Cảnh Luyện Võ: Thâm Cốc",
     "daysOfWeek": [
@@ -342,9 +342,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Tượng Tử Thần",
+    "eliteMatName": "Tượng Hắc Ám",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112017.png",
-    "commonMatName": "Bột Slime",
+    "commonMatName": "Dịch Slime",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112002.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Pole_Windvane.png"
   },
@@ -353,7 +353,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Quán Nguyệt Thương",
     "rarity": 4,
     "type": "polearm",
-    "ascensionMat": "Chân Lý Vườn Hoa Ốc Đảo",
+    "ascensionMat": "Hồi Ức Vườn Hoa Ốc Đảo",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114041.png",
     "domainName": "Bí Cảnh Luyện Võ: Tư Hoặc",
     "daysOfWeek": [
@@ -361,9 +361,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Chốt Neo Hỗn Độn",
+    "eliteMatName": "Vật Chứa Hỗn Độn",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112068.png",
-    "commonMatName": "Phù Hiệu Hiệu Úy",
+    "commonMatName": "Phù Hiệu Tân Binh",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112032.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Pole_Arakalari.png"
   },
@@ -372,7 +372,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Tai Ương Của Rồng",
     "rarity": 4,
     "type": "polearm",
-    "ascensionMat": "Sự Chuyển Dời Của Biển Sương Mù",
+    "ascensionMat": "Diên Đơn Biển Sương Mù",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114017.png",
     "domainName": "Bí Cảnh Luyện Võ: Tiếng Sấm Thành Cổ",
     "daysOfWeek": [
@@ -380,9 +380,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Đuốc Hư Vô",
+    "eliteMatName": "Phấn Hoa Hư Vô",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112026.png",
-    "commonMatName": "Bản Vẽ Cấm Chú",
+    "commonMatName": "Bản Vẽ Hướng Dẫn",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112008.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Pole_Stardust.png"
   },
@@ -391,7 +391,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Tamayuratei no Ohanashi",
     "rarity": 4,
     "type": "polearm",
-    "ascensionMat": "Mặt Nạ Kijin",
+    "ascensionMat": "Mặt Nạ Tà Ác",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114033.png",
     "domainName": "Bí Cảnh Luyện Võ: Tang Lễ Của Cát",
     "daysOfWeek": [
@@ -399,9 +399,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Lõi Lá Cuộn Biến Ảo",
+    "eliteMatName": "Mầm Khúc Xạ",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112116.png",
-    "commonMatName": "Kiếm Cách Trứ Danh",
+    "commonMatName": "Kiếm Cách Cũ Nát",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112044.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Pole_Aoandon.png"
   },
@@ -410,7 +410,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Thù Lao Của Chính Nghĩa",
     "rarity": 4,
     "type": "polearm",
-    "ascensionMat": "Ly Vàng Của Biển Nguyên Sơ",
+    "ascensionMat": "Ly Vỡ Của Biển Nguyên Sơ",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114057.png",
     "domainName": "Bí Cảnh Luyện Võ: Máy Móc",
     "daysOfWeek": [
@@ -418,9 +418,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Hạt Nhân Sinh Mệnh Dị Giới",
+    "eliteMatName": "Hạt Nhân Khe Nứt",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112089.png",
-    "commonMatName": "Bánh Răng Lõi Trung Tâm",
+    "commonMatName": "Bánh Răng Liên Kết",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112083.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Pole_Vorpal.png"
   },
@@ -429,7 +429,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Thương Hắc Nham",
     "rarity": 4,
     "type": "polearm",
-    "ascensionMat": "Sự Chuyển Dời Của Biển Sương Mù",
+    "ascensionMat": "Diên Đơn Biển Sương Mù",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114017.png",
     "domainName": "Bí Cảnh Luyện Võ: Tiếng Sấm Thành Cổ",
     "daysOfWeek": [
@@ -437,9 +437,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Đuốc Hư Vô",
+    "eliteMatName": "Phấn Hoa Hư Vô",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112026.png",
-    "commonMatName": "Phù Hiệu Hiệu Úy",
+    "commonMatName": "Phù Hiệu Tân Binh",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112032.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Pole_Blackrock.png"
   },
@@ -448,7 +448,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Thương Long Tích",
     "rarity": 4,
     "type": "polearm",
-    "ascensionMat": "Nỗi Nhớ Của Sói Bão",
+    "ascensionMat": "Răng Sữa Sói Bão",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114005.png",
     "domainName": "Bí Cảnh Luyện Võ: Thâm Cốc",
     "daysOfWeek": [
@@ -456,9 +456,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Đuốc Hư Vô",
+    "eliteMatName": "Phấn Hoa Hư Vô",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112026.png",
-    "commonMatName": "Phù Hiệu Hiệu Úy",
+    "commonMatName": "Phù Hiệu Tân Binh",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112032.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Pole_Everfrost.png"
   },
@@ -467,7 +467,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Thương Quyết Chiến",
     "rarity": 4,
     "type": "polearm",
-    "ascensionMat": "Nỗi Nhớ Của Sói Bão",
+    "ascensionMat": "Răng Sữa Sói Bão",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114005.png",
     "domainName": "Bí Cảnh Luyện Võ: Thâm Cốc",
     "daysOfWeek": [
@@ -475,9 +475,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Chồi Non Địa Mạch",
+    "eliteMatName": "Cành Cây Địa Mạch",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112020.png",
-    "commonMatName": "Mật Hoa Nguyên Tố",
+    "commonMatName": "Mật Hoa Lừa Dối",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112038.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Pole_Gladiator.png"
   },
@@ -486,7 +486,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Thương Săn Tông Thất",
     "rarity": 4,
     "type": "polearm",
-    "ascensionMat": "Sự Chuyển Dời Của Biển Sương Mù",
+    "ascensionMat": "Diên Đơn Biển Sương Mù",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114017.png",
     "domainName": "Bí Cảnh Luyện Võ: Tiếng Sấm Thành Cổ",
     "daysOfWeek": [
@@ -494,9 +494,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Đuốc Hư Vô",
+    "eliteMatName": "Phấn Hoa Hư Vô",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112026.png",
-    "commonMatName": "Phù Hiệu Hiệu Úy",
+    "commonMatName": "Phù Hiệu Tân Binh",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112032.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Pole_Theocrat.png"
   },
@@ -505,7 +505,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Thương Tây Phong",
     "rarity": 4,
     "type": "polearm",
-    "ascensionMat": "Lý Tưởng Của Đấu Sĩ Nanh Sư Tử",
+    "ascensionMat": "Xiềng Xích Đấu Sĩ Nanh Sư Tử",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114009.png",
     "domainName": "Bí Cảnh Luyện Võ: Phế Đô Khát Nước",
     "daysOfWeek": [
@@ -513,9 +513,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Trái Tim Hỗn Độn",
+    "eliteMatName": "Cấu Trúc Hỗn Độn",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112023.png",
-    "commonMatName": "Bột Slime",
+    "commonMatName": "Dịch Slime",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112002.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Pole_Zephyrus.png"
   },
@@ -524,7 +524,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Thương Thiên Nham",
     "rarity": 4,
     "type": "polearm",
-    "ascensionMat": "Miếng Thiên Thạch Đen",
+    "ascensionMat": "Hạt Thiên Thạch Đen",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114021.png",
     "domainName": "Bí Cảnh Luyện Võ: Thử Thách Sấm Sét",
     "daysOfWeek": [
@@ -532,9 +532,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Mảnh Xương Hóa Thạch",
+    "eliteMatName": "Mảnh Xương Giòn Yếu",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112041.png",
-    "commonMatName": "Mũi Tên Thiện Chiến",
+    "commonMatName": "Mũi Tên Chắc Chắn",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112011.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Pole_Lapis.png"
   },
@@ -543,7 +543,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Vây Cá Chẻ Sóng",
     "rarity": 4,
     "type": "polearm",
-    "ascensionMat": "Mặt Nạ Kijin",
+    "ascensionMat": "Mặt Nạ Tà Ác",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114033.png",
     "domainName": "Bí Cảnh Luyện Võ: Tang Lễ Của Cát",
     "daysOfWeek": [
@@ -551,9 +551,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Vuốt Quỷ Ma Thú",
+    "eliteMatName": "Móng Vuốt Ma Thú",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112056.png",
-    "commonMatName": "Kiếm Cách Trứ Danh",
+    "commonMatName": "Kiếm Cách Cũ Nát",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112044.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Pole_Maria.png"
   },
@@ -562,7 +562,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Vết Tích Cầu Vồng",
     "rarity": 4,
     "type": "polearm",
-    "ascensionMat": "Thần Tính Của Thánh Chủ Mê Sảng",
+    "ascensionMat": "Sự Sa Ngã Của Thánh Chủ Mê Sảng",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114065.png",
     "domainName": "Bí Cảnh Luyện Võ: Nghiền Ngẫm",
     "daysOfWeek": [
@@ -570,9 +570,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Lõi Bí Ẩn",
+    "eliteMatName": "Trục Bí Ẩn",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112113.png",
-    "commonMatName": "Còi Vàng Võ Sĩ Saurian",
+    "commonMatName": "Còi Gỗ Hộ Vệ",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112104.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Pole_Isikhulu.png"
   },
@@ -581,7 +581,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Hắc Anh Thương",
     "rarity": 3,
     "type": "polearm",
-    "ascensionMat": "Miếng Thiên Thạch Đen",
+    "ascensionMat": "Hạt Thiên Thạch Đen",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114021.png",
     "domainName": "Bí Cảnh Luyện Võ: Thử Thách Sấm Sét",
     "daysOfWeek": [
@@ -589,9 +589,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Mảnh Xương Hóa Thạch",
+    "eliteMatName": "Mảnh Xương Giòn Yếu",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112041.png",
-    "commonMatName": "Mũi Tên Thiện Chiến",
+    "commonMatName": "Mũi Tên Chắc Chắn",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112011.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Pole_Noire.png"
   },
@@ -600,7 +600,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Thuẫn Kích",
     "rarity": 3,
     "type": "polearm",
-    "ascensionMat": "Sự Chuyển Dời Của Biển Sương Mù",
+    "ascensionMat": "Diên Đơn Biển Sương Mù",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114017.png",
     "domainName": "Bí Cảnh Luyện Võ: Tiếng Sấm Thành Cổ",
     "daysOfWeek": [
@@ -608,9 +608,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Đuốc Hư Vô",
+    "eliteMatName": "Phấn Hoa Hư Vô",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112026.png",
-    "commonMatName": "Mật Hoa Nguyên Tố",
+    "commonMatName": "Mật Hoa Lừa Dối",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112038.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Pole_Halberd.png"
   },
@@ -619,7 +619,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Thương Bạch Anh",
     "rarity": 3,
     "type": "polearm",
-    "ascensionMat": "Thần Thể Rừng Băng Giá",
+    "ascensionMat": "Ánh Sáng Rừng Băng Giá",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114013.png",
     "domainName": "Bí Cảnh Luyện Võ: Tế Đàn Lôi Vân",
     "daysOfWeek": [
@@ -627,9 +627,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Dao Đô Thám Trưởng",
+    "eliteMatName": "Dao Săn Bắt",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112029.png",
-    "commonMatName": "Phù Hiệu Hiệu Úy",
+    "commonMatName": "Phù Hiệu Tân Binh",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112032.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Pole_Ruby.png"
   },
@@ -638,7 +638,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Thương Sắt",
     "rarity": 2,
     "type": "polearm",
-    "ascensionMat": "Gông Cùm Đấu Sĩ Nanh Sư Tử",
+    "ascensionMat": "Xiềng Xích Đấu Sĩ Nanh Sư Tử",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114009.png",
     "domainName": "Bí Cảnh Luyện Võ: Phế Đô Khát Nước",
     "daysOfWeek": [
@@ -646,9 +646,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Bộ Não Hỗn Độn",
+    "eliteMatName": "Cấu Trúc Hỗn Độn",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112023.png",
-    "commonMatName": "Bản Vẽ Phong Ấn",
+    "commonMatName": "Bản Vẽ Hướng Dẫn",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112008.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Pole_Rod.png"
   },
@@ -657,7 +657,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Thương Tân Thủ",
     "rarity": 1,
     "type": "polearm",
-    "ascensionMat": "Gông Cùm Đấu Sĩ Nanh Sư Tử",
+    "ascensionMat": "Xiềng Xích Đấu Sĩ Nanh Sư Tử",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114009.png",
     "domainName": "Bí Cảnh Luyện Võ: Phế Đô Khát Nước",
     "daysOfWeek": [
@@ -665,9 +665,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Bộ Não Hỗn Độn",
+    "eliteMatName": "Cấu Trúc Hỗn Độn",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112023.png",
-    "commonMatName": "Bản Vẽ Phong Ấn",
+    "commonMatName": "Bản Vẽ Hướng Dẫn",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112008.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Pole_Gewalt.png"
   },
@@ -676,7 +676,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Ánh Lá Phán Quyết",
     "rarity": 5,
     "type": "sword",
-    "ascensionMat": "Bùa Rừng Xanh Sương Đọng - Vàng",
+    "ascensionMat": "Bùa Rừng Xanh Sương Đọng - Đồng",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114037.png",
     "domainName": "Bí Cảnh Luyện Võ: Mây Bẩn",
     "daysOfWeek": [
@@ -684,9 +684,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Xương Khắc Ấn",
+    "eliteMatName": "Xương Vụn Vỡ",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112074.png",
-    "commonMatName": "Băng Đỏ Ánh Vàng",
+    "commonMatName": "Băng Đỏ Phai Màu",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112065.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Ayus.png"
   },
@@ -695,7 +695,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Ánh Sáng Đêm Sương Mù",
     "rarity": 5,
     "type": "sword",
-    "ascensionMat": "Nhánh Vàng Của Biển Xa",
+    "ascensionMat": "Nhánh San Hô Của Biển Xa",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114025.png",
     "domainName": "Bí Cảnh Luyện Võ: Vực Trầm Sa",
     "daysOfWeek": [
@@ -703,9 +703,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Con Ngươi Hỗn Độn",
+    "eliteMatName": "Cơ Quan Hỗn Độn",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112047.png",
-    "commonMatName": "Kiếm Cách Trứ Danh",
+    "commonMatName": "Kiếm Cách Cũ Nát",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112044.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Narukami.png"
   },
@@ -714,7 +714,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Bàn Nham Kết Lục",
     "rarity": 5,
     "type": "sword",
-    "ascensionMat": "Sự Chuyển Dời Của Biển Sương Mù",
+    "ascensionMat": "Diên Đơn Biển Sương Mù",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114017.png",
     "domainName": "Bí Cảnh Luyện Võ: Tiếng Sấm Thành Cổ",
     "daysOfWeek": [
@@ -722,9 +722,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Đuốc Hư Vô",
+    "eliteMatName": "Phấn Hoa Hư Vô",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112026.png",
-    "commonMatName": "Ấn Quạ Trộm Vàng",
+    "commonMatName": "Ấn Quạ Tầm Bảo",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112035.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Morax.png"
   },
@@ -733,7 +733,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Chìa Khóa Khaj-Nisut",
     "rarity": 5,
     "type": "sword",
-    "ascensionMat": "Bùa Rừng Xanh Sương Đọng - Vàng",
+    "ascensionMat": "Bùa Rừng Xanh Sương Đọng - Đồng",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114037.png",
     "domainName": "Bí Cảnh Luyện Võ: Mây Bẩn",
     "daysOfWeek": [
@@ -741,9 +741,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Lăng Kính Phát Sáng",
+    "eliteMatName": "Lăng Kính Hỏng Hóc",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112071.png",
-    "commonMatName": "Băng Đỏ Ánh Vàng",
+    "commonMatName": "Băng Đỏ Phai Màu",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112065.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Deshret.png"
   },
@@ -752,7 +752,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Haran Geppaku Futsu",
     "rarity": 5,
     "type": "sword",
-    "ascensionMat": "Uy Dũng Của Narukami",
+    "ascensionMat": "Trí Tuệ Của Narukami",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114029.png",
     "domainName": "Bí Cảnh Luyện Võ: Tế Đàn Cát",
     "daysOfWeek": [
@@ -760,9 +760,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Tượng Tử Thần",
+    "eliteMatName": "Tượng Hắc Ám",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112017.png",
-    "commonMatName": "Kiếm Cách Trứ Danh",
+    "commonMatName": "Kiếm Cách Cũ Nát",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112044.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Amenoma.png"
   },
@@ -771,7 +771,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Khúc Ca Núi Đá",
     "rarity": 5,
     "type": "sword",
-    "ascensionMat": "Giác Ngộ Của Làn Khói Thần Bí",
+    "ascensionMat": "Suy Tư Của Làn Khói Thần Bí",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114069.png",
     "domainName": "Bí Cảnh Luyện Võ: Ước Lượng",
     "daysOfWeek": [
@@ -779,9 +779,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Lõi Bí Ẩn",
+    "eliteMatName": "Trục Bí Ẩn",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112113.png",
-    "commonMatName": "Răng Nanh Bạo Chúa",
+    "commonMatName": "Răng Nanh Non Nớt",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112101.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_XochitlsTube.png"
   },
@@ -790,7 +790,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Kiếm Chước Phong",
     "rarity": 5,
     "type": "sword",
-    "ascensionMat": "Thần Thể Rừng Băng Giá",
+    "ascensionMat": "Ánh Sáng Rừng Băng Giá",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114013.png",
     "domainName": "Bí Cảnh Luyện Võ: Tế Đàn Lôi Vân",
     "daysOfWeek": [
@@ -798,9 +798,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Dao Đô Thám Trưởng",
+    "eliteMatName": "Dao Săn Bắt",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112029.png",
-    "commonMatName": "Mặt Nạ Xui Xẻo",
+    "commonMatName": "Mặt Nạ Vỡ",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112005.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Kunwu.png"
   },
@@ -809,7 +809,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Lời Thề Tự Do Cổ Xưa",
     "rarity": 5,
     "type": "sword",
-    "ascensionMat": "Lý Tưởng Của Đấu Sĩ Nanh Sư Tử",
+    "ascensionMat": "Xiềng Xích Đấu Sĩ Nanh Sư Tử",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114009.png",
     "domainName": "Bí Cảnh Luyện Võ: Phế Đô Khát Nước",
     "daysOfWeek": [
@@ -817,9 +817,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Trái Tim Hỗn Độn",
+    "eliteMatName": "Cấu Trúc Hỗn Độn",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112023.png",
-    "commonMatName": "Bản Vẽ Cấm Chú",
+    "commonMatName": "Bản Vẽ Hướng Dẫn",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112008.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Widsith.png"
   },
@@ -828,7 +828,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Phong Ưng Kiếm",
     "rarity": 5,
     "type": "sword",
-    "ascensionMat": "Mảnh Giấc Mơ Tháp Cô Vương",
+    "ascensionMat": "Ngói Vỡ Tháp Cô Vương",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114001.png",
     "domainName": "Bí Cảnh Luyện Võ: Thủy Quang Thành",
     "daysOfWeek": [
@@ -836,9 +836,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Sừng Hắc Tinh",
+    "eliteMatName": "Sừng Nặng",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112014.png",
-    "commonMatName": "Mũi Tên Thiện Chiến",
+    "commonMatName": "Mũi Tên Chắc Chắn",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112011.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Falcon.png"
   },
@@ -847,7 +847,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Sắc Nước Lộng Lẫy",
     "rarity": 5,
     "type": "sword",
-    "ascensionMat": "Tinh Chất Giọt Sương Thánh Thuần",
+    "ascensionMat": "Cặn Bẩn Giọt Sương Thánh Thuần",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114053.png",
     "domainName": "Bí Cảnh Luyện Võ: Kỹ Thuật",
     "daysOfWeek": [
@@ -855,9 +855,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Ảo Linh Nước Đục Mới Sinh",
+    "eliteMatName": "Giọt Nước Đục",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112086.png",
-    "commonMatName": "Tinh Thạch Dị Sắc",
+    "commonMatName": "Ngọc Vụn Đại Dương",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112080.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Regalis.png"
   },
@@ -866,7 +866,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Thiên Không Kiếm",
     "rarity": 5,
     "type": "sword",
-    "ascensionMat": "Nỗi Nhớ Của Sói Bão",
+    "ascensionMat": "Răng Sữa Sói Bão",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114005.png",
     "domainName": "Bí Cảnh Luyện Võ: Thâm Cốc",
     "daysOfWeek": [
@@ -874,9 +874,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Chồi Non Địa Mạch",
+    "eliteMatName": "Cành Cây Địa Mạch",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112020.png",
-    "commonMatName": "Bột Slime",
+    "commonMatName": "Dịch Slime",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112002.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Dvalin.png"
   },
@@ -885,7 +885,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Uraku Misugiri",
     "rarity": 5,
     "type": "sword",
-    "ascensionMat": "Nhánh Vàng Của Biển Xa",
+    "ascensionMat": "Nhánh San Hô Của Biển Xa",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114025.png",
     "domainName": "Bí Cảnh Luyện Võ: Vực Trầm Sa",
     "daysOfWeek": [
@@ -893,9 +893,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Con Ngươi Hỗn Độn",
+    "eliteMatName": "Cơ Quan Hỗn Độn",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112047.png",
-    "commonMatName": "Kiếm Cách Trứ Danh",
+    "commonMatName": "Kiếm Cách Cũ Nát",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112044.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Needle.png"
   },
@@ -904,7 +904,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Xá Tội",
     "rarity": 5,
     "type": "sword",
-    "ascensionMat": "Tiếng Vọng Cung Đàn Cổ Xưa",
+    "ascensionMat": "Mảnh Cung Đàn Cổ Xưa",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114049.png",
     "domainName": "Bí Cảnh Luyện Võ: Tư Duy Robot",
     "daysOfWeek": [
@@ -912,9 +912,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Thời Khắc Của Đặc Vụ",
+    "eliteMatName": "Đồng Hồ Cũ Kỹ Của Đặc Vụ",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112092.png",
-    "commonMatName": "Bánh Răng Lõi Trung Tâm",
+    "commonMatName": "Bánh Răng Liên Kết",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112083.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Estoc.png"
   },
@@ -923,7 +923,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Ánh Trăng Xiphos",
     "rarity": 4,
     "type": "sword",
-    "ascensionMat": "Bùa Rừng Xanh Sương Đọng - Vàng",
+    "ascensionMat": "Bùa Rừng Xanh Sương Đọng - Đồng",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114037.png",
     "domainName": "Bí Cảnh Luyện Võ: Mây Bẩn",
     "daysOfWeek": [
@@ -931,9 +931,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Lăng Kính Phát Sáng",
+    "eliteMatName": "Lăng Kính Hỏng Hóc",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112071.png",
-    "commonMatName": "Băng Đỏ Ánh Vàng",
+    "commonMatName": "Băng Đỏ Phai Màu",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112065.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Pleroma.png"
   },
@@ -942,7 +942,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Con Thoi Chu Sa",
     "rarity": 4,
     "type": "sword",
-    "ascensionMat": "Mảnh Giấc Mơ Tháp Cô Vương",
+    "ascensionMat": "Ngói Vỡ Tháp Cô Vương",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114001.png",
     "domainName": "Bí Cảnh Luyện Võ: Thủy Quang Thành",
     "daysOfWeek": [
@@ -950,9 +950,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Trái Tim Hỗn Độn",
+    "eliteMatName": "Cấu Trúc Hỗn Độn",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112023.png",
-    "commonMatName": "Mặt Nạ Xui Xẻo",
+    "commonMatName": "Mặt Nạ Vỡ",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112005.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Opus.png"
   },
@@ -1018,7 +1018,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Đoản Đao Amenoma",
     "rarity": 4,
     "type": "sword",
-    "ascensionMat": "Nhánh Vàng Của Biển Xa",
+    "ascensionMat": "Nhánh San Hô Của Biển Xa",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114025.png",
     "domainName": "Bí Cảnh Luyện Võ: Vực Trầm Sa",
     "daysOfWeek": [
@@ -1026,9 +1026,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Con Ngươi Hỗn Độn",
+    "eliteMatName": "Cơ Quan Hỗn Độn",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112047.png",
-    "commonMatName": "Kiếm Cách Trứ Danh",
+    "commonMatName": "Kiếm Cách Cũ Nát",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112044.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Bakufu.png"
   },
@@ -1037,7 +1037,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Hắc Nham Trường Kiếm",
     "rarity": 4,
     "type": "sword",
-    "ascensionMat": "Thần Thể Rừng Băng Giá",
+    "ascensionMat": "Ánh Sáng Rừng Băng Giá",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114013.png",
     "domainName": "Bí Cảnh Luyện Võ: Tế Đàn Lôi Vân",
     "daysOfWeek": [
@@ -1045,9 +1045,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Dao Đô Thám Trưởng",
+    "eliteMatName": "Dao Săn Bắt",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112029.png",
-    "commonMatName": "Mũi Tên Thiện Chiến",
+    "commonMatName": "Mũi Tên Chắc Chắn",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112011.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Blackrock.png"
   },
@@ -1056,7 +1056,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Kagotsurube Isshin",
     "rarity": 4,
     "type": "sword",
-    "ascensionMat": "Mặt Nạ Kijin",
+    "ascensionMat": "Mặt Nạ Tà Ác",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114033.png",
     "domainName": "Bí Cảnh Luyện Võ: Tang Lễ Của Cát",
     "daysOfWeek": [
@@ -1064,9 +1064,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Tượng Tử Thần",
+    "eliteMatName": "Tượng Hắc Ám",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112017.png",
-    "commonMatName": "Hạt Bay Lượn Kết Tinh",
+    "commonMatName": "Hạt Bay Lượn Khô Héo",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112053.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Youtou.png"
   },
@@ -1075,7 +1075,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Kiếm Bến Tàu",
     "rarity": 4,
     "type": "sword",
-    "ascensionMat": "Tinh Chất Giọt Sương Thánh Thuần",
+    "ascensionMat": "Cặn Bẩn Giọt Sương Thánh Thuần",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114053.png",
     "domainName": "Bí Cảnh Luyện Võ: Kỹ Thuật",
     "daysOfWeek": [
@@ -1083,9 +1083,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Thời Khắc Của Đặc Vụ",
+    "eliteMatName": "Đồng Hồ Cũ Kỹ Của Đặc Vụ",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112092.png",
-    "commonMatName": "Tinh Thạch Dị Sắc",
+    "commonMatName": "Ngọc Vụn Đại Dương",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112080.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Mechanic.png"
   },
@@ -1094,7 +1094,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Kiếm Đen",
     "rarity": 4,
     "type": "sword",
-    "ascensionMat": "Nỗi Nhớ Của Sói Bão",
+    "ascensionMat": "Răng Sữa Sói Bão",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114005.png",
     "domainName": "Bí Cảnh Luyện Võ: Thâm Cốc",
     "daysOfWeek": [
@@ -1102,9 +1102,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Chồi Non Địa Mạch",
+    "eliteMatName": "Cành Cây Địa Mạch",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112020.png",
-    "commonMatName": "Bột Slime",
+    "commonMatName": "Dịch Slime",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112002.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Bloodstained.png"
   },
@@ -1113,7 +1113,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Kiếm Giáng Lâm",
     "rarity": 4,
     "type": "sword",
-    "ascensionMat": "Nỗi Nhớ Của Sói Bão",
+    "ascensionMat": "Răng Sữa Sói Bão",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114005.png",
     "domainName": "Bí Cảnh Luyện Võ: Thâm Cốc",
     "daysOfWeek": [
@@ -1121,9 +1121,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Chồi Non Địa Mạch",
+    "eliteMatName": "Cành Cây Địa Mạch",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112020.png",
-    "commonMatName": "Ấn Quạ Trộm Vàng",
+    "commonMatName": "Ấn Quạ Tầm Bảo",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112035.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Psalmus.png"
   },
@@ -1132,7 +1132,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Kiếm Gỗ",
     "rarity": 4,
     "type": "sword",
-    "ascensionMat": "Bùa Rừng Xanh Sương Đọng - Vàng",
+    "ascensionMat": "Bùa Rừng Xanh Sương Đọng - Đồng",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114037.png",
     "domainName": "Bí Cảnh Luyện Võ: Mây Bẩn",
     "daysOfWeek": [
@@ -1140,9 +1140,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Chốt Neo Hỗn Độn",
+    "eliteMatName": "Vật Chứa Hỗn Độn",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112068.png",
-    "commonMatName": "Băng Đỏ Ánh Vàng",
+    "commonMatName": "Băng Đỏ Phai Màu",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112065.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Arakalari.png"
   },
@@ -1151,7 +1151,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Kiếm Sáo",
     "rarity": 4,
     "type": "sword",
-    "ascensionMat": "Nỗi Nhớ Của Sói Bão",
+    "ascensionMat": "Răng Sữa Sói Bão",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114005.png",
     "domainName": "Bí Cảnh Luyện Võ: Thâm Cốc",
     "daysOfWeek": [
@@ -1159,9 +1159,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Chồi Non Địa Mạch",
+    "eliteMatName": "Cành Cây Địa Mạch",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112020.png",
-    "commonMatName": "Bột Slime",
+    "commonMatName": "Dịch Slime",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112002.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Troupe.png"
   },
@@ -1170,7 +1170,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Kiếm Tế Lễ",
     "rarity": 4,
     "type": "sword",
-    "ascensionMat": "Lý Tưởng Của Đấu Sĩ Nanh Sư Tử",
+    "ascensionMat": "Xiềng Xích Đấu Sĩ Nanh Sư Tử",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114009.png",
     "domainName": "Bí Cảnh Luyện Võ: Phế Đô Khát Nước",
     "daysOfWeek": [
@@ -1178,9 +1178,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Trái Tim Hỗn Độn",
+    "eliteMatName": "Cấu Trúc Hỗn Độn",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112023.png",
-    "commonMatName": "Bản Vẽ Cấm Chú",
+    "commonMatName": "Bản Vẽ Hướng Dẫn",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112008.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Fossil.png"
   },
@@ -1189,7 +1189,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Lưỡi Kiếm Narzissenkreuz",
     "rarity": 4,
     "type": "sword",
-    "ascensionMat": "Tiếng Vọng Cung Đàn Cổ Xưa",
+    "ascensionMat": "Mảnh Cung Đàn Cổ Xưa",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114049.png",
     "domainName": "Bí Cảnh Luyện Võ: Tư Duy Robot",
     "daysOfWeek": [
@@ -1197,9 +1197,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Thời Khắc Của Đặc Vụ",
+    "eliteMatName": "Đồng Hồ Cũ Kỹ Của Đặc Vụ",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112092.png",
-    "commonMatName": "Tinh Thạch Dị Sắc",
+    "commonMatName": "Ngọc Vụn Đại Dương",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112080.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Purewill.png"
   },
@@ -1208,7 +1208,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Mẫu Trảm Nham",
     "rarity": 4,
     "type": "sword",
-    "ascensionMat": "Sự Chuyển Dời Của Biển Sương Mù",
+    "ascensionMat": "Diên Đơn Biển Sương Mù",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114017.png",
     "domainName": "Bí Cảnh Luyện Võ: Tiếng Sấm Thành Cổ",
     "daysOfWeek": [
@@ -1216,9 +1216,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Đuốc Hư Vô",
+    "eliteMatName": "Phấn Hoa Hư Vô",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112026.png",
-    "commonMatName": "Phù Hiệu Hiệu Úy",
+    "commonMatName": "Phù Hiệu Tân Binh",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112032.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Proto.png"
   },
@@ -1227,7 +1227,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Nanh Sói",
     "rarity": 4,
     "type": "sword",
-    "ascensionMat": "Mảnh Giấc Mơ Tháp Cô Vương",
+    "ascensionMat": "Ngói Vỡ Tháp Cô Vương",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114001.png",
     "domainName": "Bí Cảnh Luyện Võ: Thủy Quang Thành",
     "daysOfWeek": [
@@ -1235,9 +1235,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Trái Tim Hỗn Độn",
+    "eliteMatName": "Cấu Trúc Hỗn Độn",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112023.png",
-    "commonMatName": "Mặt Nạ Xui Xẻo",
+    "commonMatName": "Mặt Nạ Vỡ",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112005.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Boreas.png"
   },
@@ -1246,7 +1246,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Nhạc Khúc Biển Sâu",
     "rarity": 4,
     "type": "sword",
-    "ascensionMat": "Tinh Chất Giọt Sương Thánh Thuần",
+    "ascensionMat": "Cặn Bẩn Giọt Sương Thánh Thuần",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114053.png",
     "domainName": "Bí Cảnh Luyện Võ: Kỹ Thuật",
     "daysOfWeek": [
@@ -1254,9 +1254,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Ảo Linh Nước Đục Mới Sinh",
+    "eliteMatName": "Giọt Nước Đục",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112086.png",
-    "commonMatName": "Kiếm Cách Trứ Danh",
+    "commonMatName": "Kiếm Cách Cũ Nát",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112044.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Vorpal.png"
   },
@@ -1265,7 +1265,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Ống Đồng Fleuve Cendre",
     "rarity": 4,
     "type": "sword",
-    "ascensionMat": "Tiếng Vọng Cung Đàn Cổ Xưa",
+    "ascensionMat": "Mảnh Cung Đàn Cổ Xưa",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114049.png",
     "domainName": "Bí Cảnh Luyện Võ: Tư Duy Robot",
     "daysOfWeek": [
@@ -1273,9 +1273,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Ảo Linh Nước Đục Mới Sinh",
+    "eliteMatName": "Giọt Nước Đục",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112086.png",
-    "commonMatName": "Tinh Thạch Dị Sắc",
+    "commonMatName": "Ngọc Vụn Đại Dương",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112080.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Machination.png"
   },
@@ -1284,7 +1284,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Răng Nanh Rỉ Sét",
     "rarity": 4,
     "type": "sword",
-    "ascensionMat": "Lý Tưởng Của Đấu Sĩ Nanh Sư Tử",
+    "ascensionMat": "Xiềng Xích Đấu Sĩ Nanh Sư Tử",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114009.png",
     "domainName": "Bí Cảnh Luyện Võ: Phế Đô Khát Nước",
     "daysOfWeek": [
@@ -1292,9 +1292,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Sừng Hắc Tinh",
+    "eliteMatName": "Sừng Nặng",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112014.png",
-    "commonMatName": "Phù Hiệu Hiệu Úy",
+    "commonMatName": "Phù Hiệu Tân Binh",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112032.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Magnum.png"
   },
@@ -1303,7 +1303,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Sáo Ezpitzal",
     "rarity": 4,
     "type": "sword",
-    "ascensionMat": "Sự Vinh Dự Của Trái Tim Hiến Tế",
+    "ascensionMat": "Sự Sợ Hãi Của Trái Tim Hiến Tế",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114061.png",
     "domainName": "Bí Cảnh Luyện Võ: U Tối",
     "daysOfWeek": [
@@ -1311,9 +1311,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Cán Kiếm Chưa Tắt",
+    "eliteMatName": "Cán Kiếm Nát Vụn",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112098.png",
-    "commonMatName": "Răng Nanh Bạo Chúa",
+    "commonMatName": "Răng Nanh Non Nớt",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112101.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Isikhulu.png"
   },
@@ -1322,7 +1322,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Tai Họa Eshu",
     "rarity": 4,
     "type": "sword",
-    "ascensionMat": "Thần Tính Của Thánh Chủ Mê Sảng",
+    "ascensionMat": "Sự Sa Ngã Của Thánh Chủ Mê Sảng",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114065.png",
     "domainName": "Bí Cảnh Luyện Võ: Nghiền Ngẫm",
     "daysOfWeek": [
@@ -1330,9 +1330,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Lõi Lá Cuộn Biến Ảo",
+    "eliteMatName": "Mầm Khúc Xạ",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112116.png",
-    "commonMatName": "Còi Vàng Võ Sĩ Saurian",
+    "commonMatName": "Còi Gỗ Hộ Vệ",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112104.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_SacrificialNgombe.png"
   },
@@ -1341,7 +1341,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Tây Phong Kiếm",
     "rarity": 4,
     "type": "sword",
-    "ascensionMat": "Mảnh Giấc Mơ Tháp Cô Vương",
+    "ascensionMat": "Ngói Vỡ Tháp Cô Vương",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114001.png",
     "domainName": "Bí Cảnh Luyện Võ: Thủy Quang Thành",
     "daysOfWeek": [
@@ -1349,9 +1349,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Sừng Hắc Tinh",
+    "eliteMatName": "Sừng Nặng",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112014.png",
-    "commonMatName": "Mũi Tên Thiện Chiến",
+    "commonMatName": "Mũi Tên Chắc Chắn",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112011.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Zephyrus.png"
   },
@@ -1360,7 +1360,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Thiết Phong Kích",
     "rarity": 4,
     "type": "sword",
-    "ascensionMat": "Miếng Thiên Thạch Đen",
+    "ascensionMat": "Hạt Thiên Thạch Đen",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114021.png",
     "domainName": "Bí Cảnh Luyện Võ: Thử Thách Sấm Sét",
     "daysOfWeek": [
@@ -1368,9 +1368,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Mảnh Xương Hóa Thạch",
+    "eliteMatName": "Mảnh Xương Giòn Yếu",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112041.png",
-    "commonMatName": "Mật Hoa Nguyên Tố",
+    "commonMatName": "Mật Hoa Lừa Dối",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112038.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Exotic.png"
   },
@@ -1379,7 +1379,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Tia Sáng Nơi Hẻm Tối",
     "rarity": 4,
     "type": "sword",
-    "ascensionMat": "Mảnh Giấc Mơ Tháp Cô Vương",
+    "ascensionMat": "Ngói Vỡ Tháp Cô Vương",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114001.png",
     "domainName": "Bí Cảnh Luyện Võ: Thủy Quang Thành",
     "daysOfWeek": [
@@ -1387,9 +1387,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Sừng Hắc Tinh",
+    "eliteMatName": "Sừng Nặng",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112014.png",
-    "commonMatName": "Bản Vẽ Cấm Chú",
+    "commonMatName": "Bản Vẽ Hướng Dẫn",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112008.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Outlaw.png"
   },
@@ -1398,7 +1398,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Tiếng Hét Của Rồng",
     "rarity": 4,
     "type": "sword",
-    "ascensionMat": "Thần Thể Rừng Băng Giá",
+    "ascensionMat": "Ánh Sáng Rừng Băng Giá",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114013.png",
     "domainName": "Bí Cảnh Luyện Võ: Tế Đàn Lôi Vân",
     "daysOfWeek": [
@@ -1406,9 +1406,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Dao Đô Thám Trưởng",
+    "eliteMatName": "Dao Săn Bắt",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112029.png",
-    "commonMatName": "Ấn Quạ Trộm Vàng",
+    "commonMatName": "Ấn Quạ Tầm Bảo",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112035.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Rockkiller.png"
   },
@@ -1417,7 +1417,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Toukabou Shigure",
     "rarity": 4,
     "type": "sword",
-    "ascensionMat": "Uy Dũng Của Narukami",
+    "ascensionMat": "Trí Tuệ Của Narukami",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114029.png",
     "domainName": "Bí Cảnh Luyện Võ: Tế Đàn Cát",
     "daysOfWeek": [
@@ -1425,9 +1425,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Lăng Kính Phát Sáng",
+    "eliteMatName": "Lăng Kính Hỏng Hóc",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112071.png",
-    "commonMatName": "Kiếm Cách Trứ Danh",
+    "commonMatName": "Kiếm Cách Cũ Nát",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112044.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Kasabouzu.png"
   },
@@ -1436,7 +1436,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Trường Kiếm Tông Thất",
     "rarity": 4,
     "type": "sword",
-    "ascensionMat": "Mảnh Giấc Mơ Tháp Cô Vương",
+    "ascensionMat": "Ngói Vỡ Tháp Cô Vương",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114001.png",
     "domainName": "Bí Cảnh Luyện Võ: Thủy Quang Thành",
     "daysOfWeek": [
@@ -1444,9 +1444,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Sừng Hắc Tinh",
+    "eliteMatName": "Sừng Nặng",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112014.png",
-    "commonMatName": "Mặt Nạ Xui Xẻo",
+    "commonMatName": "Mặt Nạ Vỡ",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112005.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Theocrat.png"
   },
@@ -1455,7 +1455,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Xương Cứng",
     "rarity": 4,
     "type": "sword",
-    "ascensionMat": "Sự Vinh Dự Của Trái Tim Hiến Tế",
+    "ascensionMat": "Sự Sợ Hãi Của Trái Tim Hiến Tế",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114061.png",
     "domainName": "Bí Cảnh Luyện Võ: U Tối",
     "daysOfWeek": [
@@ -1463,9 +1463,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Biểu Tượng Ý Chí Ngao Du",
+    "eliteMatName": "Mảnh Ý Chí Vụn Vỡ",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112107.png",
-    "commonMatName": "Còi Vàng Võ Sĩ Saurian",
+    "commonMatName": "Còi Gỗ Hộ Vệ",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112104.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Umpakati.png"
   },
@@ -1474,7 +1474,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Đao Săn Cá",
     "rarity": 3,
     "type": "sword",
-    "ascensionMat": "Sự Chuyển Dời Của Biển Sương Mù",
+    "ascensionMat": "Diên Đơn Biển Sương Mù",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114017.png",
     "domainName": "Bí Cảnh Luyện Võ: Tiếng Sấm Thành Cổ",
     "daysOfWeek": [
@@ -1482,9 +1482,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Đuốc Hư Vô",
+    "eliteMatName": "Phấn Hoa Hư Vô",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112026.png",
-    "commonMatName": "Ấn Quạ Trộm Vàng",
+    "commonMatName": "Ấn Quạ Tầm Bảo",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112035.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Sashimi.png"
   },
@@ -1493,7 +1493,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Kiếm Lữ Hành",
     "rarity": 3,
     "type": "sword",
-    "ascensionMat": "Lý Tưởng Của Đấu Sĩ Nanh Sư Tử",
+    "ascensionMat": "Xiềng Xích Đấu Sĩ Nanh Sư Tử",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114009.png",
     "domainName": "Bí Cảnh Luyện Võ: Phế Đô Khát Nước",
     "daysOfWeek": [
@@ -1501,9 +1501,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Trái Tim Hỗn Độn",
+    "eliteMatName": "Cấu Trúc Hỗn Độn",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112023.png",
-    "commonMatName": "Bản Vẽ Cấm Chú",
+    "commonMatName": "Bản Vẽ Hướng Dẫn",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112008.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Traveler.png"
   },
@@ -1512,7 +1512,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Kiếm Phi Thiên",
     "rarity": 3,
     "type": "sword",
-    "ascensionMat": "Miếng Thiên Thạch Đen",
+    "ascensionMat": "Hạt Thiên Thạch Đen",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114021.png",
     "domainName": "Bí Cảnh Luyện Võ: Thử Thách Sấm Sét",
     "daysOfWeek": [
@@ -1520,9 +1520,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Mảnh Xương Hóa Thạch",
+    "eliteMatName": "Mảnh Xương Giòn Yếu",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112041.png",
-    "commonMatName": "Phù Hiệu Hiệu Úy",
+    "commonMatName": "Phù Hiệu Tân Binh",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112032.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Mitsurugi.png"
   },
@@ -1531,7 +1531,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Kiếm Sắt Đen",
     "rarity": 3,
     "type": "sword",
-    "ascensionMat": "Thần Thể Rừng Băng Giá",
+    "ascensionMat": "Ánh Sáng Rừng Băng Giá",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114013.png",
     "domainName": "Bí Cảnh Luyện Võ: Tế Đàn Lôi Vân",
     "daysOfWeek": [
@@ -1539,9 +1539,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Dao Đô Thám Trưởng",
+    "eliteMatName": "Dao Săn Bắt",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112029.png",
-    "commonMatName": "Mặt Nạ Xui Xẻo",
+    "commonMatName": "Mặt Nạ Vỡ",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112005.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Darker.png"
   },
@@ -1550,7 +1550,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Lãnh Nhẫn",
     "rarity": 3,
     "type": "sword",
-    "ascensionMat": "Mảnh Giấc Mơ Tháp Cô Vương",
+    "ascensionMat": "Ngói Vỡ Tháp Cô Vương",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114001.png",
     "domainName": "Bí Cảnh Luyện Võ: Thủy Quang Thành",
     "daysOfWeek": [
@@ -1558,9 +1558,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Sừng Hắc Tinh",
+    "eliteMatName": "Sừng Nặng",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112014.png",
-    "commonMatName": "Mũi Tên Thiện Chiến",
+    "commonMatName": "Mũi Tên Chắc Chắn",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112011.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Steel.png"
   },
@@ -1569,7 +1569,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Thần Kiếm Lê Minh",
     "rarity": 3,
     "type": "sword",
-    "ascensionMat": "Nỗi Nhớ Của Sói Bão",
+    "ascensionMat": "Răng Sữa Sói Bão",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114005.png",
     "domainName": "Bí Cảnh Luyện Võ: Thâm Cốc",
     "daysOfWeek": [
@@ -1577,9 +1577,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Chồi Non Địa Mạch",
+    "eliteMatName": "Cành Cây Địa Mạch",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112020.png",
-    "commonMatName": "Bột Slime",
+    "commonMatName": "Dịch Slime",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112002.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Dawn.png"
   },
@@ -1588,7 +1588,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Kiếm Bạc",
     "rarity": 2,
     "type": "sword",
-    "ascensionMat": "Mảnh Vỡ Tháp Cô Vương",
+    "ascensionMat": "Ngói Vỡ Tháp Cô Vương",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114001.png",
     "domainName": "Bí Cảnh Luyện Võ: Thủy Quang Thành",
     "daysOfWeek": [
@@ -1596,9 +1596,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Sừng Đồng Đen",
+    "eliteMatName": "Sừng Nặng",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112014.png",
-    "commonMatName": "Mũi Tên Sắc Bén",
+    "commonMatName": "Mũi Tên Chắc Chắn",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112011.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Silver.png"
   },
@@ -1607,7 +1607,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Vô Phong Kiếm",
     "rarity": 1,
     "type": "sword",
-    "ascensionMat": "Mảnh Vỡ Tháp Cô Vương",
+    "ascensionMat": "Ngói Vỡ Tháp Cô Vương",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114001.png",
     "domainName": "Bí Cảnh Luyện Võ: Thủy Quang Thành",
     "daysOfWeek": [
@@ -1615,9 +1615,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Sừng Đồng Đen",
+    "eliteMatName": "Sừng Nặng",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112014.png",
-    "commonMatName": "Mũi Tên Sắc Bén",
+    "commonMatName": "Mũi Tên Chắc Chắn",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112011.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Sword_Blunt.png"
   },
@@ -1626,7 +1626,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Đường Cùng Của Sói",
     "rarity": 5,
     "type": "claymore",
-    "ascensionMat": "Lý Tưởng Của Đấu Sĩ Nanh Sư Tử",
+    "ascensionMat": "Xiềng Xích Đấu Sĩ Nanh Sư Tử",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114009.png",
     "domainName": "Bí Cảnh Luyện Võ: Phế Đô Khát Nước",
     "daysOfWeek": [
@@ -1634,9 +1634,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Trái Tim Hỗn Độn",
+    "eliteMatName": "Cấu Trúc Hỗn Độn",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112023.png",
-    "commonMatName": "Bản Vẽ Cấm Chú",
+    "commonMatName": "Bản Vẽ Hướng Dẫn",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112008.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Claymore_Wolfmound.png"
   },
@@ -1645,7 +1645,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Hải Đăng Bờ Biển Lau",
     "rarity": 5,
     "type": "claymore",
-    "ascensionMat": "Quá Khứ Của Ánh Nắng Quyền Uy",
+    "ascensionMat": "Dư Âm Của Ánh Nắng Quyền Uy",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114045.png",
     "domainName": "Bí Cảnh Luyện Võ: Dẫn Nghiệp",
     "daysOfWeek": [
@@ -1653,9 +1653,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Xương Khắc Ấn",
+    "eliteMatName": "Xương Vụn Vỡ",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112074.png",
-    "commonMatName": "Băng Đỏ Ánh Vàng",
+    "commonMatName": "Băng Đỏ Phai Màu",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112065.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Claymore_Deshret.png"
   },
@@ -1664,7 +1664,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Kiếm Vô Công",
     "rarity": 5,
     "type": "claymore",
-    "ascensionMat": "Sự Chuyển Dời Của Biển Sương Mù",
+    "ascensionMat": "Diên Đơn Biển Sương Mù",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114017.png",
     "domainName": "Bí Cảnh Luyện Võ: Tiếng Sấm Thành Cổ",
     "daysOfWeek": [
@@ -1672,9 +1672,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Đuốc Hư Vô",
+    "eliteMatName": "Phấn Hoa Hư Vô",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112026.png",
-    "commonMatName": "Ấn Quạ Trộm Vàng",
+    "commonMatName": "Ấn Quạ Tầm Bảo",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112035.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Claymore_Kunwu.png"
   },
@@ -1683,7 +1683,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Nanh Sơn Vương",
     "rarity": 5,
     "type": "claymore",
-    "ascensionMat": "Thần Tính Của Thánh Chủ Mê Sảng",
+    "ascensionMat": "Sự Sa Ngã Của Thánh Chủ Mê Sảng",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114065.png",
     "domainName": "Bí Cảnh Luyện Võ: Nghiền Ngẫm",
     "daysOfWeek": [
@@ -1691,9 +1691,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Con Mắt Rực Cháy",
+    "eliteMatName": "Hòn Đá Rực Cháy",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112110.png",
-    "commonMatName": "Còi Vàng Võ Sĩ Saurian",
+    "commonMatName": "Còi Gỗ Hộ Vệ",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112104.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Claymore_EmeraldSword.png"
   },
@@ -1702,7 +1702,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Phán Quyết",
     "rarity": 5,
     "type": "claymore",
-    "ascensionMat": "Tiếng Vọng Cung Đàn Cổ Xưa",
+    "ascensionMat": "Mảnh Cung Đàn Cổ Xưa",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114049.png",
     "domainName": "Bí Cảnh Luyện Võ: Tư Duy Robot",
     "daysOfWeek": [
@@ -1710,9 +1710,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Hạt Nhân Sinh Mệnh Dị Giới",
+    "eliteMatName": "Hạt Nhân Khe Nứt",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112089.png",
-    "commonMatName": "Bánh Răng Lõi Trung Tâm",
+    "commonMatName": "Bánh Răng Liên Kết",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112083.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Claymore_GoldenVerdict.png"
   },
@@ -1721,7 +1721,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Thiên Dương Rực Lửa",
     "rarity": 5,
     "type": "claymore",
-    "ascensionMat": "Sự Vinh Dự Của Trái Tim Hiến Tế",
+    "ascensionMat": "Sự Sợ Hãi Của Trái Tim Hiến Tế",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114061.png",
     "domainName": "Bí Cảnh Luyện Võ: U Tối",
     "daysOfWeek": [
@@ -1729,9 +1729,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Lõi Bí Ẩn",
+    "eliteMatName": "Trục Bí Ẩn",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112113.png",
-    "commonMatName": "Răng Nanh Bạo Chúa",
+    "commonMatName": "Răng Nanh Non Nớt",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112101.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Claymore_RadianceSword.png"
   },
@@ -1740,7 +1740,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Thiên Không Kiêu Ngạo",
     "rarity": 5,
     "type": "claymore",
-    "ascensionMat": "Nỗi Nhớ Của Sói Bão",
+    "ascensionMat": "Răng Sữa Sói Bão",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114005.png",
     "domainName": "Bí Cảnh Luyện Võ: Thâm Cốc",
     "daysOfWeek": [
@@ -1748,9 +1748,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Chồi Non Địa Mạch",
+    "eliteMatName": "Cành Cây Địa Mạch",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112020.png",
-    "commonMatName": "Bột Slime",
+    "commonMatName": "Dịch Slime",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112002.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Claymore_Dvalin.png"
   },
@@ -1759,7 +1759,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Tiếng Gió Trong Rừng Thông",
     "rarity": 5,
     "type": "claymore",
-    "ascensionMat": "Mảnh Giấc Mơ Tháp Cô Vương",
+    "ascensionMat": "Ngói Vỡ Tháp Cô Vương",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114001.png",
     "domainName": "Bí Cảnh Luyện Võ: Thủy Quang Thành",
     "daysOfWeek": [
@@ -1767,9 +1767,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Sừng Hắc Tinh",
+    "eliteMatName": "Sừng Nặng",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112014.png",
-    "commonMatName": "Mặt Nạ Xui Xẻo",
+    "commonMatName": "Mặt Nạ Vỡ",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112005.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Claymore_Widsith.png"
   },
@@ -1778,7 +1778,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Xích Giác Phá Thạch Đao",
     "rarity": 5,
     "type": "claymore",
-    "ascensionMat": "Uy Dũng Của Narukami",
+    "ascensionMat": "Trí Tuệ Của Narukami",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114029.png",
     "domainName": "Bí Cảnh Luyện Võ: Tế Đàn Cát",
     "daysOfWeek": [
@@ -1786,9 +1786,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Vuốt Quỷ Ma Thú",
+    "eliteMatName": "Móng Vuốt Ma Thú",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112056.png",
-    "commonMatName": "Kiếm Cách Trứ Danh",
+    "commonMatName": "Kiếm Cách Cũ Nát",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112044.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Claymore_Itadorimaru.png"
   },
@@ -1797,7 +1797,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "\"Bá Vương Tối Thượng Siêu Cấp Ma Kiếm\"",
     "rarity": 4,
     "type": "claymore",
-    "ascensionMat": "Ly Vàng Của Biển Nguyên Sơ",
+    "ascensionMat": "Ly Vỡ Của Biển Nguyên Sơ",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114057.png",
     "domainName": "Bí Cảnh Luyện Võ: Máy Móc",
     "daysOfWeek": [
@@ -1805,9 +1805,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Thời Khắc Của Đặc Vụ",
+    "eliteMatName": "Đồng Hồ Cũ Kỹ Của Đặc Vụ",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112092.png",
-    "commonMatName": "Bánh Răng Lõi Trung Tâm",
+    "commonMatName": "Bánh Răng Liên Kết",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112083.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Claymore_Champion.png"
   },
@@ -1816,7 +1816,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Akuoumaru",
     "rarity": 4,
     "type": "claymore",
-    "ascensionMat": "Nhánh Vàng Của Biển Xa",
+    "ascensionMat": "Nhánh San Hô Của Biển Xa",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114025.png",
     "domainName": "Bí Cảnh Luyện Võ: Vực Trầm Sa",
     "daysOfWeek": [
@@ -1824,9 +1824,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Vuốt Quỷ Ma Thú",
+    "eliteMatName": "Móng Vuốt Ma Thú",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112056.png",
-    "commonMatName": "Kiếm Cách Trứ Danh",
+    "commonMatName": "Kiếm Cách Cũ Nát",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112044.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Claymore_Maria.png"
   },
@@ -1835,7 +1835,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Bóng Tối Thủy Triều",
     "rarity": 4,
     "type": "claymore",
-    "ascensionMat": "Ly Vàng Của Biển Nguyên Sơ",
+    "ascensionMat": "Ly Vỡ Của Biển Nguyên Sơ",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114057.png",
     "domainName": "Bí Cảnh Luyện Võ: Máy Móc",
     "daysOfWeek": [
@@ -1843,9 +1843,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Hạt Nhân Sinh Mệnh Dị Giới",
+    "eliteMatName": "Hạt Nhân Khe Nứt",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112089.png",
-    "commonMatName": "Bánh Răng Lõi Trung Tâm",
+    "commonMatName": "Bánh Răng Liên Kết",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112083.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Claymore_Vorpal.png"
   },
@@ -1854,7 +1854,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Đại Kiếm Tây Phong",
     "rarity": 4,
     "type": "claymore",
-    "ascensionMat": "Lý Tưởng Của Đấu Sĩ Nanh Sư Tử",
+    "ascensionMat": "Xiềng Xích Đấu Sĩ Nanh Sư Tử",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114009.png",
     "domainName": "Bí Cảnh Luyện Võ: Phế Đô Khát Nước",
     "daysOfWeek": [
@@ -1862,9 +1862,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Trái Tim Hỗn Độn",
+    "eliteMatName": "Cấu Trúc Hỗn Độn",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112023.png",
-    "commonMatName": "Phù Hiệu Hiệu Úy",
+    "commonMatName": "Phù Hiệu Tân Binh",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112032.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Claymore_Zephyrus.png"
   },
@@ -1873,7 +1873,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Đại Kiếm Tế Lễ",
     "rarity": 4,
     "type": "claymore",
-    "ascensionMat": "Nỗi Nhớ Của Sói Bão",
+    "ascensionMat": "Răng Sữa Sói Bão",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114005.png",
     "domainName": "Bí Cảnh Luyện Võ: Thâm Cốc",
     "daysOfWeek": [
@@ -1881,9 +1881,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Chồi Non Địa Mạch",
+    "eliteMatName": "Cành Cây Địa Mạch",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112020.png",
-    "commonMatName": "Mũi Tên Thiện Chiến",
+    "commonMatName": "Mũi Tên Chắc Chắn",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112011.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Claymore_Fossil.png"
   },
@@ -1892,7 +1892,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Đại Kiếm Tông Thất",
     "rarity": 4,
     "type": "claymore",
-    "ascensionMat": "Lý Tưởng Của Đấu Sĩ Nanh Sư Tử",
+    "ascensionMat": "Xiềng Xích Đấu Sĩ Nanh Sư Tử",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114009.png",
     "domainName": "Bí Cảnh Luyện Võ: Phế Đô Khát Nước",
     "daysOfWeek": [
@@ -1900,9 +1900,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Trái Tim Hỗn Độn",
+    "eliteMatName": "Cấu Trúc Hỗn Độn",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112023.png",
-    "commonMatName": "Bột Slime",
+    "commonMatName": "Dịch Slime",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112002.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Claymore_Theocrat.png"
   },
@@ -1911,7 +1911,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Đao Chấn Động",
     "rarity": 4,
     "type": "claymore",
-    "ascensionMat": "Sự Vinh Dự Của Trái Tim Hiến Tế",
+    "ascensionMat": "Sự Sợ Hãi Của Trái Tim Hiến Tế",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114061.png",
     "domainName": "Bí Cảnh Luyện Võ: U Tối",
     "daysOfWeek": [
@@ -1919,9 +1919,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Con Mắt Rực Cháy",
+    "eliteMatName": "Hòn Đá Rực Cháy",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112110.png",
-    "commonMatName": "Còi Vàng Võ Sĩ Saurian",
+    "commonMatName": "Còi Gỗ Hộ Vệ",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112104.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Claymore_Isikhulu.png"
   },
@@ -1930,7 +1930,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Đóa Hoa Tôn Màu Thép",
     "rarity": 4,
     "type": "claymore",
-    "ascensionMat": "Lý Tưởng Của Đấu Sĩ Nanh Sư Tử",
+    "ascensionMat": "Xiềng Xích Đấu Sĩ Nanh Sư Tử",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114009.png",
     "domainName": "Bí Cảnh Luyện Võ: Phế Đô Khát Nước",
     "daysOfWeek": [
@@ -1938,9 +1938,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Xương Khắc Ấn",
+    "eliteMatName": "Xương Vụn Vỡ",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112074.png",
-    "commonMatName": "Hạt Bay Lượn Kết Tinh",
+    "commonMatName": "Hạt Bay Lượn Khô Héo",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112053.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Claymore_Fleurfair.png"
   },
@@ -1949,7 +1949,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Gậy Đàm Phán",
     "rarity": 4,
     "type": "claymore",
-    "ascensionMat": "Chân Lý Vườn Hoa Ốc Đảo",
+    "ascensionMat": "Hồi Ức Vườn Hoa Ốc Đảo",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114041.png",
     "domainName": "Bí Cảnh Luyện Võ: Tư Hoặc",
     "daysOfWeek": [
@@ -1957,9 +1957,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Xương Khắc Ấn",
+    "eliteMatName": "Xương Vụn Vỡ",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112074.png",
-    "commonMatName": "Bột Slime",
+    "commonMatName": "Dịch Slime",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112002.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Claymore_BeastTamer.png"
   },
@@ -1968,7 +1968,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Hắc Nham Trảm Đao",
     "rarity": 4,
     "type": "claymore",
-    "ascensionMat": "Sự Chuyển Dời Của Biển Sương Mù",
+    "ascensionMat": "Diên Đơn Biển Sương Mù",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114017.png",
     "domainName": "Bí Cảnh Luyện Võ: Tiếng Sấm Thành Cổ",
     "daysOfWeek": [
@@ -1976,9 +1976,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Đuốc Hư Vô",
+    "eliteMatName": "Phấn Hoa Hư Vô",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112026.png",
-    "commonMatName": "Phù Hiệu Hiệu Úy",
+    "commonMatName": "Phù Hiệu Tân Binh",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112032.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Claymore_Blackrock.png"
   },
@@ -1987,7 +1987,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Kiếm Bạch Ảnh",
     "rarity": 4,
     "type": "claymore",
-    "ascensionMat": "Thần Thể Rừng Băng Giá",
+    "ascensionMat": "Ánh Sáng Rừng Băng Giá",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114013.png",
     "domainName": "Bí Cảnh Luyện Võ: Tế Đàn Lôi Vân",
     "daysOfWeek": [
@@ -1995,9 +1995,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Dao Đô Thám Trưởng",
+    "eliteMatName": "Dao Săn Bắt",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112029.png",
-    "commonMatName": "Ấn Quạ Trộm Vàng",
+    "commonMatName": "Ấn Quạ Tầm Bảo",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112035.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Claymore_Exotic.png"
   },
@@ -2006,7 +2006,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Kiếm Chuông",
     "rarity": 4,
     "type": "claymore",
-    "ascensionMat": "Mảnh Giấc Mơ Tháp Cô Vương",
+    "ascensionMat": "Ngói Vỡ Tháp Cô Vương",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114001.png",
     "domainName": "Bí Cảnh Luyện Võ: Thủy Quang Thành",
     "daysOfWeek": [
@@ -2014,9 +2014,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Sừng Hắc Tinh",
+    "eliteMatName": "Sừng Nặng",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112014.png",
-    "commonMatName": "Mật Hoa Nguyên Tố",
+    "commonMatName": "Mật Hoa Lừa Dối",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112038.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Claymore_Troupe.png"
   },
@@ -2025,7 +2025,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Kiếm Li Cốt",
     "rarity": 4,
     "type": "claymore",
-    "ascensionMat": "Miếng Thiên Thạch Đen",
+    "ascensionMat": "Hạt Thiên Thạch Đen",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114021.png",
     "domainName": "Bí Cảnh Luyện Võ: Thử Thách Sấm Sét",
     "daysOfWeek": [
@@ -2033,9 +2033,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Mảnh Xương Hóa Thạch",
+    "eliteMatName": "Mảnh Xương Giòn Yếu",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112041.png",
-    "commonMatName": "Mật Hoa Nguyên Tố",
+    "commonMatName": "Mật Hoa Lừa Dối",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112038.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Claymore_Kione.png"
   },
@@ -2044,7 +2044,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Máy Cưa Cầm Tay",
     "rarity": 4,
     "type": "claymore",
-    "ascensionMat": "Ly Vàng Của Biển Nguyên Sơ",
+    "ascensionMat": "Ly Vỡ Của Biển Nguyên Sơ",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114057.png",
     "domainName": "Bí Cảnh Luyện Võ: Máy Móc",
     "daysOfWeek": [
@@ -2052,9 +2052,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Hạt Nhân Sinh Mệnh Dị Giới",
+    "eliteMatName": "Hạt Nhân Khe Nứt",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112089.png",
-    "commonMatName": "Bánh Răng Lõi Trung Tâm",
+    "commonMatName": "Bánh Răng Liên Kết",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112083.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Claymore_Mechanic.png"
   },
@@ -2063,7 +2063,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Mẫu Cổ Hoa",
     "rarity": 4,
     "type": "claymore",
-    "ascensionMat": "Miếng Thiên Thạch Đen",
+    "ascensionMat": "Hạt Thiên Thạch Đen",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114021.png",
     "domainName": "Bí Cảnh Luyện Võ: Thử Thách Sấm Sét",
     "daysOfWeek": [
@@ -2071,9 +2071,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Mảnh Xương Hóa Thạch",
+    "eliteMatName": "Mảnh Xương Giòn Yếu",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112041.png",
-    "commonMatName": "Mặt Nạ Xui Xẻo",
+    "commonMatName": "Mặt Nạ Vỡ",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112005.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Claymore_Proto.png"
   },
@@ -2082,7 +2082,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Móc Trĩu Quả",
     "rarity": 4,
     "type": "claymore",
-    "ascensionMat": "Giác Ngộ Của Làn Khói Thần Bí",
+    "ascensionMat": "Suy Tư Của Làn Khói Thần Bí",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114069.png",
     "domainName": "Bí Cảnh Luyện Võ: Ước Lượng",
     "daysOfWeek": [
@@ -2090,9 +2090,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Lõi Bí Ẩn",
+    "eliteMatName": "Trục Bí Ẩn",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112113.png",
-    "commonMatName": "Răng Nanh Bạo Chúa",
+    "commonMatName": "Răng Nanh Non Nớt",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112101.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Claymore_Umpakati.png"
   },
@@ -2101,7 +2101,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Sắc Nước Makhaira",
     "rarity": 4,
     "type": "claymore",
-    "ascensionMat": "Quá Khứ Của Ánh Nắng Quyền Uy",
+    "ascensionMat": "Dư Âm Của Ánh Nắng Quyền Uy",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114045.png",
     "domainName": "Bí Cảnh Luyện Võ: Dẫn Nghiệp",
     "daysOfWeek": [
@@ -2109,9 +2109,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Chốt Neo Hỗn Độn",
+    "eliteMatName": "Vật Chứa Hỗn Độn",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112068.png",
-    "commonMatName": "Ấn Quạ Trộm Vàng",
+    "commonMatName": "Ấn Quạ Tầm Bảo",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112035.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Claymore_Pleroma.png"
   },
@@ -2120,7 +2120,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Thiên Nham Cổ Kiếm",
     "rarity": 4,
     "type": "claymore",
-    "ascensionMat": "Thần Thể Rừng Băng Giá",
+    "ascensionMat": "Ánh Sáng Rừng Băng Giá",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114013.png",
     "domainName": "Bí Cảnh Luyện Võ: Tế Đàn Lôi Vân",
     "daysOfWeek": [
@@ -2128,9 +2128,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Dao Đô Thám Trưởng",
+    "eliteMatName": "Dao Săn Bắt",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112029.png",
-    "commonMatName": "Mũi Tên Thiện Chiến",
+    "commonMatName": "Mũi Tên Chắc Chắn",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112011.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Claymore_Lapis.png"
   },
@@ -2139,7 +2139,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Trường Đao Katsuragi",
     "rarity": 4,
     "type": "claymore",
-    "ascensionMat": "Uy Dũng Của Narukami",
+    "ascensionMat": "Trí Tuệ Của Narukami",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114029.png",
     "domainName": "Bí Cảnh Luyện Võ: Tế Đàn Cát",
     "daysOfWeek": [
@@ -2147,9 +2147,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Con Ngươi Hỗn Độn",
+    "eliteMatName": "Cơ Quan Hỗn Độn",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112047.png",
-    "commonMatName": "Kiếm Cách Trứ Danh",
+    "commonMatName": "Kiếm Cách Cũ Nát",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112044.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Claymore_Bakufu.png"
   },
@@ -2158,7 +2158,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Tuyết Vùi Tinh Ngân",
     "rarity": 4,
     "type": "claymore",
-    "ascensionMat": "Mảnh Giấc Mơ Tháp Cô Vương",
+    "ascensionMat": "Ngói Vỡ Tháp Cô Vương",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114001.png",
     "domainName": "Bí Cảnh Luyện Võ: Thủy Quang Thành",
     "daysOfWeek": [
@@ -2166,9 +2166,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Sừng Hắc Tinh",
+    "eliteMatName": "Sừng Nặng",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112014.png",
-    "commonMatName": "Bột Slime",
+    "commonMatName": "Dịch Slime",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112002.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Claymore_Dragonfell.png"
   },
@@ -2177,7 +2177,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Vũ Tài",
     "rarity": 4,
     "type": "claymore",
-    "ascensionMat": "Sự Chuyển Dời Của Biển Sương Mù",
+    "ascensionMat": "Diên Đơn Biển Sương Mù",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114017.png",
     "domainName": "Bí Cảnh Luyện Võ: Tiếng Sấm Thành Cổ",
     "daysOfWeek": [
@@ -2185,9 +2185,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Đuốc Hư Vô",
+    "eliteMatName": "Phấn Hoa Hư Vô",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112026.png",
-    "commonMatName": "Bản Vẽ Cấm Chú",
+    "commonMatName": "Bản Vẽ Hướng Dẫn",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112008.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Claymore_Perdue.png"
   },
@@ -2196,7 +2196,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Vua Biển Hàng Hiệu",
     "rarity": 4,
     "type": "claymore",
-    "ascensionMat": "Miếng Thiên Thạch Đen",
+    "ascensionMat": "Hạt Thiên Thạch Đen",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114021.png",
     "domainName": "Bí Cảnh Luyện Võ: Thử Thách Sấm Sét",
     "daysOfWeek": [
@@ -2204,9 +2204,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Mảnh Xương Hóa Thạch",
+    "eliteMatName": "Mảnh Xương Giòn Yếu",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112041.png",
-    "commonMatName": "Bột Slime",
+    "commonMatName": "Dịch Slime",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112002.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Claymore_MillenniaTuna.png"
   },
@@ -2215,7 +2215,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Vương Khí Rừng Sâu",
     "rarity": 4,
     "type": "claymore",
-    "ascensionMat": "Bùa Rừng Xanh Sương Đọng - Vàng",
+    "ascensionMat": "Bùa Rừng Xanh Sương Đọng - Đồng",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114037.png",
     "domainName": "Bí Cảnh Luyện Võ: Mây Bẩn",
     "daysOfWeek": [
@@ -2223,9 +2223,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Chốt Neo Hỗn Độn",
+    "eliteMatName": "Vật Chứa Hỗn Độn",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112068.png",
-    "commonMatName": "Băng Đỏ Ánh Vàng",
+    "commonMatName": "Băng Đỏ Phai Màu",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112065.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Claymore_Arakalari.png"
   },
@@ -2234,7 +2234,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Đại Kiếm Phi Thiên",
     "rarity": 3,
     "type": "claymore",
-    "ascensionMat": "Miếng Thiên Thạch Đen",
+    "ascensionMat": "Hạt Thiên Thạch Đen",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114021.png",
     "domainName": "Bí Cảnh Luyện Võ: Thử Thách Sấm Sét",
     "daysOfWeek": [
@@ -2242,9 +2242,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Mảnh Xương Hóa Thạch",
+    "eliteMatName": "Mảnh Xương Giòn Yếu",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112041.png",
-    "commonMatName": "Ấn Quạ Trộm Vàng",
+    "commonMatName": "Ấn Quạ Tầm Bảo",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112035.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Claymore_Mitsurugi.png"
   },
@@ -2253,7 +2253,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Gậy Thu Phục",
     "rarity": 3,
     "type": "claymore",
-    "ascensionMat": "Sự Chuyển Dời Của Biển Sương Mù",
+    "ascensionMat": "Diên Đơn Biển Sương Mù",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114017.png",
     "domainName": "Bí Cảnh Luyện Võ: Tiếng Sấm Thành Cổ",
     "daysOfWeek": [
@@ -2261,9 +2261,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Đuốc Hư Vô",
+    "eliteMatName": "Phấn Hoa Hư Vô",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112026.png",
-    "commonMatName": "Mặt Nạ Xui Xẻo",
+    "commonMatName": "Mặt Nạ Vỡ",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112005.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Claymore_Reasoning.png"
   },
@@ -2272,7 +2272,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Kiếm Bạch Thiết",
     "rarity": 3,
     "type": "claymore",
-    "ascensionMat": "Lý Tưởng Của Đấu Sĩ Nanh Sư Tử",
+    "ascensionMat": "Xiềng Xích Đấu Sĩ Nanh Sư Tử",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114009.png",
     "domainName": "Bí Cảnh Luyện Võ: Phế Đô Khát Nước",
     "daysOfWeek": [
@@ -2280,9 +2280,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Trái Tim Hỗn Độn",
+    "eliteMatName": "Cấu Trúc Hỗn Độn",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112023.png",
-    "commonMatName": "Bột Slime",
+    "commonMatName": "Dịch Slime",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112002.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Claymore_Tin.png"
   },
@@ -2291,7 +2291,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Kiếm Huyết Rồng",
     "rarity": 3,
     "type": "claymore",
-    "ascensionMat": "Nỗi Nhớ Của Sói Bão",
+    "ascensionMat": "Răng Sữa Sói Bão",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114005.png",
     "domainName": "Bí Cảnh Luyện Võ: Thâm Cốc",
     "daysOfWeek": [
@@ -2299,9 +2299,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Chồi Non Địa Mạch",
+    "eliteMatName": "Cành Cây Địa Mạch",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112020.png",
-    "commonMatName": "Mũi Tên Thiện Chiến",
+    "commonMatName": "Mũi Tên Chắc Chắn",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112011.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Claymore_Siegfry.png"
   },
@@ -2310,7 +2310,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Kiếm Thiết Ảnh",
     "rarity": 3,
     "type": "claymore",
-    "ascensionMat": "Mảnh Giấc Mơ Tháp Cô Vương",
+    "ascensionMat": "Ngói Vỡ Tháp Cô Vương",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114001.png",
     "domainName": "Bí Cảnh Luyện Võ: Thủy Quang Thành",
     "daysOfWeek": [
@@ -2318,9 +2318,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Sừng Hắc Tinh",
+    "eliteMatName": "Sừng Nặng",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112014.png",
-    "commonMatName": "Mật Hoa Nguyên Tố",
+    "commonMatName": "Mật Hoa Lừa Dối",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112038.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Claymore_Glaive.png"
   },
@@ -2329,7 +2329,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Kiếm Dụng Binh",
     "rarity": 2,
     "type": "claymore",
-    "ascensionMat": "Mảnh Răng Sói Bão",
+    "ascensionMat": "Răng Sữa Sói Bão",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114005.png",
     "domainName": "Bí Cảnh Luyện Võ: Thâm Cốc",
     "daysOfWeek": [
@@ -2337,9 +2337,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Lá Khô Địa Mạch",
+    "eliteMatName": "Cành Cây Địa Mạch",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112020.png",
-    "commonMatName": "Tinh Slime",
+    "commonMatName": "Dịch Slime",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112002.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Claymore_Oyaji.png"
   },
@@ -2348,7 +2348,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Kiếm Huấn Luyện",
     "rarity": 1,
     "type": "claymore",
-    "ascensionMat": "Mảnh Răng Sói Bão",
+    "ascensionMat": "Răng Sữa Sói Bão",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114005.png",
     "domainName": "Bí Cảnh Luyện Võ: Thâm Cốc",
     "daysOfWeek": [
@@ -2356,9 +2356,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Lá Khô Địa Mạch",
+    "eliteMatName": "Cành Cây Địa Mạch",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112020.png",
-    "commonMatName": "Tinh Slime",
+    "commonMatName": "Dịch Slime",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112002.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Claymore_Aniki.png"
   },
@@ -2367,7 +2367,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Cánh Thiên Không",
     "rarity": 5,
     "type": "bow",
-    "ascensionMat": "Nỗi Nhớ Của Sói Bão",
+    "ascensionMat": "Răng Sữa Sói Bão",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114005.png",
     "domainName": "Bí Cảnh Luyện Võ: Thâm Cốc",
     "daysOfWeek": [
@@ -2375,9 +2375,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Chồi Non Địa Mạch",
+    "eliteMatName": "Cành Cây Địa Mạch",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112020.png",
-    "commonMatName": "Mũi Tên Thiện Chiến",
+    "commonMatName": "Mũi Tên Chắc Chắn",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112011.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Bow_Dvalin.png"
   },
@@ -2386,7 +2386,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Con Đường Thợ Săn",
     "rarity": 5,
     "type": "bow",
-    "ascensionMat": "Quá Khứ Của Ánh Nắng Quyền Uy",
+    "ascensionMat": "Dư Âm Của Ánh Nắng Quyền Uy",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114045.png",
     "domainName": "Bí Cảnh Luyện Võ: Dẫn Nghiệp",
     "daysOfWeek": [
@@ -2394,9 +2394,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Nhân Bào Nấm Hồi Phục",
+    "eliteMatName": "Nhân Bào Nấm Đã Chết",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112062.png",
-    "commonMatName": "Băng Đỏ Ánh Vàng",
+    "commonMatName": "Băng Đỏ Phai Màu",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112065.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Bow_Ayus.png"
   },
@@ -2405,7 +2405,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Cung Amos",
     "rarity": 5,
     "type": "bow",
-    "ascensionMat": "Lý Tưởng Của Đấu Sĩ Nanh Sư Tử",
+    "ascensionMat": "Xiềng Xích Đấu Sĩ Nanh Sư Tử",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114009.png",
     "domainName": "Bí Cảnh Luyện Võ: Phế Đô Khát Nước",
     "daysOfWeek": [
@@ -2413,9 +2413,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Trái Tim Hỗn Độn",
+    "eliteMatName": "Cấu Trúc Hỗn Độn",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112023.png",
-    "commonMatName": "Bột Slime",
+    "commonMatName": "Dịch Slime",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112002.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Bow_Amos.png"
   },
@@ -2424,7 +2424,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Màn Ảo Thuật Đầu Tiên",
     "rarity": 5,
     "type": "bow",
-    "ascensionMat": "Tiếng Vọng Cung Đàn Cổ Xưa",
+    "ascensionMat": "Mảnh Cung Đàn Cổ Xưa",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114049.png",
     "domainName": "Bí Cảnh Luyện Võ: Tư Duy Robot",
     "daysOfWeek": [
@@ -2432,9 +2432,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Ảo Linh Nước Đục Mới Sinh",
+    "eliteMatName": "Giọt Nước Đục",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112086.png",
-    "commonMatName": "Tinh Thạch Dị Sắc",
+    "commonMatName": "Ngọc Vụn Đại Dương",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112080.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Bow_Pledge.png"
   },
@@ -2443,7 +2443,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Màn Mưa Tơ Lòng",
     "rarity": 5,
     "type": "bow",
-    "ascensionMat": "Tinh Chất Giọt Sương Thánh Thuần",
+    "ascensionMat": "Cặn Bẩn Giọt Sương Thánh Thuần",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114053.png",
     "domainName": "Bí Cảnh Luyện Võ: Kỹ Thuật",
     "daysOfWeek": [
@@ -2451,9 +2451,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Vây Thú Ánh Sáng Vực Thẳm",
+    "eliteMatName": "Vây Thú Dạng Lông",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112095.png",
-    "commonMatName": "Tinh Thạch Dị Sắc",
+    "commonMatName": "Ngọc Vụn Đại Dương",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112080.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Bow_Arcdange.png"
   },
@@ -2462,7 +2462,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Ngôi Sao Cực Đông",
     "rarity": 5,
     "type": "bow",
-    "ascensionMat": "Mặt Nạ Kijin",
+    "ascensionMat": "Mặt Nạ Tà Ác",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114033.png",
     "domainName": "Bí Cảnh Luyện Võ: Tang Lễ Của Cát",
     "daysOfWeek": [
@@ -2470,9 +2470,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Vuốt Quỷ Ma Thú",
+    "eliteMatName": "Móng Vuốt Ma Thú",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112056.png",
-    "commonMatName": "Hạt Bay Lượn Kết Tinh",
+    "commonMatName": "Hạt Bay Lượn Khô Héo",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112053.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Bow_Worldbane.png"
   },
@@ -2481,7 +2481,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Nhược Thủy",
     "rarity": 5,
     "type": "bow",
-    "ascensionMat": "Thần Thể Rừng Băng Giá",
+    "ascensionMat": "Ánh Sáng Rừng Băng Giá",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114013.png",
     "domainName": "Bí Cảnh Luyện Võ: Tế Đàn Lôi Vân",
     "daysOfWeek": [
@@ -2489,9 +2489,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Tượng Tử Thần",
+    "eliteMatName": "Tượng Hắc Ám",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112017.png",
-    "commonMatName": "Hạt Bay Lượn Kết Tinh",
+    "commonMatName": "Hạt Bay Lượn Khô Héo",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112053.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Bow_Kirin.png"
   },
@@ -2500,7 +2500,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Sấm Sét Rung Động",
     "rarity": 5,
     "type": "bow",
-    "ascensionMat": "Uy Dũng Của Narukami",
+    "ascensionMat": "Trí Tuệ Của Narukami",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114029.png",
     "domainName": "Bí Cảnh Luyện Võ: Tế Đàn Cát",
     "daysOfWeek": [
@@ -2508,9 +2508,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Lăng Kính Phân Cực",
+    "eliteMatName": "Lăng Kính Ảm Đạm",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112050.png",
-    "commonMatName": "Mũi Tên Thiện Chiến",
+    "commonMatName": "Mũi Tên Chắc Chắn",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112011.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Bow_Narukami.png"
   },
@@ -2519,7 +2519,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Tiếng Thở Dài Vô Tận",
     "rarity": 5,
     "type": "bow",
-    "ascensionMat": "Nỗi Nhớ Của Sói Bão",
+    "ascensionMat": "Răng Sữa Sói Bão",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114005.png",
     "domainName": "Bí Cảnh Luyện Võ: Thâm Cốc",
     "daysOfWeek": [
@@ -2527,9 +2527,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Sừng Hắc Tinh",
+    "eliteMatName": "Sừng Nặng",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112014.png",
-    "commonMatName": "Phù Hiệu Hiệu Úy",
+    "commonMatName": "Phù Hiệu Tân Binh",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112032.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Bow_Widsith.png"
   },
@@ -2538,7 +2538,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Xích Vũ Tinh Tựu",
     "rarity": 5,
     "type": "bow",
-    "ascensionMat": "Giác Ngộ Của Làn Khói Thần Bí",
+    "ascensionMat": "Suy Tư Của Làn Khói Thần Bí",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114069.png",
     "domainName": "Bí Cảnh Luyện Võ: Ước Lượng",
     "daysOfWeek": [
@@ -2546,9 +2546,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Lõi Lá Cuộn Biến Ảo",
+    "eliteMatName": "Mầm Khúc Xạ",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112116.png",
-    "commonMatName": "Còi Vàng Võ Sĩ Saurian",
+    "commonMatName": "Còi Gỗ Hộ Vệ",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112104.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Bow_Qoyllorsnova.png"
   },
@@ -2557,7 +2557,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Ánh Trăng Mouun",
     "rarity": 4,
     "type": "bow",
-    "ascensionMat": "Uy Dũng Của Narukami",
+    "ascensionMat": "Trí Tuệ Của Narukami",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114029.png",
     "domainName": "Bí Cảnh Luyện Võ: Tế Đàn Cát",
     "daysOfWeek": [
@@ -2565,9 +2565,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Lăng Kính Phân Cực",
+    "eliteMatName": "Lăng Kính Ảm Đạm",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112050.png",
-    "commonMatName": "Hạt Bay Lượn Kết Tinh",
+    "commonMatName": "Hạt Bay Lượn Khô Héo",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112053.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Bow_Maria.png"
   },
@@ -2576,7 +2576,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Bài Ca Hoa Gió",
     "rarity": 4,
     "type": "bow",
-    "ascensionMat": "Lý Tưởng Của Đấu Sĩ Nanh Sư Tử",
+    "ascensionMat": "Xiềng Xích Đấu Sĩ Nanh Sư Tử",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114009.png",
     "domainName": "Bí Cảnh Luyện Võ: Phế Đô Khát Nước",
     "daysOfWeek": [
@@ -2584,9 +2584,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Chồi Non Địa Mạch",
+    "eliteMatName": "Cành Cây Địa Mạch",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112020.png",
-    "commonMatName": "Mật Hoa Nguyên Tố",
+    "commonMatName": "Mật Hoa Lừa Dối",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112038.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Bow_Fleurfair.png"
   },
@@ -2595,7 +2595,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Cận Vệ Nhà Vua",
     "rarity": 4,
     "type": "bow",
-    "ascensionMat": "Quá Khứ Của Ánh Nắng Quyền Uy",
+    "ascensionMat": "Dư Âm Của Ánh Nắng Quyền Uy",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114045.png",
     "domainName": "Bí Cảnh Luyện Võ: Dẫn Nghiệp",
     "daysOfWeek": [
@@ -2603,9 +2603,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Nhân Bào Nấm Hồi Phục",
+    "eliteMatName": "Nhân Bào Nấm Đã Chết",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112062.png",
-    "commonMatName": "Mũi Tên Thiện Chiến",
+    "commonMatName": "Mũi Tên Chắc Chắn",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112011.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Bow_Arakalari.png"
   },
@@ -2614,7 +2614,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Cung Hắc Nham",
     "rarity": 4,
     "type": "bow",
-    "ascensionMat": "Thần Thể Rừng Băng Giá",
+    "ascensionMat": "Ánh Sáng Rừng Băng Giá",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114013.png",
     "domainName": "Bí Cảnh Luyện Võ: Tế Đàn Lôi Vân",
     "daysOfWeek": [
@@ -2622,9 +2622,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Dao Đô Thám Trưởng",
+    "eliteMatName": "Dao Săn Bắt",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112029.png",
-    "commonMatName": "Mật Hoa Nguyên Tố",
+    "commonMatName": "Mật Hoa Lừa Dối",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112038.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Bow_Blackrock.png"
   },
@@ -2633,7 +2633,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Cung Rỉ Sét",
     "rarity": 4,
     "type": "bow",
-    "ascensionMat": "Thần Thể Rừng Băng Giá",
+    "ascensionMat": "Ánh Sáng Rừng Băng Giá",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114013.png",
     "domainName": "Bí Cảnh Luyện Võ: Tế Đàn Lôi Vân",
     "daysOfWeek": [
@@ -2641,9 +2641,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Dao Đô Thám Trưởng",
+    "eliteMatName": "Dao Săn Bắt",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112029.png",
-    "commonMatName": "Mặt Nạ Xui Xẻo",
+    "commonMatName": "Mặt Nạ Vỡ",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112005.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Bow_Recluse.png"
   },
@@ -2652,7 +2652,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Cung Sắc Xanh",
     "rarity": 4,
     "type": "bow",
-    "ascensionMat": "Mảnh Giấc Mơ Tháp Cô Vương",
+    "ascensionMat": "Ngói Vỡ Tháp Cô Vương",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114001.png",
     "domainName": "Bí Cảnh Luyện Võ: Thủy Quang Thành",
     "daysOfWeek": [
@@ -2660,9 +2660,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Sừng Hắc Tinh",
+    "eliteMatName": "Sừng Nặng",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112014.png",
-    "commonMatName": "Mũi Tên Thiện Chiến",
+    "commonMatName": "Mũi Tên Chắc Chắn",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112011.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Bow_Viridescent.png"
   },
@@ -2671,7 +2671,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Cung Tây Phong",
     "rarity": 4,
     "type": "bow",
-    "ascensionMat": "Lý Tưởng Của Đấu Sĩ Nanh Sư Tử",
+    "ascensionMat": "Xiềng Xích Đấu Sĩ Nanh Sư Tử",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114009.png",
     "domainName": "Bí Cảnh Luyện Võ: Phế Đô Khát Nước",
     "daysOfWeek": [
@@ -2679,9 +2679,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Trái Tim Hỗn Độn",
+    "eliteMatName": "Cấu Trúc Hỗn Độn",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112023.png",
-    "commonMatName": "Mật Hoa Nguyên Tố",
+    "commonMatName": "Mật Hoa Lừa Dối",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112038.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Bow_Zephyrus.png"
   },
@@ -2690,7 +2690,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Cung Tế Lễ",
     "rarity": 4,
     "type": "bow",
-    "ascensionMat": "Nỗi Nhớ Của Sói Bão",
+    "ascensionMat": "Răng Sữa Sói Bão",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114005.png",
     "domainName": "Bí Cảnh Luyện Võ: Thâm Cốc",
     "daysOfWeek": [
@@ -2698,9 +2698,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Chồi Non Địa Mạch",
+    "eliteMatName": "Cành Cây Địa Mạch",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112020.png",
-    "commonMatName": "Bột Slime",
+    "commonMatName": "Dịch Slime",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112002.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Bow_Fossil.png"
   },
@@ -2709,7 +2709,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Cung Thép",
     "rarity": 4,
     "type": "bow",
-    "ascensionMat": "Miếng Thiên Thạch Đen",
+    "ascensionMat": "Hạt Thiên Thạch Đen",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114021.png",
     "domainName": "Bí Cảnh Luyện Võ: Thử Thách Sấm Sét",
     "daysOfWeek": [
@@ -2717,9 +2717,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Mảnh Xương Hóa Thạch",
+    "eliteMatName": "Mảnh Xương Giòn Yếu",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112041.png",
-    "commonMatName": "Phù Hiệu Hiệu Úy",
+    "commonMatName": "Phù Hiệu Tân Binh",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112032.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Bow_Exotic.png"
   },
@@ -2728,7 +2728,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Cung Trừ Ma",
     "rarity": 4,
     "type": "bow",
-    "ascensionMat": "Uy Dũng Của Narukami",
+    "ascensionMat": "Trí Tuệ Của Narukami",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114029.png",
     "domainName": "Bí Cảnh Luyện Võ: Tế Đàn Cát",
     "daysOfWeek": [
@@ -2736,9 +2736,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Lăng Kính Phân Cực",
+    "eliteMatName": "Lăng Kính Ảm Đạm",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112050.png",
-    "commonMatName": "Mũi Tên Thiện Chiến",
+    "commonMatName": "Mũi Tên Chắc Chắn",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112011.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Bow_Bakufu.png"
   },
@@ -2747,7 +2747,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Điệu Van Ban Đêm",
     "rarity": 4,
     "type": "bow",
-    "ascensionMat": "Mảnh Giấc Mơ Tháp Cô Vương",
+    "ascensionMat": "Ngói Vỡ Tháp Cô Vương",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114001.png",
     "domainName": "Bí Cảnh Luyện Võ: Thủy Quang Thành",
     "daysOfWeek": [
@@ -2755,9 +2755,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Sừng Hắc Tinh",
+    "eliteMatName": "Sừng Nặng",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112014.png",
-    "commonMatName": "Ấn Quạ Trộm Vàng",
+    "commonMatName": "Ấn Quạ Tầm Bảo",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112035.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Bow_Nachtblind.png"
   },
@@ -2766,7 +2766,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Hậu Duệ Mặt Trời",
     "rarity": 4,
     "type": "bow",
-    "ascensionMat": "Quá Khứ Của Ánh Nắng Quyền Uy",
+    "ascensionMat": "Dư Âm Của Ánh Nắng Quyền Uy",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114045.png",
     "domainName": "Bí Cảnh Luyện Võ: Dẫn Nghiệp",
     "daysOfWeek": [
@@ -2774,9 +2774,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Hoa Nở Rộ Của Kẻ Lang Thang",
+    "eliteMatName": "Hoa Chưa Nở Từ Nơi Nào Đó",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112077.png",
-    "commonMatName": "Bụi Tinh Thể",
+    "commonMatName": "Bào Tử Nấm Quỷ",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112059.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Bow_Gurabad.png"
   },
@@ -2785,7 +2785,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Kẻ Săn Mồi",
     "rarity": 4,
     "type": "bow",
-    "ascensionMat": "Uy Dũng Của Narukami",
+    "ascensionMat": "Trí Tuệ Của Narukami",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114029.png",
     "domainName": "Bí Cảnh Luyện Võ: Tế Đàn Cát",
     "daysOfWeek": [
@@ -2793,9 +2793,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Lăng Kính Phân Cực",
+    "eliteMatName": "Lăng Kính Ảm Đạm",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112050.png",
-    "commonMatName": "Mũi Tên Thiện Chiến",
+    "commonMatName": "Mũi Tên Chắc Chắn",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112011.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Bow_Predator.png"
   },
@@ -2804,7 +2804,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Khúc Ca Tĩnh Lặng",
     "rarity": 4,
     "type": "bow",
-    "ascensionMat": "Tiếng Vọng Cung Đàn Cổ Xưa",
+    "ascensionMat": "Mảnh Cung Đàn Cổ Xưa",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114049.png",
     "domainName": "Bí Cảnh Luyện Võ: Tư Duy Robot",
     "daysOfWeek": [
@@ -2812,9 +2812,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Ảo Linh Nước Đục Mới Sinh",
+    "eliteMatName": "Giọt Nước Đục",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112086.png",
-    "commonMatName": "Mũi Tên Thiện Chiến",
+    "commonMatName": "Mũi Tên Chắc Chắn",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112011.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Bow_Vorpal.png"
   },
@@ -2823,7 +2823,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Lạc Hà",
     "rarity": 4,
     "type": "bow",
-    "ascensionMat": "Miếng Thiên Thạch Đen",
+    "ascensionMat": "Hạt Thiên Thạch Đen",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114021.png",
     "domainName": "Bí Cảnh Luyện Võ: Thử Thách Sấm Sét",
     "daysOfWeek": [
@@ -2831,9 +2831,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Dao Đô Thám Trưởng",
+    "eliteMatName": "Dao Săn Bắt",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112029.png",
-    "commonMatName": "Bản Vẽ Cấm Chú",
+    "commonMatName": "Bản Vẽ Hướng Dẫn",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112008.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Bow_Fallensun.png"
   },
@@ -2842,7 +2842,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Lông Vũ Thêu Hoa",
     "rarity": 4,
     "type": "bow",
-    "ascensionMat": "Giác Ngộ Của Làn Khói Thần Bí",
+    "ascensionMat": "Suy Tư Của Làn Khói Thần Bí",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114069.png",
     "domainName": "Bí Cảnh Luyện Võ: Ước Lượng",
     "daysOfWeek": [
@@ -2850,9 +2850,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Con Mắt Rực Cháy",
+    "eliteMatName": "Hòn Đá Rực Cháy",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112110.png",
-    "commonMatName": "Còi Vàng Võ Sĩ Saurian",
+    "commonMatName": "Còi Gỗ Hộ Vệ",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112104.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Bow_Umpakati.png"
   },
@@ -2861,7 +2861,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Máy Đo Cự Ly",
     "rarity": 4,
     "type": "bow",
-    "ascensionMat": "Tiếng Vọng Cung Đàn Cổ Xưa",
+    "ascensionMat": "Mảnh Cung Đàn Cổ Xưa",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114049.png",
     "domainName": "Bí Cảnh Luyện Võ: Tư Duy Robot",
     "daysOfWeek": [
@@ -2869,9 +2869,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Ảo Linh Nước Đục Mới Sinh",
+    "eliteMatName": "Giọt Nước Đục",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112086.png",
-    "commonMatName": "Tinh Thạch Dị Sắc",
+    "commonMatName": "Ngọc Vụn Đại Dương",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112080.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Bow_Mechanic.png"
   },
@@ -2880,7 +2880,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Mẫu Đạm Nguyệt",
     "rarity": 4,
     "type": "bow",
-    "ascensionMat": "Sự Chuyển Dời Của Biển Sương Mù",
+    "ascensionMat": "Diên Đơn Biển Sương Mù",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114017.png",
     "domainName": "Bí Cảnh Luyện Võ: Tiếng Sấm Thành Cổ",
     "daysOfWeek": [
@@ -2888,9 +2888,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Đuốc Hư Vô",
+    "eliteMatName": "Phấn Hoa Hư Vô",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112026.png",
-    "commonMatName": "Ấn Quạ Trộm Vàng",
+    "commonMatName": "Ấn Quạ Tầm Bảo",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112035.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Bow_Proto.png"
   },
@@ -2899,7 +2899,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Mỏ Cò Xuyên Thấu",
     "rarity": 4,
     "type": "bow",
-    "ascensionMat": "Bùa Rừng Xanh Sương Đọng - Vàng",
+    "ascensionMat": "Bùa Rừng Xanh Sương Đọng - Đồng",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114037.png",
     "domainName": "Bí Cảnh Luyện Võ: Mây Bẩn",
     "daysOfWeek": [
@@ -2907,9 +2907,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Hoa Nở Rộ Của Kẻ Lang Thang",
+    "eliteMatName": "Hoa Chưa Nở Từ Nơi Nào Đó",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112077.png",
-    "commonMatName": "Băng Đỏ Ánh Vàng",
+    "commonMatName": "Băng Đỏ Phai Màu",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112065.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Bow_Ibis.png"
   },
@@ -2918,7 +2918,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Phá Xích",
     "rarity": 4,
     "type": "bow",
-    "ascensionMat": "Giác Ngộ Của Làn Khói Thần Bí",
+    "ascensionMat": "Suy Tư Của Làn Khói Thần Bí",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114069.png",
     "domainName": "Bí Cảnh Luyện Võ: Ước Lượng",
     "daysOfWeek": [
@@ -2926,9 +2926,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Vây Thú Ánh Sáng Vực Thẳm",
+    "eliteMatName": "Vây Thú Dạng Lông",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112095.png",
-    "commonMatName": "Răng Nanh Bạo Chúa",
+    "commonMatName": "Răng Nanh Non Nớt",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112101.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Bow_Isikhulu.png"
   },
@@ -2937,7 +2937,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Sông Cạn",
     "rarity": 4,
     "type": "bow",
-    "ascensionMat": "Quá Khứ Của Ánh Nắng Quyền Uy",
+    "ascensionMat": "Dư Âm Của Ánh Nắng Quyền Uy",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114045.png",
     "domainName": "Bí Cảnh Luyện Võ: Dẫn Nghiệp",
     "daysOfWeek": [
@@ -2945,9 +2945,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Nhân Bào Nấm Hồi Phục",
+    "eliteMatName": "Nhân Bào Nấm Đã Chết",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112062.png",
-    "commonMatName": "Bụi Tinh Thể",
+    "commonMatName": "Bào Tử Nấm Quỷ",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112059.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Bow_Fin.png"
   },
@@ -2956,7 +2956,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Thợ Săn Hẻm Tối",
     "rarity": 4,
     "type": "bow",
-    "ascensionMat": "Lý Tưởng Của Đấu Sĩ Nanh Sư Tử",
+    "ascensionMat": "Xiềng Xích Đấu Sĩ Nanh Sư Tử",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114009.png",
     "domainName": "Bí Cảnh Luyện Võ: Phế Đô Khát Nước",
     "daysOfWeek": [
@@ -2964,9 +2964,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Trái Tim Hỗn Độn",
+    "eliteMatName": "Cấu Trúc Hỗn Độn",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112023.png",
-    "commonMatName": "Bột Slime",
+    "commonMatName": "Dịch Slime",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112002.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Bow_Outlaw.png"
   },
@@ -2975,7 +2975,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Trúc Vân",
     "rarity": 4,
     "type": "bow",
-    "ascensionMat": "Miếng Thiên Thạch Đen",
+    "ascensionMat": "Hạt Thiên Thạch Đen",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114021.png",
     "domainName": "Bí Cảnh Luyện Võ: Thử Thách Sấm Sét",
     "daysOfWeek": [
@@ -2983,9 +2983,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Cán Kiếm Chưa Tắt",
+    "eliteMatName": "Cán Kiếm Nát Vụn",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112098.png",
-    "commonMatName": "Phù Hiệu Hiệu Úy",
+    "commonMatName": "Phù Hiệu Tân Binh",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112032.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Bow_Ultimatum.png"
   },
@@ -2994,7 +2994,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Trường Cung Tông Thất",
     "rarity": 4,
     "type": "bow",
-    "ascensionMat": "Lý Tưởng Của Đấu Sĩ Nanh Sư Tử",
+    "ascensionMat": "Xiềng Xích Đấu Sĩ Nanh Sư Tử",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114009.png",
     "domainName": "Bí Cảnh Luyện Võ: Phế Đô Khát Nước",
     "daysOfWeek": [
@@ -3002,9 +3002,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Trái Tim Hỗn Độn",
+    "eliteMatName": "Cấu Trúc Hỗn Độn",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112023.png",
-    "commonMatName": "Bản Vẽ Cấm Chú",
+    "commonMatName": "Bản Vẽ Hướng Dẫn",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112008.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Bow_Theocrat.png"
   },
@@ -3013,7 +3013,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Tuyệt Huyền",
     "rarity": 4,
     "type": "bow",
-    "ascensionMat": "Mảnh Giấc Mơ Tháp Cô Vương",
+    "ascensionMat": "Ngói Vỡ Tháp Cô Vương",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114001.png",
     "domainName": "Bí Cảnh Luyện Võ: Thủy Quang Thành",
     "daysOfWeek": [
@@ -3021,9 +3021,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Sừng Hắc Tinh",
+    "eliteMatName": "Sừng Nặng",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112014.png",
-    "commonMatName": "Mũi Tên Thiện Chiến",
+    "commonMatName": "Mũi Tên Chắc Chắn",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112011.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Bow_Troupe.png"
   },
@@ -3032,7 +3032,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Cung Lông Quạ",
     "rarity": 3,
     "type": "bow",
-    "ascensionMat": "Mảnh Giấc Mơ Tháp Cô Vương",
+    "ascensionMat": "Ngói Vỡ Tháp Cô Vương",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114001.png",
     "domainName": "Bí Cảnh Luyện Võ: Thủy Quang Thành",
     "daysOfWeek": [
@@ -3040,9 +3040,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Sừng Hắc Tinh",
+    "eliteMatName": "Sừng Nặng",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112014.png",
-    "commonMatName": "Mũi Tên Thiện Chiến",
+    "commonMatName": "Mũi Tên Chắc Chắn",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112011.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Bow_Crowfeather.png"
   },
@@ -3051,7 +3051,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Cung Phản Khúc",
     "rarity": 3,
     "type": "bow",
-    "ascensionMat": "Lý Tưởng Của Đấu Sĩ Nanh Sư Tử",
+    "ascensionMat": "Xiềng Xích Đấu Sĩ Nanh Sư Tử",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114009.png",
     "domainName": "Bí Cảnh Luyện Võ: Phế Đô Khát Nước",
     "daysOfWeek": [
@@ -3059,9 +3059,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Trái Tim Hỗn Độn",
+    "eliteMatName": "Cấu Trúc Hỗn Độn",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112023.png",
-    "commonMatName": "Bản Vẽ Cấm Chú",
+    "commonMatName": "Bản Vẽ Hướng Dẫn",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112008.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Bow_Curve.png"
   },
@@ -3070,7 +3070,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Lời Thề Xạ Thủ Thần",
     "rarity": 3,
     "type": "bow",
-    "ascensionMat": "Nỗi Nhớ Của Sói Bão",
+    "ascensionMat": "Răng Sữa Sói Bão",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114005.png",
     "domainName": "Bí Cảnh Luyện Võ: Thâm Cốc",
     "daysOfWeek": [
@@ -3078,9 +3078,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Chồi Non Địa Mạch",
+    "eliteMatName": "Cành Cây Địa Mạch",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112020.png",
-    "commonMatName": "Bột Slime",
+    "commonMatName": "Dịch Slime",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112002.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Bow_Arjuna.png"
   },
@@ -3089,7 +3089,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Nỏ Kéo",
     "rarity": 3,
     "type": "bow",
-    "ascensionMat": "Thần Thể Rừng Băng Giá",
+    "ascensionMat": "Ánh Sáng Rừng Băng Giá",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114013.png",
     "domainName": "Bí Cảnh Luyện Võ: Tế Đàn Lôi Vân",
     "daysOfWeek": [
@@ -3097,9 +3097,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Dao Đô Thám Trưởng",
+    "eliteMatName": "Dao Săn Bắt",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112029.png",
-    "commonMatName": "Mặt Nạ Xui Xẻo",
+    "commonMatName": "Mặt Nạ Vỡ",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112005.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Bow_Sling.png"
   },
@@ -3108,7 +3108,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Tín Sứ",
     "rarity": 3,
     "type": "bow",
-    "ascensionMat": "Sự Chuyển Dời Của Biển Sương Mù",
+    "ascensionMat": "Diên Đơn Biển Sương Mù",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114017.png",
     "domainName": "Bí Cảnh Luyện Võ: Tiếng Sấm Thành Cổ",
     "daysOfWeek": [
@@ -3116,9 +3116,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Đuốc Hư Vô",
+    "eliteMatName": "Phấn Hoa Hư Vô",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112026.png",
-    "commonMatName": "Ấn Quạ Trộm Vàng",
+    "commonMatName": "Ấn Quạ Tầm Bảo",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112035.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Bow_Msg.png"
   },
@@ -3127,7 +3127,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Cung Săn Bắn Tôi Luyện",
     "rarity": 2,
     "type": "bow",
-    "ascensionMat": "Mảnh Răng Sói Bão",
+    "ascensionMat": "Răng Sữa Sói Bão",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114005.png",
     "domainName": "Bí Cảnh Luyện Võ: Thâm Cốc",
     "daysOfWeek": [
@@ -3135,9 +3135,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Lá Khô Địa Mạch",
+    "eliteMatName": "Cành Cây Địa Mạch",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112020.png",
-    "commonMatName": "Ấn Quạ Bạc Ẩn",
+    "commonMatName": "Ấn Quạ Tầm Bảo",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112035.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Bow_Old.png"
   },
@@ -3146,7 +3146,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Cung Săn Bắn",
     "rarity": 1,
     "type": "bow",
-    "ascensionMat": "Mảnh Răng Sói Bão",
+    "ascensionMat": "Răng Sữa Sói Bão",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114005.png",
     "domainName": "Bí Cảnh Luyện Võ: Thâm Cốc",
     "daysOfWeek": [
@@ -3154,9 +3154,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Lá Khô Địa Mạch",
+    "eliteMatName": "Cành Cây Địa Mạch",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112020.png",
-    "commonMatName": "Ấn Quạ Bạc Ẩn",
+    "commonMatName": "Ấn Quạ Tầm Bảo",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112035.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Bow_Hunters.png"
   },
@@ -3165,7 +3165,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Ánh Nhìn Tư Tế",
     "rarity": 5,
     "type": "catalyst",
-    "ascensionMat": "Thần Tính Của Thánh Chủ Mê Sảng",
+    "ascensionMat": "Sự Sa Ngã Của Thánh Chủ Mê Sảng",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114065.png",
     "domainName": "Bí Cảnh Luyện Võ: Nghiền Ngẫm",
     "daysOfWeek": [
@@ -3173,9 +3173,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Biểu Tượng Ý Chí Ngao Du",
+    "eliteMatName": "Mảnh Ý Chí Vụn Vỡ",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112107.png",
-    "commonMatName": "Còi Vàng Võ Sĩ Saurian",
+    "commonMatName": "Còi Gỗ Hộ Vệ",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112104.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_Figurines.png"
   },
@@ -3184,7 +3184,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Chân Ý Của Kagura",
     "rarity": 5,
     "type": "catalyst",
-    "ascensionMat": "Mặt Nạ Kijin",
+    "ascensionMat": "Mặt Nạ Tà Ác",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114033.png",
     "domainName": "Bí Cảnh Luyện Võ: Tang Lễ Của Cát",
     "daysOfWeek": [
@@ -3192,9 +3192,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Vuốt Quỷ Ma Thú",
+    "eliteMatName": "Móng Vuốt Ma Thú",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112056.png",
-    "commonMatName": "Hạt Bay Lượn Kết Tinh",
+    "commonMatName": "Hạt Bay Lượn Khô Héo",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112053.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_Narukami.png"
   },
@@ -3203,7 +3203,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Cõi Mộng Ngàn Đêm",
     "rarity": 5,
     "type": "catalyst",
-    "ascensionMat": "Chân Lý Vườn Hoa Ốc Đảo",
+    "ascensionMat": "Hồi Ức Vườn Hoa Ốc Đảo",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114041.png",
     "domainName": "Bí Cảnh Luyện Võ: Tư Hoặc",
     "daysOfWeek": [
@@ -3211,9 +3211,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Lăng Kính Phát Sáng",
+    "eliteMatName": "Lăng Kính Hỏng Hóc",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112071.png",
-    "commonMatName": "Bụi Tinh Thể",
+    "commonMatName": "Bào Tử Nấm Quỷ",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112059.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_Ayus.png"
   },
@@ -3222,7 +3222,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Dư Âm Tiếng Hạc",
     "rarity": 5,
     "type": "catalyst",
-    "ascensionMat": "Sự Chuyển Dời Của Biển Sương Mù",
+    "ascensionMat": "Diên Đơn Biển Sương Mù",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114017.png",
     "domainName": "Bí Cảnh Luyện Võ: Tiếng Sấm Thành Cổ",
     "daysOfWeek": [
@@ -3230,9 +3230,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Vây Thú Ánh Sáng Vực Thẳm",
+    "eliteMatName": "Vây Thú Dạng Lông",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112095.png",
-    "commonMatName": "Bản Vẽ Cấm Chú",
+    "commonMatName": "Bản Vẽ Hướng Dẫn",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112008.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_MountainGale.png"
   },
@@ -3241,7 +3241,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Điển Tích Tây Phong",
     "rarity": 5,
     "type": "catalyst",
-    "ascensionMat": "Lý Tưởng Của Đấu Sĩ Nanh Sư Tử",
+    "ascensionMat": "Xiềng Xích Đấu Sĩ Nanh Sư Tử",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114009.png",
     "domainName": "Bí Cảnh Luyện Võ: Phế Đô Khát Nước",
     "daysOfWeek": [
@@ -3249,9 +3249,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Trái Tim Hỗn Độn",
+    "eliteMatName": "Cấu Trúc Hỗn Độn",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112023.png",
-    "commonMatName": "Bột Slime",
+    "commonMatName": "Dịch Slime",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112002.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_Fourwinds.png"
   },
@@ -3260,7 +3260,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Hòa Giấc Trong Nắng Mai",
     "rarity": 5,
     "type": "catalyst",
-    "ascensionMat": "Uy Dũng Của Narukami",
+    "ascensionMat": "Trí Tuệ Của Narukami",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114029.png",
     "domainName": "Bí Cảnh Luyện Võ: Tế Đàn Cát",
     "daysOfWeek": [
@@ -3268,9 +3268,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Con Mắt Rực Cháy",
+    "eliteMatName": "Hòn Đá Rực Cháy",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112110.png",
-    "commonMatName": "Hạt Bay Lượn Kết Tinh",
+    "commonMatName": "Hạt Bay Lượn Khô Héo",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112053.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_SakuraFan.png"
   },
@@ -3279,7 +3279,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Hồi Ức Tulaytullah",
     "rarity": 5,
     "type": "catalyst",
-    "ascensionMat": "Quá Khứ Của Ánh Nắng Quyền Uy",
+    "ascensionMat": "Dư Âm Của Ánh Nắng Quyền Uy",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114045.png",
     "domainName": "Bí Cảnh Luyện Võ: Dẫn Nghiệp",
     "daysOfWeek": [
@@ -3287,9 +3287,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Nhân Bào Nấm Hồi Phục",
+    "eliteMatName": "Nhân Bào Nấm Đã Chết",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112062.png",
-    "commonMatName": "Bụi Tinh Thể",
+    "commonMatName": "Bào Tử Nấm Quỷ",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112059.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_Alaya.png"
   },
@@ -3298,7 +3298,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Khóa Trần Thế",
     "rarity": 5,
     "type": "catalyst",
-    "ascensionMat": "Miếng Thiên Thạch Đen",
+    "ascensionMat": "Hạt Thiên Thạch Đen",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114021.png",
     "domainName": "Bí Cảnh Luyện Võ: Thử Thách Sấm Sét",
     "daysOfWeek": [
@@ -3306,9 +3306,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Mảnh Xương Hóa Thạch",
+    "eliteMatName": "Mảnh Xương Giòn Yếu",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112041.png",
-    "commonMatName": "Mặt Nạ Xui Xẻo",
+    "commonMatName": "Mặt Nạ Vỡ",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112005.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_Kunwu.png"
   },
@@ -3317,7 +3317,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Nghi Thức Dòng Chảy Vĩnh Hằng",
     "rarity": 5,
     "type": "catalyst",
-    "ascensionMat": "Tinh Chất Giọt Sương Thánh Thuần",
+    "ascensionMat": "Cặn Bẩn Giọt Sương Thánh Thuần",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114053.png",
     "domainName": "Bí Cảnh Luyện Võ: Kỹ Thuật",
     "daysOfWeek": [
@@ -3325,9 +3325,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Hạt Nhân Sinh Mệnh Dị Giới",
+    "eliteMatName": "Hạt Nhân Khe Nứt",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112089.png",
-    "commonMatName": "Bánh Răng Lõi Trung Tâm",
+    "commonMatName": "Bánh Răng Liên Kết",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112083.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_Iudex.png"
   },
@@ -3336,7 +3336,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Ngọc Bích Huy Hoàng",
     "rarity": 5,
     "type": "catalyst",
-    "ascensionMat": "Thần Thể Rừng Băng Giá",
+    "ascensionMat": "Ánh Sáng Rừng Băng Giá",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114013.png",
     "domainName": "Bí Cảnh Luyện Võ: Tế Đàn Lôi Vân",
     "daysOfWeek": [
@@ -3344,9 +3344,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Hoa Nở Rộ Của Kẻ Lang Thang",
+    "eliteMatName": "Hoa Chưa Nở Từ Nơi Nào Đó",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112077.png",
-    "commonMatName": "Bụi Tinh Thể",
+    "commonMatName": "Bào Tử Nấm Quỷ",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112059.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_Morax.png"
   },
@@ -3355,7 +3355,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Quản Đốc Vàng Ròng",
     "rarity": 5,
     "type": "catalyst",
-    "ascensionMat": "Ly Vàng Của Biển Nguyên Sơ",
+    "ascensionMat": "Ly Vỡ Của Biển Nguyên Sơ",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114057.png",
     "domainName": "Bí Cảnh Luyện Võ: Máy Móc",
     "daysOfWeek": [
@@ -3363,9 +3363,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Thời Khắc Của Đặc Vụ",
+    "eliteMatName": "Đồng Hồ Cũ Kỹ Của Đặc Vụ",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112092.png",
-    "commonMatName": "Tinh Thạch Dị Sắc",
+    "commonMatName": "Ngọc Vụn Đại Dương",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112080.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_Wheatley.png"
   },
@@ -3374,7 +3374,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Quyển Thiên Không",
     "rarity": 5,
     "type": "catalyst",
-    "ascensionMat": "Nỗi Nhớ Của Sói Bão",
+    "ascensionMat": "Răng Sữa Sói Bão",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114005.png",
     "domainName": "Bí Cảnh Luyện Võ: Thâm Cốc",
     "daysOfWeek": [
@@ -3382,9 +3382,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Chồi Non Địa Mạch",
+    "eliteMatName": "Cành Cây Địa Mạch",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112020.png",
-    "commonMatName": "Mũi Tên Thiện Chiến",
+    "commonMatName": "Mũi Tên Chắc Chắn",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112011.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_Dvalin.png"
   },
@@ -3393,7 +3393,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Thời Khắc Lướt Sóng",
     "rarity": 5,
     "type": "catalyst",
-    "ascensionMat": "Sự Vinh Dự Của Trái Tim Hiến Tế",
+    "ascensionMat": "Sự Sợ Hãi Của Trái Tim Hiến Tế",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114061.png",
     "domainName": "Bí Cảnh Luyện Võ: U Tối",
     "daysOfWeek": [
@@ -3401,9 +3401,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Biểu Tượng Ý Chí Ngao Du",
+    "eliteMatName": "Mảnh Ý Chí Vụn Vỡ",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112107.png",
-    "commonMatName": "Răng Nanh Bạo Chúa",
+    "commonMatName": "Răng Nanh Non Nớt",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112101.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_MechaPufferfish.png"
   },
@@ -3412,7 +3412,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Vầng Trăng Bất Diệt",
     "rarity": 5,
     "type": "catalyst",
-    "ascensionMat": "Nhánh Vàng Của Biển Xa",
+    "ascensionMat": "Nhánh San Hô Của Biển Xa",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114025.png",
     "domainName": "Bí Cảnh Luyện Võ: Vực Trầm Sa",
     "daysOfWeek": [
@@ -3420,9 +3420,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Lăng Kính Phân Cực",
+    "eliteMatName": "Lăng Kính Ảm Đạm",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112050.png",
-    "commonMatName": "Hạt Bay Lượn Kết Tinh",
+    "commonMatName": "Hạt Bay Lượn Khô Héo",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112053.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_Kaleido.png"
   },
@@ -3431,7 +3431,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Chiêu Tâm",
     "rarity": 4,
     "type": "catalyst",
-    "ascensionMat": "Sự Chuyển Dời Của Biển Sương Mù",
+    "ascensionMat": "Diên Đơn Biển Sương Mù",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114017.png",
     "domainName": "Bí Cảnh Luyện Võ: Tiếng Sấm Thành Cổ",
     "daysOfWeek": [
@@ -3439,9 +3439,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Đuốc Hư Vô",
+    "eliteMatName": "Phấn Hoa Hư Vô",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112026.png",
-    "commonMatName": "Mặt Nạ Xui Xẻo",
+    "commonMatName": "Mặt Nạ Vỡ",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112005.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_Truelens.png"
   },
@@ -3450,7 +3450,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Chương Nhạc Lang Thang",
     "rarity": 4,
     "type": "catalyst",
-    "ascensionMat": "Nỗi Nhớ Của Sói Bão",
+    "ascensionMat": "Răng Sữa Sói Bão",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114005.png",
     "domainName": "Bí Cảnh Luyện Võ: Thâm Cốc",
     "daysOfWeek": [
@@ -3458,9 +3458,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Chồi Non Địa Mạch",
+    "eliteMatName": "Cành Cây Địa Mạch",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112020.png",
-    "commonMatName": "Mặt Nạ Xui Xẻo",
+    "commonMatName": "Mặt Nạ Vỡ",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112005.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_Troupe.png"
   },
@@ -3469,7 +3469,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Con Ngươi Tuyên Thệ",
     "rarity": 4,
     "type": "catalyst",
-    "ascensionMat": "Nhánh Vàng Của Biển Xa",
+    "ascensionMat": "Nhánh San Hô Của Biển Xa",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114025.png",
     "domainName": "Bí Cảnh Luyện Võ: Vực Trầm Sa",
     "daysOfWeek": [
@@ -3477,9 +3477,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Vuốt Quỷ Ma Thú",
+    "eliteMatName": "Móng Vuốt Ma Thú",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112056.png",
-    "commonMatName": "Hạt Bay Lượn Kết Tinh",
+    "commonMatName": "Hạt Bay Lượn Khô Héo",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112053.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_Jyanome.png"
   },
@@ -3488,7 +3488,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Dòng Chảy Tinh Khiết",
     "rarity": 4,
     "type": "catalyst",
-    "ascensionMat": "Tinh Chất Giọt Sương Thánh Thuần",
+    "ascensionMat": "Cặn Bẩn Giọt Sương Thánh Thuần",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114053.png",
     "domainName": "Bí Cảnh Luyện Võ: Kỹ Thuật",
     "daysOfWeek": [
@@ -3496,9 +3496,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Hạt Nhân Sinh Mệnh Dị Giới",
+    "eliteMatName": "Hạt Nhân Khe Nứt",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112089.png",
-    "commonMatName": "Tinh Thạch Dị Sắc",
+    "commonMatName": "Ngọc Vụn Đại Dương",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112080.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_Vorpal.png"
   },
@@ -3507,7 +3507,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Hải Đồ Vạn Quốc",
     "rarity": 4,
     "type": "catalyst",
-    "ascensionMat": "Miếng Thiên Thạch Đen",
+    "ascensionMat": "Hạt Thiên Thạch Đen",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114021.png",
     "domainName": "Bí Cảnh Luyện Võ: Thử Thách Sấm Sét",
     "daysOfWeek": [
@@ -3515,9 +3515,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Mảnh Xương Hóa Thạch",
+    "eliteMatName": "Mảnh Xương Giòn Yếu",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112041.png",
-    "commonMatName": "Bột Slime",
+    "commonMatName": "Dịch Slime",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112002.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_Exotic.png"
   },
@@ -3526,7 +3526,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Hắc Nham Phỉ Ngọc",
     "rarity": 4,
     "type": "catalyst",
-    "ascensionMat": "Thần Thể Rừng Băng Giá",
+    "ascensionMat": "Ánh Sáng Rừng Băng Giá",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114013.png",
     "domainName": "Bí Cảnh Luyện Võ: Tế Đàn Lôi Vân",
     "daysOfWeek": [
@@ -3534,9 +3534,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Dao Đô Thám Trưởng",
+    "eliteMatName": "Dao Săn Bắt",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112029.png",
-    "commonMatName": "Bản Vẽ Cấm Chú",
+    "commonMatName": "Bản Vẽ Hướng Dẫn",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112008.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_Blackrock.png"
   },
@@ -3545,7 +3545,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Khúc Ca Xanh Bao La",
     "rarity": 4,
     "type": "catalyst",
-    "ascensionMat": "Nỗi Nhớ Của Sói Bão",
+    "ascensionMat": "Răng Sữa Sói Bão",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114005.png",
     "domainName": "Bí Cảnh Luyện Võ: Thâm Cốc",
     "daysOfWeek": [
@@ -3553,9 +3553,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Mảnh Xương Hóa Thạch",
+    "eliteMatName": "Mảnh Xương Giòn Yếu",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112041.png",
-    "commonMatName": "Ấn Quạ Trộm Vàng",
+    "commonMatName": "Ấn Quạ Tầm Bảo",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112035.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_DandelionPoem.png"
   },
@@ -3564,7 +3564,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Mảnh Chương Tế Lễ",
     "rarity": 4,
     "type": "catalyst",
-    "ascensionMat": "Lý Tưởng Của Đấu Sĩ Nanh Sư Tử",
+    "ascensionMat": "Xiềng Xích Đấu Sĩ Nanh Sư Tử",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114009.png",
     "domainName": "Bí Cảnh Luyện Võ: Phế Đô Khát Nước",
     "daysOfWeek": [
@@ -3572,9 +3572,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Trái Tim Hỗn Độn",
+    "eliteMatName": "Cấu Trúc Hỗn Độn",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112023.png",
-    "commonMatName": "Ấn Quạ Trộm Vàng",
+    "commonMatName": "Ấn Quạ Tầm Bảo",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112035.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_Fossil.png"
   },
@@ -3583,7 +3583,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Mật Pháp Tông Thất",
     "rarity": 4,
     "type": "catalyst",
-    "ascensionMat": "Mảnh Giấc Mơ Tháp Cô Vương",
+    "ascensionMat": "Ngói Vỡ Tháp Cô Vương",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114001.png",
     "domainName": "Bí Cảnh Luyện Võ: Thủy Quang Thành",
     "daysOfWeek": [
@@ -3591,9 +3591,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Sừng Hắc Tinh",
+    "eliteMatName": "Sừng Nặng",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112014.png",
-    "commonMatName": "Phù Hiệu Hiệu Úy",
+    "commonMatName": "Phù Hiệu Tân Binh",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112032.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_Theocrat.png"
   },
@@ -3602,7 +3602,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Mẫu Kim Phách",
     "rarity": 4,
     "type": "catalyst",
-    "ascensionMat": "Sự Chuyển Dời Của Biển Sương Mù",
+    "ascensionMat": "Diên Đơn Biển Sương Mù",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114017.png",
     "domainName": "Bí Cảnh Luyện Võ: Tiếng Sấm Thành Cổ",
     "daysOfWeek": [
@@ -3610,9 +3610,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Đuốc Hư Vô",
+    "eliteMatName": "Phấn Hoa Hư Vô",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112026.png",
-    "commonMatName": "Mũi Tên Thiện Chiến",
+    "commonMatName": "Mũi Tên Chắc Chắn",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112011.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_Proto.png"
   },
@@ -3621,7 +3621,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Ngọc Bích Hiến Tế",
     "rarity": 4,
     "type": "catalyst",
-    "ascensionMat": "Thần Thể Rừng Băng Giá",
+    "ascensionMat": "Ánh Sáng Rừng Băng Giá",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114013.png",
     "domainName": "Bí Cảnh Luyện Võ: Tế Đàn Lôi Vân",
     "daysOfWeek": [
@@ -3629,9 +3629,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Đuốc Hư Vô",
+    "eliteMatName": "Phấn Hoa Hư Vô",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112026.png",
-    "commonMatName": "Bản Vẽ Cấm Chú",
+    "commonMatName": "Bản Vẽ Hướng Dẫn",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112008.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_Yue.png"
   },
@@ -3640,7 +3640,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Nhật Nguyệt Hạp",
     "rarity": 4,
     "type": "catalyst",
-    "ascensionMat": "Thần Thể Rừng Băng Giá",
+    "ascensionMat": "Ánh Sáng Rừng Băng Giá",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114013.png",
     "domainName": "Bí Cảnh Luyện Võ: Tế Đàn Lôi Vân",
     "daysOfWeek": [
@@ -3648,9 +3648,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Dao Đô Thám Trưởng",
+    "eliteMatName": "Dao Săn Bắt",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112029.png",
-    "commonMatName": "Mật Hoa Nguyên Tố",
+    "commonMatName": "Mật Hoa Lừa Dối",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112038.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_Resurrection.png"
   },
@@ -3659,7 +3659,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Quả Mọng",
     "rarity": 4,
     "type": "catalyst",
-    "ascensionMat": "Chân Lý Vườn Hoa Ốc Đảo",
+    "ascensionMat": "Hồi Ức Vườn Hoa Ốc Đảo",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114041.png",
     "domainName": "Bí Cảnh Luyện Võ: Tư Hoặc",
     "daysOfWeek": [
@@ -3667,9 +3667,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Tượng Tử Thần",
+    "eliteMatName": "Tượng Hắc Ám",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112017.png",
-    "commonMatName": "Bụi Tinh Thể",
+    "commonMatName": "Bào Tử Nấm Quỷ",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112059.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_Arakalari.png"
   },
@@ -3678,7 +3678,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Rượu Và Thơ Nơi Hẻm Tối",
     "rarity": 4,
     "type": "catalyst",
-    "ascensionMat": "Nỗi Nhớ Của Sói Bão",
+    "ascensionMat": "Răng Sữa Sói Bão",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114005.png",
     "domainName": "Bí Cảnh Luyện Võ: Thâm Cốc",
     "daysOfWeek": [
@@ -3686,9 +3686,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Chồi Non Địa Mạch",
+    "eliteMatName": "Cành Cây Địa Mạch",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112020.png",
-    "commonMatName": "Ấn Quạ Trộm Vàng",
+    "commonMatName": "Ấn Quạ Tầm Bảo",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112035.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_Outlaw.png"
   },
@@ -3697,7 +3697,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Sao Đêm Rong Ruổi",
     "rarity": 4,
     "type": "catalyst",
-    "ascensionMat": "Chân Lý Vườn Hoa Ốc Đảo",
+    "ascensionMat": "Hồi Ức Vườn Hoa Ốc Đảo",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114041.png",
     "domainName": "Bí Cảnh Luyện Võ: Tư Hoặc",
     "daysOfWeek": [
@@ -3705,9 +3705,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Nhân Bào Nấm Hồi Phục",
+    "eliteMatName": "Nhân Bào Nấm Đã Chết",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112062.png",
-    "commonMatName": "Bụi Tinh Thể",
+    "commonMatName": "Bào Tử Nấm Quỷ",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112059.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_Pleroma.png"
   },
@@ -3716,7 +3716,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Sừng Rượu Vân Xanh",
     "rarity": 4,
     "type": "catalyst",
-    "ascensionMat": "Giác Ngộ Của Làn Khói Thần Bí",
+    "ascensionMat": "Suy Tư Của Làn Khói Thần Bí",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114069.png",
     "domainName": "Bí Cảnh Luyện Võ: Ước Lượng",
     "daysOfWeek": [
@@ -3724,9 +3724,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Lõi Bí Ẩn",
+    "eliteMatName": "Trục Bí Ẩn",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112113.png",
-    "commonMatName": "Răng Nanh Bạo Chúa",
+    "commonMatName": "Răng Nanh Non Nớt",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112101.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_ConchSprayer.png"
   },
@@ -3735,7 +3735,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Tây Phong Mật Điển",
     "rarity": 4,
     "type": "catalyst",
-    "ascensionMat": "Mảnh Giấc Mơ Tháp Cô Vương",
+    "ascensionMat": "Ngói Vỡ Tháp Cô Vương",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114001.png",
     "domainName": "Bí Cảnh Luyện Võ: Thủy Quang Thành",
     "daysOfWeek": [
@@ -3743,9 +3743,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Sừng Hắc Tinh",
+    "eliteMatName": "Sừng Nặng",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112014.png",
-    "commonMatName": "Bản Vẽ Cấm Chú",
+    "commonMatName": "Bản Vẽ Hướng Dẫn",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112008.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_Zephyrus.png"
   },
@@ -3754,7 +3754,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Trái Chịu Lạnh",
     "rarity": 4,
     "type": "catalyst",
-    "ascensionMat": "Lý Tưởng Của Đấu Sĩ Nanh Sư Tử",
+    "ascensionMat": "Xiềng Xích Đấu Sĩ Nanh Sư Tử",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114009.png",
     "domainName": "Bí Cảnh Luyện Võ: Phế Đô Khát Nước",
     "daysOfWeek": [
@@ -3762,9 +3762,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Trái Tim Hỗn Độn",
+    "eliteMatName": "Cấu Trúc Hỗn Độn",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112023.png",
-    "commonMatName": "Mật Hoa Nguyên Tố",
+    "commonMatName": "Mật Hoa Lừa Dối",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112038.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_Everfrost.png"
   },
@@ -3773,7 +3773,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Tuyển tập các câu chuyện về Dodoco",
     "rarity": 4,
     "type": "catalyst",
-    "ascensionMat": "Nỗi Nhớ Của Sói Bão",
+    "ascensionMat": "Răng Sữa Sói Bão",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114005.png",
     "domainName": "Bí Cảnh Luyện Võ: Thâm Cốc",
     "daysOfWeek": [
@@ -3781,9 +3781,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Chồi Non Địa Mạch",
+    "eliteMatName": "Cành Cây Địa Mạch",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112020.png",
-    "commonMatName": "Mặt Nạ Xui Xẻo",
+    "commonMatName": "Mặt Nạ Vỡ",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112005.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_Ludiharpastum.png"
   },
@@ -3792,7 +3792,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Vòng Bạch Thần",
     "rarity": 4,
     "type": "catalyst",
-    "ascensionMat": "Nhánh Vàng Của Biển Xa",
+    "ascensionMat": "Nhánh San Hô Của Biển Xa",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114025.png",
     "domainName": "Bí Cảnh Luyện Võ: Vực Trầm Sa",
     "daysOfWeek": [
@@ -3800,9 +3800,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Lăng Kính Phân Cực",
+    "eliteMatName": "Lăng Kính Ảm Đạm",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112050.png",
-    "commonMatName": "Bản Vẽ Cấm Chú",
+    "commonMatName": "Bản Vẽ Hướng Dẫn",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112008.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_Bakufu.png"
   },
@@ -3811,7 +3811,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Vòng Xoáy Cưỡi Sóng",
     "rarity": 4,
     "type": "catalyst",
-    "ascensionMat": "Sự Vinh Dự Của Trái Tim Hiến Tế",
+    "ascensionMat": "Sự Sợ Hãi Của Trái Tim Hiến Tế",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114061.png",
     "domainName": "Bí Cảnh Luyện Võ: U Tối",
     "daysOfWeek": [
@@ -3819,9 +3819,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Biểu Tượng Ý Chí Ngao Du",
+    "eliteMatName": "Mảnh Ý Chí Vụn Vỡ",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112107.png",
-    "commonMatName": "Răng Nanh Bạo Chúa",
+    "commonMatName": "Răng Nanh Non Nớt",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112101.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_Umpakati.png"
   },
@@ -3830,7 +3830,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Vòng Yaxche",
     "rarity": 4,
     "type": "catalyst",
-    "ascensionMat": "Thần Tính Của Thánh Chủ Mê Sảng",
+    "ascensionMat": "Sự Sa Ngã Của Thánh Chủ Mê Sảng",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114065.png",
     "domainName": "Bí Cảnh Luyện Võ: Nghiền Ngẫm",
     "daysOfWeek": [
@@ -3838,9 +3838,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Biểu Tượng Ý Chí Ngao Du",
+    "eliteMatName": "Mảnh Ý Chí Vụn Vỡ",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112107.png",
-    "commonMatName": "Mặt Nạ Xui Xẻo",
+    "commonMatName": "Mặt Nạ Vỡ",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112005.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_Isikhulu.png"
   },
@@ -3849,7 +3849,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Câu Chuyện Diệt Rồng",
     "rarity": 3,
     "type": "catalyst",
-    "ascensionMat": "Nỗi Nhớ Của Sói Bão",
+    "ascensionMat": "Răng Sữa Sói Bão",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114005.png",
     "domainName": "Bí Cảnh Luyện Võ: Thâm Cốc",
     "daysOfWeek": [
@@ -3857,9 +3857,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Chồi Non Địa Mạch",
+    "eliteMatName": "Cành Cây Địa Mạch",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112020.png",
-    "commonMatName": "Bản Vẽ Cấm Chú",
+    "commonMatName": "Bản Vẽ Hướng Dẫn",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112008.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_Pulpfic.png"
   },
@@ -3868,7 +3868,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Ngọc Sinh Đôi",
     "rarity": 3,
     "type": "catalyst",
-    "ascensionMat": "Sự Chuyển Dời Của Biển Sương Mù",
+    "ascensionMat": "Diên Đơn Biển Sương Mù",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114017.png",
     "domainName": "Bí Cảnh Luyện Võ: Tiếng Sấm Thành Cổ",
     "daysOfWeek": [
@@ -3876,9 +3876,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       5,
       0
     ],
-    "eliteMatName": "Đuốc Hư Vô",
+    "eliteMatName": "Phấn Hoa Hư Vô",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112026.png",
-    "commonMatName": "Phù Hiệu Hiệu Úy",
+    "commonMatName": "Phù Hiệu Tân Binh",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112032.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_Phoney.png"
   },
@@ -3887,7 +3887,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Quả Cầu Ngọc",
     "rarity": 3,
     "type": "catalyst",
-    "ascensionMat": "Thần Thể Rừng Băng Giá",
+    "ascensionMat": "Ánh Sáng Rừng Băng Giá",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114013.png",
     "domainName": "Bí Cảnh Luyện Võ: Tế Đàn Lôi Vân",
     "daysOfWeek": [
@@ -3895,9 +3895,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Dao Đô Thám Trưởng",
+    "eliteMatName": "Dao Săn Bắt",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112029.png",
-    "commonMatName": "Ấn Quạ Trộm Vàng",
+    "commonMatName": "Ấn Quạ Tầm Bảo",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112035.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_Jade.png"
   },
@@ -3906,7 +3906,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Tiểu Thuyết Dị Giới",
     "rarity": 3,
     "type": "catalyst",
-    "ascensionMat": "Lý Tưởng Của Đấu Sĩ Nanh Sư Tử",
+    "ascensionMat": "Xiềng Xích Đấu Sĩ Nanh Sư Tử",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114009.png",
     "domainName": "Bí Cảnh Luyện Võ: Phế Đô Khát Nước",
     "daysOfWeek": [
@@ -3914,9 +3914,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       6,
       0
     ],
-    "eliteMatName": "Trái Tim Hỗn Độn",
+    "eliteMatName": "Cấu Trúc Hỗn Độn",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112023.png",
-    "commonMatName": "Mặt Nạ Xui Xẻo",
+    "commonMatName": "Mặt Nạ Vỡ",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112005.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_Lightnov.png"
   },
@@ -3925,7 +3925,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Tóm Tắt Ma Pháp",
     "rarity": 3,
     "type": "catalyst",
-    "ascensionMat": "Mảnh Giấc Mơ Tháp Cô Vương",
+    "ascensionMat": "Ngói Vỡ Tháp Cô Vương",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114001.png",
     "domainName": "Bí Cảnh Luyện Võ: Thủy Quang Thành",
     "daysOfWeek": [
@@ -3933,9 +3933,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Sừng Hắc Tinh",
+    "eliteMatName": "Sừng Nặng",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112014.png",
-    "commonMatName": "Bột Slime",
+    "commonMatName": "Dịch Slime",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112002.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_Intro.png"
   },
@@ -3944,7 +3944,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Sổ Tay Ma Pháp",
     "rarity": 2,
     "type": "catalyst",
-    "ascensionMat": "Mảnh Vỡ Tháp Cô Vương",
+    "ascensionMat": "Ngói Vỡ Tháp Cô Vương",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114001.png",
     "domainName": "Bí Cảnh Luyện Võ: Thủy Quang Thành",
     "daysOfWeek": [
@@ -3952,9 +3952,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Sừng Đồng Đen",
+    "eliteMatName": "Sừng Nặng",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112014.png",
-    "commonMatName": "Mặt Nạ Bẩn",
+    "commonMatName": "Mặt Nạ Vỡ",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112005.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_Pocket.png"
   },
@@ -3963,7 +3963,7 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
     "nameVi": "Nhật Ký Học Sinh",
     "rarity": 1,
     "type": "catalyst",
-    "ascensionMat": "Mảnh Vỡ Tháp Cô Vương",
+    "ascensionMat": "Ngói Vỡ Tháp Cô Vương",
     "ascensionMatIcon": "https://enka.network/ui/UI_ItemIcon_114001.png",
     "domainName": "Bí Cảnh Luyện Võ: Thủy Quang Thành",
     "daysOfWeek": [
@@ -3971,9 +3971,9 @@ export const COMPREHENSIVE_WEAPONS: WeaponPreset[] = [
       4,
       0
     ],
-    "eliteMatName": "Sừng Đồng Đen",
+    "eliteMatName": "Sừng Nặng",
     "eliteMatIcon": "https://enka.network/ui/UI_ItemIcon_112014.png",
-    "commonMatName": "Mặt Nạ Bẩn",
+    "commonMatName": "Mặt Nạ Vỡ",
     "commonMatIcon": "https://enka.network/ui/UI_ItemIcon_112005.png",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_Apprentice.png"
   }

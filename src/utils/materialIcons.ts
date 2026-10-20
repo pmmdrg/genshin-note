@@ -12,7 +12,7 @@ export const BASE_MATERIAL_ICONS = {
   specialty: 'https://enka.network/ui/UI_ItemIcon_101235.png',
   realmCurrency: 'https://enka.network/ui/UI_ItemIcon_204.png',
   mysticOre: 'https://enka.network/ui/UI_ItemIcon_104013.png',
-  eliteMonster: 'https://enka.network/ui/UI_ItemIcon_112012.png',
+  eliteMonster: 'https://enka.network/ui/UI_ItemIcon_112023.png',
   commonMonster: 'https://enka.network/ui/UI_ItemIcon_112002.png',
 };
 
@@ -54,23 +54,45 @@ const SPECIFIC_MATERIAL_MAP: Record<string, string> = {
   'Dây Cót Hợp Âm Fontaine': 'https://enka.network/ui/UI_ItemIcon_114056.png',
 
   // Elite Monster Drops
+  'Cấu Trúc Hỗn Độn': 'https://enka.network/ui/UI_ItemIcon_112023.png',
+  'Mạch Hỗn Độn': 'https://enka.network/ui/UI_ItemIcon_112024.png',
+  'Lõi Hỗn Độn': 'https://enka.network/ui/UI_ItemIcon_112025.png',
+  'Cơ Quan Hỗn Độn': 'https://enka.network/ui/UI_ItemIcon_112047.png',
+  'Trục Hỗn Độn': 'https://enka.network/ui/UI_ItemIcon_112048.png',
+  'Mắt Hỗn Độn': 'https://enka.network/ui/UI_ItemIcon_112049.png',
+  'Vật Chứa Hỗn Độn': 'https://enka.network/ui/UI_ItemIcon_112065.png',
+  'Cành Cây Địa Mạch': 'https://enka.network/ui/UI_ItemIcon_112012.png',
   'Chi Khô Địa Mạch': 'https://enka.network/ui/UI_ItemIcon_112012.png',
   'Cốt Chùy U Tối': 'https://enka.network/ui/UI_ItemIcon_112015.png',
+  'Sừng Nặng': 'https://enka.network/ui/UI_ItemIcon_112014.png',
   'Trục Cơ Quan': 'https://enka.network/ui/UI_ItemIcon_112085.png',
   'Bánh Răng Khớp Nối': 'https://enka.network/ui/UI_ItemIcon_112082.png',
   'Dao Săn Nham': 'https://enka.network/ui/UI_ItemIcon_112026.png',
+  'Dao Săn Bắt': 'https://enka.network/ui/UI_ItemIcon_112026.png',
   'Tượng Hắc Ám': 'https://enka.network/ui/UI_ItemIcon_112067.png',
+  'Giọt Nước Đục': 'https://enka.network/ui/UI_ItemIcon_112086.png',
 
   // Common Monster Drops
   'Dịch Slime': 'https://enka.network/ui/UI_ItemIcon_112002.png',
-  'Mặt Nạ Bị Hỏng': 'https://enka.network/ui/UI_ItemIcon_112007.png',
+  'Tinh Slime': 'https://enka.network/ui/UI_ItemIcon_112003.png',
+  'Bột Slime': 'https://enka.network/ui/UI_ItemIcon_112004.png',
+  'Mặt Nạ Bị Hỏng': 'https://enka.network/ui/UI_ItemIcon_112005.png',
+  'Mặt Nạ Vỡ': 'https://enka.network/ui/UI_ItemIcon_112005.png',
   'Huy Hiệu Sĩ Quan': 'https://enka.network/ui/UI_ItemIcon_112034.png',
+  'Phù Hiệu Tân Binh': 'https://enka.network/ui/UI_ItemIcon_112032.png',
+  'Kiếm Cách Cũ Nát': 'https://enka.network/ui/UI_ItemIcon_112044.png',
+  'Kiếm Cách Bản Ngang': 'https://enka.network/ui/UI_ItemIcon_112045.png',
   'Kiếm Cách Sắc Bén': 'https://enka.network/ui/UI_ItemIcon_112046.png',
   'Bào Tử Nấm': 'https://enka.network/ui/UI_ItemIcon_112061.png',
+  'Bào Tử Nấm Quỷ': 'https://enka.network/ui/UI_ItemIcon_112061.png',
   'Giọt Nước Tinh Linh': 'https://enka.network/ui/UI_ItemIcon_112078.png',
+  'Ngọc Vụn Đại Dương': 'https://enka.network/ui/UI_ItemIcon_112080.png',
+  'Bánh Răng Liên Kết': 'https://enka.network/ui/UI_ItemIcon_112081.png',
+  'Răng Nanh Non Nớt': 'https://enka.network/ui/UI_ItemIcon_112101.png',
 };
 
 import { CHARACTER_MATERIALS } from '../data/characterMaterialsData';
+import { COMPREHENSIVE_WEAPONS } from '../data/weaponsData';
 
 export function getMaterialIconUrl(
   materialName?: string,
@@ -87,6 +109,13 @@ export function getMaterialIconUrl(
     if (detail.worldBossMat === materialName) return detail.worldBossMatIcon;
     if (detail.weeklyBossMat === materialName) return detail.weeklyBossMatIcon;
     if (detail.localSpecialty === materialName) return detail.localSpecialtyIcon;
+  }
+
+  // Dynamic match from comprehensive weapons database
+  for (const w of COMPREHENSIVE_WEAPONS) {
+    if (w.ascensionMat === materialName && w.ascensionMatIcon) return w.ascensionMatIcon;
+    if (w.eliteMatName === materialName && w.eliteMatIcon) return w.eliteMatIcon;
+    if (w.commonMatName === materialName && w.commonMatIcon) return w.commonMatIcon;
   }
 
   return BASE_MATERIAL_ICONS[category];

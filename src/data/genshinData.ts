@@ -47,7 +47,9 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     talentBook: 'Bất Diệt (Contention)',
     talentDomain: 'Bí Cảnh Natlan',
     talentDays: [1, 4, 0],
-    weeklyBossMat: 'Nguyên liệu Natlan',
+    weeklyBossMat: 'Sừng Ăn Mòn',
+    worldBossMat: 'Lõi Nguồn Khắc Hoa Văn Kỳ Bí',
+    localSpecialty: 'Lá Khô Tử Anh',
     avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Mavuika.png',
   },
   {
@@ -59,7 +61,9 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     talentBook: 'Hàn Huyên (Kindling)',
     talentDomain: 'Bí Cảnh Natlan',
     talentDays: [2, 5, 0],
-    weeklyBossMat: 'Nguyên liệu Natlan',
+    weeklyBossMat: 'Gương Mushin',
+    worldBossMat: 'Lõi Nguồn Khắc Hoa Văn Kỳ Bí',
+    localSpecialty: 'Cúc Rực Rỡ',
     avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Xilonen.png',
   },
   {
@@ -71,7 +75,9 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     talentBook: 'Bất Diệt (Contention)',
     talentDomain: 'Bí Cảnh Natlan',
     talentDays: [1, 4, 0],
-    weeklyBossMat: 'Nguyên liệu Natlan',
+    weeklyBossMat: 'Phủ Định Và Phán Quyết',
+    worldBossMat: 'Lựu Lửa Quá Chín',
+    localSpecialty: 'Sen Đá Saurian',
     avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Kinich.png',
   },
   {
@@ -84,6 +90,8 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     talentDomain: 'Vinh Quang Nhợt Nhạt (Fontaine)',
     talentDays: [2, 5, 0],
     weeklyBossMat: 'Dây Tơ Không Ám (Cá Voi)',
+    worldBossMat: 'Nước Chưa Đạt Mức Siêu Việt',
+    localSpecialty: 'Lily Ánh Sáng Hồ Nước',
     avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Furina.png',
   },
   {
@@ -96,6 +104,8 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     talentDomain: 'Vinh Quang Nhợt Nhạt (Fontaine)',
     talentDays: [1, 4, 0],
     weeklyBossMat: 'Thủ Hộ Của Primordial',
+    worldBossMat: 'Sừng Kỳ Lân Biển Sâu',
+    localSpecialty: 'Lumitoile',
     avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Neuvillette.png',
   },
   {
@@ -108,6 +118,8 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     talentDomain: 'Vinh Quang Nhợt Nhạt (Fontaine)',
     talentDays: [3, 6, 0],
     weeklyBossMat: 'Ngọn Lửa Khắc Ghi (Arlecchino Boss)',
+    worldBossMat: 'Mảnh Giai Điệu Vàng',
+    localSpecialty: 'Tường Vi Cầu Vồng',
     avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Arlecchino.png',
   },
   {
@@ -120,6 +132,8 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     talentDomain: 'Vinh Quang Nhợt Nhạt (Fontaine)',
     talentDays: [1, 4, 0],
     weeklyBossMat: 'Dây Tơ Không Ám',
+    worldBossMat: 'Linh Kiện Dây Cót - Coppelius',
+    localSpecialty: 'Giọt Sương Ban Sớm',
     avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Navia.png',
   },
 
@@ -134,6 +148,8 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     talentDomain: 'Tháp Vô Danh (Sumeru)',
     talentDays: [2, 5, 0],
     weeklyBossMat: 'Dây Tơ Rối (Scaramouche)',
+    worldBossMat: 'Dây Leo Chế Ngự',
+    localSpecialty: 'Sen Kalpalata',
     avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Nahida.png',
   },
   {
@@ -146,6 +162,8 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     talentDomain: 'Tháp Vô Danh (Sumeru)',
     talentDays: [2, 5, 0],
     weeklyBossMat: 'Gương Mushin',
+    worldBossMat: 'Nhụy Hoa Sỏi Cát',
+    localSpecialty: 'Nhộng Cát',
     avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Alhatham.png',
   },
 
@@ -160,6 +178,8 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     talentDomain: 'Sân Đình Violet (Inazuma)',
     talentDays: [3, 6, 0],
     weeklyBossMat: 'Thời Khắc Tan Biến (Signora)',
+    worldBossMat: 'Ngọc Sấm Sét',
+    localSpecialty: 'Quả Amakumo',
     avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Shougun.png',
   },
   {
@@ -172,6 +192,8 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     talentDomain: 'Thái Sơn Phủ (Liyue)',
     talentDays: [2, 5, 0],
     weeklyBossMat: 'Vảy Vàng Mạ Bạc (Azhdaha)',
+    worldBossMat: 'Lõi Marionette',
+    localSpecialty: 'Hải Linh Chi',
     avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Kazuha.png',
   },
   {
@@ -184,6 +206,8 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     talentDomain: 'Sân Đình Violet (Inazuma)',
     talentDays: [2, 5, 0],
     weeklyBossMat: 'Nhánh Huyết Ngọc (Azhdaha)',
+    worldBossMat: 'Lõi Động Cơ Vĩnh Cửu',
+    localSpecialty: 'Tú Cầu Anh Đào',
     avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Ayaka.png',
   },
 
@@ -198,6 +222,8 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     talentDomain: 'Thái Sơn Phủ (Liyue)',
     talentDays: [3, 6, 0],
     weeklyBossMat: 'Sừng Childe',
+    worldBossMat: 'Tháp Huyền Nham',
+    localSpecialty: 'Thạch Phách',
     avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Zhongli.png',
   },
   {
@@ -210,6 +236,8 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     talentDomain: 'Thái Sơn Phủ (Liyue)',
     talentDays: [2, 5, 0],
     weeklyBossMat: 'Mảnh Ma Kiếm Phong Ma',
+    worldBossMat: 'Ngọc Chưa Chín',
+    localSpecialty: 'Hoa Nghê Thường',
     avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Hutao.png',
   },
   {
@@ -222,6 +250,8 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     talentDomain: 'Thái Sơn Phủ (Liyue)',
     talentDays: [1, 4, 0],
     weeklyBossMat: 'Vảy Vàng Azhdaha',
+    worldBossMat: 'Bánh Răng Ấn Ký',
+    localSpecialty: 'Ốc Sao',
     avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Yelan.png',
   },
   {
@@ -234,6 +264,8 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     talentDomain: 'Hẻm Núi Forsaken (Mondstadt)',
     talentDays: [2, 5, 0],
     weeklyBossMat: 'Lông Vũ Dvalin',
+    worldBossMat: 'Ngọn Lửa Vĩnh Hằng',
+    localSpecialty: 'Cúc Cánh Quạt',
     avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Bennett.png',
   },
   {
@@ -246,6 +278,8 @@ export const CHARACTERS_DATA: CharacterPreset[] = [
     talentDomain: 'Thái Sơn Phủ (Liyue)',
     talentDays: [2, 5, 0],
     weeklyBossMat: 'Móng Vuốt Dvalin',
+    worldBossMat: 'Ngọn Lửa Vĩnh Hằng',
+    localSpecialty: 'Ớt Tuyệt Vân',
     avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Xiangling.png',
   },
   {
