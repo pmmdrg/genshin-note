@@ -27,11 +27,11 @@ export const CHARACTER_MATERIALS: Record<string, CharacterMaterialDetail> = {
   },
   "aino": {
     "worldBossMat": "Khuôn Mẫu Kuuvahki Tinh Vi",
-    "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113077.png",
+    "worldBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113077.png",
     "weeklyBossMat": "Lông Vũ Tơ Lụa",
     "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113061.png",
     "localSpecialty": "Vòng Bi Di Động",
-    "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_101257.png"
+    "localSpecialtyIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_101257.png"
   },
   "albedo": {
     "worldBossMat": "Tháp Huyền Nham",
@@ -61,7 +61,7 @@ export const CHARACTER_MATERIALS: Record<string, CharacterMaterialDetail> = {
     "worldBossMat": "Đuôi Đứt Của Sinh Vật Bay",
     "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113091.png",
     "weeklyBossMat": "Lọ Thuốc Của Dị Đoan",
-    "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113083.png",
+    "weeklyBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113083.png",
     "localSpecialty": "Cỏ Nhung",
     "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_101276.png"
   },
@@ -131,9 +131,9 @@ export const CHARACTER_MATERIALS: Record<string, CharacterMaterialDetail> = {
   },
   "charlotte": {
     "worldBossMat": "\"Thiết Bị Tourbillon\"",
-    "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113052.png",
+    "worldBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113052.png",
     "weeklyBossMat": "Sợi Không Ánh Sáng",
-    "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113054.png",
+    "weeklyBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113054.png",
     "localSpecialty": "Ốc Beryl",
     "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_101232.png"
   },
@@ -143,13 +143,13 @@ export const CHARACTER_MATERIALS: Record<string, CharacterMaterialDetail> = {
     "weeklyBossMat": "Lông Vũ Tơ Lụa",
     "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113061.png",
     "localSpecialty": "Lá Khô Tử Anh",
-    "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_101253.png"
+    "localSpecialtyIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_101253.png"
   },
   "chevreuse": {
     "worldBossMat": "Sừng Kỳ Lân Biển Sâu",
-    "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113053.png",
+    "worldBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113053.png",
     "weeklyBossMat": "Mắt Xoáy Không Ánh Sáng",
-    "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113055.png",
+    "weeklyBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113055.png",
     "localSpecialty": "Hoa Lumidouce",
     "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_101235.png"
   },
@@ -157,7 +157,7 @@ export const CHARACTER_MATERIALS: Record<string, CharacterMaterialDetail> = {
     "worldBossMat": "Linh Kiện Dây Cót - Coppelia",
     "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113049.png",
     "weeklyBossMat": "Sợi Không Ánh Sáng",
-    "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113054.png",
+    "weeklyBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113054.png",
     "localSpecialty": "Hoa Lan Máu",
     "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_101204.png"
   },
@@ -171,19 +171,19 @@ export const CHARACTER_MATERIALS: Record<string, CharacterMaterialDetail> = {
   },
   "citlali": {
     "worldBossMat": "Bùa Hộ Mệnh Của Vùng Đất Bí Ẩn",
-    "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113071.png",
+    "worldBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113071.png",
     "weeklyBossMat": "Phủ Định Và Phán Quyết",
     "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113062.png",
     "localSpecialty": "Quả Quenepa",
-    "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_101249.png"
+    "localSpecialtyIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_101249.png"
   },
   "clorinde": {
     "worldBossMat": "Sừng Kỳ Lân Biển Sâu",
-    "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113053.png",
+    "worldBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113053.png",
     "weeklyBossMat": "Hổ Phách Vĩnh Hằng",
     "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113048.png",
     "localSpecialty": "Lumitoile",
-    "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_101237.png"
+    "localSpecialtyIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_101237.png"
   },
   "collei": {
     "worldBossMat": "Mỏ Vua Nấm",
@@ -195,11 +195,11 @@ export const CHARACTER_MATERIALS: Record<string, CharacterMaterialDetail> = {
   },
   "columbina": {
     "worldBossMat": "Sừng Sáng Lấp Lánh",
-    "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113079.png",
+    "worldBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113079.png",
     "weeklyBossMat": "Mặt Nạ Của Hiền Y",
-    "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113081.png",
+    "weeklyBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113081.png",
     "localSpecialty": "Cỏ Đông Lăng",
-    "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_101266.png"
+    "localSpecialtyIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_101266.png"
   },
   "cyno": {
     "worldBossMat": "Hạt Tụ Sấm",
@@ -211,7 +211,7 @@ export const CHARACTER_MATERIALS: Record<string, CharacterMaterialDetail> = {
   },
   "dahlia": {
     "worldBossMat": "Bộ Tụ Khí Bí Ẩn",
-    "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113076.png",
+    "worldBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113076.png",
     "weeklyBossMat": "Lông Vảy Ăn Mòn",
     "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113070.png",
     "localSpecialty": "Hoa Calla Lily",
@@ -253,9 +253,9 @@ export const CHARACTER_MATERIALS: Record<string, CharacterMaterialDetail> = {
     "worldBossMat": "Lõi Kuuvahki Quân Dụng Tuần Hoàn",
     "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113080.png",
     "weeklyBossMat": "Lửa Mặt Trời Ăn Mòn",
-    "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113069.png",
+    "weeklyBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113069.png",
     "localSpecialty": "Hoa Đèn Lạnh",
-    "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_101261.png"
+    "localSpecialtyIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_101261.png"
   },
   "emilie": {
     "worldBossMat": "Mảnh Giai Điệu Vàng",
@@ -263,13 +263,13 @@ export const CHARACTER_MATERIALS: Record<string, CharacterMaterialDetail> = {
     "weeklyBossMat": "Lông Vũ Tơ Lụa",
     "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113061.png",
     "localSpecialty": "Lily Ánh Sáng Hồ Nước",
-    "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_101238.png"
+    "localSpecialtyIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_101238.png"
   },
   "escoffier": {
     "worldBossMat": "Bộ Tụ Khí Bí Ẩn",
-    "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113076.png",
+    "worldBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113076.png",
     "weeklyBossMat": "Sừng Ăn Mòn",
-    "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113068.png",
+    "weeklyBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113068.png",
     "localSpecialty": "Ốc Beryl",
     "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_101232.png"
   },
@@ -299,11 +299,11 @@ export const CHARACTER_MATERIALS: Record<string, CharacterMaterialDetail> = {
   },
   "flins": {
     "worldBossMat": "Khuôn Mẫu Kuuvahki Tinh Vi",
-    "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113077.png",
+    "worldBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113077.png",
     "weeklyBossMat": "Mẫu Vật Thăng Thần: Hậu",
-    "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113075.png",
+    "weeklyBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113075.png",
     "localSpecialty": "Hoa Đèn Lạnh",
-    "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_101261.png"
+    "localSpecialtyIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_101261.png"
   },
   "freminet": {
     "worldBossMat": "Linh Kiện Dây Cót - Coppelius",
@@ -315,17 +315,17 @@ export const CHARACTER_MATERIALS: Record<string, CharacterMaterialDetail> = {
   },
   "furina": {
     "worldBossMat": "Nước Chưa Đạt Mức Siêu Việt",
-    "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113057.png",
+    "worldBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113057.png",
     "weeklyBossMat": "Khối Không Ánh Sáng",
-    "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113056.png",
+    "weeklyBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113056.png",
     "localSpecialty": "Lily Ánh Sáng Hồ Nước",
-    "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_101238.png"
+    "localSpecialtyIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_101238.png"
   },
   "gaming": {
     "worldBossMat": "Phán Quyết Của Đế Vương",
     "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113051.png",
     "weeklyBossMat": "Khối Không Ánh Sáng",
-    "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113056.png",
+    "weeklyBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113056.png",
     "localSpecialty": "Ốc Sao",
     "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_100033.png"
   },
@@ -365,33 +365,33 @@ export const CHARACTER_MATERIALS: Record<string, CharacterMaterialDetail> = {
     "worldBossMat": "Lõi Tượng Rồng Vô Tri",
     "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113072.png",
     "weeklyBossMat": "Mẫu Vật Thăng Thần: Xe",
-    "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113074.png",
+    "weeklyBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113074.png",
     "localSpecialty": "Sen Đá Saurian",
-    "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_101250.png"
+    "localSpecialtyIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_101250.png"
   },
   "illuga": {
     "worldBossMat": "Lõi Kuuvahki Quân Dụng Tuần Hoàn",
     "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113080.png",
     "weeklyBossMat": "Sừng Ăn Mòn",
-    "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113068.png",
+    "weeklyBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113068.png",
     "localSpecialty": "Thông Hổ Phách",
-    "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_101269.png"
+    "localSpecialtyIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_101269.png"
   },
   "ineffa": {
     "worldBossMat": "Bộ Tụ Khí Bí Ẩn",
-    "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113076.png",
+    "worldBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113076.png",
     "weeklyBossMat": "Lửa Mặt Trời Ăn Mòn",
-    "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113069.png",
+    "weeklyBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113069.png",
     "localSpecialty": "Nấm Sừng Phát Sáng",
-    "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_101252.png"
+    "localSpecialtyIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_101252.png"
   },
   "jahoda": {
     "worldBossMat": "Lông Vảy Lấp Lánh",
-    "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113078.png",
+    "worldBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113078.png",
     "weeklyBossMat": "Mẫu Vật Thăng Thần: Mã",
-    "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113073.png",
+    "weeklyBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113073.png",
     "localSpecialty": "Vòng Bi Di Động",
-    "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_101257.png"
+    "localSpecialtyIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_101257.png"
   },
   "jean": {
     "worldBossMat": "Hạt Giống Bão",
@@ -403,11 +403,11 @@ export const CHARACTER_MATERIALS: Record<string, CharacterMaterialDetail> = {
   },
   "kachina": {
     "worldBossMat": "Lựu Lửa Quá Chín",
-    "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113065.png",
+    "worldBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113065.png",
     "weeklyBossMat": "Ngọn Nến Lửa Tàn",
     "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113060.png",
     "localSpecialty": "Quả Quenepa",
-    "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_101249.png"
+    "localSpecialtyIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_101249.png"
   },
   "kaedeharakazuha": {
     "worldBossMat": "Lõi Marionette",
@@ -459,11 +459,11 @@ export const CHARACTER_MATERIALS: Record<string, CharacterMaterialDetail> = {
   },
   "kinich": {
     "worldBossMat": "Lựu Lửa Quá Chín",
-    "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113065.png",
+    "worldBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113065.png",
     "weeklyBossMat": "Phủ Định Và Phán Quyết",
     "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113062.png",
     "localSpecialty": "Sen Đá Saurian",
-    "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_101250.png"
+    "localSpecialtyIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_101250.png"
   },
   "kirara": {
     "worldBossMat": "Vòng Tròn U Tối",
@@ -499,19 +499,19 @@ export const CHARACTER_MATERIALS: Record<string, CharacterMaterialDetail> = {
   },
   "lanyan": {
     "worldBossMat": "Lõi Nguồn Khắc Hoa Văn Kỳ Bí",
-    "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113066.png",
+    "worldBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113066.png",
     "weeklyBossMat": "Lửa Mặt Trời Ăn Mòn",
-    "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113069.png",
+    "weeklyBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113069.png",
     "localSpecialty": "Ngọc Thanh Thủy",
-    "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_101241.png"
+    "localSpecialtyIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_101241.png"
   },
   "lauma": {
     "worldBossMat": "Lông Vảy Lấp Lánh",
-    "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113078.png",
+    "worldBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113078.png",
     "weeklyBossMat": "Lông Vảy Ăn Mòn",
     "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113070.png",
     "localSpecialty": "Bạc Ánh Trăng",
-    "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_101263.png"
+    "localSpecialtyIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_101263.png"
   },
   "layla": {
     "worldBossMat": "Lõi Chuyển Động Vĩnh Viễn",
@@ -525,7 +525,7 @@ export const CHARACTER_MATERIALS: Record<string, CharacterMaterialDetail> = {
     "worldBossMat": "Lông Vũ Sa Ngã",
     "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113086.png",
     "weeklyBossMat": "Lọ Thuốc Của Dị Đoan",
-    "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113083.png",
+    "weeklyBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113083.png",
     "localSpecialty": "Không Vũ Điệp",
     "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_101272.png"
   },
@@ -541,7 +541,7 @@ export const CHARACTER_MATERIALS: Record<string, CharacterMaterialDetail> = {
     "worldBossMat": "Đuôi Đứt Của Thằn Lằn",
     "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113085.png",
     "weeklyBossMat": "Mẫu Vật Thăng Thần: Mã",
-    "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113073.png",
+    "weeklyBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113073.png",
     "localSpecialty": "Không Vũ Điệp",
     "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_101272.png"
   },
@@ -571,11 +571,11 @@ export const CHARACTER_MATERIALS: Record<string, CharacterMaterialDetail> = {
   },
   "mavuika": {
     "worldBossMat": "Lõi Nguồn Khắc Hoa Văn Kỳ Bí",
-    "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113066.png",
+    "worldBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113066.png",
     "weeklyBossMat": "Sừng Ăn Mòn",
-    "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113068.png",
+    "weeklyBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113068.png",
     "localSpecialty": "Lá Khô Tử Anh",
-    "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_101253.png"
+    "localSpecialtyIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_101253.png"
   },
   "mika": {
     "worldBossMat": "Nhụy Hoa Sỏi Cát",
@@ -595,11 +595,11 @@ export const CHARACTER_MATERIALS: Record<string, CharacterMaterialDetail> = {
   },
   "mualani": {
     "worldBossMat": "Ấn Chúc Phúc Ràng Buộc",
-    "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113064.png",
+    "worldBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113064.png",
     "weeklyBossMat": "Khối Không Ánh Sáng",
-    "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113056.png",
+    "weeklyBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113056.png",
     "localSpecialty": "Mang Bọt Biển",
-    "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_101247.png"
+    "localSpecialtyIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_101247.png"
   },
   "nahida": {
     "worldBossMat": "Dây Leo Chế Ngự",
@@ -613,33 +613,33 @@ export const CHARACTER_MATERIALS: Record<string, CharacterMaterialDetail> = {
     "worldBossMat": "Linh Kiện Dây Cót - Coppelius",
     "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113050.png",
     "weeklyBossMat": "Sợi Không Ánh Sáng",
-    "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113054.png",
+    "weeklyBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113054.png",
     "localSpecialty": "Giọt Sương Ban Sớm",
-    "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_101240.png"
+    "localSpecialtyIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_101240.png"
   },
   "nefer": {
     "worldBossMat": "Sừng Sáng Lấp Lánh",
-    "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113079.png",
+    "worldBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113079.png",
     "weeklyBossMat": "Mẫu Vật Thăng Thần: Xe",
-    "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113074.png",
+    "weeklyBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113074.png",
     "localSpecialty": "Bạc Ánh Trăng",
-    "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_101263.png"
+    "localSpecialtyIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_101263.png"
   },
   "neuvillette": {
     "worldBossMat": "Sừng Kỳ Lân Biển Sâu",
-    "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113053.png",
+    "worldBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113053.png",
     "weeklyBossMat": "Hổ Phách Vĩnh Hằng",
     "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113048.png",
     "localSpecialty": "Lumitoile",
-    "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_101237.png"
+    "localSpecialtyIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_101237.png"
   },
   "nicole": {
     "worldBossMat": "Xác Cánh Ác Mộng",
-    "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113084.png",
+    "worldBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113084.png",
     "weeklyBossMat": "Nhựa Cây Giả Tạo",
-    "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113087.png",
+    "weeklyBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113087.png",
     "localSpecialty": "Thông Hổ Phách",
-    "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_101269.png"
+    "localSpecialtyIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_101269.png"
   },
   "nilou": {
     "worldBossMat": "Lõi Chuyển Động Vĩnh Viễn",
@@ -669,25 +669,25 @@ export const CHARACTER_MATERIALS: Record<string, CharacterMaterialDetail> = {
     "worldBossMat": "Cành Hoa Bất Diệt Trong Lửa",
     "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113090.png",
     "weeklyBossMat": "Cành Khô Vặn Xoắn",
-    "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113088.png",
+    "weeklyBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113088.png",
     "localSpecialty": "Hoa Sương Tiên",
     "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_101275.png"
   },
   "ororon": {
     "worldBossMat": "Ấn Chúc Phúc Ràng Buộc",
-    "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113064.png",
+    "worldBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113064.png",
     "weeklyBossMat": "Sợi Không Ánh Sáng",
-    "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113054.png",
+    "weeklyBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113054.png",
     "localSpecialty": "Nấm Sừng Phát Sáng",
-    "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_101252.png"
+    "localSpecialtyIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_101252.png"
   },
   "prune": {
     "worldBossMat": "Sừng Sáng Lấp Lánh",
-    "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113079.png",
+    "worldBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113079.png",
     "weeklyBossMat": "Mặt Nạ Của Hiền Y",
-    "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113081.png",
+    "weeklyBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113081.png",
     "localSpecialty": "Cỏ Đông Lăng",
-    "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_101266.png"
+    "localSpecialtyIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_101266.png"
   },
   "qiqi": {
     "worldBossMat": "Hạt Nhân Cực Hàn",
@@ -725,9 +725,9 @@ export const CHARACTER_MATERIALS: Record<string, CharacterMaterialDetail> = {
     "worldBossMat": "Lông Vũ Sa Ngã",
     "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113086.png",
     "weeklyBossMat": "Trói Buộc Của Kẻ Điên",
-    "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113082.png",
+    "weeklyBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113082.png",
     "localSpecialty": "Đơn Vị Thăm Dò Phụ Trợ",
-    "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_101239.png"
+    "localSpecialtyIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_101239.png"
   },
   "sangonomiyakokomi": {
     "worldBossMat": "Giọt Nước Bài Trừ",
@@ -747,7 +747,7 @@ export const CHARACTER_MATERIALS: Record<string, CharacterMaterialDetail> = {
   },
   "sethos": {
     "worldBossMat": "Vảy Giáp Tụ Mây",
-    "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113058.png",
+    "worldBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113058.png",
     "weeklyBossMat": "Chuông Daka",
     "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113043.png",
     "localSpecialty": "Trishiraite",
@@ -771,9 +771,9 @@ export const CHARACTER_MATERIALS: Record<string, CharacterMaterialDetail> = {
   },
   "sigewinne": {
     "worldBossMat": "Nước Chưa Đạt Mức Siêu Việt",
-    "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113057.png",
+    "worldBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113057.png",
     "weeklyBossMat": "Mắt Xoáy Không Ánh Sáng",
-    "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113055.png",
+    "weeklyBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113055.png",
     "localSpecialty": "Hoa Romaritime",
     "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_101233.png"
   },
@@ -781,7 +781,7 @@ export const CHARACTER_MATERIALS: Record<string, CharacterMaterialDetail> = {
     "worldBossMat": "Ánh Nhìn Trói Buộc",
     "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113067.png",
     "weeklyBossMat": "Mẫu Vật Thăng Thần: Mã",
-    "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113073.png",
+    "weeklyBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113073.png",
     "localSpecialty": "Lá Rạn Vân Đá",
     "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_101254.png"
   },
@@ -829,7 +829,7 @@ export const CHARACTER_MATERIALS: Record<string, CharacterMaterialDetail> = {
     "worldBossMat": "Đuôi Đứt Của Thằn Lằn",
     "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113085.png",
     "weeklyBossMat": "Mẫu Vật Thăng Thần: Xe",
-    "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113074.png",
+    "weeklyBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113074.png",
     "localSpecialty": "Quả Móc Câu",
     "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_100021.png"
   },
@@ -843,9 +843,9 @@ export const CHARACTER_MATERIALS: Record<string, CharacterMaterialDetail> = {
   },
   "vesna": {
     "worldBossMat": "Giáp Nứt Của Kẻ Lang Thang",
-    "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113092.png",
+    "worldBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113092.png",
     "weeklyBossMat": "Chồi Non Báng Bổ",
-    "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113089.png",
+    "weeklyBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113089.png",
     "localSpecialty": "Dương Xỉ Vàng",
     "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_101277.png"
   },
@@ -853,7 +853,7 @@ export const CHARACTER_MATERIALS: Record<string, CharacterMaterialDetail> = {
     "worldBossMat": "Cành Hoa Bất Diệt Trong Lửa",
     "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113090.png",
     "weeklyBossMat": "Trói Buộc Của Kẻ Điên",
-    "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113082.png",
+    "weeklyBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113082.png",
     "localSpecialty": "Hoa Sương Tiên",
     "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_101275.png"
   },
@@ -883,11 +883,11 @@ export const CHARACTER_MATERIALS: Record<string, CharacterMaterialDetail> = {
   },
   "wriothesley": {
     "worldBossMat": "\"Thiết Bị Tourbillon\"",
-    "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113052.png",
+    "worldBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113052.png",
     "weeklyBossMat": "Hoa Tươi Ban Sơ",
     "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113047.png",
     "localSpecialty": "Đơn Vị Thăm Dò Phụ Trợ",
-    "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_101239.png"
+    "localSpecialtyIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_101239.png"
   },
   "xiangling": {
     "worldBossMat": "Ngọn Lửa Vĩnh Hằng",
@@ -899,11 +899,11 @@ export const CHARACTER_MATERIALS: Record<string, CharacterMaterialDetail> = {
   },
   "xianyun": {
     "worldBossMat": "Vảy Giáp Tụ Mây",
-    "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113058.png",
+    "worldBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113058.png",
     "weeklyBossMat": "Mắt Xoáy Không Ánh Sáng",
-    "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113055.png",
+    "weeklyBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113055.png",
     "localSpecialty": "Ngọc Thanh Thủy",
-    "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_101241.png"
+    "localSpecialtyIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_101241.png"
   },
   "xiao": {
     "worldBossMat": "Ngọc Chưa Chín",
@@ -915,11 +915,11 @@ export const CHARACTER_MATERIALS: Record<string, CharacterMaterialDetail> = {
   },
   "xilonen": {
     "worldBossMat": "Lõi Nguồn Khắc Hoa Văn Kỳ Bí",
-    "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113066.png",
+    "worldBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113066.png",
     "weeklyBossMat": "Gương Mushin",
     "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113042.png",
     "localSpecialty": "Cúc Rực Rỡ",
-    "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_101248.png"
+    "localSpecialtyIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_101248.png"
   },
   "xingqiu": {
     "worldBossMat": "Trái Tim Thuần Khiết",
@@ -979,7 +979,7 @@ export const CHARACTER_MATERIALS: Record<string, CharacterMaterialDetail> = {
   },
   "yumemizukimizuki": {
     "worldBossMat": "Bùa Hộ Mệnh Của Vùng Đất Bí Ẩn",
-    "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113071.png",
+    "worldBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113071.png",
     "weeklyBossMat": "Ngọn Nến Lửa Tàn",
     "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113060.png",
     "localSpecialty": "Hải Linh Chi",
@@ -1003,9 +1003,9 @@ export const CHARACTER_MATERIALS: Record<string, CharacterMaterialDetail> = {
   },
   "zibai": {
     "worldBossMat": "Xác Cánh Ác Mộng",
-    "worldBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113084.png",
+    "worldBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113084.png",
     "weeklyBossMat": "Mẫu Vật Thăng Thần: Hậu",
-    "weeklyBossMatIcon": "https://enka.network/ui/UI_ItemIcon_113075.png",
+    "weeklyBossMatIcon": "https://gi.yatta.moe/assets/UI/UI_ItemIcon_113075.png",
     "localSpecialty": "Bách Hợp Lưu Ly",
     "localSpecialtyIcon": "https://enka.network/ui/UI_ItemIcon_100030.png"
   }
@@ -1033,7 +1033,7 @@ export function getCharacterMaterialDetail(characterName: string): CharacterMate
       worldBossMat: 'Nguyên Liệu Boss Thế Giới',
       worldBossMatIcon: 'https://enka.network/ui/UI_ItemIcon_113059.png',
       weeklyBossMat: 'Nguyên Liệu Boss Tuần',
-      weeklyBossMatIcon: 'https://enka.network/ui/UI_ItemIcon_113055.png',
+      weeklyBossMatIcon: 'https://gi.yatta.moe/assets/UI/UI_ItemIcon_113055.png',
       localSpecialty: 'Đặc Sản Khu Vực',
       localSpecialtyIcon: 'https://enka.network/ui/UI_ItemIcon_101235.png',
     };
@@ -1057,7 +1057,7 @@ export function getCharacterMaterialDetail(characterName: string): CharacterMate
     worldBossMat: 'Nguyên Liệu Boss Thế Giới',
     worldBossMatIcon: 'https://enka.network/ui/UI_ItemIcon_113059.png',
     weeklyBossMat: 'Nguyên Liệu Boss Tuần',
-    weeklyBossMatIcon: 'https://enka.network/ui/UI_ItemIcon_113055.png',
+    weeklyBossMatIcon: 'https://gi.yatta.moe/assets/UI/UI_ItemIcon_113055.png',
     localSpecialty: 'Đặc Sản Khu Vực',
     localSpecialtyIcon: 'https://enka.network/ui/UI_ItemIcon_101235.png',
   };

@@ -49,6 +49,12 @@ export function calculateLevelTo90Cost(currentLevel: number, targetLevel: number
 
 export interface TalentCost {
   goldBooks: number;
+  books: {
+    green: number;
+    blue: number;
+    gold: number;
+    total: number;
+  };
   weeklyBossMats: number;
   crowns: number;
   mora: number;
@@ -58,6 +64,8 @@ export function calculateTalentCost(
   current: { attack: number; skill: number; burst: number },
   target: { attack: number; skill: number; burst: number } = { attack: 10, skill: 10, burst: 10 }
 ): TalentCost {
+  let greenBooks = 0;
+  let blueBooks = 0;
   let goldBooks = 0;
   let weeklyBossMats = 0;
   let crowns = 0;
@@ -67,18 +75,53 @@ export function calculateTalentCost(
     const cur = Math.max(1, Math.min(10, fromLvl));
     const tgt = Math.max(cur, Math.min(10, toLvl));
     
-    // Per talent 1->10 requires: 38 Philosophies (Gold), 6 Weekly Boss Mats, 1 Crown, 1,652,500 Mora
+    // Per talent 1->10 requires:
+    // Lv2: 3 green, 12,500 Mora
+    // Lv3: 2 blue, 17,500 Mora
+    // Lv4: 4 blue, 25,000 Mora
+    // Lv5: 6 blue, 30,000 Mora
+    // Lv6: 9 blue, 37,500 Mora
+    // Lv7: 4 gold, 1 weekly, 120,000 Mora
+    // Lv8: 6 gold, 1 weekly, 260,000 Mora
+    // Lv9: 12 gold, 2 weekly, 450,000 Mora
+    // Lv10: 16 gold, 2 weekly, 1 crown, 700,000 Mora
     const remainingLevels = tgt - cur;
     if (remainingLevels <= 0) return;
 
-    const goldPerLevel = [0, 0, 0, 0, 0, 0, 4, 6, 12, 16]; // approx gold book equivalent for levels 7, 8, 9, 10
-    const weeklyMatPerLevel = [0, 0, 0, 0, 0, 0, 1, 1, 2, 2];
-    
     for (let l = cur + 1; l <= tgt; l++) {
-      goldBooks += goldPerLevel[l - 1] || 2;
-      weeklyBossMats += weeklyMatPerLevel[l - 1] || 0;
-      mora += l >= 9 ? 450000 : 150000;
-      if (l === 10) crowns += 1;
+      if (l === 2) {
+        greenBooks += 3;
+        mora += 12500;
+      } else if (l === 3) {
+        blueBooks += 2;
+        mora += 17500;
+      } else if (l === 4) {
+        blueBooks += 4;
+        mora += 25000;
+      } else if (l === 5) {
+        blueBooks += 6;
+        mora += 30000;
+      } else if (l === 6) {
+        blueBooks += 9;
+        mora += 37500;
+      } else if (l === 7) {
+        goldBooks += 4;
+        weeklyBossMats += 1;
+        mora += 120000;
+      } else if (l === 8) {
+        goldBooks += 6;
+        weeklyBossMats += 1;
+        mora += 260000;
+      } else if (l === 9) {
+        goldBooks += 12;
+        weeklyBossMats += 2;
+        mora += 450000;
+      } else if (l === 10) {
+        goldBooks += 16;
+        weeklyBossMats += 2;
+        crowns += 1;
+        mora += 700000;
+      }
     }
   };
 
@@ -86,7 +129,18 @@ export function calculateTalentCost(
   calculateSingleTalent(current.skill, target.skill);
   calculateSingleTalent(current.burst, target.burst);
 
-  return { goldBooks, weeklyBossMats, crowns, mora };
+  return {
+    goldBooks,
+    books: {
+      green: greenBooks,
+      blue: blueBooks,
+      gold: goldBooks,
+      total: greenBooks + blueBooks + goldBooks,
+    },
+    weeklyBossMats,
+    crowns,
+    mora,
+  };
 }
 
 export interface WeaponCostBreakdown {

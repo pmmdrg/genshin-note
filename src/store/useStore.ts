@@ -8,6 +8,7 @@ import { calculateLevelTo90Cost, calculateTalentCost } from '../utils/calculator
 import { DEFAULT_WALLPAPER } from '../data/wallpapers';
 import { getCharacterMaterialDetail } from '../data/characterMaterialsData';
 import { COMPREHENSIVE_WEAPONS } from '../data/weaponsData';
+import { getTalentDomainInfo } from '../utils/materialIcons';
 
 interface AppState {
   // Navigation Menu
@@ -310,8 +311,8 @@ export const useStore = create<AppState>()(
             moraNeeded: 1171800,
             bossDropNeeded: 26,
             specialtyNeeded: 94,
-            worldBossMat: 'Nước Không Thể Tan',
-            localSpecialty: 'Hoa Hồ Trung Cảnh',
+            worldBossMat: 'Nước Chưa Đạt Mức Siêu Việt',
+            localSpecialty: 'Lily Ánh Sáng Hồ Nước',
             isCompleted: false,
           },
           weaponBranch: {
@@ -333,9 +334,9 @@ export const useStore = create<AppState>()(
           },
           talentBranch: {
             talentBookName: 'Sách Công Lý (Justice)',
-            domainName: 'Vinh Quang Nhợt Nhạt (Fontaine)',
+            domainName: 'Vinh Quang Nhạt Nhòa (Fontaine)',
             daysOfWeek: [2, 5, 0],
-            weeklyBossMatName: 'Dây Tơ Không Ám (Cá Voi)',
+            weeklyBossMatName: 'Khối Không Ánh Sáng',
             currentLevels: { attack: 6, skill: 8, burst: 9 },
             targetLevels: { attack: 6, skill: 10, burst: 10 },
             booksGoldNeeded: 28,
@@ -462,6 +463,28 @@ export const useStore = create<AppState>()(
           ? char.weeklyBossMat
           : matDetail.weeklyBossMat;
 
+        const matchedCharPreset = CHARACTERS_DATA.find(
+          (c) =>
+            c.nameVi.toLowerCase() === (char.nameVi || char.name).toLowerCase() ||
+            c.name.toLowerCase() === (char.nameVi || char.name).toLowerCase() ||
+            (char.name && c.name.toLowerCase() === char.name.toLowerCase())
+        );
+
+        const talentBookName =
+          char.talentBook && !char.talentBook.includes('/')
+            ? char.talentBook
+            : matchedCharPreset?.talentBook || 'Sách Thiên Phú';
+
+        const talentDomainInfo = getTalentDomainInfo(talentBookName);
+        const domainName =
+          char.talentDomain || matchedCharPreset?.talentDomain || talentDomainInfo.domainName;
+        const daysOfWeek =
+          char.talentDays && char.talentDays.length > 0
+            ? char.talentDays
+            : matchedCharPreset?.talentDays && matchedCharPreset.talentDays.length > 0
+            ? matchedCharPreset.talentDays
+            : talentDomainInfo.daysOfWeek;
+
         const charWeaponName = char.weapon?.name;
         const matchedWeapon = charWeaponName
           ? COMPREHENSIVE_WEAPONS.find(
@@ -531,9 +554,9 @@ export const useStore = create<AppState>()(
             isCompleted: (char.weapon?.level || 1) >= 90,
           },
           talentBranch: {
-            talentBookName: char.talentBook,
-            domainName: char.talentDomain,
-            daysOfWeek: char.talentDays,
+            talentBookName,
+            domainName,
+            daysOfWeek,
             weeklyBossMatName,
             currentLevels: char.talents || { attack: 1, skill: 1, burst: 1 },
             targetLevels: { attack: 10, skill: 10, burst: 10 },

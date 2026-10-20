@@ -19,9 +19,14 @@ import { DEFAULT_ARTIFACT_PIECES } from '../types';
 import { useStore } from '../store/useStore';
 import { isDomainOpenToday } from '../utils/priority';
 import { ElementIcon } from './ElementIcon';
-import { getMaterialIconUrl, BASE_MATERIAL_ICONS } from '../utils/materialIcons';
+import {
+  getMaterialIconUrl,
+  getTalentBookIcon,
+  getTalentDomainInfo,
+  BASE_MATERIAL_ICONS,
+} from '../utils/materialIcons';
 import { WeaponSelectionDrawer } from './WeaponSelectionDrawer';
-import { calculateWeaponTo90Cost } from '../utils/calculator';
+import { calculateWeaponTo90Cost, calculateTalentCost } from '../utils/calculator';
 import { CHARACTERS_DATA } from '../data/genshinData';
 import { getCharacterMaterialDetail } from '../data/characterMaterialsData';
 import { COMPREHENSIVE_WEAPONS } from '../data/weaponsData';
@@ -76,8 +81,14 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
   };
 
   const isTopPriority = index === 0;
-  const isTalentOpenToday = isDomainOpenToday(tree.talentBranch.daysOfWeek);
+  const talentDomainInfo = getTalentDomainInfo(tree.talentBranch.talentBookName);
+  const talentDaysList =
+    tree.talentBranch.daysOfWeek && tree.talentBranch.daysOfWeek.length > 0
+      ? tree.talentBranch.daysOfWeek
+      : talentDomainInfo.daysOfWeek;
+  const isTalentOpenToday = isDomainOpenToday(talentDaysList);
   const isWeaponOpenToday = isDomainOpenToday(tree.weaponBranch.daysOfWeek);
+  const talentCost = calculateTalentCost(tree.talentBranch.currentLevels, tree.talentBranch.targetLevels);
 
   const handleFinishAll = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -138,6 +149,10 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
       ? tree.levelBranch.worldBossMat
       : matDetail.worldBossMat;
 
+  const displayWorldBossIcon =
+    getMaterialIconUrl(displayWorldBossMat, 'bossDrop') ||
+    matDetail.worldBossMatIcon;
+
   const displayWeeklyBossMat =
     tree.talentBranch.weeklyBossMatName &&
     !tree.talentBranch.weeklyBossMatName.includes('Nguyên Liệu') &&
@@ -145,11 +160,34 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
       ? tree.talentBranch.weeklyBossMatName
       : matDetail.weeklyBossMat;
 
+  const displayWeeklyBossIcon =
+    getMaterialIconUrl(displayWeeklyBossMat, 'bossDrop') ||
+    matDetail.weeklyBossMatIcon;
+
   const displaySpecialty =
     tree.levelBranch.localSpecialty &&
     !tree.levelBranch.localSpecialty.includes('Đặc Sản')
       ? tree.levelBranch.localSpecialty
       : matDetail.localSpecialty;
+
+  const displaySpecialtyIcon =
+    getMaterialIconUrl(displaySpecialty, 'specialty') ||
+    matDetail.localSpecialtyIcon;
+
+  // Safe Image error fallback handler (automatically retries via Yatta CDN if Enka fails)
+  const handleImageError = (
+    e: React.SyntheticEvent<HTMLImageElement, Event>,
+    fallbackCategory: keyof typeof BASE_MATERIAL_ICONS = 'bossDrop'
+  ) => {
+    const target = e.target as HTMLImageElement;
+    const currentSrc = target.src;
+    if (currentSrc && currentSrc.includes('enka.network/ui/')) {
+      const filename = currentSrc.split('/').pop();
+      target.src = `https://gi.yatta.moe/assets/UI/${filename}`;
+    } else {
+      target.src = BASE_MATERIAL_ICONS[fallbackCategory];
+    }
+  };
 
   // Dynamic weapon material resolution from COMPREHENSIVE_WEAPONS
   const matchedWeaponPreset = COMPREHENSIVE_WEAPONS.find(
@@ -638,12 +676,10 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                     <div className="p-2.5 rounded-xl liquid-glass-subtle liquid-glass-interactive border border-white/[0.08] flex items-center justify-between gap-2 col-span-2">
                       <div className="flex items-center gap-2 min-w-0">
                         <img
-                          src={getMaterialIconUrl(displayWorldBossMat, 'bossDrop')}
+                          src={displayWorldBossIcon}
                           alt={displayWorldBossMat}
-                          className="w-7 h-7 rounded-lg object-contain bg-slate-800/80 p-0.5 shrink-0"
-                          onError={(e) => {
-                            (e.target as HTMLImageElement).src = BASE_MATERIAL_ICONS.bossDrop;
-                          }}
+                          className="w-7 h-7 rounded-lg object-contain bg-slate-800/80 p-0.5 shrink-0 border border-white/10"
+                          onError={(e) => handleImageError(e, 'bossDrop')}
                         />
                         <span className="text-slate-300 text-xs truncate">
                           {displayWorldBossMat}
@@ -658,12 +694,10 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                     <div className="p-2.5 rounded-xl liquid-glass-subtle liquid-glass-interactive border border-white/[0.08] flex items-center justify-between gap-2 col-span-2">
                       <div className="flex items-center gap-2 min-w-0">
                         <img
-                          src={getMaterialIconUrl(displaySpecialty, 'specialty')}
+                          src={displaySpecialtyIcon}
                           alt={displaySpecialty}
-                          className="w-7 h-7 rounded-lg object-contain bg-slate-800/80 p-0.5 shrink-0"
-                          onError={(e) => {
-                            (e.target as HTMLImageElement).src = BASE_MATERIAL_ICONS.specialty;
-                          }}
+                          className="w-7 h-7 rounded-lg object-contain bg-slate-800/80 p-0.5 shrink-0 border border-white/10"
+                          onError={(e) => handleImageError(e, 'specialty')}
                         />
                         <span className="text-slate-300 text-xs truncate">
                           {displaySpecialty}
@@ -818,9 +852,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                           src={displayWeaponMatIcon}
                           alt={displayWeaponMatName}
                           className="w-8 h-8 rounded-lg object-contain bg-slate-800/80 p-0.5 shrink-0 border border-white/10"
-                          onError={(e) => {
-                            (e.target as HTMLImageElement).src = BASE_MATERIAL_ICONS.weaponAscension;
-                          }}
+                          onError={(e) => handleImageError(e, 'weaponAscension')}
                         />
                         <div className="min-w-0">
                           <div className="text-slate-200 text-xs font-semibold truncate">
@@ -861,9 +893,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                           src={displayEliteMatIcon}
                           alt={displayEliteMatName}
                           className="w-7 h-7 rounded-lg object-contain bg-slate-800/80 p-0.5 shrink-0 border border-white/10"
-                          onError={(e) => {
-                            (e.target as HTMLImageElement).src = BASE_MATERIAL_ICONS.eliteMonster;
-                          }}
+                          onError={(e) => handleImageError(e, 'eliteMonster')}
                         />
                         <div className="min-w-0">
                           <div className="text-slate-300 text-xs truncate">
@@ -891,9 +921,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                           src={displayCommonMatIcon}
                           alt={displayCommonMatName}
                           className="w-7 h-7 rounded-lg object-contain bg-slate-800/80 p-0.5 shrink-0 border border-white/10"
-                          onError={(e) => {
-                            (e.target as HTMLImageElement).src = BASE_MATERIAL_ICONS.commonMonster;
-                          }}
+                          onError={(e) => handleImageError(e, 'commonMonster')}
                         />
                         <div className="min-w-0">
                           <div className="text-slate-300 text-xs truncate">
@@ -961,17 +989,18 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
             )}
 
             {/* -------------------------------------------------- */}
-            {/* DETAIL: BRANCH 3 - TALENTS (3 Separate Skills)    */}
+            {/* DETAIL: BRANCH 3 - TALENTS (Chuẩn hóa toàn diện)   */}
             {/* -------------------------------------------------- */}
             {effectiveBranch === 'talent' && (
               <div className="space-y-3.5">
+                {/* Header */}
                 <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
                   <div>
                     <h4 className="text-xs sm:text-sm font-bold text-slate-100">
                       Nhánh Thiên Phú (3 Kỹ Năng)
                     </h4>
-                    <p className="text-[11px] text-slate-400 truncate max-w-[200px]">
-                      {tree.talentBranch.talentBookName}
+                    <p className="text-[11px] text-slate-400">
+                      Mục tiêu Lv. 10/10/10
                     </p>
                   </div>
 
@@ -988,187 +1017,332 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                   </button>
                 </div>
 
-                {/* 3 Skill Level Controls */}
+                {/* 1. Thẻ Sách Thiên Phú & Bí Cảnh Mở (Tương tự thẻ Vũ Khí) */}
+                <div className="p-3.5 rounded-2xl liquid-glass-subtle liquid-glass-interactive border border-white/[0.1] flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-3 min-w-0">
+                    <div className="w-12 h-12 rounded-xl overflow-hidden shrink-0 border border-purple-400/50 bg-gradient-to-b from-purple-500/20 to-transparent relative flex items-center justify-center p-1">
+                      <img
+                        src={getTalentBookIcon(tree.talentBranch.talentBookName)}
+                        alt={tree.talentBranch.talentBookName || 'Sách Thiên Phú'}
+                        className="w-full h-full object-contain"
+                        onError={(e) => handleImageError(e, 'talentBook')}
+                      />
+                    </div>
+
+                    <div className="min-w-0">
+                      <div className="text-xs sm:text-sm font-bold text-slate-100 truncate">
+                        {tree.talentBranch.talentBookName || 'Sách Thiên Phú'}
+                      </div>
+                      <div className="flex items-center gap-1.5 mt-0.5 text-[10px] text-slate-400 font-sans">
+                        <Calendar className="w-3 h-3 text-purple-400/80 shrink-0" />
+                        <span className="truncate">
+                          {tree.talentBranch.domainName || talentDomainInfo.domainName}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-1.5 text-[10px] mt-0.5 font-sans">
+                        <span className="text-slate-400">
+                          {talentDaysList.map((d) => (d === 0 ? 'CN' : `T${d + 1}`)).join(', ')}
+                        </span>
+                        {isTalentOpenToday ? (
+                          <span className="text-emerald-300 font-bold ml-1 flex items-center gap-1">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                            Mở hôm nay
+                          </span>
+                        ) : (
+                          <span className="text-slate-500 ml-1">Đóng</span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  <span className="text-[11px] font-bold text-purple-300 bg-purple-500/15 px-2.5 py-1 rounded-xl border border-purple-500/30 shrink-0">
+                    Bí cảnh
+                  </span>
+                </div>
+
+                {/* 2. Tùy Chỉnh Level 3 Kỹ Năng & Phím Nhanh (Preset 6/6/6, 8/8/8, 9/9/9, 10/10/10) */}
                 <div className="space-y-2">
-                  <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
-                    Chỉnh sửa level từng kỹ năng (1 - 10):
-                  </div>
-
-                  {/* Skill 1: Đánh Thường */}
-                  <div className="flex items-center justify-between p-2.5 rounded-xl liquid-glass-subtle border border-white/[0.08]">
-                    <span className="text-xs font-semibold text-slate-200">Đánh Thường</span>
-                    <div className="flex items-center gap-2">
-                      <button
-                        onClick={() =>
-                          updateTreeTalentLevel(
-                            tree.id,
-                            'attack',
-                            tree.talentBranch.currentLevels.attack - 1
-                          )
-                        }
-                        disabled={tree.talentBranch.currentLevels.attack <= 1}
-                        className="p-1 rounded-lg bg-white/[0.06] hover:bg-white/[0.12] disabled:opacity-40 text-slate-200 cursor-pointer"
-                      >
-                        <Minus className="w-3.5 h-3.5" />
-                      </button>
-                      <span className="text-xs font-bold text-purple-300 font-sans min-w-[42px] text-center">
-                        Lv.{tree.talentBranch.currentLevels.attack}
-                      </span>
-                      <button
-                        onClick={() =>
-                          updateTreeTalentLevel(
-                            tree.id,
-                            'attack',
-                            tree.talentBranch.currentLevels.attack + 1
-                          )
-                        }
-                        disabled={tree.talentBranch.currentLevels.attack >= 10}
-                        className="p-1 rounded-lg bg-white/[0.06] hover:bg-white/[0.12] disabled:opacity-40 text-slate-200 cursor-pointer"
-                      >
-                        <Plus className="w-3.5 h-3.5" />
-                      </button>
+                  <div className="flex items-center justify-between px-0.5">
+                    <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+                      Level kỹ năng (Đánh thường / E / Q):
+                    </span>
+                    <div className="flex items-center gap-1">
+                      {[
+                        { label: '6/6/6', val: 6 },
+                        { label: '8/8/8', val: 8 },
+                        { label: '9/9/9', val: 9 },
+                        { label: '10/10/10', val: 10 },
+                      ].map((preset) => (
+                        <button
+                          key={preset.label}
+                          onClick={() => {
+                            updateTreeTalentLevel(tree.id, 'attack', preset.val);
+                            updateTreeTalentLevel(tree.id, 'skill', preset.val);
+                            updateTreeTalentLevel(tree.id, 'burst', preset.val);
+                          }}
+                          className={`px-1.5 sm:px-2 py-0.5 rounded-md text-[10px] font-bold border transition-colors cursor-pointer ${
+                            tree.talentBranch.currentLevels.attack === preset.val &&
+                            tree.talentBranch.currentLevels.skill === preset.val &&
+                            tree.talentBranch.currentLevels.burst === preset.val
+                              ? 'bg-purple-500/20 border-purple-400/50 text-purple-300'
+                              : 'bg-white/[0.04] border-white/[0.08] text-slate-400 hover:text-slate-200'
+                          }`}
+                        >
+                          {preset.label}
+                        </button>
+                      ))}
                     </div>
                   </div>
 
-                  {/* Skill 2: Kỹ Năng Nguyên Tố (E) */}
-                  <div className="flex items-center justify-between p-2.5 rounded-xl liquid-glass-subtle border border-white/[0.08]">
-                    <span className="text-xs font-semibold text-slate-200">Kỹ Năng E</span>
-                    <div className="flex items-center gap-2">
-                      <button
-                        onClick={() =>
-                          updateTreeTalentLevel(
-                            tree.id,
-                            'skill',
-                            tree.talentBranch.currentLevels.skill - 1
-                          )
-                        }
-                        disabled={tree.talentBranch.currentLevels.skill <= 1}
-                        className="p-1 rounded-lg bg-white/[0.06] hover:bg-white/[0.12] disabled:opacity-40 text-slate-200 cursor-pointer"
-                      >
-                        <Minus className="w-3.5 h-3.5" />
-                      </button>
-                      <span className="text-xs font-bold text-purple-300 font-sans min-w-[42px] text-center">
-                        Lv.{tree.talentBranch.currentLevels.skill}
-                      </span>
-                      <button
-                        onClick={() =>
-                          updateTreeTalentLevel(
-                            tree.id,
-                            'skill',
-                            tree.talentBranch.currentLevels.skill + 1
-                          )
-                        }
-                        disabled={tree.talentBranch.currentLevels.skill >= 10}
-                        className="p-1 rounded-lg bg-white/[0.06] hover:bg-white/[0.12] disabled:opacity-40 text-slate-200 cursor-pointer"
-                      >
-                        <Plus className="w-3.5 h-3.5" />
-                      </button>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                    {/* Đánh Thường */}
+                    <div className="flex items-center justify-between p-2 rounded-xl liquid-glass-subtle border border-white/[0.08]">
+                      <span className="text-xs font-semibold text-slate-200">Đánh Thường</span>
+                      <div className="flex items-center gap-1.5">
+                        <button
+                          onClick={() =>
+                            updateTreeTalentLevel(
+                              tree.id,
+                              'attack',
+                              tree.talentBranch.currentLevels.attack - 1
+                            )
+                          }
+                          disabled={tree.talentBranch.currentLevels.attack <= 1}
+                          className="p-1 rounded-lg bg-white/[0.06] hover:bg-white/[0.12] disabled:opacity-40 text-slate-200 cursor-pointer"
+                        >
+                          <Minus className="w-3 h-3" />
+                        </button>
+                        <span className="text-xs font-bold text-purple-300 font-sans min-w-[32px] text-center">
+                          Lv.{tree.talentBranch.currentLevels.attack}
+                        </span>
+                        <button
+                          onClick={() =>
+                            updateTreeTalentLevel(
+                              tree.id,
+                              'attack',
+                              tree.talentBranch.currentLevels.attack + 1
+                            )
+                          }
+                          disabled={tree.talentBranch.currentLevels.attack >= 10}
+                          className="p-1 rounded-lg bg-white/[0.06] hover:bg-white/[0.12] disabled:opacity-40 text-slate-200 cursor-pointer"
+                        >
+                          <Plus className="w-3 h-3" />
+                        </button>
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Skill 3: Kỹ Năng Nộ (Q) */}
-                  <div className="flex items-center justify-between p-2.5 rounded-xl liquid-glass-subtle border border-white/[0.08]">
-                    <span className="text-xs font-semibold text-slate-200">Kỹ Năng Nộ Q</span>
-                    <div className="flex items-center gap-2">
-                      <button
-                        onClick={() =>
-                          updateTreeTalentLevel(
-                            tree.id,
-                            'burst',
-                            tree.talentBranch.currentLevels.burst - 1
-                          )
-                        }
-                        disabled={tree.talentBranch.currentLevels.burst <= 1}
-                        className="p-1 rounded-lg bg-white/[0.06] hover:bg-white/[0.12] disabled:opacity-40 text-slate-200 cursor-pointer"
-                      >
-                        <Minus className="w-3.5 h-3.5" />
-                      </button>
-                      <span className="text-xs font-bold text-purple-300 font-sans min-w-[42px] text-center">
-                        Lv.{tree.talentBranch.currentLevels.burst}
-                      </span>
-                      <button
-                        onClick={() =>
-                          updateTreeTalentLevel(
-                            tree.id,
-                            'burst',
-                            tree.talentBranch.currentLevels.burst + 1
-                          )
-                        }
-                        disabled={tree.talentBranch.currentLevels.burst >= 10}
-                        className="p-1 rounded-lg bg-white/[0.06] hover:bg-white/[0.12] disabled:opacity-40 text-slate-200 cursor-pointer"
-                      >
-                        <Plus className="w-3.5 h-3.5" />
-                      </button>
+                    {/* Kỹ Năng E */}
+                    <div className="flex items-center justify-between p-2 rounded-xl liquid-glass-subtle border border-white/[0.08]">
+                      <span className="text-xs font-semibold text-slate-200">Kỹ Năng E</span>
+                      <div className="flex items-center gap-1.5">
+                        <button
+                          onClick={() =>
+                            updateTreeTalentLevel(
+                              tree.id,
+                              'skill',
+                              tree.talentBranch.currentLevels.skill - 1
+                            )
+                          }
+                          disabled={tree.talentBranch.currentLevels.skill <= 1}
+                          className="p-1 rounded-lg bg-white/[0.06] hover:bg-white/[0.12] disabled:opacity-40 text-slate-200 cursor-pointer"
+                        >
+                          <Minus className="w-3 h-3" />
+                        </button>
+                        <span className="text-xs font-bold text-purple-300 font-sans min-w-[32px] text-center">
+                          Lv.{tree.talentBranch.currentLevels.skill}
+                        </span>
+                        <button
+                          onClick={() =>
+                            updateTreeTalentLevel(
+                              tree.id,
+                              'skill',
+                              tree.talentBranch.currentLevels.skill + 1
+                            )
+                          }
+                          disabled={tree.talentBranch.currentLevels.skill >= 10}
+                          className="p-1 rounded-lg bg-white/[0.06] hover:bg-white/[0.12] disabled:opacity-40 text-slate-200 cursor-pointer"
+                        >
+                          <Plus className="w-3 h-3" />
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Kỹ Năng Nộ Q */}
+                    <div className="flex items-center justify-between p-2 rounded-xl liquid-glass-subtle border border-white/[0.08]">
+                      <span className="text-xs font-semibold text-slate-200">Kỹ Năng Nộ Q</span>
+                      <div className="flex items-center gap-1.5">
+                        <button
+                          onClick={() =>
+                            updateTreeTalentLevel(
+                              tree.id,
+                              'burst',
+                              tree.talentBranch.currentLevels.burst - 1
+                            )
+                          }
+                          disabled={tree.talentBranch.currentLevels.burst <= 1}
+                          className="p-1 rounded-lg bg-white/[0.06] hover:bg-white/[0.12] disabled:opacity-40 text-slate-200 cursor-pointer"
+                        >
+                          <Minus className="w-3 h-3" />
+                        </button>
+                        <span className="text-xs font-bold text-purple-300 font-sans min-w-[32px] text-center">
+                          Lv.{tree.talentBranch.currentLevels.burst}
+                        </span>
+                        <button
+                          onClick={() =>
+                            updateTreeTalentLevel(
+                              tree.id,
+                              'burst',
+                              tree.talentBranch.currentLevels.burst + 1
+                            )
+                          }
+                          disabled={tree.talentBranch.currentLevels.burst >= 10}
+                          className="p-1 rounded-lg bg-white/[0.06] hover:bg-white/[0.12] disabled:opacity-40 text-slate-200 cursor-pointer"
+                        >
+                          <Plus className="w-3 h-3" />
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Required Materials with images */}
-                <div className="space-y-1.5 text-xs">
-                  {/* Sách Thiên Phú Vàng */}
-                  <div className="p-2.5 rounded-xl liquid-glass-subtle liquid-glass-interactive border border-white/[0.08] flex items-center justify-between gap-2">
-                    <div className="flex items-center gap-2 min-w-0">
-                      <img
-                        src={BASE_MATERIAL_ICONS.talentBook}
-                        alt="Talent Book"
-                        className="w-7 h-7 rounded-lg object-contain bg-slate-800/80 p-0.5 shrink-0"
-                        onError={(e) => {
-                          (e.target as HTMLElement).style.display = 'none';
-                        }}
-                      />
-                      <span className="text-slate-300 text-xs truncate">
-                        Sách Thiên Phú Vàng ({tree.talentBranch.talentBookName})
+                {/* 3. Nguyên Liệu Cần Để Nâng Cấp Tối Đa (Chuẩn hóa kèm hình ảnh và số lượng) */}
+                <div className="space-y-2 text-xs">
+                  <div className="flex items-center justify-between px-0.5 pt-1">
+                    <span className="text-[11px] font-bold text-amber-300 flex items-center gap-1.5">
+                      <Sparkles className="w-3.5 h-3.5 fill-current" />
+                      Nguyên liệu nâng cấp thiên phú (Mục tiêu Lv.10):
+                    </span>
+                    {tree.talentBranch.currentLevels.attack >= 10 &&
+                      tree.talentBranch.currentLevels.skill >= 10 &&
+                      tree.talentBranch.currentLevels.burst >= 10 && (
+                        <span className="text-[10px] font-bold text-emerald-400 bg-emerald-500/15 px-2 py-0.5 rounded-full border border-emerald-500/30">
+                          Đã tối đa
+                        </span>
+                      )}
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {/* Sách Thiên Phú (Col span 2) */}
+                    <div className="p-2.5 rounded-xl liquid-glass-subtle liquid-glass-interactive border border-white/[0.08] flex items-center justify-between gap-2 col-span-1 sm:col-span-2">
+                      <div className="flex items-center gap-2.5 min-w-0">
+                        <img
+                          src={getTalentBookIcon(tree.talentBranch.talentBookName)}
+                          alt={tree.talentBranch.talentBookName || 'Sách Thiên Phú'}
+                          className="w-8 h-8 rounded-lg object-contain bg-slate-800/80 p-0.5 shrink-0 border border-white/10"
+                          onError={(e) => handleImageError(e, 'talentBook')}
+                        />
+                        <div className="min-w-0">
+                          <div className="text-slate-200 text-xs font-semibold truncate">
+                            {tree.talentBranch.talentBookName || 'Sách Thiên Phú'}
+                          </div>
+                          <div className="flex items-center gap-1.5 text-[10px] text-slate-400 mt-0.5 font-sans">
+                            <Calendar className="w-3 h-3 text-amber-400/80 shrink-0" />
+                            <span>
+                              {talentDaysList.map((d) => (d === 0 ? 'CN' : `T${d + 1}`)).join(', ')}
+                            </span>
+                            {isTalentOpenToday ? (
+                              <span className="text-emerald-300 font-bold ml-1">● Mở hôm nay</span>
+                            ) : (
+                              <span className="text-slate-500 ml-1">Đóng</span>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="text-right shrink-0">
+                        <div className="font-bold text-amber-300 font-sans text-xs">
+                          {tree.talentBranch.booksGoldNeeded} cuốn (Vàng)
+                        </div>
+                        {talentCost.books.total > 0 && (
+                          <div className="text-[10px] text-slate-400 font-sans tracking-tight">
+                            {talentCost.books.green}🟢 {talentCost.books.blue}🔵 {talentCost.books.gold}🟡
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Nguyên Liệu Boss Tuần */}
+                    <div className="p-2.5 rounded-xl liquid-glass-subtle liquid-glass-interactive border border-white/[0.08] flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <img
+                          src={displayWeeklyBossIcon}
+                          alt={displayWeeklyBossMat}
+                          className="w-7 h-7 rounded-lg object-contain bg-slate-800/80 p-0.5 shrink-0 border border-white/10"
+                          onError={(e) => handleImageError(e, 'bossDrop')}
+                        />
+                        <div className="min-w-0">
+                          <div className="text-slate-300 text-xs truncate">
+                            {displayWeeklyBossMat}
+                          </div>
+                          <div className="text-[10px] text-slate-500 font-sans">Boss tuần</div>
+                        </div>
+                      </div>
+                      <span className="font-bold text-purple-300 shrink-0 font-sans">
+                        {tree.talentBranch.weeklyBossMatsNeeded} cái
                       </span>
                     </div>
-                    <span className="font-bold text-amber-300 shrink-0 font-sans">
-                      {tree.talentBranch.booksGoldNeeded} cuốn
-                    </span>
-                  </div>
 
-                  {/* Nguyên liệu Boss Tuần */}
-                  <div className="p-2.5 rounded-xl liquid-glass-subtle liquid-glass-interactive border border-white/[0.08] flex items-center justify-between gap-2">
-                    <div className="flex items-center gap-2 min-w-0">
-                      <img
-                        src={getMaterialIconUrl(displayWeeklyBossMat, 'bossDrop')}
-                        alt={displayWeeklyBossMat}
-                        className="w-7 h-7 rounded-lg object-contain bg-slate-800/80 p-0.5 shrink-0"
-                        onError={(e) => {
-                          (e.target as HTMLImageElement).src = BASE_MATERIAL_ICONS.bossDrop;
-                        }}
-                      />
-                      <span className="text-slate-300 text-xs truncate">
-                        {displayWeeklyBossMat}
+                    {/* Vương Miện Trí Thức */}
+                    <div className="p-2.5 rounded-xl liquid-glass-subtle liquid-glass-interactive border border-white/[0.08] flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <img
+                          src={BASE_MATERIAL_ICONS.crown}
+                          alt="Vương Miện Trí Thức"
+                          className="w-7 h-7 rounded-lg object-contain bg-slate-800/80 p-0.5 shrink-0 border border-white/10"
+                          onError={(e) => handleImageError(e, 'crown')}
+                        />
+                        <div className="min-w-0">
+                          <div className="text-slate-300 text-xs truncate">
+                            Vương Miện Trí Thức
+                          </div>
+                          <div className="text-[10px] text-slate-500 font-sans">Cấp 10</div>
+                        </div>
+                      </div>
+                      <span className="font-bold text-amber-400 shrink-0 font-sans">
+                        {tree.talentBranch.crownsNeeded} cái
                       </span>
                     </div>
-                    <span className="font-bold text-purple-300 shrink-0 font-sans">
-                      {tree.talentBranch.weeklyBossMatsNeeded} cái
-                    </span>
-                  </div>
 
-                  {/* Vương Miện Trí Thức */}
-                  <div className="p-2.5 rounded-xl liquid-glass-subtle liquid-glass-interactive border border-white/[0.08] flex items-center justify-between gap-2">
-                    <div className="flex items-center gap-2 min-w-0">
-                      <img
-                        src={BASE_MATERIAL_ICONS.crown}
-                        alt="Crown of Insight"
-                        className="w-7 h-7 rounded-lg object-contain bg-slate-800/80 p-0.5 shrink-0"
-                        onError={(e) => {
-                          (e.target as HTMLElement).style.display = 'none';
-                        }}
-                      />
-                      <span className="text-slate-300 text-xs truncate">Vương Miện Trí Thức</span>
+                    {/* Nguyên Liệu Quái Thường */}
+                    <div className="p-2.5 rounded-xl liquid-glass-subtle liquid-glass-interactive border border-white/[0.08] flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <img
+                          src={displayCommonMatIcon}
+                          alt={displayCommonMatName}
+                          className="w-7 h-7 rounded-lg object-contain bg-slate-800/80 p-0.5 shrink-0 border border-white/10"
+                          onError={(e) => handleImageError(e, 'commonMonster')}
+                        />
+                        <div className="min-w-0">
+                          <div className="text-slate-300 text-xs truncate">
+                            {displayCommonMatName}
+                          </div>
+                          <div className="text-[10px] text-slate-500 font-sans">Quái thường</div>
+                        </div>
+                      </div>
+                      <span className="font-bold text-emerald-300 shrink-0 font-sans">
+                        Cần gom
+                      </span>
                     </div>
-                    <span className="font-bold text-amber-400 shrink-0 font-sans">
-                      {tree.talentBranch.crownsNeeded} cái
-                    </span>
-                  </div>
 
-                  {isTalentOpenToday && (
-                    <div className="pt-1 flex items-center gap-1.5 text-emerald-300 text-[11px] font-bold">
-                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                      Bí cảnh sách hôm nay đang mở!
+                    {/* Mora Cần Để Nâng Thiên Phú */}
+                    <div className="p-2.5 rounded-xl liquid-glass-subtle liquid-glass-interactive border border-white/[0.08] flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <img
+                          src={BASE_MATERIAL_ICONS.mora}
+                          alt="Mora"
+                          className="w-7 h-7 rounded-lg object-contain bg-slate-800/80 p-0.5 shrink-0 border border-white/10"
+                          onError={(e) => handleImageError(e, 'mora')}
+                        />
+                        <div className="min-w-0">
+                          <div className="text-slate-300 text-xs truncate">Mora thiên phú</div>
+                          <div className="text-[10px] text-slate-500 font-sans">Tiền tệ</div>
+                        </div>
+                      </div>
+                      <span className="font-bold text-yellow-300 shrink-0 font-sans">
+                        {talentCost.mora.toLocaleString()}
+                      </span>
                     </div>
-                  )}
+                  </div>
                 </div>
               </div>
             )}
