@@ -309,15 +309,15 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
       <div
         style={{
           minHeight: '268px',
-          height: activeBranch ? `${Math.max(268, contentHeight + 8)}px` : '268px',
+          height: activeBranch ? `${Math.max(268, contentHeight + 20)}px` : '268px',
           transition: 'height 320ms cubic-bezier(0.16, 1, 0.3, 1)',
         }}
         className="overflow-visible"
       >
-        {/* Main Horizontal Tree Layout (No outer big box!) */}
+        {/* Main Horizontal Tree Layout (Padded for smooth unclipped box-shadow glow) */}
         <div
           ref={contentRef}
-          className="flex items-start gap-0 overflow-x-auto pb-2 custom-scrollbar"
+          className="flex items-start gap-0 overflow-x-auto pt-4 pb-6 pl-3.5 sm:pl-4 pr-6 -mt-4 -ml-3.5 sm:-ml-4 custom-scrollbar"
         >
         {/* ========================================================= */}
         {/* 1. CHARACTER CARD NODE (Root node, strictly locked size)  */}
@@ -564,7 +564,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
         <div
           className={`flex items-start shrink-0 origin-left transition-all duration-300 ease-out ${
             activeBranch
-              ? 'max-w-[560px] opacity-100 translate-x-0'
+              ? 'max-w-[620px] opacity-100 translate-x-0'
               : 'max-w-0 opacity-0 -translate-x-3 pointer-events-none overflow-hidden'
           }`}
           style={{

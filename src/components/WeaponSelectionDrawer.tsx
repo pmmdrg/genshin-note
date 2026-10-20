@@ -158,7 +158,7 @@ export const WeaponSelectionDrawer: React.FC<WeaponSelectionDrawerProps> = ({
           </div>
 
           {/* Weapon Type Filter Pills */}
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 custom-scrollbar text-xs">
+          <div className="flex items-center gap-1.5 overflow-x-auto pt-2 pb-2.5 px-1 -my-1 custom-scrollbar text-xs">
             <button
               onClick={() => setSelectedType('all')}
               className={`px-3 py-1.5 rounded-xl font-bold shrink-0 transition-all cursor-pointer liquid-glass-interactive ${
