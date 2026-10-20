@@ -26,7 +26,7 @@ import {
   BASE_MATERIAL_ICONS,
 } from '../utils/materialIcons';
 import { WeaponSelectionDrawer } from './WeaponSelectionDrawer';
-import { calculateWeaponTo90Cost, calculateTalentCost } from '../utils/calculator';
+import { calculateWeaponTo90Cost, calculateTalentCost, calculateLevelTo90Cost } from '../utils/calculator';
 import { CHARACTERS_DATA } from '../data/genshinData';
 import { getCharacterMaterialDetail } from '../data/characterMaterialsData';
 import { COMPREHENSIVE_WEAPONS } from '../data/weaponsData';
@@ -129,6 +129,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
   const characterWeaponType = tree.weaponBranch.weaponType || characterPreset?.weaponType;
   const weaponRarity = tree.weaponBranch.weaponRarity || 5;
   const weaponCost = calculateWeaponTo90Cost(tree.weaponBranch.currentLevel, weaponRarity);
+  const levelCost = calculateLevelTo90Cost(currentCharLevel, 90);
 
   // Active branch Y coordinate for clean branch line to drawer (uses effectiveBranch during close animation)
   const activeBranchY =
@@ -650,7 +651,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                         <span className="text-slate-300 text-xs truncate">Kinh Nghiệm Anh Hùng</span>
                       </div>
                       <span className="font-bold text-amber-300 shrink-0 font-sans">
-                        {tree.levelBranch.heroWitNeeded} cuốn
+                        {levelCost.heroWit} cuốn
                       </span>
                     </div>
 
@@ -668,7 +669,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                         <span className="text-slate-300 text-xs truncate">Mora</span>
                       </div>
                       <span className="font-bold text-yellow-300 shrink-0 font-sans">
-                        {tree.levelBranch.moraNeeded.toLocaleString()}
+                        {levelCost.mora.toLocaleString()}
                       </span>
                     </div>
 
@@ -686,7 +687,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                         </span>
                       </div>
                       <span className="font-bold text-emerald-300 shrink-0 font-sans">
-                        {tree.levelBranch.bossDropNeeded} cái
+                        {levelCost.bossDrops} cái
                       </span>
                     </div>
 
@@ -704,7 +705,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                         </span>
                       </div>
                       <span className="font-bold text-sky-300 shrink-0 font-sans">
-                        {tree.levelBranch.specialtyNeeded} cái
+                        {levelCost.localSpecialty} cái
                       </span>
                     </div>
                   </div>

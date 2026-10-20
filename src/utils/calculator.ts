@@ -7,7 +7,45 @@ export interface LevelCost {
   heroWit: number; // Sách tím (20,000 EXP)
   mora: number;
   bossDrops: number; // Boss thế giới (40 nhựa)
-  localSpecialty: number; // Đặc sản
+  localSpecialty: number; // Đặc sản khu vực
+}
+
+// Cumulative EXP required from Lv. 1 to reach each milestone level in Genshin Impact
+const CUMULATIVE_EXP: Record<number, number> = {
+  1: 0,
+  20: 120175,
+  40: 698500,
+  50: 1277600,
+  60: 2131725,
+  70: 3327650,
+  80: 4939525,
+  90: 8362650,
+};
+
+// Exact ascension milestones (Đột phá cấp 1-6)
+// Both 4-star and 5-star characters require the EXACT SAME ascension materials
+const ASCENSION_PHASES = [
+  { atLevel: 20, boss: 0, specialty: 3, mora: 20000 },
+  { atLevel: 40, boss: 2, specialty: 10, mora: 40000 },
+  { atLevel: 50, boss: 4, specialty: 20, mora: 60000 },
+  { atLevel: 60, boss: 8, specialty: 30, mora: 80000 },
+  { atLevel: 70, boss: 12, specialty: 45, mora: 100000 },
+  { atLevel: 80, boss: 20, specialty: 60, mora: 120000 }, // Final ascension Lv.80 -> 90: exactly 20 boss materials & 60 specialties
+];
+
+function getExpAtLevel(lvl: number): number {
+  const brackets = [1, 20, 40, 50, 60, 70, 80, 90];
+  if (lvl <= 1) return 0;
+  if (lvl >= 90) return CUMULATIVE_EXP[90];
+  for (let i = 0; i < brackets.length - 1; i++) {
+    const low = brackets[i];
+    const high = brackets[i + 1];
+    if (lvl >= low && lvl <= high) {
+      const frac = (lvl - low) / (high - low);
+      return Math.round(CUMULATIVE_EXP[low] + frac * (CUMULATIVE_EXP[high] - CUMULATIVE_EXP[low]));
+    }
+  }
+  return 0;
 }
 
 export function calculateLevelTo90Cost(currentLevel: number, targetLevel: number = 90): LevelCost {
@@ -18,32 +56,26 @@ export function calculateLevelTo90Cost(currentLevel: number, targetLevel: number
     return { heroWit: 0, mora: 0, bossDrops: 0, localSpecialty: 0 };
   }
 
-  // Baseline 1 to 90 total values
-  const totalHeroWit = 418;
-  const totalMora = 2092530;
-  const totalBossDrops = 46;
-  const totalSpecialty = 168;
+  const expDiff = getExpAtLevel(tgt) - getExpAtLevel(cur);
+  const heroWit = Math.ceil(expDiff / 20000);
+  const levelingMora = Math.round(expDiff * 0.2);
+  let ascMora = 0;
+  let bossDrops = 0;
+  let localSpecialty = 0;
 
-  // Level curve weights
-  const getProgressRatio = (lvl: number) => {
-    if (lvl <= 20) return 0.02;
-    if (lvl <= 40) return 0.08;
-    if (lvl <= 50) return 0.16;
-    if (lvl <= 60) return 0.28;
-    if (lvl <= 70) return 0.44;
-    if (lvl <= 80) return 0.65;
-    return 1.0;
-  };
-
-  const curRatio = getProgressRatio(cur);
-  const tgtRatio = getProgressRatio(tgt);
-  const diffRatio = Math.max(0, tgtRatio - curRatio);
+  for (const p of ASCENSION_PHASES) {
+    if (cur <= p.atLevel && tgt > p.atLevel) {
+      bossDrops += p.boss;
+      localSpecialty += p.specialty;
+      ascMora += p.mora;
+    }
+  }
 
   return {
-    heroWit: Math.round(totalHeroWit * diffRatio),
-    mora: Math.round(totalMora * diffRatio),
-    bossDrops: Math.round(totalBossDrops * diffRatio),
-    localSpecialty: Math.round(totalSpecialty * diffRatio),
+    heroWit,
+    mora: levelingMora + ascMora,
+    bossDrops,
+    localSpecialty,
   };
 }
 
