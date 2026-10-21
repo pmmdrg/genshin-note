@@ -36,9 +36,7 @@ for (const name of wNames) {
   const wVi = genshin.weapons(name, { resultLanguage: 'Vietnamese' });
   if (!wEn) continue;
 
-  const versionNum = parseFloat(wEn.version || '1.0');
-  // Include all released versions up to 5.4
-  if (versionNum > 5.4) continue;
+  // Include all weapons in database
 
   const wType = typeMap[wEn.weaponType];
   if (!wType) continue;
