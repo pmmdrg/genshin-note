@@ -142,7 +142,7 @@ export interface PityInfo {
 export function calculatePityInfo(banner: WishBannerType, currentPity: number): PityInfo {
   const isWeapon = banner === 'weapon';
   const maxPity = isWeapon ? 80 : 90;
-  const softPityStart = isWeapon ? 63 : 74;
+  const softPityStart = isWeapon ? 65 : 75; // 75 for character/standard/chronicled, 65 for weapon
   const clamped = Math.max(0, Math.min(maxPity, currentPity));
 
   const pullsToSoftPity = Math.max(0, softPityStart - clamped);
@@ -164,72 +164,55 @@ export function calculatePityInfo(banner: WishBannerType, currentPity: number): 
 }
 
 export interface CapturingRadianceInfo {
-  streak: number; // 0, 1, 2
-  isGuaranteed: boolean; // Currently has 100% guarantee from losing last 50/50
-  guaranteedNext: boolean; // 100% guaranteed to trigger Capturing Radiance on the next 50/50
-  remainingAttempts: number; // How many more 50/50 attempts until guaranteed (0, 1, 2, or 3)
+  lossesSinceLastRadiance: number; // 0, 1, 2, 3+
+  remainingLosses: number; // 3, 2, 1, 0
+  guaranteedNext: boolean; // true if lossesSinceLastRadiance >= 3
+  isGuaranteed: boolean;
   statusTitle: string;
   statusBadge: string;
-  description: string;
-  probText: string;
 }
 
 /**
- * Calculates Capturing Radiance (Bắt Lấy Ánh Sáng) status based on Version 5.0+ mechanics.
- * Streak represents consecutive 50/50 losses without winning or triggering Capturing Radiance.
- * Max consecutive 50/50 non-wins before guaranteed Capturing Radiance is 2 (so the 3rd 50/50 is guaranteed 100%).
+ * Tự động tính cơ chế Bắt Lấy Ánh Sáng kể từ lần Bắt Lấy Ánh Sáng gần nhất.
+ * Cứ tích lũy đủ 3 lần lệch sẽ chắc chắn có Bắt Lấy Ánh Sáng ở lần 50/50 tiếp theo!
  */
-export function calculateCapturingRadianceInfo(streak: number, isGuaranteed: boolean): CapturingRadianceInfo {
-  const clampedStreak = Math.max(0, Math.min(2, streak));
+export function calculateAutoCapturingRadiance(
+  records: WishRecord[],
+  isGuaranteed: boolean = false
+): CapturingRadianceInfo {
+  const charRecords = records.filter((r) => r.bannerType === 'character');
+  let lossesSinceLastRadiance = 0;
 
-  if (isGuaranteed) {
-    return {
-      streak: clampedStreak,
-      isGuaranteed: true,
-      guaranteedNext: false,
-      remainingAttempts: 3 - clampedStreak,
-      statusTitle: 'Đang Có Bảo Hiểm 100%',
-      statusBadge: 'Bảo Hiểm Banner',
-      description: 'Lần 5★ kế tiếp chắc chắn là nhân vật sự kiện của banner! Sau khi nhận, chu kỳ 50/50 tiếp theo sẽ áp dụng cơ chế Bắt Lấy Ánh Sáng.',
-      probText: '100% Nhân Vật Banner',
-    };
+  for (const r of charRecords) {
+    if (r.isCapturingRadiance) {
+      break;
+    }
+    if (!r.isRateUp) {
+      lossesSinceLastRadiance++;
+    }
   }
 
-  if (clampedStreak >= 2) {
-    return {
-      streak: 2,
-      isGuaranteed: false,
-      guaranteedNext: true,
-      remainingAttempts: 0,
-      statusTitle: 'Chắc Chắn Kích Hoạt Bắt Lấy Ánh Sáng!',
-      statusBadge: '100% Bắt Lấy Ánh Sáng',
-      description: 'Bạn đã lệch 50/50 2 lần liên tiếp. Ở lần nổ 5★ 50/50 tiếp theo, cơ chế Bắt Lấy Ánh Sáng CHẮC CHẮN 100% kích hoạt và trao ngay nhân vật Banner!',
-      probText: '100% Kích Hoạt',
-    };
-  }
+  const remainingLosses = Math.max(0, 3 - lossesSinceLastRadiance);
+  const guaranteedNext = lossesSinceLastRadiance >= 3;
 
-  if (clampedStreak === 1) {
-    return {
-      streak: 1,
-      isGuaranteed: false,
-      guaranteedNext: false,
-      remainingAttempts: 1,
-      statusTitle: 'Còn Tối Đa 1 Lần 50/50 Nữa',
-      statusBadge: 'Tỉ Lệ Cao (~50%)',
-      description: 'Bạn đã có 1 lần lệch 50/50 tích lũy. Ở lần 50/50 kế tiếp, nếu thua, tỉ lệ kích hoạt Bắt Lấy Ánh Sáng được tăng vọt lên ~50%. Nếu vẫn chưa kích hoạt, lần kế tiếp sẽ chắc chắn 100%!',
-      probText: '~50% Khi Thua 50/50',
-    };
+  let statusBadge = '';
+  let statusTitle = '';
+
+  if (guaranteedNext) {
+    statusBadge = '100% Chắc Chắn';
+    statusTitle = 'Chắc chắn có Bắt Lấy Ánh Sáng ở lần 50/50 tới!';
+  } else {
+    statusBadge = `${lossesSinceLastRadiance}/3 Lệch`;
+    statusTitle = `Còn ${remainingLosses} lần lệch nữa chắc chắn có Bắt Lấy Ánh Sáng`;
   }
 
   return {
-    streak: 0,
-    isGuaranteed: false,
-    guaranteedNext: false,
-    remainingAttempts: 2,
-    statusTitle: 'Còn Tối Đa 2 Lần 50/50 Nữa',
-    statusBadge: 'Cơ Bản (~10%)',
-    description: 'Chu kỳ Bắt Lấy Ánh Sáng ở mức cơ bản. Khi gặp 50/50, bạn có 55% tỉ lệ thắng tự nhiên (50% gốc + 10% cơ chế Bắt Lấy Ánh Sáng khi thua).',
-    probText: '~10% Khi Thua 50/50',
+    lossesSinceLastRadiance,
+    remainingLosses,
+    guaranteedNext,
+    isGuaranteed,
+    statusTitle,
+    statusBadge,
   };
 }
 
@@ -238,6 +221,8 @@ export interface WishSummary {
   rateUpCount: number;
   lost5050Count: number;
   capturingRadianceCount: number;
+  characterCount: number;
+  weaponCount: number;
   winRatePercent: number;
   averagePity: number;
   totalPrimos: number;
@@ -255,6 +240,8 @@ export function calculateWishSummary(records: WishRecord[], bannerType?: WishBan
       rateUpCount: 0,
       lost5050Count: 0,
       capturingRadianceCount: 0,
+      characterCount: 0,
+      weaponCount: 0,
       winRatePercent: 0,
       averagePity: 0,
       totalPrimos: 0,
@@ -266,10 +253,17 @@ export function calculateWishSummary(records: WishRecord[], bannerType?: WishBan
   let rateUpCount = 0;
   let lost5050Count = 0;
   let capturingRadianceCount = 0;
+  let characterCount = 0;
+  let weaponCount = 0;
   let totalPity = 0;
 
   for (const r of filtered) {
     totalPity += r.pity;
+    if (r.itemType === 'character') {
+      characterCount++;
+    } else {
+      weaponCount++;
+    }
     if (r.isCapturingRadiance) {
       capturingRadianceCount++;
       rateUpCount++;
@@ -306,6 +300,8 @@ export function calculateWishSummary(records: WishRecord[], bannerType?: WishBan
     rateUpCount,
     lost5050Count,
     capturingRadianceCount,
+    characterCount,
+    weaponCount,
     winRatePercent,
     averagePity,
     totalPrimos,

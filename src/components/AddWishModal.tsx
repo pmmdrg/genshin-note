@@ -521,18 +521,13 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
                     >
                       <Sparkles className="w-3.5 h-3.5" />
                     </div>
-                    <div>
-                      <div className="flex items-center gap-1.5">
-                        <span className="text-xs font-bold text-white">
-                          Kích Hoạt Bắt Lấy Ánh Sáng (5.0+)
-                        </span>
-                        <span className="text-[10px] px-1.5 py-0.2 rounded-md bg-pink-500/30 text-pink-200 border border-pink-400/40 font-extrabold">
-                          Capturing Radiance
-                        </span>
-                      </div>
-                      <p className="text-[10px] text-slate-300">
-                        Khi quay bị lệch nhưng hiệu ứng cầu vồng kích hoạt đổi thành nhân vật sự kiện
-                      </p>
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-xs font-bold text-white">
+                        Kích Hoạt Bắt Lấy Ánh Sáng (5.0+)
+                      </span>
+                      <span className="text-[10px] px-1.5 py-0.2 rounded-md bg-pink-500/30 text-pink-200 border border-pink-400/40 font-extrabold">
+                        Capturing Radiance
+                      </span>
                     </div>
                   </div>
                   <div
