@@ -40,7 +40,6 @@ export const WishTrackerView: React.FC = () => {
     wishHistory,
     setCurrentWishPity,
     incrementWishPity,
-    setFatePoints,
     deleteWishRecord,
     clearWishHistory,
   } = useStore();
@@ -56,7 +55,6 @@ export const WishTrackerView: React.FC = () => {
     currentPity: 0,
     isGuaranteed: false,
     capturingRadianceLossStreak: 0,
-    fatePoints: 0,
   };
 
   const pityInfo = useMemo(() => {
@@ -239,13 +237,7 @@ export const WishTrackerView: React.FC = () => {
                 >
                   <Shield className="w-3.5 h-3.5" />
                   <span>
-                    {activeWishBanner === 'chronicled'
-                      ? isGuaranteedEffective
-                        ? 'Có Định Chuẩn'
-                        : 'Chưa Có'
-                      : isGuaranteedEffective
-                      ? 'Có Bảo Hiểm'
-                      : '50/50'}
+                    {isGuaranteedEffective ? 'Có Bảo Hiểm' : '50/50'}
                   </span>
                 </div>
               )}
@@ -427,40 +419,25 @@ export const WishTrackerView: React.FC = () => {
                   </div>
                   <div>
                     <h3 className="text-xs font-bold uppercase tracking-wider text-slate-300">
-                      Định Chuẩn Vũ Khí (5.0)
+                      Cầu Nguyện Vũ Khí
                     </h3>
-                    <span className="text-[11px] text-slate-400">Tối đa 1 Điểm Định Chuẩn</span>
+                    <span className="text-[11px] text-slate-400">Tối đa 80 Roll</span>
                   </div>
                 </div>
 
-                <span
-                  className={`text-xs font-extrabold px-2.5 py-0.5 rounded-lg border ${
-                    currentStats.fatePoints === 1
-                      ? 'bg-amber-500/25 border-amber-400/50 text-amber-300'
-                      : 'bg-white/[0.05] text-slate-400 border-white/[0.08]'
-                  }`}
-                >
-                  {currentStats.fatePoints || 0} / 1 Điểm
+                <span className="text-xs font-extrabold px-2.5 py-0.5 rounded-lg border bg-amber-500/25 border-amber-400/50 text-amber-300">
+                  80 Roll Bảo Hiểm
                 </span>
               </div>
 
-              {/* Quick toggle Fate point */}
-              <div className="flex items-center justify-between text-xs pt-1">
-                <span className="text-slate-400 text-[11px]">Gán Điểm Định Chuẩn:</span>
-                <div className="flex items-center gap-1.5">
-                  {[0, 1].map((pt) => (
-                    <button
-                      key={pt}
-                      onClick={() => setFatePoints('weapon', pt)}
-                      className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition-colors cursor-pointer ${
-                        (currentStats.fatePoints || 0) === pt
-                          ? 'bg-amber-500/30 border-amber-400 text-amber-200'
-                          : 'bg-white/[0.04] border-white/[0.08] text-slate-400 hover:text-white'
-                      }`}
-                    >
-                      {pt} Điểm {pt === 1 ? '(100%)' : ''}
-                    </button>
-                  ))}
+              <div className="p-3.5 rounded-2xl bg-black/30 border border-white/[0.08] space-y-2">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-slate-400">Soft Pity:</span>
+                  <span className="font-extrabold text-amber-300">Mốc 65 roll</span>
+                </div>
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-slate-400">Tỉ lệ nổ:</span>
+                  <span className="font-extrabold text-slate-200">75% Trúng / 25% Lệch</span>
                 </div>
               </div>
             </div>
@@ -481,40 +458,25 @@ export const WishTrackerView: React.FC = () => {
                   </div>
                   <div>
                     <h3 className="text-xs font-bold uppercase tracking-wider text-teal-300">
-                      Định Chuẩn Sử Ký
+                      Cầu Nguyện Sử Ký
                     </h3>
-                    <span className="text-[11px] text-slate-400">Tối đa 1 Điểm Định Chuẩn</span>
+                    <span className="text-[11px] text-slate-400">Tối đa 90 Roll</span>
                   </div>
                 </div>
 
-                <span
-                  className={`text-xs font-extrabold px-2.5 py-0.5 rounded-lg border ${
-                    currentStats.fatePoints === 1
-                      ? 'bg-teal-500/25 border-teal-400/50 text-teal-300'
-                      : 'bg-white/[0.05] text-slate-400 border-white/[0.08]'
-                  }`}
-                >
-                  {currentStats.fatePoints || 0} / 1 Điểm
+                <span className="text-xs font-extrabold px-2.5 py-0.5 rounded-lg border bg-teal-500/25 border-teal-400/50 text-teal-300">
+                  90 Roll Bảo Hiểm
                 </span>
               </div>
 
-              {/* Quick toggle Fate point */}
-              <div className="flex items-center justify-between text-xs pt-1">
-                <span className="text-slate-400 text-[11px]">Gán Điểm Định Chuẩn:</span>
-                <div className="flex items-center gap-1.5">
-                  {[0, 1].map((pt) => (
-                    <button
-                      key={pt}
-                      onClick={() => setFatePoints('chronicled', pt)}
-                      className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition-colors cursor-pointer ${
-                        (currentStats.fatePoints || 0) === pt
-                          ? 'bg-teal-500/30 border-teal-400 text-teal-200'
-                          : 'bg-white/[0.04] border-white/[0.08] text-slate-400 hover:text-white'
-                      }`}
-                    >
-                      {pt} Điểm {pt === 1 ? '(100%)' : ''}
-                    </button>
-                  ))}
+              <div className="p-3.5 rounded-2xl bg-black/30 border border-teal-500/20 space-y-2">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-slate-400">Soft Pity:</span>
+                  <span className="font-extrabold text-teal-300">Mốc 75 roll</span>
+                </div>
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-slate-400">Cơ chế:</span>
+                  <span className="font-extrabold text-slate-200">50/50 & Bảo hiểm 100%</span>
                 </div>
               </div>
             </div>
@@ -702,7 +664,7 @@ export const WishTrackerView: React.FC = () => {
                     ? 'Bắt Sáng'
                     : activeWishBanner === 'standard'
                     ? 'Vũ Khí'
-                    : 'Định Chuẩn'}
+                    : 'Trúng Rate'}
                 </div>
                 <div className="text-sm sm:text-base font-extrabold text-pink-300 mt-0.5">
                   {activeWishBanner === 'character'
@@ -854,19 +816,14 @@ export const WishTrackerView: React.FC = () => {
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
             {filteredHistory.map((item, index) => {
               // Pity color assessment
-              const is4Star = item.rarity === 4;
-              const isEarly = is4Star ? item.pity <= 5 : item.pity < 50;
-              const isNormal = is4Star
-                ? item.pity > 5 && item.pity <= 8
-                : item.pity >= 50 && item.pity < pityInfo.softPityStart;
+              const isEarly = item.pity < 50;
+              const isNormal = item.pity >= 50 && item.pity < pityInfo.softPityStart;
 
               return (
                 <div
                   key={item.id}
                   className={`liquid-glass rounded-2xl p-3 border transition-all relative overflow-hidden group hover:border-white/20 hover:shadow-[0_8px_25px_rgba(0,0,0,0.5)] flex flex-col justify-between ${
-                    is4Star
-                      ? 'border-purple-500/30'
-                      : item.isCapturingRadiance
+                    item.isCapturingRadiance
                       ? 'border-pink-500/40 radiance-card-glow'
                       : !item.isRateUp && item.bannerType !== 'standard'
                       ? 'border-rose-500/30'
@@ -887,7 +844,7 @@ export const WishTrackerView: React.FC = () => {
                           : 'bg-rose-500/20 text-rose-300 border-rose-500/30'
                       }`}
                       title={`Nổ ở roll số ${item.pity} (${
-                        isEarly ? 'May Mắn!' : isNormal ? 'Bình Thường' : is4Star ? 'Pity Cao' : 'Soft Pity'
+                        isEarly ? 'May Mắn!' : isNormal ? 'Bình Thường' : 'Soft Pity'
                       })`}
                     >
                       {item.pity} <span className="text-[9px] font-normal text-slate-300">roll</span>
@@ -897,11 +854,7 @@ export const WishTrackerView: React.FC = () => {
                   {/* Center: Avatar & Names */}
                   <div className="flex flex-col items-center text-center my-1">
                     <div
-                      className={`relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl overflow-hidden bg-black/40 border shrink-0 mb-1.5 transition-transform duration-300 group-hover:scale-105 ${
-                        is4Star
-                          ? 'border-purple-400/50 shadow-[0_0_12px_rgba(168,85,247,0.3)]'
-                          : 'border-amber-400/40 shadow-[0_0_12px_rgba(245,158,11,0.25)]'
-                      }`}
+                      className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl overflow-hidden bg-black/40 border border-amber-400/40 shadow-[0_0_12px_rgba(245,158,11,0.25)] shrink-0 mb-1.5 transition-transform duration-300 group-hover:scale-105"
                     >
                       <img
                         src={item.icon}
@@ -913,19 +866,12 @@ export const WishTrackerView: React.FC = () => {
                     </div>
 
                     <div className="w-full px-0.5">
-                      <div className="flex items-center justify-center gap-1">
-                        <h4
-                          className="text-xs sm:text-sm font-bold text-white leading-tight truncate"
-                          title={item.nameVi || item.name}
-                        >
-                          {item.nameVi || item.name}
-                        </h4>
-                        {is4Star && (
-                          <span className="text-[9px] font-extrabold px-1 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30 shrink-0">
-                            4★
-                          </span>
-                        )}
-                      </div>
+                      <h4
+                        className="text-xs sm:text-sm font-bold text-white leading-tight truncate"
+                        title={item.nameVi || item.name}
+                      >
+                        {item.nameVi || item.name}
+                      </h4>
                       {item.name !== item.nameVi && (
                         <div
                           className="text-[10px] text-slate-400 truncate mt-0.5"
@@ -949,10 +895,6 @@ export const WishTrackerView: React.FC = () => {
                       >
                         {item.itemType === 'character' ? 'Nhân Vật' : 'Vũ Khí'}
                       </span>
-                    ) : is4Star ? (
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-lg bg-purple-500/20 text-purple-300 border border-purple-500/30 flex items-center justify-center gap-1 w-full">
-                        <span>{item.itemType === 'character' ? '4★ Nhân Vật' : '4★ Vũ Khí'}</span>
-                      </span>
                     ) : item.isCapturingRadiance ? (
                       <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-lg radiance-badge text-white flex items-center justify-center gap-1 w-full">
                         <Sparkles className="w-3 h-3 animate-spin-slow shrink-0" />
@@ -961,17 +903,17 @@ export const WishTrackerView: React.FC = () => {
                     ) : item.isGuaranteed ? (
                       <span className="text-[10px] font-semibold px-2 py-0.5 rounded-lg bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 flex items-center justify-center gap-1 w-full">
                         <Shield className="w-3 h-3 shrink-0" />
-                        <span className="truncate">{item.bannerType === 'chronicled' ? 'Định Chuẩn' : 'Bảo Hiểm'}</span>
+                        <span className="truncate">Bảo Hiểm</span>
                       </span>
                     ) : item.isRateUp ? (
                       <span className="text-[10px] font-bold px-2 py-0.5 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center justify-center gap-1 w-full">
                         <CheckCircle2 className="w-3 h-3 shrink-0" />
-                        <span className="truncate">{item.bannerType === 'chronicled' ? 'Trúng ĐC' : 'Trúng Rate'}</span>
+                        <span className="truncate">Trúng Rate</span>
                       </span>
                     ) : (
                       <span className="text-[10px] font-bold px-2 py-0.5 rounded-lg bg-rose-500/20 text-rose-300 border border-rose-500/30 flex items-center justify-center gap-1 w-full">
                         <XCircle className="w-3 h-3 shrink-0" />
-                        <span className="truncate">{item.bannerType === 'chronicled' ? 'Lệch ĐC' : 'Lệch Rate'}</span>
+                        <span className="truncate">Lệch Rate</span>
                       </span>
                     )}
                   </div>

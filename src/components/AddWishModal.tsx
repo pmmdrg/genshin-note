@@ -1,14 +1,14 @@
 import React, { useState, useMemo, useCallback } from 'react';
 import { createPortal } from 'react-dom';
-import { X, Sparkles, CheckCircle2, XCircle, Search, Zap } from 'lucide-react';
+import { X, Sparkles, CheckCircle2, XCircle, Search } from 'lucide-react';
 import { useStore } from '../store/useStore';
 import { useDebounce } from '../hooks/useDebounce';
 import type { WishBannerType, WishRecord } from '../types';
 import {
   STANDARD_5STAR_CHARACTERS,
   STANDARD_5STAR_WEAPONS,
-  GACHA_ALL_CHARACTERS,
-  GACHA_ALL_WEAPONS,
+  GACHA_5STAR_CHARACTERS,
+  GACHA_5STAR_WEAPONS,
   BANNER_NAMES,
 } from '../data/wishData';
 
@@ -62,17 +62,6 @@ const ALIASES: Record<string, string[]> = {
   "hunter's path": ['con duong tho san', 'cung tho san', 'tran tighnari'],
   'beacon of the reed sea': ['hai dang bo bien lau', 'tran dehya'],
   'redhorn stonethresher': ['xich giac', 'xich giac pha thach dao', 'tran itto'],
-  'the catch': ['lao xien ca'],
-  'the widsith': ['chuong nhac lang thang', 'widsith'],
-  'favonius sword': ['tay phong kiem'],
-  'favonius lance': ['thuong tay phong'],
-  'favonius warbow': ['cung tay phong'],
-  'favonius codex': ['tay phong bi dien'],
-  'favonius greatsword': ['dai kiem tay phong'],
-  'sacrificial sword': ['kiem te le'],
-  'sacrificial bow': ['cung te le'],
-  'sacrificial fragments': ['manh chuong te le'],
-  'sacrificial greatsword': ['dai kiem te le'],
 };
 
 function itemMatchesQuery(name: string, nameVi: string, qClean: string): boolean {
@@ -93,7 +82,6 @@ interface GachaCardProps {
   name: string;
   nameVi: string;
   icon: string;
-  rarity: 4 | 5;
   isStandard: boolean;
   isSelected: boolean;
   showStandardBadge: boolean;
@@ -101,24 +89,18 @@ interface GachaCardProps {
 }
 
 const GachaItemCard = React.memo<GachaCardProps>(
-  ({ name, nameVi, icon, rarity, isStandard, isSelected, showStandardBadge, onSelect }) => {
+  ({ name, nameVi, icon, isStandard, isSelected, showStandardBadge, onSelect }) => {
     return (
       <button
         type="button"
         onClick={() => onSelect({ name, nameVi })}
         className={`relative p-1.5 rounded-xl flex flex-col items-center gap-1 transition-all cursor-pointer text-center group ${
           isSelected
-            ? rarity === 4
-              ? 'bg-purple-500/25 border-2 border-purple-400 shadow-[0_0_14px_rgba(168,85,247,0.4)] scale-105'
-              : 'bg-amber-500/25 border-2 border-amber-400 shadow-[0_0_14px_rgba(245,158,11,0.4)] scale-105'
+            ? 'bg-amber-500/25 border-2 border-amber-400 shadow-[0_0_14px_rgba(245,158,11,0.4)] scale-105'
             : 'bg-white/[0.03] border border-white/[0.06] hover:bg-white/[0.08]'
         }`}
       >
-        <div
-          className={`relative w-12 h-12 rounded-lg overflow-hidden bg-black/40 border shrink-0 ${
-            rarity === 4 ? 'border-purple-400/40' : 'border-amber-400/30'
-          }`}
-        >
+        <div className="relative w-12 h-12 rounded-lg overflow-hidden bg-black/40 border border-amber-400/30 shrink-0">
           <img
             src={icon}
             alt={nameVi || name}
@@ -131,21 +113,12 @@ const GachaItemCard = React.memo<GachaCardProps>(
               Lệch
             </span>
           )}
-          {rarity === 4 && (
-            <span className="absolute bottom-0 left-0 text-[8px] bg-purple-600/90 text-white font-black px-1 rounded-tr-md">
-              4★
-            </span>
-          )}
         </div>
         <span className="text-[10px] font-medium text-slate-200 line-clamp-1 leading-tight w-full truncate">
           {nameVi || name}
         </span>
         {isSelected && (
-          <div
-            className={`absolute -top-1 -right-1 w-4 h-4 rounded-full flex items-center justify-center text-[9px] font-bold shadow-md ${
-              rarity === 4 ? 'bg-purple-400 text-black' : 'bg-amber-400 text-black'
-            }`}
-          >
+          <div className="absolute -top-1 -right-1 w-4 h-4 rounded-full flex items-center justify-center text-[9px] font-bold shadow-md bg-amber-400 text-black">
             ✓
           </div>
         )}
@@ -163,14 +136,10 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
   const [searchQuery, setSearchQuery] = useState('');
   const debouncedSearch = useDebounce(searchQuery, 150);
 
-  const [rarityFilter, setRarityFilter] = useState<'all' | '5' | '4'>(() => {
-    return editingWish && editingWish.rarity === 4 ? '4' : '5';
-  });
-
   const [selectedItemName, setSelectedItemName] = useState<string>(() => {
     if (editingWish) return editingWish.nameVi || editingWish.name;
     if (bannerType === 'weapon') {
-      return 'Đoạn Thảo Trường Đao';
+      return 'Trượng Homa';
     }
     if (bannerType === 'standard' || bannerType === 'chronicled') {
       return 'Jean';
@@ -199,42 +168,28 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
 
   const maxPity = bannerType === 'weapon' ? 80 : 90;
 
-  // Base items per banner
+  // Base 5-star items per banner
   const baseItems = useMemo(() => {
     if (bannerType === 'character') {
-      return GACHA_ALL_CHARACTERS.map((c) => ({
+      return GACHA_5STAR_CHARACTERS.map((c) => ({
         ...c,
         itemType: 'character' as const,
         icon: c.avatarUrl,
       }));
     } else if (bannerType === 'weapon') {
-      return GACHA_ALL_WEAPONS.map((w) => ({
+      return GACHA_5STAR_WEAPONS.map((w) => ({
         ...w,
         itemType: 'weapon' as const,
         icon: w.avatarUrl,
       }));
-    } else if (bannerType === 'chronicled') {
-      const chars = GACHA_ALL_CHARACTERS.map((c) => ({
-        ...c,
-        itemType: 'character' as const,
-        icon: c.avatarUrl,
-        isStandard: false,
-      }));
-      const weps = GACHA_ALL_WEAPONS.map((w) => ({
-        ...w,
-        itemType: 'weapon' as const,
-        icon: w.avatarUrl,
-        isStandard: false,
-      }));
-      return [...chars, ...weps];
     } else {
-      // Standard Banner: prioritize standard characters & weapons
-      const chars = GACHA_ALL_CHARACTERS.map((c) => ({
+      // Chronicled or Standard
+      const chars = GACHA_5STAR_CHARACTERS.map((c) => ({
         ...c,
         itemType: 'character' as const,
         icon: c.avatarUrl,
       }));
-      const weps = GACHA_ALL_WEAPONS.map((w) => ({
+      const weps = GACHA_5STAR_WEAPONS.map((w) => ({
         ...w,
         itemType: 'weapon' as const,
         icon: w.avatarUrl,
@@ -243,18 +198,18 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
     }
   }, [bannerType]);
 
-  // Filter items using debounced search and rarity filter
+  // Filter 5-star items using debounced search
   const selectableItems = useMemo(() => {
     const qClean = cleanStr(debouncedSearch.trim());
     const isSearching = qClean.length > 0;
 
     return baseItems.filter((item) => {
-      // Match search query first
+      // Match search query
       if (isSearching) {
         return itemMatchesQuery(item.name, item.nameVi, qClean);
       }
 
-      // Banner type constraints when not searching
+      // Standard banner defaults to standard items when not searching
       if (bannerType === 'standard') {
         const isStdChar =
           item.itemType === 'character' &&
@@ -271,18 +226,11 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
         if (!isStdChar && !isStdWep) return false;
       }
 
-      // Rarity filter
-      if (rarityFilter === '5') {
-        return item.rarity === 5;
-      }
-      if (rarityFilter === '4') {
-        return item.rarity === 4;
-      }
       return true;
     });
-  }, [baseItems, debouncedSearch, rarityFilter, bannerType]);
+  }, [baseItems, debouncedSearch, bannerType]);
 
-  // Selected item object (lookup in baseItems so it persists across search filters)
+  // Selected item object
   const selectedItemObj = useMemo(() => {
     return (
       baseItems.find((i) => i.name === selectedItemName || i.nameVi === selectedItemName) ||
@@ -296,10 +244,9 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
     setIsCapturingRadiance(false);
   }, []);
 
-  // Automatic determination of rate-up vs loss
+  // Automatic determination of rate-up vs standard loss
   const isSelectedStandard = useMemo(() => {
     if (!selectedItemObj) return false;
-    if (selectedItemObj.rarity === 4) return false;
 
     if (bannerType === 'character') {
       return (
@@ -328,16 +275,10 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
     e.preventDefault();
     if (!selectedItemObj) return;
 
-    const itemRarity = (selectedItemObj.rarity || 5) as 4 | 5;
-
     // Determine rateUp status automatically
     let isRateUp = true;
     if (bannerType === 'character' || bannerType === 'weapon') {
-      if (itemRarity === 5) {
-        isRateUp = !isSelectedStandard || isCapturingRadiance;
-      } else {
-        isRateUp = true;
-      }
+      isRateUp = !isSelectedStandard || isCapturingRadiance;
     } else if (bannerType === 'chronicled') {
       isRateUp = chronicledRateUp;
     } else {
@@ -357,23 +298,20 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
       nameVi: selectedItemObj.nameVi,
       icon: selectedItemObj.icon,
       itemType: selectedItemObj.itemType,
-      rarity: itemRarity,
+      rarity: 5,
       bannerType,
       pity: Math.max(1, Math.min(maxPity, pity)),
       date: editingWish?.date || new Date().toISOString().split('T')[0],
       isRateUp,
-      isCapturingRadiance:
-        bannerType === 'character' && itemRarity === 5 ? isCapturingRadiance : false,
-      isGuaranteed: itemRarity === 5 ? wasGuaranteed : false,
+      isCapturingRadiance: bannerType === 'character' ? isCapturingRadiance : false,
+      isGuaranteed: wasGuaranteed,
       notes: editingWish?.notes || '',
     };
 
     if (editingWish) {
       updateWishRecord(editingWish.id, recordData);
     } else {
-      // Only reset 5★ pity if a 5★ was pulled and autoResetPity is enabled
-      const shouldResetPity = itemRarity === 5 && autoResetPity;
-      addWishRecord(recordData, shouldResetPity);
+      addWishRecord(recordData, autoResetPity);
     }
 
     onClose();
@@ -414,50 +352,12 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* 1. Chọn Vật Phẩm (Hỗ trợ Debounce và tìm kiếm không dấu/bí danh) */}
+          {/* 1. Chọn Vật Phẩm 5★ */}
           <div className="space-y-2">
-            <div className="flex items-center justify-between gap-2 flex-wrap">
-              <div className="flex items-center gap-2">
-                <label className="text-xs font-semibold text-slate-300 uppercase tracking-wider">
-                  Chọn Vật Phẩm
-                </label>
-                {/* Rarity Filter Tabs */}
-                <div className="flex items-center gap-1 p-0.5 bg-white/[0.04] border border-white/[0.08] rounded-lg">
-                  <button
-                    type="button"
-                    onClick={() => setRarityFilter('5')}
-                    className={`px-2 py-0.5 rounded text-[11px] font-bold transition-all cursor-pointer ${
-                      rarityFilter === '5'
-                        ? 'bg-amber-500/25 text-amber-300 border border-amber-400/40'
-                        : 'text-slate-400 hover:text-white'
-                    }`}
-                  >
-                    5★ Vàng
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setRarityFilter('4')}
-                    className={`px-2 py-0.5 rounded text-[11px] font-bold transition-all cursor-pointer ${
-                      rarityFilter === '4'
-                        ? 'bg-purple-500/25 text-purple-300 border border-purple-400/40'
-                        : 'text-slate-400 hover:text-white'
-                    }`}
-                  >
-                    4★ Tím
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setRarityFilter('all')}
-                    className={`px-2 py-0.5 rounded text-[11px] font-bold transition-all cursor-pointer ${
-                      rarityFilter === 'all'
-                        ? 'bg-white/20 text-white'
-                        : 'text-slate-400 hover:text-white'
-                    }`}
-                  >
-                    Tất Cả
-                  </button>
-                </div>
-              </div>
+            <div className="flex items-center justify-between gap-2">
+              <label className="text-xs font-bold text-slate-300 uppercase tracking-wider">
+                Chọn Vật Phẩm 5★ ({selectableItems.length})
+              </label>
 
               {/* Search Box with instant typing */}
               <div className="relative w-44 sm:w-56">
@@ -476,7 +376,7 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
             <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2 min-h-[200px] max-h-64 sm:max-h-72 overflow-y-auto p-2 rounded-2xl bg-black/25 border border-white/[0.06]">
               {selectableItems.length === 0 ? (
                 <div className="col-span-full py-8 text-center text-xs text-slate-400 space-y-1">
-                  <div>Không tìm thấy vật phẩm nào khớp với &quot;{debouncedSearch}&quot;</div>
+                  <div>Không tìm thấy vật phẩm 5★ nào khớp với &quot;{debouncedSearch}&quot;</div>
                   <div className="text-[10px] text-slate-500">
                     Thử tìm bằng tiếng Anh, viết liền hoặc không dấu (vd: homa, hutao, doan thao...)
                   </div>
@@ -492,7 +392,6 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
                       name={item.name}
                       nameVi={item.nameVi}
                       icon={item.icon}
-                      rarity={item.rarity}
                       isStandard={item.isStandard}
                       isSelected={isSelected}
                       showStandardBadge={bannerType !== 'standard'}
@@ -508,12 +407,8 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
               <div className="flex items-center justify-between text-xs px-2.5 py-1.5 rounded-xl bg-white/[0.03] border border-white/[0.06]">
                 <div className="flex items-center gap-2">
                   <span className="text-slate-400 text-[11px]">Đang chọn:</span>
-                  <span
-                    className={`font-bold ${
-                      selectedItemObj.rarity === 4 ? 'text-purple-300' : 'text-amber-300'
-                    }`}
-                  >
-                    {selectedItemObj.nameVi || selectedItemObj.name} ({selectedItemObj.rarity}★)
+                  <span className="font-bold text-amber-300">
+                    {selectedItemObj.nameVi || selectedItemObj.name} (5★)
                   </span>
                   {selectedItemObj.name !== selectedItemObj.nameVi && (
                     <span className="text-[10px] text-slate-500">({selectedItemObj.name})</span>
@@ -527,7 +422,7 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
           </div>
 
           {/* 2. Tự Động Xét Bảo Hiểm / Trúng Rate */}
-          {selectedItemObj && selectedItemObj.rarity === 5 ? (
+          {selectedItemObj && (
             <>
               {bannerType === 'character' && (
                 <div className="p-3 rounded-2xl bg-black/25 border border-white/[0.08] flex items-center justify-between gap-2 flex-wrap">
@@ -571,12 +466,12 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
                   {isSelectedStandard ? (
                     <span className="text-xs font-bold px-2.5 py-0.5 rounded-lg bg-rose-500/20 text-rose-300 border border-rose-500/30 flex items-center gap-1">
                       <XCircle className="w-3.5 h-3.5" />
-                      <span>Lệch (Vũ khí thường) → Tích 1 Điểm Định Chuẩn</span>
+                      <span>Lệch Rate (Vũ khí thường) → Lần sau BẢO HIỂM</span>
                     </span>
                   ) : (
                     <span className="text-xs font-bold px-2.5 py-0.5 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1">
                       <CheckCircle2 className="w-3.5 h-3.5" />
-                      <span>Trúng Vũ Khí Định Chuẩn</span>
+                      <span>Trúng Rate (Vũ khí giới hạn)</span>
                     </span>
                   )}
                 </div>
@@ -584,7 +479,7 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
 
               {bannerType === 'chronicled' && (
                 <div className="p-3 rounded-2xl bg-black/25 border border-white/[0.08] flex items-center justify-between gap-2">
-                  <span className="text-xs text-slate-400">Định Chuẩn Sử Ký:</span>
+                  <span className="text-xs text-slate-400">Kết quả Cầu Nguyện Sử Ký:</span>
                   <div className="flex items-center gap-2">
                     <button
                       type="button"
@@ -595,7 +490,7 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
                           : 'bg-white/[0.04] text-slate-400 border-white/[0.08]'
                       }`}
                     >
-                      ✓ Trúng Định Chuẩn
+                      ✓ Trúng Rate
                     </button>
                     <button
                       type="button"
@@ -606,29 +501,19 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
                           : 'bg-white/[0.04] text-slate-400 border-white/[0.08]'
                       }`}
                     >
-                      ✕ Lệch Định Chuẩn
+                      ✕ Lệch Rate
                     </button>
                   </div>
                 </div>
               )}
             </>
-          ) : (
-            <div className="p-3 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-between gap-2 text-xs">
-              <span className="font-bold text-purple-300 flex items-center gap-1.5">
-                <Zap className="w-3.5 h-3.5" />
-                <span>Nổ Vật Phẩm 4★ (Tím)</span>
-              </span>
-              <span className="text-slate-400 text-[11px]">
-                Nổ 4★ không làm đặt lại bộ đếm Pity 5★
-              </span>
-            </div>
           )}
 
           {/* 3. Số Roll Nổ (Pity) */}
           <div className="space-y-1.5">
             <div className="flex items-center justify-between">
               <label className="text-xs font-semibold text-slate-300 uppercase tracking-wider">
-                {selectedItemObj?.rarity === 4 ? 'Số Roll Nhận 4★' : 'Số Roll Nổ 5★ (Pity)'}
+                Số Roll Nổ 5★ (Pity)
               </label>
               <span className="text-xs font-bold text-amber-300">
                 {pity} / {maxPity}
@@ -677,7 +562,7 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
           </div>
 
           {/* 4. Tự Động Reset Pity */}
-          {!editingWish && selectedItemObj?.rarity === 5 && (
+          {!editingWish && (
             <label className="flex items-center gap-2 cursor-pointer pt-1 text-xs text-slate-300 select-none">
               <input
                 type="checkbox"

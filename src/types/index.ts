@@ -239,7 +239,7 @@ export interface WishRecord {
   nameVi: string;
   icon: string;
   itemType: 'character' | 'weapon';
-  rarity: 4 | 5;
+  rarity: 5;
   bannerType: WishBannerType;
   pity: number; // số roll từ 5★ trước đến 5★ này (1 - 90)
   date: string; // YYYY-MM-DD
@@ -253,6 +253,6 @@ export interface WishBannerStats {
   currentPity: number; // 0-90 (hoặc 0-80 cho vũ khí)
   isGuaranteed: boolean; // Đang có bảo hiểm 100% không
   capturingRadianceLossStreak: number; // Số lần lệch 50/50 liên tiếp (0, 1, 2)
-  fatePoints?: number; // Điểm định mệnh (vũ khí: 0 hoặc 1)
+  fatePoints?: number;
   selectedWeaponTarget?: string;
 }

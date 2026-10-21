@@ -1128,10 +1128,8 @@ export const useStore = create<AppState>()(
           } else if (banner === 'weapon' || banner === 'chronicled') {
             if (record.isRateUp) {
               updatedStats.isGuaranteed = false;
-              updatedStats.fatePoints = 0;
             } else {
               updatedStats.isGuaranteed = true;
-              updatedStats.fatePoints = 1;
             }
           }
 
