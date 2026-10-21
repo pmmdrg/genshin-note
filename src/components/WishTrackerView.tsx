@@ -634,13 +634,6 @@ export const WishTrackerView: React.FC = () => {
                     ✕ Lệch: {summary.lost5050Count}
                   </span>
                 </div>
-
-                {summary.guaranteedCount > 0 && (
-                  <div className="text-[10px] text-indigo-300 font-medium flex items-center justify-between pt-1 border-t border-white/[0.04]">
-                    <span>🛡️ Trúng nhờ bảo hiểm:</span>
-                    <span className="font-bold">{summary.guaranteedCount} (không tính vào 50/50)</span>
-                  </div>
-                )}
               </div>
             )}
 
