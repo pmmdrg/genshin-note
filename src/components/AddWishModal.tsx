@@ -385,7 +385,7 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto liquid-glass rounded-3xl border border-white/15 p-5 sm:p-6 shadow-[0_20px_60px_rgba(0,0,0,0.85)] text-slate-100 space-y-4"
+        className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto liquid-glass rounded-3xl border border-white/15 p-5 sm:p-6 shadow-[0_20px_60px_rgba(0,0,0,0.85)] text-slate-100 space-y-4"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -473,7 +473,7 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
             </div>
 
             {/* Selection Grid (Optimized with React.memo and lazy decoding) */}
-            <div className="grid grid-cols-4 sm:grid-cols-6 gap-2 min-h-[176px] max-h-48 overflow-y-auto p-1.5 rounded-2xl bg-black/25 border border-white/[0.06]">
+            <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2 min-h-[200px] max-h-64 sm:max-h-72 overflow-y-auto p-2 rounded-2xl bg-black/25 border border-white/[0.06]">
               {selectableItems.length === 0 ? (
                 <div className="col-span-full py-8 text-center text-xs text-slate-400 space-y-1">
                   <div>Không tìm thấy vật phẩm nào khớp với &quot;{debouncedSearch}&quot;</div>

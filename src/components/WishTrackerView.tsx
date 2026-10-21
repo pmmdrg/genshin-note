@@ -652,48 +652,74 @@ export const WishTrackerView: React.FC = () => {
             ) : (
               <div className="space-y-1.5">
                 <div className="flex items-baseline justify-between">
-                  <span className="text-xs text-slate-400 font-medium">Tỉ Lệ Trúng Rate:</span>
+                  <span className="text-xs text-slate-400 font-medium">
+                    Tỉ Lệ Trúng Rate ({activeWishBanner === 'character' ? '50/50' : activeWishBanner === 'weapon' ? '75/25' : 'Định Chuẩn'}):
+                  </span>
                   <span className="text-2xl font-black text-emerald-400">
-                    {summary.winRatePercent}%
+                    {summary.total5050Count > 0 ? `${summary.winRatePercent}%` : 'Chưa có'}
                   </span>
                 </div>
 
                 <div className="w-full h-2.5 bg-black/40 rounded-full overflow-hidden flex border border-white/[0.08]">
                   <div
                     className="bg-emerald-500 h-full transition-all duration-500"
-                    style={{ width: `${summary.winRatePercent}%` }}
-                    title={`Trúng: ${summary.rateUpCount}`}
+                    style={{
+                      width: `${summary.total5050Count > 0 ? summary.winRatePercent : 50}%`,
+                    }}
+                    title={`Trúng 50/50: ${summary.rateUpCount}`}
                   />
                   <div
                     className="bg-rose-500 h-full transition-all duration-500"
-                    style={{ width: `${100 - summary.winRatePercent}%` }}
-                    title={`Lệch: ${summary.lost5050Count}`}
+                    style={{
+                      width: `${summary.total5050Count > 0 ? 100 - summary.winRatePercent : 50}%`,
+                    }}
+                    title={`Lệch 50/50: ${summary.lost5050Count}`}
                   />
                 </div>
 
-                <div className="flex items-center justify-between text-[11px] text-slate-400 pt-0.5">
+                <div className="flex items-center justify-between text-[11px] text-slate-400 pt-0.5 flex-wrap gap-1">
                   <span className="text-emerald-400 font-bold">
                     ✓ Trúng: {summary.rateUpCount}
+                    {summary.capturingRadianceCount > 0 && (
+                      <span className="text-pink-300 ml-1 font-semibold text-[10px]">
+                        ({summary.naturalWinCount} tự nhiên, {summary.capturingRadianceCount} bắt sáng)
+                      </span>
+                    )}
                   </span>
                   <span className="text-rose-400 font-bold">
                     ✕ Lệch: {summary.lost5050Count}
                   </span>
                 </div>
+
+                {summary.guaranteedCount > 0 && (
+                  <div className="text-[10px] text-indigo-300 font-medium flex items-center justify-between pt-1 border-t border-white/[0.04]">
+                    <span>🛡️ Trúng nhờ bảo hiểm:</span>
+                    <span className="font-bold">{summary.guaranteedCount} (không tính vào 50/50)</span>
+                  </div>
+                )}
               </div>
             )}
 
             {/* Metrics Grid */}
-            <div className="grid grid-cols-3 gap-2 pt-2 border-t border-white/[0.08]">
+            <div className="grid grid-cols-4 gap-1.5 pt-2 border-t border-white/[0.08]">
               <div className="p-2 rounded-xl bg-white/[0.03] text-center border border-white/[0.06]">
                 <div className="text-[10px] text-slate-400">Tổng 5★</div>
-                <div className="text-base font-extrabold text-white mt-0.5">
+                <div className="text-sm sm:text-base font-extrabold text-white mt-0.5">
                   {summary.total5Star}
                 </div>
               </div>
               <div className="p-2 rounded-xl bg-white/[0.03] text-center border border-white/[0.06]">
                 <div className="text-[10px] text-slate-400">Pity TB</div>
-                <div className="text-base font-extrabold text-amber-300 mt-0.5">
+                <div className="text-sm sm:text-base font-extrabold text-amber-300 mt-0.5">
                   {summary.averagePity}
+                </div>
+              </div>
+              <div className="p-2 rounded-xl bg-white/[0.03] text-center border border-white/[0.06]">
+                <div className="text-[10px] text-slate-400">
+                  {activeWishBanner === 'standard' ? 'Nhân Vật' : 'Bảo Hiểm'}
+                </div>
+                <div className="text-sm sm:text-base font-extrabold text-indigo-300 mt-0.5">
+                  {activeWishBanner === 'standard' ? summary.characterCount : summary.guaranteedCount}
                 </div>
               </div>
               <div className="p-2 rounded-xl bg-white/[0.03] text-center border border-white/[0.06]">
@@ -704,7 +730,7 @@ export const WishTrackerView: React.FC = () => {
                     ? 'Vũ Khí'
                     : 'Định Chuẩn'}
                 </div>
-                <div className="text-base font-extrabold text-pink-300 mt-0.5">
+                <div className="text-sm sm:text-base font-extrabold text-pink-300 mt-0.5">
                   {activeWishBanner === 'character'
                     ? summary.capturingRadianceCount
                     : activeWishBanner === 'standard'
@@ -851,7 +877,7 @@ export const WishTrackerView: React.FC = () => {
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
             {filteredHistory.map((item, index) => {
               // Pity color assessment
               const is4Star = item.rarity === 4;
@@ -863,7 +889,7 @@ export const WishTrackerView: React.FC = () => {
               return (
                 <div
                   key={item.id}
-                  className={`liquid-glass rounded-2xl p-4 border transition-all relative overflow-hidden group hover:border-white/20 hover:shadow-[0_8px_25px_rgba(0,0,0,0.5)] ${
+                  className={`liquid-glass rounded-2xl p-3 border transition-all relative overflow-hidden group hover:border-white/20 hover:shadow-[0_8px_25px_rgba(0,0,0,0.5)] flex flex-col justify-between ${
                     is4Star
                       ? 'border-purple-500/30'
                       : item.isCapturingRadiance
@@ -873,66 +899,75 @@ export const WishTrackerView: React.FC = () => {
                       : 'border-white/[0.1]'
                   }`}
                 >
-                  <div className="flex items-start justify-between gap-3">
-                    {/* Item Avatar & Details */}
-                    <div className="flex items-center gap-3">
-                      <div
-                        className={`relative w-14 h-14 rounded-2xl overflow-hidden bg-black/40 border shrink-0 ${
-                          is4Star
-                            ? 'border-purple-400/50 shadow-[0_0_12px_rgba(168,85,247,0.3)]'
-                            : 'border-amber-400/40 shadow-[0_0_12px_rgba(245,158,11,0.25)]'
-                        }`}
-                      >
-                        <img
-                          src={item.icon}
-                          alt={item.nameVi}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                        />
-                      </div>
-
-                      <div className="space-y-0.5">
-                        <div className="flex items-center gap-1.5">
-                          <h4 className="text-sm font-bold text-white leading-tight">
-                            {item.nameVi || item.name}
-                          </h4>
-                          {is4Star && (
-                            <span className="text-[10px] font-extrabold px-1.5 py-0.2 rounded-md bg-purple-500/20 text-purple-300 border border-purple-500/30">
-                              4★
-                            </span>
-                          )}
-                        </div>
-                        <div className="text-[11px] text-slate-400">
-                          {item.name !== item.nameVi ? item.name : ''}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Pity Number Badge */}
-                    <div className="text-right shrink-0">
-                      <div
-                        className={`text-xl font-black px-2.5 py-1 rounded-xl border leading-none inline-block shadow-sm ${
-                          isEarly
-                            ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30'
-                            : isNormal
-                            ? 'bg-amber-500/20 text-amber-300 border-amber-500/30'
-                            : 'bg-rose-500/20 text-rose-300 border-rose-500/30'
-                        }`}
-                        title={`Nổ ở roll số ${item.pity}`}
-                      >
-                        {item.pity}
-                      </div>
-                      <div className="text-[9px] font-bold text-slate-500 uppercase mt-0.5 tracking-wider">
-                        {isEarly ? 'May Mắn!' : isNormal ? 'Bình Thường' : is4Star ? 'Pity Cao' : 'Soft Pity'}
-                      </div>
+                  {/* Top: Index & Pity badge */}
+                  <div className="flex items-center justify-between gap-1 mb-1.5">
+                    <span className="text-[10px] font-extrabold text-slate-500">
+                      #{filteredHistory.length - index}
+                    </span>
+                    <div
+                      className={`text-xs font-black px-2 py-0.5 rounded-lg border leading-none shadow-sm ${
+                        isEarly
+                          ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30'
+                          : isNormal
+                          ? 'bg-amber-500/20 text-amber-300 border-amber-500/30'
+                          : 'bg-rose-500/20 text-rose-300 border-rose-500/30'
+                      }`}
+                      title={`Nổ ở roll số ${item.pity} (${
+                        isEarly ? 'May Mắn!' : isNormal ? 'Bình Thường' : is4Star ? 'Pity Cao' : 'Soft Pity'
+                      })`}
+                    >
+                      {item.pity} <span className="text-[9px] font-normal text-slate-300">roll</span>
                     </div>
                   </div>
 
-                  {/* Badges Row */}
-                  <div className="flex items-center gap-1.5 mt-3 pt-3 border-t border-white/[0.06] flex-wrap">
-                    {/* Standard banner shows Character or Weapon badge */}
+                  {/* Center: Avatar & Names */}
+                  <div className="flex flex-col items-center text-center my-1">
+                    <div
+                      className={`relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl overflow-hidden bg-black/40 border shrink-0 mb-1.5 transition-transform duration-300 group-hover:scale-105 ${
+                        is4Star
+                          ? 'border-purple-400/50 shadow-[0_0_12px_rgba(168,85,247,0.3)]'
+                          : 'border-amber-400/40 shadow-[0_0_12px_rgba(245,158,11,0.25)]'
+                      }`}
+                    >
+                      <img
+                        src={item.icon}
+                        alt={item.nameVi}
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+
+                    <div className="w-full px-0.5">
+                      <div className="flex items-center justify-center gap-1">
+                        <h4
+                          className="text-xs sm:text-sm font-bold text-white leading-tight truncate"
+                          title={item.nameVi || item.name}
+                        >
+                          {item.nameVi || item.name}
+                        </h4>
+                        {is4Star && (
+                          <span className="text-[9px] font-extrabold px-1 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30 shrink-0">
+                            4★
+                          </span>
+                        )}
+                      </div>
+                      {item.name !== item.nameVi && (
+                        <div
+                          className="text-[10px] text-slate-400 truncate mt-0.5"
+                          title={item.name}
+                        >
+                          {item.name}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Bottom: Status Badge */}
+                  <div className="pt-2 mt-1.5 border-t border-white/[0.06] flex items-center justify-center text-center">
                     {item.bannerType === 'standard' ? (
                       <span
-                        className={`text-[10px] font-bold px-2 py-0.5 rounded-lg border flex items-center gap-1 ${
+                        className={`text-[10px] font-bold px-2 py-0.5 rounded-lg border flex items-center justify-center gap-1 w-full ${
                           item.itemType === 'character'
                             ? 'bg-indigo-500/20 text-indigo-300 border-indigo-500/30'
                             : 'bg-amber-500/20 text-amber-300 border-amber-500/30'
@@ -941,52 +976,47 @@ export const WishTrackerView: React.FC = () => {
                         {item.itemType === 'character' ? 'Nhân Vật' : 'Vũ Khí'}
                       </span>
                     ) : is4Star ? (
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-lg bg-purple-500/20 text-purple-300 border border-purple-500/30 flex items-center gap-1">
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-lg bg-purple-500/20 text-purple-300 border border-purple-500/30 flex items-center justify-center gap-1 w-full">
                         <span>{item.itemType === 'character' ? '4★ Nhân Vật' : '4★ Vũ Khí'}</span>
                       </span>
                     ) : item.isCapturingRadiance ? (
-                      <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-lg radiance-badge text-white flex items-center gap-1">
-                        <Sparkles className="w-3 h-3 animate-spin-slow" />
-                        <span>Bắt Lấy Ánh Sáng</span>
+                      <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-lg radiance-badge text-white flex items-center justify-center gap-1 w-full">
+                        <Sparkles className="w-3 h-3 animate-spin-slow shrink-0" />
+                        <span className="truncate">Bắt Sáng</span>
                       </span>
                     ) : item.isGuaranteed ? (
-                      <span className="text-[10px] font-semibold px-2 py-0.5 rounded-lg bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 flex items-center gap-1">
-                        <Shield className="w-3 h-3" />
-                        <span>{item.bannerType === 'chronicled' ? 'Định Chuẩn' : 'Bảo Hiểm'}</span>
+                      <span className="text-[10px] font-semibold px-2 py-0.5 rounded-lg bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 flex items-center justify-center gap-1 w-full">
+                        <Shield className="w-3 h-3 shrink-0" />
+                        <span className="truncate">{item.bannerType === 'chronicled' ? 'Định Chuẩn' : 'Bảo Hiểm'}</span>
                       </span>
                     ) : item.isRateUp ? (
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1">
-                        <CheckCircle2 className="w-3 h-3" />
-                        <span>{item.bannerType === 'chronicled' ? 'Trúng Định Chuẩn' : 'Trúng Rate'}</span>
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center justify-center gap-1 w-full">
+                        <CheckCircle2 className="w-3 h-3 shrink-0" />
+                        <span className="truncate">{item.bannerType === 'chronicled' ? 'Trúng ĐC' : 'Trúng Rate'}</span>
                       </span>
                     ) : (
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-lg bg-rose-500/20 text-rose-300 border border-rose-500/30 flex items-center gap-1">
-                        <XCircle className="w-3 h-3" />
-                        <span>{item.bannerType === 'chronicled' ? 'Lệch Định Chuẩn' : 'Lệch Rate'}</span>
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-lg bg-rose-500/20 text-rose-300 border border-rose-500/30 flex items-center justify-center gap-1 w-full">
+                        <XCircle className="w-3 h-3 shrink-0" />
+                        <span className="truncate">{item.bannerType === 'chronicled' ? 'Lệch ĐC' : 'Lệch Rate'}</span>
                       </span>
                     )}
-
-                    {/* Pull Index in history */}
-                    <span className="text-[10px] text-slate-500 ml-auto">
-                      #{filteredHistory.length - index}
-                    </span>
                   </div>
 
                   {/* Actions overlay on hover */}
-                  <div className="absolute top-2 right-2 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="absolute top-1.5 right-1.5 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity bg-black/70 backdrop-blur-md rounded-lg p-0.5 border border-white/10 z-20">
                     <button
                       onClick={() => handleOpenAddModal(item)}
-                      className="w-7 h-7 rounded-lg bg-white/[0.08] hover:bg-white/[0.15] text-slate-300 hover:text-white flex items-center justify-center transition-colors cursor-pointer"
+                      className="w-6 h-6 rounded-md bg-white/[0.08] hover:bg-white/[0.2] text-slate-300 hover:text-white flex items-center justify-center transition-colors cursor-pointer"
                       title="Chỉnh sửa bản ghi"
                     >
-                      <Edit2 className="w-3.5 h-3.5" />
+                      <Edit2 className="w-3 h-3" />
                     </button>
                     <button
                       onClick={() => deleteWishRecord(item.id)}
-                      className="w-7 h-7 rounded-lg bg-white/[0.08] hover:bg-rose-500/30 text-slate-400 hover:text-rose-300 flex items-center justify-center transition-colors cursor-pointer"
+                      className="w-6 h-6 rounded-md bg-white/[0.08] hover:bg-rose-500/40 text-slate-400 hover:text-rose-300 flex items-center justify-center transition-colors cursor-pointer"
                       title="Xóa bản ghi"
                     >
-                      <Trash2 className="w-3.5 h-3.5" />
+                      <Trash2 className="w-3 h-3" />
                     </button>
                   </div>
                 </div>

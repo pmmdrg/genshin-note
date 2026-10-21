@@ -654,8 +654,6 @@ export const GACHA_5STAR_CHARACTERS: Gacha5StarCharacter[] = [
 ];
 
 export const STANDARD_5STAR_WEAPONS = [
-  'Dạ Khúc Hạ Màn',
-  "Nocturne's Curtain Call",
   'Thiên Không Kiếm',
   'Thiên Không Kiêu Ngạo',
   'Xương Sống Thiên Không',
@@ -860,12 +858,15 @@ export function calculateAutoCapturingRadiance(
 
 export interface WishSummary {
   total5Star: number;
-  rateUpCount: number;
-  lost5050Count: number;
-  capturingRadianceCount: number;
+  rateUpCount: number; // Tổng số lần trúng rate 50/50 (tự nhiên + bắt sáng)
+  naturalWinCount: number; // Trúng rate tự nhiên (50/50)
+  capturingRadianceCount: number; // Trúng rate nhờ Bắt Lấy Ánh Sáng
+  guaranteedCount: number; // Trúng rate nhờ Bảo Hiểm (không tính vào tỉ lệ 50/50)
+  lost5050Count: number; // Lệch 50/50
+  total5050Count: number; // Tổng số lần đối mặt 50/50 (rateUpCount + lost5050Count)
   characterCount: number;
   weaponCount: number;
-  winRatePercent: number;
+  winRatePercent: number; // Tỉ lệ trúng 50/50: (rateUpCount / total5050Count) * 100
   averagePity: number;
   totalPrimos: number;
   luckTier: 'very_lucky' | 'lucky' | 'normal' | 'unlucky';
@@ -873,15 +874,21 @@ export interface WishSummary {
 }
 
 export function calculateWishSummary(records: WishRecord[], bannerType?: WishBannerType): WishSummary {
-  const filtered = bannerType ? records.filter((r) => r.bannerType === bannerType) : records;
+  // Chỉ tính các bản ghi 5★ (rarity 5 hoặc mặc định nếu chưa gán)
+  const filtered = (bannerType ? records.filter((r) => r.bannerType === bannerType) : records).filter(
+    (r) => r.rarity === 5 || !r.rarity
+  );
   const total5Star = filtered.length;
 
   if (total5Star === 0) {
     return {
       total5Star: 0,
       rateUpCount: 0,
-      lost5050Count: 0,
+      naturalWinCount: 0,
       capturingRadianceCount: 0,
+      guaranteedCount: 0,
+      lost5050Count: 0,
+      total5050Count: 0,
       characterCount: 0,
       weaponCount: 0,
       winRatePercent: 0,
@@ -893,32 +900,55 @@ export function calculateWishSummary(records: WishRecord[], bannerType?: WishBan
   }
 
   let rateUpCount = 0;
-  let lost5050Count = 0;
+  let naturalWinCount = 0;
   let capturingRadianceCount = 0;
+  let guaranteedCount = 0;
+  let lost5050Count = 0;
   let characterCount = 0;
   let weaponCount = 0;
   let totalPity = 0;
 
-  for (const r of filtered) {
+  // Lịch sử trong state lưu theo thứ tự mới nhất ở đầu (index 0).
+  // Đảo ngược lại theo thứ tự thời gian (cũ -> mới) để suy luận bảo hiểm chính xác nếu chưa lưu cờ.
+  const chronological = filtered.slice().reverse();
+  let wasPreviousLoss = false;
+
+  for (const r of chronological) {
     totalPity += r.pity;
     if (r.itemType === 'character') {
       characterCount++;
     } else {
       weaponCount++;
     }
+
+    // Một lần quay có bảo hiểm nếu được đánh dấu cụ thể HOẶC lần nổ trước đó trên banner bị lệch
+    const isGuaranteedPull = typeof r.isGuaranteed === 'boolean' ? r.isGuaranteed : wasPreviousLoss;
+
     if (r.isCapturingRadiance) {
+      // Kích hoạt Bắt Lấy Ánh Sáng: tính là thắng 50/50
       capturingRadianceCount++;
       rateUpCount++;
-    } else if (r.isRateUp) {
-      rateUpCount++;
-    } else {
+      wasPreviousLoss = false;
+    } else if (!r.isRateUp) {
+      // Lệch rate 50/50
       lost5050Count++;
+      wasPreviousLoss = true;
+    } else if (isGuaranteedPull) {
+      // Trúng rate nhờ BẢO HIỂM: KHÔNG tính vào tỷ lệ trúng/lệch 50/50
+      guaranteedCount++;
+      wasPreviousLoss = false;
+    } else {
+      // Trúng rate thực sự không nhờ bảo hiểm (thắng 50/50 tự nhiên)
+      naturalWinCount++;
+      rateUpCount++;
+      wasPreviousLoss = false;
     }
   }
 
+  const total5050Count = rateUpCount + lost5050Count;
   const averagePity = Math.round((totalPity / total5Star) * 10) / 10;
   const totalPrimos = totalPity * 160;
-  const winRatePercent = total5Star > 0 ? Math.round((rateUpCount / total5Star) * 100) : 0;
+  const winRatePercent = total5050Count > 0 ? Math.round((rateUpCount / total5050Count) * 100) : 0;
 
   let luckTier: WishSummary['luckTier'] = 'normal';
   let luckLabel = 'Bình Thường';
@@ -940,8 +970,11 @@ export function calculateWishSummary(records: WishRecord[], bannerType?: WishBan
   return {
     total5Star,
     rateUpCount,
-    lost5050Count,
+    naturalWinCount,
     capturingRadianceCount,
+    guaranteedCount,
+    lost5050Count,
+    total5050Count,
     characterCount,
     weaponCount,
     winRatePercent,
@@ -2181,7 +2214,7 @@ export const GACHA_ALL_WEAPONS: GachaItemOption[] = [
     "rarity": 5,
     "weaponType": "catalyst",
     "avatarUrl": "https://enka.network/ui/UI_EquipIcon_Catalyst_Brisingamen.png",
-    "isStandard": true
+    "isStandard": false
   },
   {
     "name": "Crane's Echoing Call",
