@@ -17,11 +17,85 @@ export const STANDARD_5STAR_CHARACTERS = [
   'Dehya',
 ];
 
+export interface Gacha5StarCharacter {
+  name: string;
+  nameVi: string;
+  element: 'pyro' | 'hydro' | 'anemo' | 'electro' | 'dendro' | 'cryo' | 'geo';
+  weaponType: 'sword' | 'claymore' | 'polearm' | 'bow' | 'catalyst';
+  avatarUrl: string;
+  isStandard: boolean;
+}
+
+export const GACHA_5STAR_CHARACTERS: Gacha5StarCharacter[] = [
+  // Natlan
+  { name: 'Mavuika', nameVi: 'Mavuika', element: 'pyro', weaponType: 'claymore', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Mavuika.png', isStandard: false },
+  { name: 'Citlali', nameVi: 'Citlali', element: 'cryo', weaponType: 'catalyst', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Citlali.png', isStandard: false },
+  { name: 'Chasca', nameVi: 'Chasca', element: 'anemo', weaponType: 'bow', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Chasca.png', isStandard: false },
+  { name: 'Xilonen', nameVi: 'Xilonen', element: 'geo', weaponType: 'sword', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Xilonen.png', isStandard: false },
+  { name: 'Kinich', nameVi: 'Kinich', element: 'dendro', weaponType: 'claymore', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Kinich.png', isStandard: false },
+  { name: 'Mualani', nameVi: 'Mualani', element: 'hydro', weaponType: 'catalyst', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Mualani.png', isStandard: false },
+
+  // Fontaine
+  { name: 'Emilie', nameVi: 'Emilie', element: 'dendro', weaponType: 'polearm', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Emilie.png', isStandard: false },
+  { name: 'Sigewinne', nameVi: 'Sigewinne', element: 'hydro', weaponType: 'bow', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Sigewinne.png', isStandard: false },
+  { name: 'Clorinde', nameVi: 'Clorinde', element: 'electro', weaponType: 'sword', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Clorinde.png', isStandard: false },
+  { name: 'Arlecchino', nameVi: 'Arlecchino', element: 'pyro', weaponType: 'polearm', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Arlecchino.png', isStandard: false },
+  { name: 'Chiori', nameVi: 'Chiori', element: 'geo', weaponType: 'sword', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Chiori.png', isStandard: false },
+  { name: 'Xianyun', nameVi: 'Xianyun', element: 'anemo', weaponType: 'catalyst', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Liuyun.png', isStandard: false },
+  { name: 'Navia', nameVi: 'Navia', element: 'geo', weaponType: 'claymore', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Navia.png', isStandard: false },
+  { name: 'Furina', nameVi: 'Furina', element: 'hydro', weaponType: 'sword', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Furina.png', isStandard: false },
+  { name: 'Wriothesley', nameVi: 'Wriothesley', element: 'cryo', weaponType: 'catalyst', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Wriothesley.png', isStandard: false },
+  { name: 'Neuvillette', nameVi: 'Neuvillette', element: 'hydro', weaponType: 'catalyst', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Neuvillette.png', isStandard: false },
+  { name: 'Lyney', nameVi: 'Lyney', element: 'pyro', weaponType: 'bow', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Liney.png', isStandard: false },
+
+  // Sumeru
+  { name: 'Baizhu', nameVi: 'Baizhu', element: 'dendro', weaponType: 'catalyst', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Baizhuer.png', isStandard: false },
+  { name: 'Dehya', nameVi: 'Dehya', element: 'pyro', weaponType: 'claymore', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Dehya.png', isStandard: true },
+  { name: 'Alhaitham', nameVi: 'Alhaitham', element: 'dendro', weaponType: 'sword', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Alhatham.png', isStandard: false },
+  { name: 'Wanderer', nameVi: 'Kẻ Lang Thang', element: 'anemo', weaponType: 'catalyst', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Wanderer.png', isStandard: false },
+  { name: 'Nahida', nameVi: 'Nahida', element: 'dendro', weaponType: 'catalyst', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Nahida.png', isStandard: false },
+  { name: 'Nilou', nameVi: 'Nilou', element: 'hydro', weaponType: 'sword', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Nilou.png', isStandard: false },
+  { name: 'Cyno', nameVi: 'Cyno', element: 'electro', weaponType: 'polearm', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Cyno.png', isStandard: false },
+  { name: 'Tighnari', nameVi: 'Tighnari', element: 'dendro', weaponType: 'bow', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Tighnari.png', isStandard: true },
+
+  // Inazuma
+  { name: 'Yelan', nameVi: 'Yelan', element: 'hydro', weaponType: 'bow', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Yelan.png', isStandard: false },
+  { name: 'Kamisato Ayato', nameVi: 'Kamisato Ayato', element: 'hydro', weaponType: 'sword', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Ayato.png', isStandard: false },
+  { name: 'Yae Miko', nameVi: 'Yae Miko', element: 'electro', weaponType: 'catalyst', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Yae.png', isStandard: false },
+  { name: 'Shenhe', nameVi: 'Shenhe', element: 'cryo', weaponType: 'polearm', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Shenhe.png', isStandard: false },
+  { name: 'Arataki Itto', nameVi: 'Arataki Itto', element: 'geo', weaponType: 'claymore', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Itto.png', isStandard: false },
+  { name: 'Sangonomiya Kokomi', nameVi: 'Sangonomiya Kokomi', element: 'hydro', weaponType: 'catalyst', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Kokomi.png', isStandard: false },
+  { name: 'Raiden Shogun', nameVi: 'Raiden Shogun', element: 'electro', weaponType: 'polearm', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Shougun.png', isStandard: false },
+  { name: 'Yoimiya', nameVi: 'Yoimiya', element: 'pyro', weaponType: 'bow', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Yoimiya.png', isStandard: false },
+  { name: 'Kamisato Ayaka', nameVi: 'Kamisato Ayaka', element: 'cryo', weaponType: 'sword', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Ayaka.png', isStandard: false },
+  { name: 'Kaedehara Kazuha', nameVi: 'Kaedehara Kazuha', element: 'anemo', weaponType: 'sword', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Kazuha.png', isStandard: false },
+
+  // Liyue & Mondstadt
+  { name: 'Eula', nameVi: 'Eula', element: 'cryo', weaponType: 'claymore', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Eula.png', isStandard: false },
+  { name: 'Hu Tao', nameVi: 'Hu Tao', element: 'pyro', weaponType: 'polearm', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Hutao.png', isStandard: false },
+  { name: 'Xiao', nameVi: 'Xiao', element: 'anemo', weaponType: 'polearm', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Xiao.png', isStandard: false },
+  { name: 'Ganyu', nameVi: 'Ganyu', element: 'cryo', weaponType: 'bow', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Ganyu.png', isStandard: false },
+  { name: 'Albedo', nameVi: 'Albedo', element: 'geo', weaponType: 'sword', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Albedo.png', isStandard: false },
+  { name: 'Zhongli', nameVi: 'Zhongli', element: 'geo', weaponType: 'polearm', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Zhongli.png', isStandard: false },
+  { name: 'Tartaglia', nameVi: 'Tartaglia', element: 'hydro', weaponType: 'bow', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Tartaglia.png', isStandard: false },
+  { name: 'Klee', nameVi: 'Klee', element: 'pyro', weaponType: 'catalyst', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Klee.png', isStandard: false },
+  { name: 'Venti', nameVi: 'Venti', element: 'anemo', weaponType: 'bow', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Venti.png', isStandard: false },
+  { name: 'Keqing', nameVi: 'Keqing', element: 'electro', weaponType: 'sword', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Keqing.png', isStandard: true },
+  { name: 'Mona', nameVi: 'Mona', element: 'hydro', weaponType: 'catalyst', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Mona.png', isStandard: true },
+  { name: 'Qiqi', nameVi: 'Qiqi', element: 'cryo', weaponType: 'sword', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Qiqi.png', isStandard: true },
+  { name: 'Diluc', nameVi: 'Diluc', element: 'pyro', weaponType: 'claymore', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Diluc.png', isStandard: true },
+  { name: 'Jean', nameVi: 'Jean', element: 'anemo', weaponType: 'sword', avatarUrl: 'https://enka.network/ui/UI_AvatarIcon_Qin.png', isStandard: true },
+];
+
 export const STANDARD_5STAR_WEAPONS = [
+  'Thiên Không Kiếm',
+  'Thiên Không Kiêu Ngạo',
+  'Xương Sống Thiên Không',
+  'Cánh Thiên Không',
+  'Quyển Thiên Không',
   'Kiếm Thiên Không',
   'Đại Kiếm Thiên Không',
   'Thương Thiên Không',
-  'Cánh Thiên Không',
   'Quyển Sách Thiên Không',
   'Cung Amos',
   'Điển Tích Tây Phong',

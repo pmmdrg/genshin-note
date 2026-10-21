@@ -32,7 +32,6 @@ export const WishTrackerView: React.FC = () => {
     wishHistory,
     setCurrentWishPity,
     incrementWishPity,
-    toggleWishGuarantee,
     setFatePoints,
     deleteWishRecord,
     clearWishHistory,
@@ -220,28 +219,27 @@ export const WishTrackerView: React.FC = () => {
                 </div>
               </div>
 
-              {/* Guarantee Toggle Pill */}
+              {/* Guarantee Status Badge (Auto-calculated, read-only) */}
               {activeWishBanner !== 'standard' && (
-                <button
-                  onClick={() => toggleWishGuarantee(activeWishBanner)}
-                  className={`flex items-center gap-1.5 px-2.5 py-1 rounded-xl text-[11px] font-bold border transition-all cursor-pointer ${
+                <div
+                  className={`flex items-center gap-1.5 px-2.5 py-1 rounded-xl text-[11px] font-bold border select-none ${
                     isGuaranteedEffective
                       ? 'bg-indigo-500/25 border-indigo-400/50 text-indigo-300 shadow-[0_0_12px_rgba(99,102,241,0.25)]'
-                      : 'bg-white/[0.04] border-white/[0.08] text-slate-400 hover:text-slate-200'
+                      : 'bg-white/[0.04] border-white/[0.08] text-slate-400'
                   }`}
-                  title="Tự động xét từ lần nổ gần nhất (Bấm nếu muốn đổi thủ công)"
+                  title="Tự động tính từ lịch sử cầu nguyện"
                 >
                   <Shield className="w-3.5 h-3.5" />
                   <span>
                     {activeWishBanner === 'chronicled'
                       ? isGuaranteedEffective
-                        ? 'Có Định Mệnh'
+                        ? 'Có Định Chuẩn'
                         : 'Chưa Có'
                       : isGuaranteedEffective
                       ? 'Có Bảo Hiểm'
                       : '50/50'}
                   </span>
-                </button>
+                </div>
               )}
             </div>
 
@@ -440,9 +438,9 @@ export const WishTrackerView: React.FC = () => {
                   </div>
                   <div>
                     <h3 className="text-xs font-bold uppercase tracking-wider text-slate-300">
-                      Định Mệnh Vũ Khí (5.0)
+                      Định Chuẩn Vũ Khí (5.0)
                     </h3>
-                    <span className="text-[11px] text-slate-400">Tối đa 1 Điểm Định Mệnh</span>
+                    <span className="text-[11px] text-slate-400">Tối đa 1 Điểm Định Chuẩn</span>
                   </div>
                 </div>
 
@@ -461,14 +459,14 @@ export const WishTrackerView: React.FC = () => {
                 <div className="text-[11px] text-slate-400 font-medium">Trạng thái:</div>
                 <div className="text-lg font-bold text-white">
                   {currentStats.fatePoints === 1
-                    ? '✨ 100% Ra Vũ Khí Đã Chọn'
+                    ? '✨ 100% Ra Vũ Khí Định Chuẩn'
                     : 'Đang trong kỳ 50/50 vũ khí'}
                 </div>
               </div>
 
               {/* Quick toggle Fate point */}
               <div className="flex items-center justify-between text-xs pt-1">
-                <span className="text-slate-400 text-[11px]">Gán Điểm Định Mệnh:</span>
+                <span className="text-slate-400 text-[11px]">Gán Điểm Định Chuẩn:</span>
                 <div className="flex items-center gap-1.5">
                   {[0, 1].map((pt) => (
                     <button
@@ -503,9 +501,9 @@ export const WishTrackerView: React.FC = () => {
                   </div>
                   <div>
                     <h3 className="text-xs font-bold uppercase tracking-wider text-teal-300">
-                      Định Mệnh Sử Ký
+                      Định Chuẩn Sử Ký
                     </h3>
-                    <span className="text-[11px] text-slate-400">Tối đa 1 Điểm Định Mệnh</span>
+                    <span className="text-[11px] text-slate-400">Tối đa 1 Điểm Định Chuẩn</span>
                   </div>
                 </div>
 
@@ -524,14 +522,14 @@ export const WishTrackerView: React.FC = () => {
                 <div className="text-[11px] text-slate-400 font-medium">Trạng thái:</div>
                 <div className="text-lg font-bold text-white">
                   {currentStats.fatePoints === 1
-                    ? '✨ 100% Ra Mục Tiêu Đã Chọn'
+                    ? '✨ 100% Ra Mục Tiêu Định Chuẩn'
                     : 'Đang trong kỳ 50/50 mục tiêu'}
                 </div>
               </div>
 
               {/* Quick toggle Fate point */}
               <div className="flex items-center justify-between text-xs pt-1">
-                <span className="text-slate-400 text-[11px]">Gán Điểm Định Mệnh:</span>
+                <span className="text-slate-400 text-[11px]">Gán Điểm Định Chuẩn:</span>
                 <div className="flex items-center gap-1.5">
                   {[0, 1].map((pt) => (
                     <button
@@ -707,7 +705,7 @@ export const WishTrackerView: React.FC = () => {
                     ? 'Bắt Sáng'
                     : activeWishBanner === 'standard'
                     ? 'Vũ Khí'
-                    : 'Định Mệnh'}
+                    : 'Định Chuẩn'}
                 </div>
                 <div className="text-base font-extrabold text-pink-300 mt-0.5">
                   {activeWishBanner === 'character'
@@ -954,7 +952,7 @@ export const WishTrackerView: React.FC = () => {
                     {item.isGuaranteed && item.bannerType !== 'standard' && (
                       <span className="text-[10px] font-semibold px-2 py-0.5 rounded-lg bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 flex items-center gap-1">
                         <Shield className="w-3 h-3" />
-                        <span>{item.bannerType === 'chronicled' ? 'Định Mệnh' : 'Bảo Hiểm'}</span>
+                        <span>{item.bannerType === 'chronicled' ? 'Định Chuẩn' : 'Bảo Hiểm'}</span>
                       </span>
                     )}
 

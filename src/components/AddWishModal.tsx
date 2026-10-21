@@ -3,9 +3,12 @@ import { createPortal } from 'react-dom';
 import { X, Sparkles, CheckCircle2, XCircle, Search } from 'lucide-react';
 import { useStore } from '../store/useStore';
 import type { WishBannerType, WishRecord } from '../types';
-import { CHARACTERS_DATA } from '../data/genshinData';
 import { COMPREHENSIVE_WEAPONS } from '../data/weaponsData';
-import { STANDARD_5STAR_CHARACTERS, STANDARD_5STAR_WEAPONS } from '../data/wishData';
+import {
+  STANDARD_5STAR_CHARACTERS,
+  STANDARD_5STAR_WEAPONS,
+  GACHA_5STAR_CHARACTERS,
+} from '../data/wishData';
 
 interface AddWishModalProps {
   isOpen: boolean;
@@ -29,10 +32,8 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
 
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Available 5★ characters
-  const fiveStarCharacters = useMemo(() => {
-    return CHARACTERS_DATA.filter((c) => c.rarity === 5);
-  }, []);
+  // Available 5★ characters (all 49 official gacha characters, no Traveler)
+  const fiveStarCharacters = GACHA_5STAR_CHARACTERS;
 
   // Available 5★ weapons
   const fiveStarWeapons = useMemo(() => {
@@ -451,12 +452,12 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
               {isSelectedStandard ? (
                 <span className="text-xs font-bold px-2.5 py-0.5 rounded-lg bg-rose-500/20 text-rose-300 border border-rose-500/30 flex items-center gap-1">
                   <XCircle className="w-3.5 h-3.5" />
-                  <span>Lệch (Vũ khí thường) → Tích 1 Điểm Định Mệnh</span>
+                  <span>Lệch (Vũ khí thường) → Tích 1 Điểm Định Chuẩn</span>
                 </span>
               ) : (
                 <span className="text-xs font-bold px-2.5 py-0.5 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1">
                   <CheckCircle2 className="w-3.5 h-3.5" />
-                  <span>Trúng Vũ Khí Định Mệnh</span>
+                  <span>Trúng Vũ Khí Định Chuẩn</span>
                 </span>
               )}
             </div>
@@ -464,7 +465,7 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
 
           {bannerType === 'chronicled' && (
             <div className="p-3 rounded-2xl bg-black/25 border border-white/[0.08] flex items-center justify-between gap-2">
-              <span className="text-xs text-slate-400">Mục tiêu Sử Ký:</span>
+              <span className="text-xs text-slate-400">Định Chuẩn Sử Ký:</span>
               <div className="flex items-center gap-2">
                 <button
                   type="button"
@@ -475,7 +476,7 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
                       : 'bg-white/[0.04] text-slate-400 border-white/[0.08]'
                   }`}
                 >
-                  ✓ Trúng Mục Tiêu
+                  ✓ Trúng Định Chuẩn
                 </button>
                 <button
                   type="button"
@@ -486,7 +487,7 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
                       : 'bg-white/[0.04] text-slate-400 border-white/[0.08]'
                   }`}
                 >
-                  ✕ Lệch Mục Tiêu
+                  ✕ Lệch Định Chuẩn
                 </button>
               </div>
             </div>
