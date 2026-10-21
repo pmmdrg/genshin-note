@@ -238,3 +238,61 @@ body {
   animation: cardDeleteExit 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
   pointer-events: none;
 }
+
+/* Capturing Radiance (Bắt Lấy Ánh Sáng) Iridescent Glow Effects */
+@keyframes radianceShimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.radiance-badge {
+  background: linear-gradient(135deg, rgba(236, 72, 153, 0.3), rgba(168, 85, 247, 0.35), rgba(59, 130, 246, 0.35), rgba(245, 158, 11, 0.35));
+  background-size: 300% 300%;
+  animation: radianceShimmer 6s ease infinite;
+  border: 1px solid rgba(244, 114, 182, 0.5);
+  box-shadow: 0 0 20px rgba(236, 72, 153, 0.3), inset 0 0 12px rgba(168, 85, 247, 0.25);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+}
+
+.radiance-card-glow {
+  position: relative;
+}
+
+.radiance-card-glow::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(120deg, #ec4899, #8b5cf6, #3b82f6, #10b981, #f59e0b, #ec4899);
+  background-size: 300% 300%;
+  animation: radianceShimmer 5s linear infinite;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.03);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2.5s ease-in-out infinite;
+}

@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import type { TaskGoal, HoyoDailyNote, UserCharacter, CharacterBranchTree, NavigationMenu, ArtifactPieceItem, WallpaperConfig, WeaponPreset } from '../types';
+import type { TaskGoal, HoyoDailyNote, UserCharacter, CharacterBranchTree, NavigationMenu, ArtifactPieceItem, WallpaperConfig, WeaponPreset, WishBannerType, WishBannerStats, WishRecord } from '../types';
 import { DEFAULT_ARTIFACT_PIECES } from '../types';
 import { USER_CHARACTERS_PRESET, CHARACTERS_DATA } from '../data/genshinData';
 import { getCharacterDefaultBuild } from '../data/characterEquipData';
@@ -10,6 +10,7 @@ import { getCharacterMaterialDetail } from '../data/characterMaterialsData';
 import { getCharacterTalentDetail } from '../data/characterTalentsData';
 import { COMPREHENSIVE_WEAPONS } from '../data/weaponsData';
 import { getTalentDomainInfo } from '../utils/materialIcons';
+import { DEFAULT_BANNER_STATS, INITIAL_WISH_HISTORY } from '../data/wishData';
 
 interface AppState {
   // Navigation Menu
@@ -89,6 +90,22 @@ interface AppState {
   resetWallpaper: () => void;
   isWallpaperModalOpen: boolean;
   setIsWallpaperModalOpen: (open: boolean) => void;
+
+  // Wish / Gacha Tracker (Lịch Sử Cầu Nguyện)
+  activeWishBanner: WishBannerType;
+  setActiveWishBanner: (banner: WishBannerType) => void;
+  wishBannerStats: Record<WishBannerType, WishBannerStats>;
+  wishHistory: WishRecord[];
+  setCurrentWishPity: (banner: WishBannerType, pity: number) => void;
+  incrementWishPity: (banner: WishBannerType, delta?: number) => void;
+  toggleWishGuarantee: (banner: WishBannerType) => void;
+  setCapturingRadianceStreak: (streak: number) => void;
+  setWeaponFatePoints: (points: number) => void;
+  addWishRecord: (record: Omit<WishRecord, 'id'>, autoResetPity?: boolean) => void;
+  updateWishRecord: (id: string, updates: Partial<WishRecord>) => void;
+  deleteWishRecord: (id: string) => void;
+  clearWishHistory: (banner?: WishBannerType) => void;
+  resetWishBannerData: (banner: WishBannerType) => void;
 }
 
 export const useStore = create<AppState>()(
@@ -984,12 +1001,174 @@ export const useStore = create<AppState>()(
           });
         }
       },
+
+      // Wish / Gacha Tracker (Lịch Sử Cầu Nguyện)
+      activeWishBanner: 'character',
+      setActiveWishBanner: (banner) => set({ activeWishBanner: banner }),
+      wishBannerStats: DEFAULT_BANNER_STATS,
+      wishHistory: INITIAL_WISH_HISTORY,
+
+      setCurrentWishPity: (banner, pity) =>
+        set((state) => {
+          const maxPity = banner === 'weapon' ? 80 : 90;
+          const currentStats = state.wishBannerStats?.[banner] || DEFAULT_BANNER_STATS[banner];
+          return {
+            wishBannerStats: {
+              ...(state.wishBannerStats || DEFAULT_BANNER_STATS),
+              [banner]: {
+                ...currentStats,
+                currentPity: Math.max(0, Math.min(maxPity, pity)),
+              },
+            },
+          };
+        }),
+
+      incrementWishPity: (banner, delta = 1) =>
+        set((state) => {
+          const maxPity = banner === 'weapon' ? 80 : 90;
+          const currentStats = state.wishBannerStats?.[banner] || DEFAULT_BANNER_STATS[banner];
+          const newPity = Math.max(0, Math.min(maxPity, currentStats.currentPity + delta));
+          return {
+            wishBannerStats: {
+              ...(state.wishBannerStats || DEFAULT_BANNER_STATS),
+              [banner]: {
+                ...currentStats,
+                currentPity: newPity,
+              },
+            },
+          };
+        }),
+
+      toggleWishGuarantee: (banner) =>
+        set((state) => {
+          const currentStats = state.wishBannerStats?.[banner] || DEFAULT_BANNER_STATS[banner];
+          return {
+            wishBannerStats: {
+              ...(state.wishBannerStats || DEFAULT_BANNER_STATS),
+              [banner]: {
+                ...currentStats,
+                isGuaranteed: !currentStats.isGuaranteed,
+              },
+            },
+          };
+        }),
+
+      setCapturingRadianceStreak: (streak) =>
+        set((state) => {
+          const currentStats = state.wishBannerStats?.character || DEFAULT_BANNER_STATS.character;
+          return {
+            wishBannerStats: {
+              ...(state.wishBannerStats || DEFAULT_BANNER_STATS),
+              character: {
+                ...currentStats,
+                capturingRadianceLossStreak: Math.max(0, Math.min(2, streak)),
+              },
+            },
+          };
+        }),
+
+      setWeaponFatePoints: (points) =>
+        set((state) => {
+          const currentStats = state.wishBannerStats?.weapon || DEFAULT_BANNER_STATS.weapon;
+          return {
+            wishBannerStats: {
+              ...(state.wishBannerStats || DEFAULT_BANNER_STATS),
+              weapon: {
+                ...currentStats,
+                fatePoints: Math.max(0, Math.min(1, points)),
+              },
+            },
+          };
+        }),
+
+      addWishRecord: (record, autoResetPity = true) =>
+        set((state) => {
+          const newRecord: WishRecord = {
+            ...record,
+            id: `wish-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+          };
+          const updatedHistory = [newRecord, ...(state.wishHistory || [])];
+
+          const banner = record.bannerType;
+          const currentStats = state.wishBannerStats?.[banner] || DEFAULT_BANNER_STATS[banner];
+          const updatedStats: WishBannerStats = { ...currentStats };
+
+          if (autoResetPity) {
+            updatedStats.currentPity = 0;
+          }
+
+          if (banner === 'character') {
+            if (record.isCapturingRadiance || record.isRateUp) {
+              // Won rate-up or triggered Capturing Radiance: reset streak to 0 and guarantee to false
+              updatedStats.isGuaranteed = false;
+              updatedStats.capturingRadianceLossStreak = 0;
+            } else {
+              // Lost 50/50: player now has 100% guarantee for next 5★, and streak increments up to 2
+              updatedStats.isGuaranteed = true;
+              updatedStats.capturingRadianceLossStreak = Math.min(
+                2,
+                (currentStats.capturingRadianceLossStreak || 0) + 1
+              );
+            }
+          } else if (banner === 'weapon') {
+            if (record.isRateUp) {
+              updatedStats.isGuaranteed = false;
+              updatedStats.fatePoints = 0;
+            } else {
+              updatedStats.isGuaranteed = true;
+              updatedStats.fatePoints = Math.min(1, (currentStats.fatePoints || 0) + 1);
+            }
+          }
+
+          return {
+            wishHistory: updatedHistory,
+            wishBannerStats: {
+              ...(state.wishBannerStats || DEFAULT_BANNER_STATS),
+              [banner]: updatedStats,
+            },
+          };
+        }),
+
+      updateWishRecord: (id, updates) =>
+        set((state) => ({
+          wishHistory: (state.wishHistory || []).map((r) =>
+            r.id === id ? { ...r, ...updates } : r
+          ),
+        })),
+
+      deleteWishRecord: (id) =>
+        set((state) => ({
+          wishHistory: (state.wishHistory || []).filter((r) => r.id !== id),
+        })),
+
+      clearWishHistory: (banner) =>
+        set((state) => ({
+          wishHistory: banner
+            ? (state.wishHistory || []).filter((r) => r.bannerType !== banner)
+            : [],
+        })),
+
+      resetWishBannerData: (banner) =>
+        set((state) => ({
+          wishBannerStats: {
+            ...(state.wishBannerStats || DEFAULT_BANNER_STATS),
+            [banner]: { ...DEFAULT_BANNER_STATS[banner] },
+          },
+          wishHistory: (state.wishHistory || []).filter((r) => r.bannerType !== banner),
+        })),
     }),
     {
       name: 'genshin-note-storage',
       storage: createJSONStorage(() => localStorage),
       onRehydrateStorage: () => (state) => {
-        if (!state || !state.characters || !state.characterTrees) return;
+        if (!state) return;
+        if (!state.wishBannerStats) {
+          state.wishBannerStats = DEFAULT_BANNER_STATS;
+        }
+        if (!state.wishHistory) {
+          state.wishHistory = INITIAL_WISH_HISTORY;
+        }
+        if (!state.characters || !state.characterTrees) return;
         // Auto-sync characterTrees with characters in-game levels upon rehydration from storage
         state.characterTrees = state.characterTrees.map((tree) => {
           const matchedChar = state.characters.find(

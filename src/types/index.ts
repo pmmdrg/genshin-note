@@ -2,7 +2,7 @@ export type TaskCategory = 'character' | 'weapon' | 'artifact' | 'boss' | 'custo
 
 export type ElementType = 'pyro' | 'hydro' | 'anemo' | 'electro' | 'dendro' | 'cryo' | 'geo';
 
-export type NavigationMenu = 'timeline' | 'characters' | 'completed';
+export type NavigationMenu = 'timeline' | 'characters' | 'completed' | 'wishes';
 
 export interface FarmMaterial {
   materialName: string;
@@ -226,4 +226,33 @@ export interface WallpaperConfig {
   customUrl?: string;
   blur: 'none' | 'sm' | 'md' | 'lg';
   overlayOpacity: number;
+}
+
+// ==========================================
+// GACHA / WISH TRACKER (LỊCH SỬ CẦU NGUYỆN)
+// ==========================================
+export type WishBannerType = 'character' | 'weapon' | 'standard' | 'chronicled';
+
+export interface WishRecord {
+  id: string;
+  name: string;
+  nameVi: string;
+  icon: string;
+  itemType: 'character' | 'weapon';
+  rarity: 5;
+  bannerType: WishBannerType;
+  pity: number; // số roll từ 5★ trước đến 5★ này (1 - 90)
+  date: string; // YYYY-MM-DD
+  isRateUp: boolean; // Trúng rate banner
+  isCapturingRadiance?: boolean; // Kích hoạt "Bắt Lấy Ánh Sáng" (Version 5.0+)
+  isGuaranteed?: boolean; // Lúc quay đã có bảo hiểm
+  notes?: string;
+}
+
+export interface WishBannerStats {
+  currentPity: number; // 0-90 (hoặc 0-80 cho vũ khí)
+  isGuaranteed: boolean; // Đang có bảo hiểm 100% không
+  capturingRadianceLossStreak: number; // Số lần lệch 50/50 liên tiếp (0, 1, 2)
+  fatePoints?: number; // Điểm định mệnh (vũ khí: 0 hoặc 1)
+  selectedWeaponTarget?: string;
 }

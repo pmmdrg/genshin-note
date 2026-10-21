@@ -12,6 +12,7 @@ import {
   Compass,
   AlertCircle,
   Image as ImageIcon,
+  Sparkles,
 } from 'lucide-react';
 import { useStore } from '../store/useStore';
 import { calculateResinRecovery, formatSecondsToTime, getGenshinServerDate } from '../utils/priority';
@@ -39,11 +40,13 @@ export const Sidebar: React.FC = () => {
     characterTrees,
     characters,
     setIsWallpaperModalOpen,
+    wishBannerStats,
   } = useStore();
 
   const isCharacters = location.pathname === '/' || location.pathname.startsWith('/characters');
   const isTimeline = location.pathname.startsWith('/timeline');
   const isCompleted = location.pathname.startsWith('/completed');
+  const isWishes = location.pathname.startsWith('/wishes');
 
   const [showCheckInToast, setShowCheckInToast] = useState(false);
 
@@ -56,6 +59,7 @@ export const Sidebar: React.FC = () => {
   const actualCommissions = hoyoData ? hoyoData.finished_task_num : commissionsCount;
   const activeTreeCount = characterTrees.filter((t) => !t.isCompleted).length;
   const completedCount = characterTrees.filter((t) => t.isCompleted).length;
+  const characterPity = wishBannerStats?.character?.currentPity ?? 0;
 
   const handleCheckIn = async () => {
     await executeDailyCheckIn();
@@ -171,6 +175,30 @@ export const Sidebar: React.FC = () => {
               }`}
             >
               {completedCount}
+            </span>
+          </button>
+
+          {/* 4. Lịch Sử Cầu Nguyện (/wishes) */}
+          <button
+            onClick={() => navigate('/wishes')}
+            className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-2xl text-xs font-semibold transition-all duration-300 ease-out cursor-pointer active:scale-95 ${
+              isWishes
+                ? 'bg-gradient-to-r from-pink-500/80 via-purple-600/80 to-indigo-600/80 text-white shadow-[0_4px_16px_rgba(236,72,153,0.35)] border border-pink-400/40 scale-[1.02]'
+                : 'text-slate-400 hover:text-pink-300 hover:bg-white/[0.04]'
+            }`}
+          >
+            <div className="flex items-center gap-2.5">
+              <Sparkles className="w-4 h-4 text-pink-400" />
+              <span>Cầu Nguyện (Gacha)</span>
+            </div>
+            <span
+              className={`text-[10px] px-2 py-0.5 rounded-full font-bold transition-colors duration-300 ${
+                isWishes
+                  ? 'bg-white/20 text-white'
+                  : 'bg-pink-500/15 text-pink-300 border border-pink-500/25'
+              }`}
+            >
+              {characterPity}/90
             </span>
           </button>
 

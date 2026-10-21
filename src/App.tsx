@@ -4,6 +4,7 @@ import { Sidebar } from './components/Sidebar';
 import { CharacterRosterView } from './components/CharacterRosterView';
 import { TaskTreeTimeline } from './components/TaskTreeTimeline';
 import { CompletedList } from './components/CompletedList';
+import { WishTrackerView } from './components/WishTrackerView';
 import { WallpaperModal } from './components/WallpaperModal';
 import { useStore } from './store/useStore';
 import { APP_VERSION } from './version';
@@ -16,7 +17,7 @@ export const App: React.FC = () => {
   React.useEffect(() => {
     syncWithHoyo();
     fetchCharactersFromHoyo();
-  }, []);
+  }, [syncWithHoyo, fetchCharactersFromHoyo]);
 
   // Synchronize store activeNav with current route
   React.useEffect(() => {
@@ -25,10 +26,12 @@ export const App: React.FC = () => {
       setActiveNav('timeline');
     } else if (path.startsWith('/completed')) {
       setActiveNav('completed');
+    } else if (path.startsWith('/wishes')) {
+      setActiveNav('wishes');
     } else {
       setActiveNav('characters');
     }
-  }, [location.pathname]);
+  }, [location.pathname, setActiveNav]);
 
   const activeWallpaperUrl = getActiveWallpaperUrl(wallpaper);
   const blurClass = getBlurClass(wallpaper.blur);
@@ -83,6 +86,7 @@ export const App: React.FC = () => {
               <Route path="/characters" element={<CharacterRosterView />} />
               <Route path="/timeline" element={<TaskTreeTimeline />} />
               <Route path="/completed" element={<CompletedList />} />
+              <Route path="/wishes" element={<WishTrackerView />} />
               <Route path="*" element={<Navigate to="/characters" replace />} />
             </Routes>
           </div>
