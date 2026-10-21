@@ -24,6 +24,14 @@ interface DialogProps {
   defaultBanner: WishBannerType;
 }
 
+const removeAccents = (str: string): string => {
+  return str
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[đĐ]/g, 'd')
+    .toLowerCase();
+};
+
 const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBanner }) => {
   const { addWishRecord, updateWishRecord, wishBannerStats, wishHistory } = useStore();
 
@@ -31,7 +39,7 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
 
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Available 5★ characters (all 49 official gacha characters, no Traveler)
+  // Available 5★ characters (all 68 official/available 5★ gacha characters, no Traveler)
   const fiveStarCharacters = GACHA_5STAR_CHARACTERS;
 
   // Available 5★ weapons
@@ -71,41 +79,38 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
 
   const maxPity = bannerType === 'weapon' ? 80 : 90;
 
-  // Filter items based on banner and search query
+  // Filter items based on banner and search query (supports accent-insensitive search)
   const selectableItems = useMemo(() => {
-    const query = searchQuery.trim().toLowerCase();
+    const qClean = removeAccents(searchQuery.trim());
+    const matchQuery = (name: string, nameVi?: string) => {
+      if (!qClean) return true;
+      const nClean = removeAccents(name);
+      const viClean = nameVi ? removeAccents(nameVi) : '';
+      return nClean.includes(qClean) || viClean.includes(qClean);
+    };
+
     if (bannerType === 'character') {
       return fiveStarCharacters
-        .filter(
-          (c) =>
-            !query ||
-            c.name.toLowerCase().includes(query) ||
-            c.nameVi.toLowerCase().includes(query)
-        )
+        .filter((c) => matchQuery(c.name, c.nameVi))
         .map((c) => ({
           name: c.name,
           nameVi: c.nameVi,
           icon: c.avatarUrl,
           itemType: 'character' as const,
           isStandard: STANDARD_5STAR_CHARACTERS.some(
-            (s) => s.toLowerCase() === c.name.toLowerCase() || s.toLowerCase() === c.nameVi.toLowerCase()
+            (s) => removeAccents(s) === removeAccents(c.name) || removeAccents(s) === removeAccents(c.nameVi)
           ),
         }));
     } else if (bannerType === 'weapon') {
       return fiveStarWeapons
-        .filter(
-          (w) =>
-            !query ||
-            w.name.toLowerCase().includes(query) ||
-            w.nameVi.toLowerCase().includes(query)
-        )
+        .filter((w) => matchQuery(w.name, w.nameVi))
         .map((w) => ({
           name: w.name,
           nameVi: w.nameVi,
           icon: w.avatarUrl,
           itemType: 'weapon' as const,
           isStandard: STANDARD_5STAR_WEAPONS.some(
-            (s) => s.toLowerCase() === w.name.toLowerCase() || s.toLowerCase() === w.nameVi.toLowerCase()
+            (s) => removeAccents(s) === removeAccents(w.name) || removeAccents(s) === removeAccents(w.nameVi)
           ),
         }));
     } else if (bannerType === 'chronicled') {
@@ -124,18 +129,13 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
         isStandard: false,
       }));
       const combined = [...allChars, ...allWeapons];
-      return combined.filter(
-        (i) =>
-          !query ||
-          i.name.toLowerCase().includes(query) ||
-          i.nameVi.toLowerCase().includes(query)
-      );
+      return combined.filter((i) => matchQuery(i.name, i.nameVi));
     } else {
       // Standard Banner: combine standard characters and standard weapons
       const standardChars = fiveStarCharacters
         .filter((c) =>
           STANDARD_5STAR_CHARACTERS.some(
-            (s) => s.toLowerCase() === c.name.toLowerCase() || s.toLowerCase() === c.nameVi.toLowerCase()
+            (s) => removeAccents(s) === removeAccents(c.name) || removeAccents(s) === removeAccents(c.nameVi)
           )
         )
         .map((c) => ({
@@ -149,7 +149,7 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
       const stdWeapons = fiveStarWeapons
         .filter((w) =>
           STANDARD_5STAR_WEAPONS.some(
-            (s) => s.toLowerCase() === w.name.toLowerCase() || s.toLowerCase() === w.nameVi.toLowerCase()
+            (s) => removeAccents(s) === removeAccents(w.name) || removeAccents(s) === removeAccents(w.nameVi)
           )
         )
         .map((w) => ({
@@ -161,12 +161,7 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
         }));
 
       const combined = [...standardChars, ...stdWeapons];
-      return combined.filter(
-        (i) =>
-          !query ||
-          i.name.toLowerCase().includes(query) ||
-          i.nameVi.toLowerCase().includes(query)
-      );
+      return combined.filter((i) => matchQuery(i.name, i.nameVi));
     }
   }, [bannerType, searchQuery, fiveStarCharacters, fiveStarWeapons]);
 
@@ -181,15 +176,15 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
     if (bannerType === 'character') {
       return STANDARD_5STAR_CHARACTERS.some(
         (s) =>
-          s.toLowerCase() === selectedItemObj.name.toLowerCase() ||
-          s.toLowerCase() === selectedItemObj.nameVi.toLowerCase()
+          removeAccents(s) === removeAccents(selectedItemObj.name) ||
+          removeAccents(s) === removeAccents(selectedItemObj.nameVi)
       );
     }
     if (bannerType === 'weapon') {
       return STANDARD_5STAR_WEAPONS.some(
         (s) =>
-          s.toLowerCase() === selectedItemObj.name.toLowerCase() ||
-          s.toLowerCase() === selectedItemObj.nameVi.toLowerCase()
+          removeAccents(s) === removeAccents(selectedItemObj.name) ||
+          removeAccents(s) === removeAccents(selectedItemObj.nameVi)
       );
     }
     return false;

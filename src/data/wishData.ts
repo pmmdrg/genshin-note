@@ -15,6 +15,8 @@ export const STANDARD_5STAR_CHARACTERS = [
   'Qiqi',
   'Tighnari',
   'Dehya',
+  'Yumemizuki Mizuki',
+  'Mizuki',
 ];
 
 export interface Gacha5StarCharacter {
@@ -553,7 +555,7 @@ export const GACHA_5STAR_CHARACTERS: Gacha5StarCharacter[] = [
     "element": "anemo",
     "weaponType": "catalyst",
     "avatarUrl": "https://enka.network/ui/UI_AvatarIcon_Mizuki.png",
-    "isStandard": false
+    "isStandard": true
   },
   {
     "name": "Zhongli",
@@ -574,6 +576,8 @@ export const GACHA_5STAR_CHARACTERS: Gacha5StarCharacter[] = [
 ];
 
 export const STANDARD_5STAR_WEAPONS = [
+  'Dạ Khúc Hạ Màn',
+  "Nocturne's Curtain Call",
   'Thiên Không Kiếm',
   'Thiên Không Kiêu Ngạo',
   'Xương Sống Thiên Không',

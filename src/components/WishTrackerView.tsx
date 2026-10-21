@@ -24,6 +24,14 @@ import {
 } from '../data/wishData';
 import { AddWishModal } from './AddWishModal';
 
+const removeAccents = (str: string): string => {
+  return str
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[đĐ]/g, 'd')
+    .toLowerCase();
+};
+
 export const WishTrackerView: React.FC = () => {
   const {
     activeWishBanner,
@@ -77,20 +85,20 @@ export const WishTrackerView: React.FC = () => {
     return !!currentStats.isGuaranteed;
   }, [lastBannerRecord, currentStats.isGuaranteed, activeWishBanner]);
 
-  // Filtered wish history
+  // Filtered wish history (accent-insensitive search)
   const filteredHistory = useMemo(() => {
     const list = wishHistory.filter((r) => r.bannerType === activeWishBanner);
-    const query = searchQuery.trim().toLowerCase();
+    const qClean = removeAccents(searchQuery.trim());
 
     return list.filter((r) => {
       // Query filter
-      if (
-        query &&
-        !r.name.toLowerCase().includes(query) &&
-        !r.nameVi.toLowerCase().includes(query) &&
-        !(r.notes || '').toLowerCase().includes(query)
-      ) {
-        return false;
+      if (qClean) {
+        const nClean = removeAccents(r.name);
+        const viClean = removeAccents(r.nameVi || '');
+        const notesClean = removeAccents(r.notes || '');
+        if (!nClean.includes(qClean) && !viClean.includes(qClean) && !notesClean.includes(qClean)) {
+          return false;
+        }
       }
 
       // Status filter
