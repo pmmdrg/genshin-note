@@ -302,46 +302,35 @@ export const WishTrackerView: React.FC = () => {
             </div>
           </div>
 
-          {/* Quick Pity Steppers & Add 5★ button for this banner */}
-          <div className="flex items-center justify-between gap-1.5 pt-3 border-t border-white/[0.08] mt-3">
-            <div className="flex items-center gap-1.5">
-              <button
-                onClick={() => incrementWishPity(activeWishBanner, -1)}
-                className="px-2 py-1.5 rounded-xl bg-white/[0.06] hover:bg-white/[0.12] text-xs font-bold text-slate-300 border border-white/[0.08] transition-colors cursor-pointer active:scale-95"
-                title="Giảm 1 roll"
-              >
-                -1
-              </button>
-              <button
-                onClick={() => incrementWishPity(activeWishBanner, 1)}
-                className="px-2.5 py-1.5 rounded-xl bg-indigo-500/20 hover:bg-indigo-500/30 text-xs font-bold text-indigo-300 border border-indigo-500/30 transition-colors cursor-pointer active:scale-95"
-                title="Cộng 1 roll"
-              >
-                +1
-              </button>
-              <button
-                onClick={() => incrementWishPity(activeWishBanner, 10)}
-                className="px-2.5 py-1.5 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-xs font-bold text-amber-300 border border-amber-500/30 transition-colors cursor-pointer active:scale-95"
-                title="Cộng 10 roll"
-              >
-                +10
-              </button>
-              <button
-                onClick={() => setCurrentWishPity(activeWishBanner, 0)}
-                className="px-2 py-1.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-slate-400 hover:text-slate-200 text-xs transition-colors cursor-pointer"
-                title="Đặt lại Pity về 0"
-              >
-                <RotateCcw className="w-3 h-3" />
-              </button>
-            </div>
-
-            {/* Banner Specific Add 5★ Button */}
+          {/* Quick Pity Steppers */}
+          <div className="flex items-center gap-1.5 pt-3 border-t border-white/[0.08] mt-3">
             <button
-              onClick={() => handleOpenAddModal()}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold text-xs shadow-[0_2px_12px_rgba(245,158,11,0.35)] transition-all cursor-pointer active:scale-95 shrink-0"
+              onClick={() => incrementWishPity(activeWishBanner, -1)}
+              className="px-2 py-1.5 rounded-xl bg-white/[0.06] hover:bg-white/[0.12] text-xs font-bold text-slate-300 border border-white/[0.08] transition-colors cursor-pointer active:scale-95"
+              title="Giảm 1 roll"
             >
-              <Plus className="w-3.5 h-3.5 stroke-[3]" />
-              <span>Thêm 5★</span>
+              -1
+            </button>
+            <button
+              onClick={() => incrementWishPity(activeWishBanner, 1)}
+              className="px-2.5 py-1.5 rounded-xl bg-indigo-500/20 hover:bg-indigo-500/30 text-xs font-bold text-indigo-300 border border-indigo-500/30 transition-colors cursor-pointer active:scale-95"
+              title="Cộng 1 roll"
+            >
+              +1
+            </button>
+            <button
+              onClick={() => incrementWishPity(activeWishBanner, 10)}
+              className="px-2.5 py-1.5 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-xs font-bold text-amber-300 border border-amber-500/30 transition-colors cursor-pointer active:scale-95"
+              title="Cộng 10 roll"
+            >
+              +10
+            </button>
+            <button
+              onClick={() => setCurrentWishPity(activeWishBanner, 0)}
+              className="px-2 py-1.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-slate-400 hover:text-slate-200 text-xs transition-colors cursor-pointer"
+              title="Đặt lại Pity về 0"
+            >
+              <RotateCcw className="w-3 h-3" />
             </button>
           </div>
         </div>
@@ -744,7 +733,7 @@ export const WishTrackerView: React.FC = () => {
             {/* Banner Specific Add 5★ Button */}
             <button
               onClick={() => handleOpenAddModal()}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 font-bold text-xs border border-amber-500/30 transition-all cursor-pointer active:scale-95"
+              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold text-xs shadow-[0_4px_16px_rgba(245,158,11,0.35)] transition-all cursor-pointer active:scale-95"
             >
               <Plus className="w-3.5 h-3.5 stroke-[3]" />
               <span>Thêm 5★ {BANNER_NAMES[activeWishBanner]}</span>
@@ -932,6 +921,11 @@ export const WishTrackerView: React.FC = () => {
                         <Sparkles className="w-3 h-3 animate-spin-slow" />
                         <span>Bắt Lấy Ánh Sáng</span>
                       </span>
+                    ) : item.isGuaranteed ? (
+                      <span className="text-[10px] font-semibold px-2 py-0.5 rounded-lg bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 flex items-center gap-1">
+                        <Shield className="w-3 h-3" />
+                        <span>{item.bannerType === 'chronicled' ? 'Định Chuẩn' : 'Bảo Hiểm'}</span>
+                      </span>
                     ) : item.isRateUp ? (
                       <span className="text-[10px] font-bold px-2 py-0.5 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1">
                         <CheckCircle2 className="w-3 h-3" />
@@ -941,13 +935,6 @@ export const WishTrackerView: React.FC = () => {
                       <span className="text-[10px] font-bold px-2 py-0.5 rounded-lg bg-rose-500/20 text-rose-300 border border-rose-500/30 flex items-center gap-1">
                         <XCircle className="w-3 h-3" />
                         <span>{item.bannerType === 'chronicled' ? 'Lệch Định Chuẩn' : 'Lệch Rate'}</span>
-                      </span>
-                    )}
-
-                    {item.isGuaranteed && item.bannerType !== 'standard' && (
-                      <span className="text-[10px] font-semibold px-2 py-0.5 rounded-lg bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 flex items-center gap-1">
-                        <Shield className="w-3 h-3" />
-                        <span>{item.bannerType === 'chronicled' ? 'Định Chuẩn' : 'Bảo Hiểm'}</span>
                       </span>
                     )}
 
