@@ -8,6 +8,7 @@ import {
   STANDARD_5STAR_CHARACTERS,
   STANDARD_5STAR_WEAPONS,
   GACHA_5STAR_CHARACTERS,
+  BANNER_NAMES,
 } from '../data/wishData';
 
 interface AddWishModalProps {
@@ -26,9 +27,7 @@ interface DialogProps {
 const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBanner }) => {
   const { addWishRecord, updateWishRecord, wishBannerStats, wishHistory } = useStore();
 
-  const [bannerType, setBannerType] = useState<WishBannerType>(() => {
-    return editingWish?.bannerType || defaultBanner || 'character';
-  });
+  const bannerType: WishBannerType = editingWish?.bannerType || defaultBanner || 'character';
 
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -41,9 +40,12 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
   }, []);
 
   const [selectedItemName, setSelectedItemName] = useState<string>(() => {
-    if (editingWish) return editingWish.name;
-    if (defaultBanner === 'weapon') {
+    if (editingWish) return editingWish.nameVi || editingWish.name;
+    if (bannerType === 'weapon') {
       return fiveStarWeapons[0]?.nameVi || 'Đoạn Thảo Trường Đao';
+    }
+    if (bannerType === 'standard' || bannerType === 'chronicled') {
+      return 'Jean';
     }
     return 'Mavuika';
   });
@@ -59,8 +61,8 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
 
   const [pity, setPity] = useState<number>(() => {
     if (editingWish) return editingWish.pity;
-    const currentP = wishBannerStats[defaultBanner || 'character']?.currentPity || 0;
-    return currentP > 0 ? currentP : (defaultBanner === 'weapon' ? 65 : 75);
+    const currentP = wishBannerStats[bannerType]?.currentPity || 0;
+    return currentP > 0 ? currentP : (bannerType === 'weapon' ? 65 : 75);
   });
 
   const [autoResetPity, setAutoResetPity] = useState<boolean>(() => {
@@ -261,9 +263,14 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
               <Sparkles className="w-4 h-4 animate-pulse" />
             </div>
             <div>
-              <h2 className="text-base font-bold text-white tracking-wide">
-                {editingWish ? 'Chỉnh Sửa Lần Nổ 5★' : 'Thêm Lần Nổ 5★'}
-              </h2>
+              <div className="flex items-center gap-2">
+                <h2 className="text-base font-bold text-white tracking-wide">
+                  {editingWish ? 'Chỉnh Sửa Lần Nổ 5★' : 'Thêm Lần Nổ 5★'}
+                </h2>
+                <span className="text-[11px] font-bold px-2.5 py-0.5 rounded-lg bg-amber-500/15 border border-amber-400/30 text-amber-300">
+                  Banner {BANNER_NAMES[bannerType]}
+                </span>
+              </div>
             </div>
           </div>
           <button
@@ -275,81 +282,7 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* 1. Chọn Banner Type */}
-          <div>
-            <label className="block text-xs font-semibold text-slate-300 mb-1.5 uppercase tracking-wider">
-              Loại Banner
-            </label>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-              <button
-                type="button"
-                onClick={() => {
-                  setBannerType('character');
-                  setSearchQuery('');
-                  setSelectedItemName('Mavuika');
-                  setIsCapturingRadiance(false);
-                }}
-                className={`py-2 px-3 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
-                  bannerType === 'character'
-                    ? 'bg-gradient-to-r from-purple-500/80 to-indigo-600/80 text-white border-purple-400/40 shadow-[0_0_15px_rgba(168,85,247,0.3)]'
-                    : 'bg-white/[0.04] text-slate-400 border-white/[0.08] hover:bg-white/[0.08] hover:text-white'
-                }`}
-              >
-                Nhân Vật
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setBannerType('weapon');
-                  setSearchQuery('');
-                  setSelectedItemName(fiveStarWeapons[0]?.nameVi || 'Đoạn Thảo Trường Đao');
-                  setIsCapturingRadiance(false);
-                }}
-                className={`py-2 px-3 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
-                  bannerType === 'weapon'
-                    ? 'bg-gradient-to-r from-amber-500/80 to-orange-600/80 text-white border-amber-400/40 shadow-[0_0_15px_rgba(245,158,11,0.3)]'
-                    : 'bg-white/[0.04] text-slate-400 border-white/[0.08] hover:bg-white/[0.08] hover:text-white'
-                }`}
-              >
-                Vũ Khí
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setBannerType('standard');
-                  setSearchQuery('');
-                  setSelectedItemName('Diluc');
-                  setIsCapturingRadiance(false);
-                }}
-                className={`py-2 px-3 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
-                  bannerType === 'standard'
-                    ? 'bg-gradient-to-r from-blue-500/80 to-cyan-600/80 text-white border-blue-400/40 shadow-[0_0_15px_rgba(59,130,246,0.3)]'
-                    : 'bg-white/[0.04] text-slate-400 border-white/[0.08] hover:bg-white/[0.08] hover:text-white'
-                }`}
-              >
-                Thường
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setBannerType('chronicled');
-                  setSearchQuery('');
-                  setSelectedItemName('Jean');
-                  setIsCapturingRadiance(false);
-                  setChronicledRateUp(true);
-                }}
-                className={`py-2 px-3 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
-                  bannerType === 'chronicled'
-                    ? 'bg-gradient-to-r from-teal-500/80 to-emerald-600/80 text-white border-teal-400/40 shadow-[0_0_15px_rgba(20,184,166,0.3)]'
-                    : 'bg-white/[0.04] text-slate-400 border-white/[0.08] hover:bg-white/[0.08] hover:text-white'
-                }`}
-              >
-                Sử Ký
-              </button>
-            </div>
-          </div>
-
-          {/* 2. Chọn Vật Phẩm 5★ */}
+          {/* 1. Chọn Vật Phẩm 5★ */}
           <div>
             <div className="flex items-center justify-between mb-1.5">
               <label className="text-xs font-semibold text-slate-300 uppercase tracking-wider">
@@ -409,7 +342,7 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
             </div>
           </div>
 
-          {/* 3. Tự Động Xét Bảo Hiểm / Trúng Rate */}
+          {/* 2. Tự Động Xét Bảo Hiểm / Trúng Rate */}
           {bannerType === 'character' && (
             <div className="p-3 rounded-2xl bg-black/25 border border-white/[0.08] flex items-center justify-between gap-2 flex-wrap">
               <div className="flex items-center gap-2">
@@ -493,7 +426,7 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
             </div>
           )}
 
-          {/* 4. Số Roll Nổ (Pity) */}
+          {/* 3. Số Roll Nổ (Pity) */}
           <div className="space-y-1.5">
             <div className="flex items-center justify-between">
               <label className="text-xs font-semibold text-slate-300 uppercase tracking-wider">
@@ -545,7 +478,7 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
             </div>
           </div>
 
-          {/* 5. Tự Động Reset Pity */}
+          {/* 4. Tự Động Reset Pity */}
           {!editingWish && (
             <label className="flex items-center gap-2 cursor-pointer pt-1 text-xs text-slate-300 select-none">
               <input

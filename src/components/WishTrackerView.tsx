@@ -880,11 +880,6 @@ export const WishTrackerView: React.FC = () => {
                           alt={item.nameVi}
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                         />
-                        <div className="absolute bottom-0 inset-x-0 bg-black/70 backdrop-blur-xs py-0.5 text-center">
-                          <span className="text-[10px] font-black text-amber-300 tracking-tighter">
-                            ★★★★★
-                          </span>
-                        </div>
                       </div>
 
                       <div className="space-y-0.5">
@@ -940,12 +935,12 @@ export const WishTrackerView: React.FC = () => {
                     ) : item.isRateUp ? (
                       <span className="text-[10px] font-bold px-2 py-0.5 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1">
                         <CheckCircle2 className="w-3 h-3" />
-                        <span>{item.bannerType === 'chronicled' ? 'Trúng Mục Tiêu' : 'Trúng Rate'}</span>
+                        <span>{item.bannerType === 'chronicled' ? 'Trúng Định Chuẩn' : 'Trúng Rate'}</span>
                       </span>
                     ) : (
                       <span className="text-[10px] font-bold px-2 py-0.5 rounded-lg bg-rose-500/20 text-rose-300 border border-rose-500/30 flex items-center gap-1">
                         <XCircle className="w-3 h-3" />
-                        <span>{item.bannerType === 'chronicled' ? 'Lệch Mục Tiêu' : 'Lệch Rate'}</span>
+                        <span>{item.bannerType === 'chronicled' ? 'Lệch Định Chuẩn' : 'Lệch Rate'}</span>
                       </span>
                     )}
 
