@@ -346,7 +346,7 @@ export const WishTrackerView: React.FC = () => {
         {/* CARD 2: BANNER MECHANIC (STAT ONLY) */}
         {activeWishBanner === 'character' ? (
           <div className="liquid-glass rounded-3xl p-5 border border-pink-500/25 radiance-card-glow flex flex-col justify-between relative overflow-hidden shadow-[0_10px_30px_rgba(236,72,153,0.15)]">
-            <div className="space-y-3.5">
+            <div className="space-y-4">
               {/* Header */}
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
@@ -372,16 +372,8 @@ export const WishTrackerView: React.FC = () => {
                 </span>
               </div>
 
-              {/* High-impact Status & Number */}
-              <div className="p-3.5 rounded-2xl bg-black/35 border border-pink-500/20 space-y-1">
-                <div className="text-[11px] text-slate-400 font-medium">Trạng thái:</div>
-                <div className="text-lg sm:text-xl font-black text-white leading-tight">
-                  {radianceInfo.statusTitle}
-                </div>
-              </div>
-
               {/* Visual 3-Loss Progress Tracker */}
-              <div className="space-y-1.5">
+              <div className="space-y-2">
                 <div className="flex items-center justify-between text-[11px] text-slate-400">
                   <span>Tích lũy lệch (3 lần = chắc chắn):</span>
                   <span className="font-bold text-white">
@@ -396,7 +388,7 @@ export const WishTrackerView: React.FC = () => {
                     return (
                       <div
                         key={step}
-                        className={`p-2 rounded-xl text-center border transition-all select-none ${
+                        className={`p-2.5 rounded-xl text-center border transition-all select-none ${
                           isPassed
                             ? isFinal
                               ? 'radiance-badge text-white font-extrabold border-pink-400'
@@ -405,7 +397,7 @@ export const WishTrackerView: React.FC = () => {
                         }`}
                       >
                         <div className="text-[10px] font-bold">Lần Lệch {step}</div>
-                        <div className="text-[11px] font-black mt-0.5">
+                        <div className="text-xs font-black mt-0.5">
                           {step === 1 ? 'Còn 2' : step === 2 ? 'Còn 1' : '100% ✨'}
                         </div>
                       </div>
@@ -427,7 +419,7 @@ export const WishTrackerView: React.FC = () => {
         ) : activeWishBanner === 'weapon' ? (
           /* Weapon Banner Info Card */
           <div className="liquid-glass rounded-3xl p-5 border border-white/[0.12] flex flex-col justify-between shadow-[0_10px_30px_rgba(0,0,0,0.35)]">
-            <div className="space-y-3.5">
+            <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <div className="w-7 h-7 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center justify-center font-bold text-xs">
@@ -452,15 +444,6 @@ export const WishTrackerView: React.FC = () => {
                 </span>
               </div>
 
-              <div className="p-3.5 rounded-2xl bg-black/30 border border-white/[0.08] space-y-1">
-                <div className="text-[11px] text-slate-400 font-medium">Trạng thái:</div>
-                <div className="text-lg font-bold text-white">
-                  {currentStats.fatePoints === 1
-                    ? '✨ 100% Ra Vũ Khí Định Chuẩn'
-                    : 'Đang trong kỳ 50/50 vũ khí'}
-                </div>
-              </div>
-
               {/* Quick toggle Fate point */}
               <div className="flex items-center justify-between text-xs pt-1">
                 <span className="text-slate-400 text-[11px]">Gán Điểm Định Chuẩn:</span>
@@ -469,7 +452,7 @@ export const WishTrackerView: React.FC = () => {
                     <button
                       key={pt}
                       onClick={() => setFatePoints('weapon', pt)}
-                      className={`px-3 py-1 rounded-lg text-xs font-bold border transition-colors cursor-pointer ${
+                      className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition-colors cursor-pointer ${
                         (currentStats.fatePoints || 0) === pt
                           ? 'bg-amber-500/30 border-amber-400 text-amber-200'
                           : 'bg-white/[0.04] border-white/[0.08] text-slate-400 hover:text-white'
@@ -490,7 +473,7 @@ export const WishTrackerView: React.FC = () => {
         ) : activeWishBanner === 'chronicled' ? (
           /* Chronicled Banner (Sử Ký) Info Card */
           <div className="liquid-glass rounded-3xl p-5 border border-teal-500/25 flex flex-col justify-between shadow-[0_10px_30px_rgba(20,184,166,0.2)]">
-            <div className="space-y-3.5">
+            <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <div className="w-7 h-7 rounded-xl bg-teal-500/20 text-teal-300 border border-teal-500/30 flex items-center justify-center font-bold text-xs">
@@ -515,15 +498,6 @@ export const WishTrackerView: React.FC = () => {
                 </span>
               </div>
 
-              <div className="p-3.5 rounded-2xl bg-black/30 border border-teal-500/20 space-y-1">
-                <div className="text-[11px] text-slate-400 font-medium">Trạng thái:</div>
-                <div className="text-lg font-bold text-white">
-                  {currentStats.fatePoints === 1
-                    ? '✨ 100% Ra Mục Tiêu Định Chuẩn'
-                    : 'Đang trong kỳ 50/50 mục tiêu'}
-                </div>
-              </div>
-
               {/* Quick toggle Fate point */}
               <div className="flex items-center justify-between text-xs pt-1">
                 <span className="text-slate-400 text-[11px]">Gán Điểm Định Chuẩn:</span>
@@ -532,7 +506,7 @@ export const WishTrackerView: React.FC = () => {
                     <button
                       key={pt}
                       onClick={() => setFatePoints('chronicled', pt)}
-                      className={`px-3 py-1 rounded-lg text-xs font-bold border transition-colors cursor-pointer ${
+                      className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition-colors cursor-pointer ${
                         (currentStats.fatePoints || 0) === pt
                           ? 'bg-teal-500/30 border-teal-400 text-teal-200'
                           : 'bg-white/[0.04] border-white/[0.08] text-slate-400 hover:text-white'
