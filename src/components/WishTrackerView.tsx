@@ -4,7 +4,6 @@ import {
   Shield,
   Plus,
   RotateCcw,
-  Calendar,
   CheckCircle2,
   XCircle,
   Trash2,
@@ -65,6 +64,19 @@ export const WishTrackerView: React.FC = () => {
   const summary = useMemo(() => {
     return calculateWishSummary(wishHistory, activeWishBanner);
   }, [wishHistory, activeWishBanner]);
+
+  // Determine if player has guarantee based on last record in history
+  const lastBannerRecord = useMemo(() => {
+    return wishHistory.find((r) => r.bannerType === activeWishBanner);
+  }, [wishHistory, activeWishBanner]);
+
+  const isGuaranteedEffective = useMemo(() => {
+    if (activeWishBanner === 'standard') return false;
+    if (lastBannerRecord) {
+      return !lastBannerRecord.isRateUp;
+    }
+    return !!currentStats.isGuaranteed;
+  }, [lastBannerRecord, currentStats.isGuaranteed, activeWishBanner]);
 
   // Filtered wish history
   const filteredHistory = useMemo(() => {
@@ -213,19 +225,19 @@ export const WishTrackerView: React.FC = () => {
                 <button
                   onClick={() => toggleWishGuarantee(activeWishBanner)}
                   className={`flex items-center gap-1.5 px-2.5 py-1 rounded-xl text-[11px] font-bold border transition-all cursor-pointer ${
-                    currentStats.isGuaranteed
+                    isGuaranteedEffective
                       ? 'bg-indigo-500/25 border-indigo-400/50 text-indigo-300 shadow-[0_0_12px_rgba(99,102,241,0.25)]'
                       : 'bg-white/[0.04] border-white/[0.08] text-slate-400 hover:text-slate-200'
                   }`}
-                  title="Nhấn để đổi trạng thái có/không có bảo hiểm"
+                  title="Tự động xét từ lần nổ gần nhất (Bấm nếu muốn đổi thủ công)"
                 >
                   <Shield className="w-3.5 h-3.5" />
                   <span>
                     {activeWishBanner === 'chronicled'
-                      ? currentStats.isGuaranteed
+                      ? isGuaranteedEffective
                         ? 'Có Định Mệnh'
                         : 'Chưa Có'
-                      : currentStats.isGuaranteed
+                      : isGuaranteedEffective
                       ? 'Có Bảo Hiểm'
                       : '50/50'}
                   </span>
@@ -886,10 +898,6 @@ export const WishTrackerView: React.FC = () => {
                         <div className="text-[11px] text-slate-400">
                           {item.name !== item.nameVi ? item.name : ''}
                         </div>
-                        <div className="flex items-center gap-1 text-[11px] text-slate-500">
-                          <Calendar className="w-3 h-3" />
-                          <span>{item.date}</span>
-                        </div>
                       </div>
                     </div>
 
@@ -955,13 +963,6 @@ export const WishTrackerView: React.FC = () => {
                       #{filteredHistory.length - index}
                     </span>
                   </div>
-
-                  {/* Notes (if any) */}
-                  {item.notes && (
-                    <p className="text-[11px] text-slate-300/90 italic mt-2 bg-black/20 p-2 rounded-lg border border-white/[0.04]">
-                      "{item.notes}"
-                    </p>
-                  )}
 
                   {/* Actions overlay on hover */}
                   <div className="absolute top-2 right-2 flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
