@@ -40,10 +40,10 @@ type ActiveBranchType = 'level' | 'weapon' | 'talent' | 'artifact' | null;
 
 export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, index }) => {
   const {
+    characters,
     toggleBranchComplete,
     toggleCompleteCharacterTree,
     deleteCharacterTree,
-    updateTreeLevel,
     updateTreeWeaponLevel,
     setTreeWeapon,
     updateTreeTalentLevel,
@@ -188,8 +188,15 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
     }, 350);
   };
 
-  const isC6 = (tree.constellation ?? 0) >= 6;
-  const currentCharLevel = tree.level ?? tree.levelBranch.currentLevel;
+  // Live character resolution from store to ensure 100% synchronization with in-game HoYoLAB level
+  const liveChar = characters.find(
+    (c) =>
+      c.id === tree.characterId ||
+      c.nameVi.toLowerCase() === tree.characterName.toLowerCase() ||
+      c.name.toLowerCase() === tree.characterName.toLowerCase()
+  );
+  const currentCharLevel = liveChar?.level ?? tree.level ?? tree.levelBranch.currentLevel ?? 1;
+  const isC6 = (liveChar?.constellation ?? tree.constellation ?? 0) >= 6;
 
   // Safe artifact pieces fallback (with updated Lông Vũ Tử Vong name)
   const artifactPieces =
@@ -459,7 +466,7 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
             className={`w-full h-[55px] px-3.5 py-2 rounded-2xl text-left border transition-all flex items-center justify-between group/branch cursor-pointer liquid-glass-interactive ${
               activeBranch === 'level'
                 ? '!bg-sky-500/25 !border-sky-400/70 shadow-[0_0_20px_rgba(56,189,248,0.3)] text-sky-200 backdrop-blur-xl'
-                : tree.levelBranch.isCompleted
+                : (tree.levelBranch.isCompleted || currentCharLevel >= 90)
                 ? '!bg-emerald-500/15 !border-emerald-500/40 text-emerald-300 hover:!bg-emerald-500/20 backdrop-blur-md'
                 : 'liquid-glass-subtle text-slate-300 hover:text-white hover:border-white/25'
             }`}
@@ -467,11 +474,11 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
             <div className="min-w-0 flex flex-col justify-center">
               <div className="text-xs font-bold truncate tracking-wide">Cấp Độ</div>
               <div className="text-[11px] text-slate-400 font-sans mt-0.5">
-                Lv.{currentCharLevel} → 90
+                {currentCharLevel >= 90 ? 'Lv. 90 (Tối đa)' : `Lv.${currentCharLevel} → 90`}
               </div>
             </div>
             <div className="shrink-0 ml-2">
-              {tree.levelBranch.isCompleted ? (
+              {(tree.levelBranch.isCompleted || currentCharLevel >= 90) ? (
                 <CheckCircle2 className="w-4 h-4 text-emerald-400 fill-emerald-400/20" />
               ) : (
                 <Circle className="w-4 h-4 text-slate-500 group-hover/branch:text-sky-400/70" />
@@ -615,63 +622,58 @@ export const CharacterTreeCard: React.FC<CharacterTreeCardProps> = ({ tree, inde
                   <button
                     onClick={() => toggleBranchComplete(tree.id, 'levelBranch')}
                     className={`px-2.5 py-1 rounded-xl text-xs font-bold border transition-all flex items-center gap-1.5 cursor-pointer ${
-                      tree.levelBranch.isCompleted
+                      (tree.levelBranch.isCompleted || currentCharLevel >= 90)
                         ? 'bg-emerald-500/20 border-emerald-500/40 text-emerald-300'
                         : 'bg-white/[0.04] border-white/10 text-slate-300 hover:border-sky-400/40'
                     }`}
                   >
                     <Check className="w-3.5 h-3.5" />
-                    <span>{tree.levelBranch.isCompleted ? 'Đã Xong' : 'Hoàn Thành'}</span>
+                    <span>{(tree.levelBranch.isCompleted || currentCharLevel >= 90) ? 'Đã Xong' : 'Hoàn Thành'}</span>
                   </button>
                 </div>
 
-                {/* Level Stepper & Quick presets */}
-                <div className="flex items-center justify-between liquid-glass-subtle p-3 rounded-2xl border border-white/[0.08]">
-                  <div className="text-xs text-slate-300 font-semibold">Cấp hiện tại:</div>
-                  <div className="flex items-center gap-2">
-                    <button
-                      onClick={() => updateTreeLevel(tree.id, currentCharLevel - 1)}
-                      disabled={currentCharLevel <= 1}
-                      className="p-1 rounded-lg bg-white/[0.06] hover:bg-white/[0.12] disabled:opacity-40 text-slate-200 cursor-pointer"
-                      title="Giảm cấp"
-                    >
-                      <Minus className="w-3.5 h-3.5" />
-                    </button>
-                    <span className="text-sm font-black text-amber-300 font-sans min-w-[50px] text-center">
+                {/* Thông tin Cấp độ hiện tại (Tự động đồng bộ từ HoYoLAB / Dữ liệu game) */}
+                <div className="flex items-center justify-between p-3.5 rounded-2xl liquid-glass-subtle border border-white/[0.08]">
+                  <div className="flex items-center gap-3 min-w-0">
+                    <div className="w-10 h-10 rounded-xl bg-amber-400/10 border border-amber-400/30 flex items-center justify-center shrink-0 text-amber-300 font-black text-xs font-sans shadow-sm">
                       Lv.{currentCharLevel}
-                    </span>
-                    <button
-                      onClick={() => updateTreeLevel(tree.id, currentCharLevel + 1)}
-                      disabled={currentCharLevel >= 90}
-                      className="p-1 rounded-lg bg-white/[0.06] hover:bg-white/[0.12] disabled:opacity-40 text-slate-200 cursor-pointer"
-                      title="Tăng cấp"
-                    >
-                      <Plus className="w-3.5 h-3.5" />
-                    </button>
+                    </div>
+                    <div className="min-w-0">
+                      <div className="text-xs sm:text-sm font-bold text-slate-100 flex items-center gap-1.5 flex-wrap">
+                        <span>Cấp hiện tại trong game</span>
+                        <span className="text-[10px] font-semibold text-emerald-400 bg-emerald-500/15 px-2 py-0.5 rounded-md border border-emerald-500/30 flex items-center gap-1">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                          Đồng bộ HoYoLAB
+                        </span>
+                      </div>
+                      <div className="text-[11px] text-slate-400 mt-0.5 font-sans">
+                        {currentCharLevel >= 90 ? (
+                          <span className="text-emerald-300 font-semibold">Nhân vật đã đạt cấp tối đa (Lv. 90/90)</span>
+                        ) : (
+                          <span>Cần nâng thêm <strong className="text-amber-300 font-bold">{90 - currentCharLevel}</strong> cấp để đạt Lv. 90</span>
+                        )}
+                      </div>
+                    </div>
                   </div>
 
-                  {/* Quick Presets */}
-                  <div className="flex items-center gap-1">
-                    {[70, 80, 90].map((lvl) => (
-                      <button
-                        key={lvl}
-                        onClick={() => updateTreeLevel(tree.id, lvl)}
-                        className={`px-2 py-0.5 rounded-md text-[10px] font-bold border transition-colors cursor-pointer ${
-                          currentCharLevel === lvl
-                            ? 'bg-sky-400/20 border-sky-400/50 text-sky-300'
-                            : 'bg-white/[0.04] border-white/[0.08] text-slate-400 hover:text-slate-200'
-                        }`}
-                      >
-                        {lvl}
-                      </button>
-                    ))}
+                  <div className="text-right shrink-0">
+                    <span className="text-xs font-black text-amber-300 font-sans tracking-wide bg-amber-400/10 px-2.5 py-1 rounded-xl border border-amber-400/20">
+                      {currentCharLevel} / 90
+                    </span>
                   </div>
                 </div>
 
                 {/* Required Materials Grid with Official Icons */}
                 <div>
-                  <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">
-                    Nguyên liệu cần đến Lv. 90:
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+                      Nguyên liệu cần đến Lv. 90:
+                    </span>
+                    {currentCharLevel >= 90 && (
+                      <span className="text-[10px] font-bold text-emerald-400 bg-emerald-500/15 px-2 py-0.5 rounded-full border border-emerald-500/30">
+                        Đã tối đa
+                      </span>
+                    )}
                   </div>
                   <div className="grid grid-cols-2 gap-2 text-xs">
                     {/* Sách Kinh Nghiệm Anh Hùng */}

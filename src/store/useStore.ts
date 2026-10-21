@@ -263,14 +263,47 @@ export const useStore = create<AppState>()(
                 return b.constellation - a.constellation;
               });
 
-              set((state) => ({
-                characters: transformed,
-                selectedCharacterId:
-                  transformed.some((c) => c.id === state.selectedCharacterId && state.selectedCharacterId.startsWith('char-hoyo-'))
-                    ? state.selectedCharacterId
-                    : transformed[0]?.id || state.selectedCharacterId,
-                characterFetchLoading: false,
-              }));
+              set((state) => {
+                // Auto-sync characterTrees with fresh live HoYoLAB character levels and stats
+                const updatedCharacterTrees = state.characterTrees.map((tree) => {
+                  const matchedHoyo = transformed.find(
+                    (c) =>
+                      c.id === tree.characterId ||
+                      c.nameVi.toLowerCase() === tree.characterName.toLowerCase() ||
+                      c.name.toLowerCase() === tree.characterName.toLowerCase()
+                  );
+                  if (!matchedHoyo) return tree;
+
+                  const newLevel = matchedHoyo.level || tree.level || 1;
+                  const levelCost = calculateLevelTo90Cost(newLevel, 90);
+
+                  return {
+                    ...tree,
+                    avatarUrl: matchedHoyo.icon || tree.avatarUrl,
+                    constellation: matchedHoyo.constellation ?? tree.constellation,
+                    level: newLevel,
+                    levelBranch: {
+                      ...tree.levelBranch,
+                      currentLevel: newLevel,
+                      heroWitNeeded: levelCost.heroWit,
+                      moraNeeded: levelCost.mora,
+                      bossDropNeeded: levelCost.bossDrops,
+                      specialtyNeeded: levelCost.localSpecialty,
+                      isCompleted: tree.levelBranch.isCompleted || newLevel >= 90,
+                    },
+                  };
+                });
+
+                return {
+                  characters: transformed,
+                  characterTrees: updatedCharacterTrees,
+                  selectedCharacterId:
+                    transformed.some((c) => c.id === state.selectedCharacterId && state.selectedCharacterId.startsWith('char-hoyo-'))
+                      ? state.selectedCharacterId
+                      : transformed[0]?.id || state.selectedCharacterId,
+                  characterFetchLoading: false,
+                };
+              });
             } else {
               set({ characterFetchLoading: false });
             }
@@ -955,6 +988,36 @@ export const useStore = create<AppState>()(
     {
       name: 'genshin-note-storage',
       storage: createJSONStorage(() => localStorage),
+      onRehydrateStorage: () => (state) => {
+        if (!state || !state.characters || !state.characterTrees) return;
+        // Auto-sync characterTrees with characters in-game levels upon rehydration from storage
+        state.characterTrees = state.characterTrees.map((tree) => {
+          const matchedChar = state.characters.find(
+            (c) =>
+              c.id === tree.characterId ||
+              c.nameVi.toLowerCase() === tree.characterName.toLowerCase() ||
+              c.name.toLowerCase() === tree.characterName.toLowerCase()
+          );
+          if (!matchedChar) return tree;
+          const newLevel = matchedChar.level || tree.level || 1;
+          const levelCost = calculateLevelTo90Cost(newLevel, 90);
+          return {
+            ...tree,
+            level: newLevel,
+            avatarUrl: matchedChar.icon || tree.avatarUrl,
+            constellation: matchedChar.constellation ?? tree.constellation,
+            levelBranch: {
+              ...tree.levelBranch,
+              currentLevel: newLevel,
+              heroWitNeeded: levelCost.heroWit,
+              moraNeeded: levelCost.mora,
+              bossDropNeeded: levelCost.bossDrops,
+              specialtyNeeded: levelCost.localSpecialty,
+              isCompleted: tree.levelBranch.isCompleted || newLevel >= 90,
+            },
+          };
+        });
+      },
     }
   )
 );
