@@ -13,6 +13,7 @@ import {
   TrendingUp,
   Award,
   Zap,
+  BookOpen,
   Search,
 } from 'lucide-react';
 import { useStore } from '../store/useStore';
@@ -21,6 +22,7 @@ import {
   calculatePityInfo,
   calculateCapturingRadianceInfo,
   calculateWishSummary,
+  BANNER_NAMES,
 } from '../data/wishData';
 import { AddWishModal } from './AddWishModal';
 
@@ -34,6 +36,7 @@ export const WishTrackerView: React.FC = () => {
     incrementWishPity,
     toggleWishGuarantee,
     setCapturingRadianceStreak,
+    setFatePoints,
     deleteWishRecord,
     clearWishHistory,
   } = useStore();
@@ -148,7 +151,7 @@ export const WishTrackerView: React.FC = () => {
           }`}
         >
           <Sparkles className="w-3.5 h-3.5 text-amber-300" />
-          <span>Nhân Vật Sự Kiện</span>
+          <span>Nhân Vật</span>
           <span className="text-[10px] px-1.5 py-0.2 rounded-md bg-white/20 text-white font-extrabold">
             {wishBannerStats.character.currentPity}/90
           </span>
@@ -163,7 +166,7 @@ export const WishTrackerView: React.FC = () => {
           }`}
         >
           <Zap className="w-3.5 h-3.5 text-amber-300" />
-          <span>Vũ Khí Sự Kiện</span>
+          <span>Vũ Khí</span>
           <span className="text-[10px] px-1.5 py-0.2 rounded-md bg-white/20 text-white font-extrabold">
             {wishBannerStats.weapon.currentPity}/80
           </span>
@@ -178,9 +181,24 @@ export const WishTrackerView: React.FC = () => {
           }`}
         >
           <Award className="w-3.5 h-3.5 text-cyan-300" />
-          <span>Tiêu Chuẩn</span>
+          <span>Thường</span>
           <span className="text-[10px] px-1.5 py-0.2 rounded-md bg-white/20 text-white font-extrabold">
             {wishBannerStats.standard.currentPity}/90
+          </span>
+        </button>
+
+        <button
+          onClick={() => setActiveWishBanner('chronicled')}
+          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
+            activeWishBanner === 'chronicled'
+              ? 'bg-gradient-to-r from-teal-500/90 to-emerald-600/90 text-white shadow-[0_4px_16px_rgba(20,184,166,0.35)] scale-[1.02]'
+              : 'text-slate-400 hover:text-white hover:bg-white/[0.04]'
+          }`}
+        >
+          <BookOpen className="w-3.5 h-3.5 text-teal-300" />
+          <span>Sử Ký</span>
+          <span className="text-[10px] px-1.5 py-0.2 rounded-md bg-white/20 text-white font-extrabold">
+            {wishBannerStats.chronicled.currentPity}/90
           </span>
         </button>
       </div>
@@ -201,7 +219,13 @@ export const WishTrackerView: React.FC = () => {
                     Bộ Đếm Pity Hiện Tại
                   </h3>
                   <span className="text-[11px] text-slate-400">
-                    {activeWishBanner === 'weapon' ? 'Vũ khí (Tối đa 80)' : 'Nhân vật (Tối đa 90)'}
+                    {activeWishBanner === 'weapon'
+                      ? 'Vũ khí (Tối đa 80)'
+                      : activeWishBanner === 'chronicled'
+                      ? 'Sử Ký (Tối đa 90)'
+                      : activeWishBanner === 'standard'
+                      ? 'Thường (Tối đa 90)'
+                      : 'Nhân vật (Tối đa 90)'}
                   </span>
                 </div>
               </div>
@@ -218,7 +242,15 @@ export const WishTrackerView: React.FC = () => {
                   title="Nhấn để đổi trạng thái có/không có bảo hiểm"
                 >
                   <Shield className="w-3.5 h-3.5" />
-                  <span>{currentStats.isGuaranteed ? 'Có Bảo Hiểm' : '50/50'}</span>
+                  <span>
+                    {activeWishBanner === 'chronicled'
+                      ? currentStats.isGuaranteed
+                        ? 'Có Định Mệnh'
+                        : 'Chưa Có'
+                      : currentStats.isGuaranteed
+                      ? 'Có Bảo Hiểm'
+                      : '50/50'}
+                  </span>
                 </button>
               )}
             </div>
@@ -435,8 +467,8 @@ export const WishTrackerView: React.FC = () => {
               </div>
             </div>
           </div>
-        ) : (
-          /* Weapon / Standard Alternate Info Card */
+        ) : activeWishBanner === 'weapon' ? (
+          /* Weapon Banner Info Card */
           <div className="liquid-glass rounded-3xl p-5 border border-white/[0.12] flex flex-col justify-between shadow-[0_10px_30px_rgba(0,0,0,0.35)]">
             <div className="space-y-3">
               <div className="flex items-center gap-2">
@@ -445,40 +477,157 @@ export const WishTrackerView: React.FC = () => {
                 </div>
                 <div>
                   <h3 className="text-xs font-bold uppercase tracking-wider text-slate-300">
-                    {activeWishBanner === 'weapon' ? 'Định Mệnh Vũ Khí (5.0)' : 'Cầu Nguyện Tiêu Chuẩn'}
+                    Định Mệnh Vũ Khí (5.0)
                   </h3>
                   <span className="text-[11px] text-slate-400">
-                    {activeWishBanner === 'weapon' ? 'Tối đa 1 Điểm Định Mệnh' : 'Danh sách vĩnh viễn'}
+                    Tối đa 1 Điểm Định Mệnh
                   </span>
                 </div>
               </div>
 
-              {activeWishBanner === 'weapon' ? (
-                <div className="p-3.5 rounded-2xl bg-black/30 border border-white/[0.08] space-y-2">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="text-slate-300">Điểm Định Mệnh (Fate Points):</span>
-                    <span className="font-extrabold text-amber-300">
-                      {currentStats.fatePoints || 0} / 1
-                    </span>
-                  </div>
-                  <p className="text-xs text-slate-300 leading-relaxed">
-                    Từ bản 5.0, Định Mệnh Vũ Khí đã được giảm từ 2 điểm xuống còn <strong>1 điểm</strong>. Nếu lần đầu ra vũ khí 5★ không trúng định mệnh, lần kế tiếp 100% là vũ khí bạn đã chọn!
-                  </p>
+              <div className="p-3.5 rounded-2xl bg-black/30 border border-white/[0.08] space-y-2">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-slate-300">Điểm Định Mệnh (Fate Points):</span>
+                  <span className={`font-extrabold px-2 py-0.5 rounded-md border ${
+                    currentStats.fatePoints === 1
+                      ? 'bg-amber-500/30 text-amber-200 border-amber-400/50'
+                      : 'bg-white/[0.05] text-slate-300 border-white/[0.1]'
+                  }`}>
+                    {currentStats.fatePoints || 0} / 1
+                  </span>
                 </div>
-              ) : (
-                <div className="p-3.5 rounded-2xl bg-black/30 border border-white/[0.08] space-y-2">
-                  <p className="text-xs text-slate-300 leading-relaxed">
-                    Banner Tiêu Chuẩn bao gồm 7 nhân vật 5★ (Diluc, Jean, Mona, Keqing, Qiqi, Tighnari, Dehya) và 10 vũ khí 5★ dòng Thiên Không & nguyên bản.
-                  </p>
-                  <div className="text-xs text-indigo-300 font-semibold">
-                    Quy tắc 90 roll đảm bảo vật phẩm 5★!
-                  </div>
+                <div className="text-sm font-bold text-white">
+                  {currentStats.fatePoints === 1
+                    ? '✨ 100% Chắc Chắn Ra Vũ Khí Định Mệnh!'
+                    : 'Đang trong kỳ 50/50 vũ khí'}
                 </div>
-              )}
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  Từ bản 5.0, Định Mệnh Vũ Khí đã được giảm từ 2 điểm xuống còn <strong>1 điểm</strong>. Nếu lần đầu ra vũ khí 5★ không trúng định mệnh, lần kế tiếp 100% là vũ khí bạn đã chọn!
+                </p>
+              </div>
+
+              {/* Quick toggle Fate point */}
+              <div className="flex items-center justify-between text-xs pt-1">
+                <span className="text-slate-400 text-[11px]">Gán Điểm Định Mệnh:</span>
+                <div className="flex items-center gap-1.5">
+                  {[0, 1].map((pt) => (
+                    <button
+                      key={pt}
+                      onClick={() => setFatePoints('weapon', pt)}
+                      className={`px-2.5 py-1 rounded-lg text-xs font-bold border transition-colors cursor-pointer ${
+                        (currentStats.fatePoints || 0) === pt
+                          ? 'bg-amber-500/30 border-amber-400 text-amber-200'
+                          : 'bg-white/[0.04] border-white/[0.08] text-slate-400 hover:text-white'
+                      }`}
+                    >
+                      {pt} Điểm {pt === 1 ? '(Bảo Hiểm)' : ''}
+                    </button>
+                  ))}
+                </div>
+              </div>
             </div>
 
-            <div className="pt-3 border-t border-white/[0.08] text-xs text-slate-400">
-              Mẹo: Dùng Mối Duyên Tương Ngộ (xanh) cho Banner Tiêu Chuẩn.
+            <div className="pt-3 border-t border-white/[0.08] text-xs text-slate-400 flex items-center justify-between">
+              <span>Loại Duyên:</span>
+              <span className="text-slate-300 font-semibold">Mối Duyên Vương Vấn (Hồng)</span>
+            </div>
+          </div>
+        ) : activeWishBanner === 'chronicled' ? (
+          /* Chronicled Banner (Sử Ký) Info Card */
+          <div className="liquid-glass rounded-3xl p-5 border border-teal-500/25 flex flex-col justify-between shadow-[0_10px_30px_rgba(20,184,166,0.2)]">
+            <div className="space-y-3">
+              <div className="flex items-center gap-2">
+                <div className="w-7 h-7 rounded-xl bg-teal-500/20 text-teal-300 border border-teal-500/30 flex items-center justify-center font-bold text-xs">
+                  <BookOpen className="w-4 h-4" />
+                </div>
+                <div>
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-teal-300">
+                    Định Mệnh Sử Ký (1 Điểm Định Mệnh)
+                  </h3>
+                  <span className="text-[11px] text-slate-400">
+                    Cầu Nguyện Sử Ký (Chronicled Wish)
+                  </span>
+                </div>
+              </div>
+
+              <div className="p-3.5 rounded-2xl bg-black/30 border border-teal-500/20 space-y-2">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-slate-300">Điểm Định Mệnh:</span>
+                  <span className={`font-extrabold px-2 py-0.5 rounded-md border ${
+                    currentStats.fatePoints === 1
+                      ? 'bg-teal-500/30 text-teal-200 border-teal-400/50'
+                      : 'bg-white/[0.05] text-slate-300 border-white/[0.1]'
+                  }`}>
+                    {currentStats.fatePoints || 0} / 1
+                  </span>
+                </div>
+                <div className="text-sm font-bold text-white">
+                  {currentStats.fatePoints === 1
+                    ? '✨ 100% Chắc Chắn Ra Mục Tiêu Đã Chọn!'
+                    : 'Đang trong kỳ 50/50 mục tiêu'}
+                </div>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  Khi chọn Định Mệnh 1 nhân vật hoặc vũ khí, nếu nổ 5★ không phải mục tiêu đó, bạn sẽ nhận 1 Điểm Định Mệnh. Lần nổ 5★ tiếp theo chắc chắn 100% là mục tiêu đã chọn!
+                </p>
+              </div>
+
+              {/* Quick toggle Fate point */}
+              <div className="flex items-center justify-between text-xs pt-1">
+                <span className="text-slate-400 text-[11px]">Gán Điểm Định Mệnh:</span>
+                <div className="flex items-center gap-1.5">
+                  {[0, 1].map((pt) => (
+                    <button
+                      key={pt}
+                      onClick={() => setFatePoints('chronicled', pt)}
+                      className={`px-2.5 py-1 rounded-lg text-xs font-bold border transition-colors cursor-pointer ${
+                        (currentStats.fatePoints || 0) === pt
+                          ? 'bg-teal-500/30 border-teal-400 text-teal-200'
+                          : 'bg-white/[0.04] border-white/[0.08] text-slate-400 hover:text-white'
+                      }`}
+                    >
+                      {pt} Điểm {pt === 1 ? '(Bảo Hiểm)' : ''}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="pt-3 border-t border-white/[0.08] text-xs text-slate-400 flex items-center justify-between">
+              <span>Loại Duyên:</span>
+              <span className="text-slate-300 font-semibold">Mối Duyên Vương Vấn (Hồng)</span>
+            </div>
+          </div>
+        ) : (
+          /* Standard Banner (Thường) Info Card */
+          <div className="liquid-glass rounded-3xl p-5 border border-white/[0.12] flex flex-col justify-between shadow-[0_10px_30px_rgba(0,0,0,0.35)]">
+            <div className="space-y-3">
+              <div className="flex items-center gap-2">
+                <div className="w-7 h-7 rounded-xl bg-blue-500/20 text-cyan-300 border border-blue-500/30 flex items-center justify-center font-bold text-xs">
+                  <Award className="w-4 h-4" />
+                </div>
+                <div>
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-slate-300">
+                    Cầu Nguyện Thường
+                  </h3>
+                  <span className="text-[11px] text-slate-400">
+                    Danh sách nhân vật & vũ khí vĩnh viễn
+                  </span>
+                </div>
+              </div>
+
+              <div className="p-3.5 rounded-2xl bg-black/30 border border-white/[0.08] space-y-2">
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  Banner Thường bao gồm 7 nhân vật 5★ (Diluc, Jean, Mona, Keqing, Qiqi, Tighnari, Dehya) và 10 vũ khí 5★ dòng Thiên Không & nguyên bản.
+                </p>
+                <div className="text-xs text-indigo-300 font-semibold">
+                  Quy tắc 90 roll đảm bảo nhận vật phẩm 5★!
+                </div>
+              </div>
+            </div>
+
+            <div className="pt-3 border-t border-white/[0.08] text-xs text-slate-400 flex items-center justify-between">
+              <span>Loại Duyên:</span>
+              <span className="text-slate-300 font-semibold">Mối Duyên Tương Ngộ (Xanh)</span>
             </div>
           </div>
         )}
@@ -619,12 +768,7 @@ export const WishTrackerView: React.FC = () => {
               Nhật Ký 5★ ({filteredHistory.length})
             </h2>
             <span className="text-xs text-slate-400">
-              — Banner{' '}
-              {activeWishBanner === 'character'
-                ? 'Nhân Vật Sự Kiện'
-                : activeWishBanner === 'weapon'
-                ? 'Vũ Khí Sự Kiện'
-                : 'Tiêu Chuẩn'}
+              — Banner {BANNER_NAMES[activeWishBanner]}
             </span>
           </div>
 

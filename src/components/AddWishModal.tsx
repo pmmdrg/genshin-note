@@ -116,6 +116,29 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
             (s) => s.toLowerCase() === w.name.toLowerCase() || s.toLowerCase() === w.nameVi.toLowerCase()
           ),
         }));
+    } else if (bannerType === 'chronicled') {
+      // Chronicled Banner (Sử Ký): all 5★ characters and all 5★ weapons
+      const allChars = fiveStarCharacters.map((c) => ({
+        name: c.name,
+        nameVi: c.nameVi,
+        icon: c.avatarUrl,
+        itemType: 'character' as const,
+        isStandard: false,
+      }));
+      const allWeapons = fiveStarWeapons.map((w) => ({
+        name: w.name,
+        nameVi: w.nameVi,
+        icon: w.avatarUrl,
+        itemType: 'weapon' as const,
+        isStandard: false,
+      }));
+      const combined = [...allChars, ...allWeapons];
+      return combined.filter(
+        (i) =>
+          !query ||
+          i.name.toLowerCase().includes(query) ||
+          i.nameVi.toLowerCase().includes(query)
+      );
     } else {
       // Standard Banner: combine standard characters and standard weapons
       const standardChars = fiveStarCharacters
@@ -233,7 +256,7 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
             <label className="block text-xs font-semibold text-slate-300 mb-1.5 uppercase tracking-wider">
               Loại Banner Cầu Nguyện
             </label>
-            <div className="grid grid-cols-3 gap-2">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
               <button
                 type="button"
                 onClick={() => {
@@ -248,7 +271,7 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
                     : 'bg-white/[0.04] text-slate-400 border-white/[0.08] hover:bg-white/[0.08] hover:text-white'
                 }`}
               >
-                Nhân Vật Sự Kiện
+                Nhân Vật
               </button>
               <button
                 type="button"
@@ -265,7 +288,7 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
                     : 'bg-white/[0.04] text-slate-400 border-white/[0.08] hover:bg-white/[0.08] hover:text-white'
                 }`}
               >
-                Vũ Khí Sự Kiện
+                Vũ Khí
               </button>
               <button
                 type="button"
@@ -282,7 +305,24 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
                     : 'bg-white/[0.04] text-slate-400 border-white/[0.08] hover:bg-white/[0.08] hover:text-white'
                 }`}
               >
-                Tiêu Chuẩn
+                Thường
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setBannerType('chronicled');
+                  setSearchQuery('');
+                  setSelectedItemName('Jean');
+                  setIsRateUp(true);
+                  setIsCapturingRadiance(false);
+                }}
+                className={`py-2 px-3 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
+                  bannerType === 'chronicled'
+                    ? 'bg-gradient-to-r from-teal-500/80 to-emerald-600/80 text-white border-teal-400/40 shadow-[0_0_15px_rgba(20,184,166,0.3)]'
+                    : 'bg-white/[0.04] text-slate-400 border-white/[0.08] hover:bg-white/[0.08] hover:text-white'
+                }`}
+              >
+                Sử Ký
               </button>
             </div>
           </div>
@@ -422,7 +462,7 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
             <div className="p-3.5 rounded-2xl bg-black/25 border border-white/[0.08] space-y-3">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-semibold text-slate-300 uppercase tracking-wider">
-                  Kết Quả 50/50:
+                  {bannerType === 'chronicled' ? 'Kết Quả Định Mệnh:' : 'Kết Quả 50/50:'}
                 </span>
                 <div className="flex items-center gap-2">
                   <button
@@ -436,7 +476,7 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
                         : 'bg-white/[0.04] text-slate-400 border-white/[0.08]'
                     }`}
                   >
-                    ✓ Trúng Rate
+                    {bannerType === 'chronicled' ? '✓ Trúng Mục Tiêu' : '✓ Trúng Rate'}
                   </button>
                   <button
                     type="button"
@@ -450,7 +490,7 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
                         : 'bg-white/[0.04] text-slate-400 border-white/[0.08]'
                     }`}
                   >
-                    ✕ Lệch Rate
+                    {bannerType === 'chronicled' ? '✕ Lệch Mục Tiêu' : '✕ Lệch Rate'}
                   </button>
                 </div>
               </div>
@@ -511,7 +551,11 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
               <div className="flex items-center justify-between pt-1">
                 <div className="flex items-center gap-1.5 text-xs text-slate-300">
                   <Shield className="w-3.5 h-3.5 text-indigo-400" />
-                  <span>Lúc quay đã có sẵn bảo hiểm 100%?</span>
+                  <span>
+                    {bannerType === 'chronicled'
+                      ? 'Lúc quay đã có sẵn 1 Điểm Định Mệnh?'
+                      : 'Lúc quay đã có sẵn bảo hiểm 100%?'}
+                  </span>
                 </div>
                 <button
                   type="button"
@@ -522,7 +566,13 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
                       : 'bg-white/[0.04] border-white/[0.08] text-slate-400'
                   }`}
                 >
-                  {isGuaranteed ? 'Có Bảo Hiểm' : 'Không (50/50)'}
+                  {bannerType === 'chronicled'
+                    ? isGuaranteed
+                      ? 'Có Định Mệnh'
+                      : 'Chưa Có'
+                    : isGuaranteed
+                    ? 'Có Bảo Hiểm'
+                    : 'Không (50/50)'}
                 </button>
               </div>
             </div>

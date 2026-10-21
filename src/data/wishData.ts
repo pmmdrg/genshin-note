@@ -1,5 +1,12 @@
 import type { WishBannerType, WishBannerStats, WishRecord } from '../types';
 
+export const BANNER_NAMES: Record<WishBannerType, string> = {
+  character: 'Nhân Vật',
+  weapon: 'Vũ Khí',
+  standard: 'Thường',
+  chronicled: 'Sử Ký',
+};
+
 export const STANDARD_5STAR_CHARACTERS = [
   'Diluc',
   'Jean',

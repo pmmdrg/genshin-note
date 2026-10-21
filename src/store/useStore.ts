@@ -101,6 +101,7 @@ interface AppState {
   toggleWishGuarantee: (banner: WishBannerType) => void;
   setCapturingRadianceStreak: (streak: number) => void;
   setWeaponFatePoints: (points: number) => void;
+  setFatePoints: (banner: 'weapon' | 'chronicled', points: number) => void;
   addWishRecord: (record: Omit<WishRecord, 'id'>, autoResetPity?: boolean) => void;
   updateWishRecord: (id: string, updates: Partial<WishRecord>) => void;
   deleteWishRecord: (id: string) => void;
@@ -1081,6 +1082,20 @@ export const useStore = create<AppState>()(
           };
         }),
 
+      setFatePoints: (banner, points) =>
+        set((state) => {
+          const currentStats = state.wishBannerStats?.[banner] || DEFAULT_BANNER_STATS[banner];
+          return {
+            wishBannerStats: {
+              ...(state.wishBannerStats || DEFAULT_BANNER_STATS),
+              [banner]: {
+                ...currentStats,
+                fatePoints: Math.max(0, Math.min(1, points)),
+              },
+            },
+          };
+        }),
+
       addWishRecord: (record, autoResetPity = true) =>
         set((state) => {
           const newRecord: WishRecord = {
@@ -1110,13 +1125,13 @@ export const useStore = create<AppState>()(
                 (currentStats.capturingRadianceLossStreak || 0) + 1
               );
             }
-          } else if (banner === 'weapon') {
+          } else if (banner === 'weapon' || banner === 'chronicled') {
             if (record.isRateUp) {
               updatedStats.isGuaranteed = false;
               updatedStats.fatePoints = 0;
             } else {
               updatedStats.isGuaranteed = true;
-              updatedStats.fatePoints = Math.min(1, (currentStats.fatePoints || 0) + 1);
+              updatedStats.fatePoints = 1;
             }
           }
 
