@@ -14,7 +14,9 @@ import {
   BookOpen,
   Search,
 } from 'lucide-react';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { useStore } from '../store/useStore';
+import { useDebounce } from '../hooks/useDebounce';
 import type { WishRecord } from '../types';
 import {
   calculatePityInfo,
@@ -47,8 +49,14 @@ export const WishTrackerView: React.FC = () => {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [editingWish, setEditingWish] = useState<WishRecord | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const debouncedSearch = useDebounce(searchQuery, 150);
   const [filterType, setFilterType] = useState<'all' | 'rateUp' | 'radiance' | 'lost'>('all');
   const [confirmClear, setConfirmClear] = useState(false);
+
+  const [historyGridRef] = useAutoAnimate<HTMLDivElement>({
+    duration: 220,
+    easing: 'cubic-bezier(0.25, 1, 0.5, 1)',
+  });
 
   // Current banner stats
   const currentStats = wishBannerStats[activeWishBanner] || {
@@ -86,7 +94,7 @@ export const WishTrackerView: React.FC = () => {
   // Filtered wish history (accent-insensitive search)
   const filteredHistory = useMemo(() => {
     const list = wishHistory.filter((r) => r.bannerType === activeWishBanner);
-    const qClean = removeAccents(searchQuery.trim());
+    const qClean = removeAccents(debouncedSearch.trim());
 
     return list.filter((r) => {
       // Query filter
@@ -113,7 +121,7 @@ export const WishTrackerView: React.FC = () => {
       }
       return true;
     });
-  }, [wishHistory, activeWishBanner, searchQuery, filterType]);
+  }, [wishHistory, activeWishBanner, debouncedSearch, filterType]);
 
   const handleOpenAddModal = (wish?: WishRecord) => {
     setEditingWish(wish || null);
@@ -813,7 +821,10 @@ export const WishTrackerView: React.FC = () => {
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
+          <div
+            ref={historyGridRef}
+            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3"
+          >
             {filteredHistory.map((item, index) => {
               // Pity color assessment
               const isEarly = item.pity < 50;
@@ -822,7 +833,7 @@ export const WishTrackerView: React.FC = () => {
               return (
                 <div
                   key={item.id}
-                  className={`liquid-glass rounded-2xl p-3 border transition-all relative overflow-hidden group hover:border-white/20 hover:shadow-[0_8px_25px_rgba(0,0,0,0.5)] flex flex-col justify-between ${
+                  className={`liquid-glass rounded-2xl p-3 border transition-colors duration-200 relative overflow-hidden group hover:border-white/20 hover:shadow-[0_8px_25px_rgba(0,0,0,0.5)] flex flex-col justify-between ${
                     item.isCapturingRadiance
                       ? 'border-pink-500/40 radiance-card-glow'
                       : !item.isRateUp && item.bannerType !== 'standard'

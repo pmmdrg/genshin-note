@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { X, Sparkles, CheckCircle2, XCircle, Search } from 'lucide-react';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { useStore } from '../store/useStore';
 import { useDebounce } from '../hooks/useDebounce';
 import type { WishBannerType, WishRecord } from '../types';
@@ -94,7 +95,7 @@ const GachaItemCard = React.memo<GachaCardProps>(
       <button
         type="button"
         onClick={() => onSelect({ name, nameVi })}
-        className={`relative p-1.5 rounded-xl flex flex-col items-center gap-1 transition-all cursor-pointer text-center group ${
+        className={`relative p-1.5 rounded-xl flex flex-col items-center gap-1 transition-colors duration-200 cursor-pointer text-center group ${
           isSelected
             ? 'bg-amber-500/25 border-2 border-amber-400 shadow-[0_0_14px_rgba(245,158,11,0.4)] scale-105'
             : 'bg-white/[0.03] border border-white/[0.06] hover:bg-white/[0.08]'
@@ -130,6 +131,11 @@ GachaItemCard.displayName = 'GachaItemCard';
 
 const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBanner }) => {
   const { addWishRecord, updateWishRecord, wishBannerStats, wishHistory } = useStore();
+
+  const [gridRef] = useAutoAnimate<HTMLDivElement>({
+    duration: 220,
+    easing: 'cubic-bezier(0.25, 1, 0.5, 1)',
+  });
 
   const bannerType: WishBannerType = editingWish?.bannerType || defaultBanner || 'character';
 
@@ -372,8 +378,11 @@ const AddWishDialog: React.FC<DialogProps> = ({ onClose, editingWish, defaultBan
               </div>
             </div>
 
-            {/* Selection Grid (Optimized with React.memo and lazy decoding) */}
-            <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2 min-h-[200px] max-h-64 sm:max-h-72 overflow-y-auto p-2 rounded-2xl bg-black/25 border border-white/[0.06]">
+            {/* Selection Grid (Optimized with React.memo, lazy decoding and smooth layout animation) */}
+            <div
+              ref={gridRef}
+              className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2 min-h-[200px] max-h-64 sm:max-h-72 overflow-y-auto p-2 rounded-2xl bg-black/25 border border-white/[0.06]"
+            >
               {selectableItems.length === 0 ? (
                 <div className="col-span-full py-8 text-center text-xs text-slate-400 space-y-1">
                   <div>Không tìm thấy vật phẩm 5★ nào khớp với &quot;{debouncedSearch}&quot;</div>
