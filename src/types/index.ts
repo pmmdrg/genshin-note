@@ -239,7 +239,7 @@ export interface WishRecord {
   nameVi: string;
   icon: string;
   itemType: 'character' | 'weapon';
-  rarity: 5;
+  rarity: 4 | 5;
   bannerType: WishBannerType;
   pity: number; // số roll từ 5★ trước đến 5★ này (1 - 90)
   date: string; // YYYY-MM-DD

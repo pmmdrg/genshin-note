@@ -854,14 +854,19 @@ export const WishTrackerView: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
             {filteredHistory.map((item, index) => {
               // Pity color assessment
-              const isEarly = item.pity < 50;
-              const isNormal = item.pity >= 50 && item.pity < pityInfo.softPityStart;
+              const is4Star = item.rarity === 4;
+              const isEarly = is4Star ? item.pity <= 5 : item.pity < 50;
+              const isNormal = is4Star
+                ? item.pity > 5 && item.pity <= 8
+                : item.pity >= 50 && item.pity < pityInfo.softPityStart;
 
               return (
                 <div
                   key={item.id}
                   className={`liquid-glass rounded-2xl p-4 border transition-all relative overflow-hidden group hover:border-white/20 hover:shadow-[0_8px_25px_rgba(0,0,0,0.5)] ${
-                    item.isCapturingRadiance
+                    is4Star
+                      ? 'border-purple-500/30'
+                      : item.isCapturingRadiance
                       ? 'border-pink-500/40 radiance-card-glow'
                       : !item.isRateUp && item.bannerType !== 'standard'
                       ? 'border-rose-500/30'
@@ -871,7 +876,13 @@ export const WishTrackerView: React.FC = () => {
                   <div className="flex items-start justify-between gap-3">
                     {/* Item Avatar & Details */}
                     <div className="flex items-center gap-3">
-                      <div className="relative w-14 h-14 rounded-2xl overflow-hidden bg-black/40 border border-amber-400/40 shrink-0 shadow-[0_0_12px_rgba(245,158,11,0.25)]">
+                      <div
+                        className={`relative w-14 h-14 rounded-2xl overflow-hidden bg-black/40 border shrink-0 ${
+                          is4Star
+                            ? 'border-purple-400/50 shadow-[0_0_12px_rgba(168,85,247,0.3)]'
+                            : 'border-amber-400/40 shadow-[0_0_12px_rgba(245,158,11,0.25)]'
+                        }`}
+                      >
                         <img
                           src={item.icon}
                           alt={item.nameVi}
@@ -884,6 +895,11 @@ export const WishTrackerView: React.FC = () => {
                           <h4 className="text-sm font-bold text-white leading-tight">
                             {item.nameVi || item.name}
                           </h4>
+                          {is4Star && (
+                            <span className="text-[10px] font-extrabold px-1.5 py-0.2 rounded-md bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                              4★
+                            </span>
+                          )}
                         </div>
                         <div className="text-[11px] text-slate-400">
                           {item.name !== item.nameVi ? item.name : ''}
@@ -906,7 +922,7 @@ export const WishTrackerView: React.FC = () => {
                         {item.pity}
                       </div>
                       <div className="text-[9px] font-bold text-slate-500 uppercase mt-0.5 tracking-wider">
-                        {isEarly ? 'May Mắn!' : isNormal ? 'Bình Thường' : 'Soft Pity'}
+                        {isEarly ? 'May Mắn!' : isNormal ? 'Bình Thường' : is4Star ? 'Pity Cao' : 'Soft Pity'}
                       </div>
                     </div>
                   </div>
@@ -923,6 +939,10 @@ export const WishTrackerView: React.FC = () => {
                         }`}
                       >
                         {item.itemType === 'character' ? 'Nhân Vật' : 'Vũ Khí'}
+                      </span>
+                    ) : is4Star ? (
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-lg bg-purple-500/20 text-purple-300 border border-purple-500/30 flex items-center gap-1">
+                        <span>{item.itemType === 'character' ? '4★ Nhân Vật' : '4★ Vũ Khí'}</span>
                       </span>
                     ) : item.isCapturingRadiance ? (
                       <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-lg radiance-badge text-white flex items-center gap-1">
