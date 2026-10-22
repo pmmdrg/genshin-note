@@ -78,6 +78,23 @@ export const WishTrackerView: React.FC = () => {
     return calculateWishSummary(wishHistory, activeWishBanner);
   }, [wishHistory, activeWishBanner]);
 
+  // Tổng số roll và nguyên thạch đã bỏ ra (Nhân Vật, Vũ Khí, Sử Ký - loại trừ banner Thường)
+  const limitedRollsStats = useMemo(() => {
+    const historyRolls = wishHistory
+      .filter((r) => r.bannerType !== 'standard')
+      .reduce((sum, r) => sum + (r.pity || 0), 0);
+
+    const currentPityRolls =
+      (wishBannerStats.character?.currentPity || 0) +
+      (wishBannerStats.weapon?.currentPity || 0) +
+      (wishBannerStats.chronicled?.currentPity || 0);
+
+    const totalRolls = historyRolls + currentPityRolls;
+    const totalPrimos = totalRolls * 160;
+
+    return { totalRolls, totalPrimos };
+  }, [wishHistory, wishBannerStats]);
+
   // Determine if player has guarantee based on last record in history
   const lastBannerRecord = useMemo(() => {
     return wishHistory.find((r) => r.bannerType === activeWishBanner);
@@ -137,10 +154,17 @@ export const WishTrackerView: React.FC = () => {
             <Sparkles className="w-5 h-5 animate-pulse" />
           </div>
           <div>
-            <h1 className="text-xl sm:text-2xl font-black tracking-tight text-white flex items-center gap-2">
+            <h1 className="text-xl sm:text-2xl font-black tracking-tight text-white flex items-center gap-2.5 flex-wrap">
               <span>Lịch Sử Cầu Nguyện</span>
-              <span className="text-[11px] font-extrabold px-2 py-0.5 rounded-full radiance-badge text-white">
-                5.0+ Bắt Lấy Ánh Sáng
+              <span
+                className="text-xs sm:text-sm font-bold px-3 py-1 rounded-full bg-gradient-to-r from-amber-500/20 via-orange-500/20 to-amber-500/20 border border-amber-400/40 text-amber-300 inline-flex items-center gap-1.5 shadow-[0_0_16px_rgba(245,158,11,0.2)]"
+                title="Tổng số roll và Nguyên Thạch đã dùng trên 3 banner (Nhân Vật, Vũ Khí, Sử Ký) - loại trừ banner Thường"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                <span>{limitedRollsStats.totalRolls.toLocaleString()} roll</span>
+                <span className="text-slate-300 font-medium text-[11px] sm:text-xs">
+                  ({limitedRollsStats.totalPrimos.toLocaleString()} Nguyên Thạch)
+                </span>
               </span>
             </h1>
           </div>
