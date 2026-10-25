@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import type { TaskGoal, HoyoDailyNote, UserCharacter, CharacterBranchTree, NavigationMenu, ArtifactPieceItem, WallpaperConfig, WeaponPreset, WishBannerType, WishBannerStats, WishRecord } from '../types';
+import type { TaskGoal, HoyoDailyNote, UserCharacter, CharacterBranchTree, NavigationMenu, ArtifactPieceItem, WallpaperConfig, WeaponPreset, WishBannerType, WishBannerStats, WishRecord, VersionScheduleSettings } from '../types';
 import { DEFAULT_ARTIFACT_PIECES } from '../types';
 import { USER_CHARACTERS_PRESET, CHARACTERS_DATA } from '../data/genshinData';
 import { getCharacterDefaultBuild } from '../data/characterEquipData';
@@ -107,6 +107,11 @@ interface AppState {
   deleteWishRecord: (id: string) => void;
   clearWishHistory: (banner?: WishBannerType) => void;
   resetWishBannerData: (banner: WishBannerType) => void;
+
+  // Version Schedule (Lịch Hoạt Động & Phiên Bản)
+  versionScheduleSettings: VersionScheduleSettings;
+  updateVersionScheduleSettings: (settings: Partial<VersionScheduleSettings>) => void;
+  setVersionScheduleNote: (versionId: string, notes: string) => void;
 }
 
 export const useStore = create<AppState>()(
@@ -1169,6 +1174,38 @@ export const useStore = create<AppState>()(
           },
           wishHistory: (state.wishHistory || []).filter((r) => r.bannerType !== banner),
         })),
+
+      // Version Schedule (Lịch Hoạt Động & Phiên Bản)
+      versionScheduleSettings: {
+        baseDate: '2026-11-04',
+        startingVersion: '5.2',
+        customNotes: {},
+      },
+      updateVersionScheduleSettings: (settings) =>
+        set((state) => ({
+          versionScheduleSettings: {
+            ...(state.versionScheduleSettings || {
+              baseDate: '2026-11-04',
+              startingVersion: '5.2',
+              customNotes: {},
+            }),
+            ...settings,
+          },
+        })),
+      setVersionScheduleNote: (versionId, notes) =>
+        set((state) => ({
+          versionScheduleSettings: {
+            ...(state.versionScheduleSettings || {
+              baseDate: '2026-11-04',
+              startingVersion: '5.2',
+              customNotes: {},
+            }),
+            customNotes: {
+              ...(state.versionScheduleSettings?.customNotes || {}),
+              [versionId]: notes,
+            },
+          },
+        })),
     }),
     {
       name: 'genshin-note-storage',
@@ -1180,6 +1217,13 @@ export const useStore = create<AppState>()(
         }
         if (!state.wishHistory) {
           state.wishHistory = INITIAL_WISH_HISTORY;
+        }
+        if (!state.versionScheduleSettings) {
+          state.versionScheduleSettings = {
+            baseDate: '2026-11-04',
+            startingVersion: '5.2',
+            customNotes: {},
+          };
         }
         if (!state.characters || !state.characterTrees) return;
         // Auto-sync characterTrees with characters in-game levels upon rehydration from storage

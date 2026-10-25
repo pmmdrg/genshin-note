@@ -5,6 +5,7 @@ import { CharacterRosterView } from './components/CharacterRosterView';
 import { TaskTreeTimeline } from './components/TaskTreeTimeline';
 import { CompletedList } from './components/CompletedList';
 import { WishTrackerView } from './components/WishTrackerView';
+import { VersionCalendarView } from './components/VersionCalendarView';
 import { WallpaperModal } from './components/WallpaperModal';
 import { useStore } from './store/useStore';
 import { APP_VERSION } from './version';
@@ -28,6 +29,8 @@ export const App: React.FC = () => {
       setActiveNav('completed');
     } else if (path.startsWith('/wishes')) {
       setActiveNav('wishes');
+    } else if (path.startsWith('/calendar')) {
+      setActiveNav('calendar');
     } else {
       setActiveNav('characters');
     }
@@ -87,6 +90,8 @@ export const App: React.FC = () => {
               <Route path="/timeline" element={<TaskTreeTimeline />} />
               <Route path="/completed" element={<CompletedList />} />
               <Route path="/wishes" element={<WishTrackerView />} />
+              <Route path="/calendar" element={<VersionCalendarView />} />
+              <Route path="/schedule" element={<Navigate to="/calendar" replace />} />
               <Route path="*" element={<Navigate to="/characters" replace />} />
             </Routes>
           </div>

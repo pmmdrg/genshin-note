@@ -47,6 +47,7 @@ export const Sidebar: React.FC = () => {
   const isTimeline = location.pathname.startsWith('/timeline');
   const isCompleted = location.pathname.startsWith('/completed');
   const isWishes = location.pathname.startsWith('/wishes');
+  const isCalendar = location.pathname.startsWith('/calendar') || location.pathname.startsWith('/schedule');
 
   const [showCheckInToast, setShowCheckInToast] = useState(false);
 
@@ -199,6 +200,30 @@ export const Sidebar: React.FC = () => {
               }`}
             >
               {characterPity}/90
+            </span>
+          </button>
+
+          {/* 5. Lịch Hoạt Động & Phiên Bản (/calendar) */}
+          <button
+            onClick={() => navigate('/calendar')}
+            className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-2xl text-xs font-semibold transition-all duration-300 ease-out cursor-pointer active:scale-95 ${
+              isCalendar
+                ? 'bg-gradient-to-r from-cyan-500/80 via-teal-600/80 to-blue-600/80 text-white shadow-[0_4px_16px_rgba(6,182,212,0.35)] border border-cyan-400/40 scale-[1.02]'
+                : 'text-slate-400 hover:text-cyan-300 hover:bg-white/[0.04]'
+            }`}
+          >
+            <div className="flex items-center gap-2.5">
+              <Calendar className="w-4 h-4 text-cyan-400" />
+              <span>Lịch Hoạt Động</span>
+            </div>
+            <span
+              className={`text-[10px] px-2 py-0.5 rounded-full font-bold transition-colors duration-300 ${
+                isCalendar
+                  ? 'bg-white/20 text-white'
+                  : 'bg-cyan-500/15 text-cyan-300 border border-cyan-500/25'
+              }`}
+            >
+              5 Ver
             </span>
           </button>
 

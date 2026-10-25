@@ -2,7 +2,7 @@ export type TaskCategory = 'character' | 'weapon' | 'artifact' | 'boss' | 'custo
 
 export type ElementType = 'pyro' | 'hydro' | 'anemo' | 'electro' | 'dendro' | 'cryo' | 'geo';
 
-export type NavigationMenu = 'timeline' | 'characters' | 'completed' | 'wishes';
+export type NavigationMenu = 'timeline' | 'characters' | 'completed' | 'wishes' | 'calendar';
 
 export interface FarmMaterial {
   materialName: string;
@@ -255,4 +255,10 @@ export interface WishBannerStats {
   capturingRadianceLossStreak: number; // Số lần lệch 50/50 liên tiếp (0, 1, 2)
   fatePoints?: number;
   selectedWeaponTarget?: string;
+}
+
+export interface VersionScheduleSettings {
+  baseDate: string; // ISO date format "YYYY-MM-DD" e.g. "2026-11-04"
+  startingVersion: string; // e.g. "5.2"
+  customNotes: Record<string, string>; // versionId -> notes
 }
