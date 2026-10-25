@@ -2,6 +2,8 @@
 
 Ứng dụng web cá nhân định hướng và sắp xếp thứ tự ưu tiên các mục tiêu bồi dưỡng trong **Genshin Impact** theo mô hình **Timeline & Ngăn Xếp (Stack LIFO)**.
 
+> 📖 **Quy chuẩn & Chỉ dẫn phát triển**: Xem tài liệu hướng dẫn và ngữ cảnh dự án tại [**`docs/GUIDELINES.md`**](./docs/GUIDELINES.md).
+
 ---
 
 ## 🌟 Tính Năng Nổi Bật
