@@ -4,24 +4,24 @@ Tài liệu này tổng hợp toàn bộ các quy tắc nghiệp vụ, công th�
 
 ---
 
-## 🎯 1. Lịch Hoạt Động & Phiên Bản (Version Schedule)
+## 🎯 1. Lịch Hoạt Động & Phiên Bản (Timeline & Gantt Schedule)
 
-- **Giai đoạn phiên bản hiện tại**: **Giai đoạn 7.x**. Phiên bản kế tiếp bắt đầu là **7.2**.
-- **Lộ trình 5 phiên bản kế tiếp**:
-  1. **v7.2**: Bắt đầu Thứ Tư, 04/11/2026 (Phase 2: Thứ Ba, 24/11/2026 lúc 17:00).
-  2. **v7.3**: Bắt đầu Thứ Tư, 16/12/2026 (Phase 2: Thứ Ba, 05/01/2027 lúc 17:00).
-  3. **v7.4**: Bắt đầu Thứ Tư, 27/01/2027 (Phase 2: Thứ Ba, 16/02/2027 lúc 17:00).
-  4. **v7.5**: Bắt đầu Thứ Tư, 10/03/2027 (Phase 2: Thứ Ba, 30/03/2027 lúc 17:00).
-  5. **v7.6**: Bắt đầu Thứ Tư, 21/04/2027 (Phase 2: Thứ Ba, 11/05/2027 lúc 17:00).
-- **Quy tắc chu kỳ phiên bản**:
-  - Chu kỳ chuẩn: **42 ngày (6 tuần)**.
-  - Ngày ra mắt phiên bản mới: Luôn là sáng **Thứ Tư** lúc **10:00** (sau bảo trì máy chủ từ 05:00 - 10:00).
-  - Phân chia 2 Phase:
-    - **Phase 1**: Thứ Tư (10:00) ➔ Thứ Ba (17:00) tuần thứ 3 (20 ngày).
-    - **Phase 2**: Bắt đầu chính xác vào **chiều Thứ Ba lúc 17:00** ➔ Thứ Tư (06:00) ngày bảo trì tiếp theo (21 ngày).
-- **Yêu cầu giao diện**:
-  - Tối giản, trực quan, loại bỏ các thẻ thống kê rườm rà không cần thiết.
-  - Mỗi phiên bản chỉ gồm ngày giờ bắt đầu/kết thúc cụ thể của 2 Phase và ô ghi chú kế hoạch cá nhân.
+- **Giao diện dòng thời gian (Gantt Chart)**:
+  - Hiển thị timeline ngang liên tục theo trục ngày tháng với thanh trượt mượt mà.
+  - Phía trên là trục tháng (`tháng 10`, `tháng 11` màu vàng amber) và các cột ngày trong tuần (`T2 26`, `T3 27`...).
+  - **Mốc Hôm Nay**: Đường chỉ báo dọc màu sáng cắt qua toàn bộ các hàng sự kiện, phía trên có huy hiệu thời gian thực (`06:02:07`).
+  - Nút **"Về Hôm Nay"** tự động cuộn nhanh và căn giữa ngày hiện tại trên màn hình.
+  - Các thanh sự kiện (Gantt bars): Có nền gradient theo danh mục, tên sự kiện bên trái, ảnh avatar/artwork nhân vật bên phải, và huy hiệu thời gian đếm ngược còn lại (`8d 7h`). Nhấp vào thanh để xem chi tiết thời gian bắt đầu/kết thúc.
+- **Phạm vi hiển thị (11 phiên bản: Trước & Sau mốc hôm nay 5 phiên bản)**:
+  - **5 phiên bản trước hôm nay**: v6.5, v6.6, v6.7, v6.8, v7.0.
+  - **Phiên bản hiện tại (chứa mốc hôm nay 26/10/2026)**: **v7.1** (Phase 2 đang diễn ra từ 13/10/2026 đến 04/11/2026).
+  - **5 phiên bản sau hôm nay**: v7.2 (04/11/2026), v7.3 (16/12/2026), v7.4 (27/01/2027), v7.5 (10/03/2027), v7.6 (21/04/2027).
+- **Quy tắc chu kỳ phiên bản & sự kiện định kỳ**:
+  - Chu kỳ phiên bản chuẩn: **42 ngày (6 tuần)**, bắt đầu sáng Thứ Tư lúc 10:00.
+  - Phase 1: Thứ Tư (10:00) ➔ Thứ Ba (17:00) tuần thứ 3 (20 ngày).
+  - Phase 2: Bắt đầu chiều Thứ Ba lúc 17:00 ➔ Thứ Tư (06:00) ngày bảo trì tiếp theo (21 ngày).
+  - **La Hoàn Thâm Cảnh (Spiral Abyss)**: Reset định kỳ vào ngày **16** hàng tháng.
+  - **Nhà Hát Giả Tưởng (Imaginarium Theater)**: Reset định kỳ vào ngày **01** hàng tháng.
 
 ---
 

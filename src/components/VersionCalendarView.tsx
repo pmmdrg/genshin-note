@@ -1,485 +1,530 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 import {
-  Calendar,
-  Clock,
-  Sparkles,
-  ChevronRight,
-  Edit3,
-  Check,
-  RotateCcw,
-  Sliders,
-  CalendarDays,
+  ZoomIn,
+  ZoomOut,
+  Target,
 } from 'lucide-react';
-import { useStore } from '../store/useStore';
 import {
-  generateVersionSchedule,
-  DEFAULT_VERSION_SCHEDULE_SETTINGS,
-} from '../data/versionSchedule';
-import type { VersionScheduleItem } from '../data/versionSchedule';
+  buildDayColumns,
+  buildTimelineItems,
+  TIMELINE_START_DATE,
+} from '../data/timelineScheduleData';
+import type { TimelineBarItem, TimelineCategory } from '../data/timelineScheduleData';
+
+type FilterType = 'all' | 'version' | 'banner' | 'event' | 'endgame';
+
+const TRACK_CONFIG: {
+  category: TimelineCategory | 'banner';
+  label: string;
+  filterGroup: FilterType;
+  filterCategories: TimelineCategory[];
+}[] = [
+  {
+    category: 'version',
+    label: 'Phiên Bản (Version & Phase)',
+    filterGroup: 'version',
+    filterCategories: ['version'],
+  },
+  {
+    category: 'event',
+    label: 'Sự Kiện Chính & Phụ',
+    filterGroup: 'event',
+    filterCategories: ['event'],
+  },
+  {
+    category: 'character_banner_1',
+    label: 'Banner Nhân Vật 1',
+    filterGroup: 'banner',
+    filterCategories: ['character_banner_1'],
+  },
+  {
+    category: 'character_banner_2',
+    label: 'Banner Nhân Vật 2',
+    filterGroup: 'banner',
+    filterCategories: ['character_banner_2'],
+  },
+  {
+    category: 'weapon_banner',
+    label: 'Banner Vũ Khí',
+    filterGroup: 'banner',
+    filterCategories: ['weapon_banner'],
+  },
+  {
+    category: 'abyss',
+    label: 'La Hoàn Thâm Cảnh',
+    filterGroup: 'endgame',
+    filterCategories: ['abyss'],
+  },
+  {
+    category: 'theater',
+    label: 'Nhà Hát Giả Tưởng',
+    filterGroup: 'endgame',
+    filterCategories: ['theater'],
+  },
+];
 
 export const VersionCalendarView: React.FC = () => {
-  const {
-    versionScheduleSettings,
-    updateVersionScheduleSettings,
-    setVersionScheduleNote,
-  } = useStore();
-
-  const settings = versionScheduleSettings || DEFAULT_VERSION_SCHEDULE_SETTINGS;
-
-  // Live timer for countdown ticking every 10 seconds
   const [now, setNow] = useState<Date>(() => new Date());
+  const [dayWidth, setDayWidth] = useState<number>(38); // pixels per day (zoom)
+  const [filter, setFilter] = useState<FilterType>('all');
+  const [useLocalTime, setUseLocalTime] = useState<boolean>(true);
+  const [selectedItem, setSelectedItem] = useState<TimelineBarItem | null>(null);
+
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  // Live timer ticking every second for the "Hôm nay" badge
   useEffect(() => {
     const timer = setInterval(() => {
       setNow(new Date());
-    }, 10000);
+    }, 1000);
     return () => clearInterval(timer);
   }, []);
 
-  // Settings modal / edit state
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-  const [inputStartingVersion, setInputStartingVersion] = useState(settings.startingVersion || '7.2');
-  const [inputBaseDate, setInputBaseDate] = useState(settings.baseDate || '2026-11-04');
+  // Build calendar days and months data
+  const { days, months, todayIndex } = useMemo(() => {
+    return buildDayColumns(now);
+  }, [now]);
 
-  // Editing notes state
-  const [editingNoteId, setEditingNoteId] = useState<string | null>(null);
-  const [noteText, setNoteText] = useState('');
+  // Build timeline items
+  const allItems = useMemo(() => {
+    return buildTimelineItems(now);
+  }, [now]);
 
-  // Generate 5 versions based on settings and live `now`
-  const versions = useMemo(() => {
-    return generateVersionSchedule(
-      settings.baseDate || '2026-11-04',
-      settings.startingVersion || '7.2',
-      settings.customNotes || {},
-      now
-    );
-  }, [settings.baseDate, settings.startingVersion, settings.customNotes, now]);
+  // Calculate day offset helper
+  const getDayOffset = useCallback((targetDate: Date): number => {
+    const start = new Date(
+      TIMELINE_START_DATE.getFullYear(),
+      TIMELINE_START_DATE.getMonth(),
+      TIMELINE_START_DATE.getDate()
+    ).getTime();
+    const cur = new Date(
+      targetDate.getFullYear(),
+      targetDate.getMonth(),
+      targetDate.getDate()
+    ).getTime();
+    return Math.max(0, (cur - start) / (1000 * 60 * 60 * 24));
+  }, []);
 
-  // Find the primary version to highlight in the hero banner (current live version, or the first upcoming one)
-  const heroVersion = useMemo(() => {
-    return versions.find((v) => v.status === 'current') || versions.find((v) => v.status === 'upcoming') || versions[0];
-  }, [versions]);
-
-  // Save customized settings
-  const handleSaveSettings = () => {
-    updateVersionScheduleSettings({
-      startingVersion: inputStartingVersion.trim() || '7.2',
-      baseDate: inputBaseDate.trim() || '2026-11-04',
+  // Jump to Today
+  const handleScrollToToday = useCallback(() => {
+    if (!scrollContainerRef.current) return;
+    const container = scrollContainerRef.current;
+    const targetScrollLeft = todayIndex * dayWidth - container.clientWidth / 2 + dayWidth / 2;
+    container.scrollTo({
+      left: Math.max(0, targetScrollLeft),
+      behavior: 'smooth',
     });
-    setIsSettingsOpen(false);
-  };
+  }, [todayIndex, dayWidth]);
 
-  // Reset to default settings
-  const handleResetSettings = () => {
-    setInputStartingVersion(DEFAULT_VERSION_SCHEDULE_SETTINGS.startingVersion);
-    setInputBaseDate(DEFAULT_VERSION_SCHEDULE_SETTINGS.baseDate);
-    updateVersionScheduleSettings({
-      startingVersion: DEFAULT_VERSION_SCHEDULE_SETTINGS.startingVersion,
-      baseDate: DEFAULT_VERSION_SCHEDULE_SETTINGS.baseDate,
-    });
-    setIsSettingsOpen(false);
-  };
+  // Auto-center on Today upon initial load
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      handleScrollToToday();
+    }, 120);
+    return () => clearTimeout(timer);
+  }, [handleScrollToToday]);
 
-  // Save notes for a specific version
-  const handleStartEditNote = (version: VersionScheduleItem) => {
-    setEditingNoteId(version.id);
-    setNoteText(version.notes || '');
-  };
+  // Total timeline width in px
+  const totalTimelineWidth = days.length * dayWidth;
 
-  const handleSaveNote = (versionId: string) => {
-    setVersionScheduleNote(versionId, noteText.trim());
-    setEditingNoteId(null);
-  };
+  // Filter tracks
+  const visibleTracks = useMemo(() => {
+    if (filter === 'all') return TRACK_CONFIG;
+    return TRACK_CONFIG.filter((t) => t.filterGroup === filter);
+  }, [filter]);
+
+  // Format today time badge
+  const todayTimeStr = useMemo(() => {
+    const pad = (n: number) => String(n).padStart(2, '0');
+    return `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+  }, [now]);
 
   return (
-    <div className="space-y-6 max-w-7xl mx-auto pb-16">
-      {/* ================= 1. HEADER SECTION ================= */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/[0.08]">
-        <div className="flex items-center gap-3">
-          <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-cyan-500/25 via-teal-500/20 to-blue-500/25 border border-cyan-400/40 flex items-center justify-center text-cyan-300 shadow-[0_0_24px_rgba(6,182,212,0.35)] shrink-0">
-            <Calendar className="w-5 h-5 animate-pulse" />
+    <div className="space-y-4 max-w-[100vw] mx-auto pb-16">
+      {/* ================= 1. HEADER ================= */}
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-3 border-b border-white/[0.08]">
+        <div>
+          <div className="flex items-center gap-3">
+            <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-white flex items-center gap-2">
+              <span>Lịch Hoạt Động</span>
+            </h1>
+            <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+              11 Phiên Bản (5 Trước ➔ 5 Sau)
+            </span>
           </div>
-          <div>
-            <div className="flex items-center gap-2 flex-wrap">
-              <h1 className="text-xl sm:text-2xl font-black tracking-tight text-white">
-                Lịch Hoạt Động & Phiên Bản
-              </h1>
-              <span className="text-[11px] font-extrabold px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
-                5 Phiên Bản Tiếp Theo
-              </span>
-            </div>
-            <p className="text-xs text-slate-400 mt-0.5">
-              Chu kỳ 42 ngày (6 tuần) • Cập nhật Thứ Tư • Phase 2 bắt đầu lúc 17:00 Chiều Thứ Ba
-            </p>
+
+          <div className="flex items-center gap-2 mt-1.5 text-xs text-slate-400">
+            <label className="flex items-center gap-2 cursor-pointer select-none hover:text-slate-200 transition-colors">
+              <input
+                type="checkbox"
+                checked={useLocalTime}
+                onChange={(e) => setUseLocalTime(e.target.checked)}
+                className="w-3.5 h-3.5 rounded bg-black/40 border-white/20 text-cyan-500 focus:ring-0 cursor-pointer"
+              />
+              <span>Dùng giờ địa phương (Asia/Bangkok - Asia Server UTC+8)</span>
+            </label>
           </div>
         </div>
 
-        {/* Action Controls */}
-        <div className="flex items-center gap-2">
+        {/* Action Controls & Filters */}
+        <div className="flex items-center gap-2 flex-wrap">
+          {/* Filter Pills */}
+          <div className="flex items-center gap-1 p-1 rounded-xl bg-white/[0.04] border border-white/[0.08] text-xs">
+            <button
+              onClick={() => setFilter('all')}
+              className={`px-2.5 py-1 rounded-lg font-bold transition-all cursor-pointer ${
+                filter === 'all'
+                  ? 'bg-cyan-500 text-slate-950 shadow-md'
+                  : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              Tất Cả
+            </button>
+            <button
+              onClick={() => setFilter('version')}
+              className={`px-2.5 py-1 rounded-lg font-bold transition-all cursor-pointer ${
+                filter === 'version'
+                  ? 'bg-cyan-500 text-slate-950 shadow-md'
+                  : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              Phiên Bản
+            </button>
+            <button
+              onClick={() => setFilter('banner')}
+              className={`px-2.5 py-1 rounded-lg font-bold transition-all cursor-pointer ${
+                filter === 'banner'
+                  ? 'bg-cyan-500 text-slate-950 shadow-md'
+                  : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              Banner
+            </button>
+            <button
+              onClick={() => setFilter('event')}
+              className={`px-2.5 py-1 rounded-lg font-bold transition-all cursor-pointer ${
+                filter === 'event'
+                  ? 'bg-cyan-500 text-slate-950 shadow-md'
+                  : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              Sự Kiện
+            </button>
+            <button
+              onClick={() => setFilter('endgame')}
+              className={`px-2.5 py-1 rounded-lg font-bold transition-all cursor-pointer ${
+                filter === 'endgame'
+                  ? 'bg-cyan-500 text-slate-950 shadow-md'
+                  : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              La Hoàn & Nhà Hát
+            </button>
+          </div>
+
+          {/* Jump to Today button */}
           <button
-            onClick={() => {
-              setInputStartingVersion(settings.startingVersion || '5.2');
-              setInputBaseDate(settings.baseDate || '2026-11-04');
-              setIsSettingsOpen(true);
-            }}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] text-slate-300 hover:text-white text-xs font-semibold border border-white/[0.08] transition-all cursor-pointer"
+            onClick={handleScrollToToday}
+            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold text-xs shadow-[0_0_16px_rgba(245,158,11,0.35)] transition-all cursor-pointer active:scale-95"
+            title="Cuộn nhanh về ngày hôm nay"
           >
-            <Sliders className="w-3.5 h-3.5 text-cyan-400" />
-            <span>Tùy Chỉnh Lịch</span>
+            <Target className="w-3.5 h-3.5" />
+            <span>Về Hôm Nay</span>
           </button>
+
+          {/* Zoom Controls */}
+          <div className="flex items-center gap-1 bg-white/[0.04] p-1 rounded-xl border border-white/[0.08]">
+            <button
+              onClick={() => setDayWidth((w) => Math.max(26, w - 6))}
+              disabled={dayWidth <= 26}
+              className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 disabled:opacity-30 cursor-pointer"
+              title="Thu nhỏ ngày"
+            >
+              <ZoomOut className="w-3.5 h-3.5" />
+            </button>
+            <span className="text-[10px] font-mono font-bold text-slate-300 px-1 min-w-[28px] text-center">
+              {dayWidth}px
+            </span>
+            <button
+              onClick={() => setDayWidth((w) => Math.min(52, w + 6))}
+              disabled={dayWidth >= 52}
+              className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 disabled:opacity-30 cursor-pointer"
+              title="Phóng to ngày"
+            >
+              <ZoomIn className="w-3.5 h-3.5" />
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* ================= 2. HERO HIGHLIGHT BANNER ================= */}
-      {heroVersion && (
-        <div className="relative overflow-hidden rounded-3xl p-6 sm:p-7 border border-cyan-500/30 liquid-glass shadow-[0_12px_40px_rgba(6,182,212,0.15)]">
-          {/* Subtle background ambient gradients */}
-          <div className="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-cyan-500/10 blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-24 -left-24 w-80 h-80 rounded-full bg-blue-500/10 blur-3xl pointer-events-none" />
-
-          <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-            <div className="space-y-2">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/15 border border-cyan-400/30 text-cyan-300 text-xs font-bold">
-                <Sparkles className="w-3.5 h-3.5 text-cyan-400 animate-spin-slow" />
-                <span>
-                  {heroVersion.status === 'current'
-                    ? `Đang Diễn Ra ${heroVersion.currentPhase ? `(Phase ${heroVersion.currentPhase})` : ''}`
-                    : 'Phiên Bản Kế Tiếp Sắp Mở'}
-                </span>
-              </div>
-
-              <div className="flex items-baseline gap-3">
-                <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
-                  {heroVersion.title}
-                </h2>
-                <span className="text-xs sm:text-sm font-semibold text-slate-400">
-                  {heroVersion.startDateStr} ➔ {heroVersion.endDateStr}
-                </span>
-              </div>
-
-              <p className="text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
-                {heroVersion.status === 'current'
-                  ? `Phiên bản hiện tại đang hoạt động. Còn ${heroVersion.daysRemaining} ngày trước khi bảo trì phiên bản kế tiếp.`
-                  : `Cập nhật chính thức sau bảo trì máy chủ vào sáng ${heroVersion.startDateStr} (khoảng 10:00).`}
-              </p>
-            </div>
-
-            {/* Countdown / Status Box */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-              <div className="p-4 rounded-2xl bg-black/40 border border-white/[0.08] text-center min-w-[140px]">
-                <div className="text-[10px] uppercase tracking-wider text-slate-400 font-bold">
-                  {heroVersion.status === 'current' ? 'Thời Gian Còn Lại' : 'Đếm Ngược Ra Mắt'}
-                </div>
-                <div className="text-xl sm:text-2xl font-black text-cyan-300 mt-1">
-                  {heroVersion.status === 'current'
-                    ? `${heroVersion.daysRemaining} ngày`
-                    : `${heroVersion.daysUntilStart} ngày`}
-                </div>
-                <div className="text-[10px] text-slate-400 mt-0.5">
-                  {heroVersion.status === 'current' ? 'kết thúc phiên bản' : 'đến ngày mở bản 5★'}
-                </div>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-black/40 border border-white/[0.08] text-center min-w-[140px]">
-                <div className="text-[10px] uppercase tracking-wider text-slate-400 font-bold">
-                  Giai Đoạn 2 (Phase 2)
-                </div>
-                <div className="text-sm sm:text-base font-extrabold text-amber-300 mt-1">
-                  17:00 Chiều Thứ Ba
-                </div>
-                <div className="text-[10px] text-slate-400 mt-0.5">
-                  {heroVersion.phase2.startDateStr.replace(/^Thứ Ba, /, '')}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* ================= 3. DETAILED 5 VERSIONS LIST ================= */}
-      <div className="space-y-4">
-        <div className="flex items-center justify-between">
-          <h2 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
-            <CalendarDays className="w-5 h-5 text-cyan-400" />
-            <span>Lịch Trình 5 Phiên Bản Tiếp Theo (Giai Đoạn 7.x)</span>
-          </h2>
-          <span className="text-xs text-slate-400">
-            Từ {versions[0]?.startDateStr} đến {versions[versions.length - 1]?.endDateStr}
-          </span>
-        </div>
-
-        <div className="space-y-4">
-          {versions.map((ver, idx) => {
-            const isHero = ver.id === heroVersion?.id;
-            const isEditingThisNote = editingNoteId === ver.id;
-
-            return (
-              <div
-                key={ver.id}
-                className={`liquid-glass rounded-3xl p-5 sm:p-6 border transition-all duration-300 relative overflow-hidden ${
-                  ver.status === 'current'
-                    ? 'border-cyan-500/40 shadow-[0_8px_32px_rgba(6,182,212,0.2)]'
-                    : isHero
-                    ? 'border-amber-400/30'
-                    : 'border-white/[0.08] hover:border-white/[0.16]'
-                }`}
-              >
-                {/* Header row of Version Card */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-white/[0.06]">
-                  <div className="flex items-center gap-3">
+      {/* ================= 2. GANTT TIMELINE CONTAINER ================= */}
+      <div className="rounded-3xl liquid-glass border border-white/[0.1] overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.5)]">
+        <div
+          ref={scrollContainerRef}
+          className="overflow-x-auto relative select-none scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent cursor-grab active:cursor-grabbing"
+          style={{ maxHeight: '72vh' }}
+        >
+          <div
+            className="relative min-h-[500px]"
+            style={{ width: `${totalTimelineWidth}px` }}
+          >
+            {/* ================= STICKY TOP CALENDAR HEADER ================= */}
+            <div className="sticky top-0 z-40 bg-[#0d111a]/95 backdrop-blur-xl border-b border-white/[0.12]">
+              {/* Row 1: Month Groups */}
+              <div className="flex border-b border-white/[0.06] h-7">
+                {months.map((m) => {
+                  const mWidth = m.daysCount * dayWidth;
+                  return (
                     <div
-                      className={`w-12 h-12 rounded-2xl flex flex-col items-center justify-center font-black shadow-inner shrink-0 ${
-                        ver.status === 'current'
-                          ? 'bg-gradient-to-tr from-cyan-500 to-blue-600 text-white shadow-cyan-500/30'
-                          : idx === 0
-                          ? 'bg-gradient-to-tr from-amber-500 to-orange-600 text-white'
-                          : 'bg-white/[0.06] border border-white/[0.1] text-slate-300'
+                      key={m.key}
+                      style={{ width: `${mWidth}px` }}
+                      className="shrink-0 px-2 flex items-center border-r border-white/[0.08]"
+                    >
+                      <span className="text-xs font-bold text-amber-300 uppercase tracking-wider">
+                        {m.monthName} <span className="text-slate-500 font-normal">({m.year})</span>
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Row 2: Days Columns */}
+              <div className="flex h-11">
+                {days.map((d) => {
+                  return (
+                    <div
+                      key={d.dateStr}
+                      style={{ width: `${dayWidth}px` }}
+                      className={`shrink-0 flex flex-col items-center justify-center border-r border-white/[0.04] text-center ${
+                        d.isToday
+                          ? 'bg-cyan-500/15'
+                          : d.isWeekend
+                          ? 'bg-white/[0.015]'
+                          : ''
                       }`}
                     >
-                      <span className="text-[10px] uppercase font-bold text-white/80 leading-none">VER</span>
-                      <span className="text-sm font-black leading-none mt-0.5">{ver.versionNumber}</span>
-                    </div>
-
-                    <div>
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <h3 className="text-base sm:text-lg font-black text-white">
-                          {ver.title}
-                        </h3>
-
-                        {ver.status === 'current' && (
-                          <span className="text-[11px] font-extrabold px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 inline-flex items-center gap-1">
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-                            Đang Diễn Ra
-                          </span>
-                        )}
-
-                        {ver.status === 'upcoming' && (
-                          <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-white/[0.06] text-slate-300 border border-white/[0.1]">
-                            Còn {ver.daysUntilStart} ngày
-                          </span>
-                        )}
-
-                        {ver.status === 'past' && (
-                          <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-slate-800 text-slate-500 border border-white/[0.04]">
-                            Đã Kết Thúc
-                          </span>
-                        )}
-                      </div>
-
-                      <div className="text-xs text-slate-400 flex items-center gap-1.5 mt-0.5 flex-wrap">
-                        <Clock className="w-3.5 h-3.5 text-slate-500 shrink-0" />
-                        <span>{ver.startDateStr}</span>
-                        <ChevronRight className="w-3 h-3 text-slate-600 shrink-0" />
-                        <span>{ver.endDateStr}</span>
-                        <span className="text-slate-500">• 42 ngày</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* 2 Phase Cards Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 pt-3.5">
-                  {/* Phase 1 Card */}
-                  <div
-                    className={`rounded-2xl p-4 border transition-all ${
-                      ver.currentPhase === 1
-                        ? 'bg-gradient-to-br from-indigo-500/15 via-purple-500/10 to-transparent border-indigo-500/40 shadow-[0_0_20px_rgba(99,102,241,0.15)]'
-                        : 'bg-white/[0.02] border-white/[0.06]'
-                    }`}
-                  >
-                    <div className="flex items-center justify-between gap-2 pb-2.5 border-b border-white/[0.04]">
-                      <div className="flex items-center gap-2">
-                        <div className="w-6 h-6 rounded-lg bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-black text-xs">
-                          1
-                        </div>
-                        <span className="text-sm font-bold text-white">Giai Đoạn 1 (Phase 1)</span>
-                      </div>
-
-                      <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-white/[0.06] text-slate-300">
-                        {ver.phase1.durationDays} ngày
-                      </span>
-                    </div>
-
-                    <div className="mt-3 space-y-2 text-xs">
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="text-slate-400">Bắt đầu:</span>
-                        <span className="font-bold text-slate-200">
-                          {ver.phase1.startTimeStr} • {ver.phase1.startDateStr}
-                        </span>
-                      </div>
-
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="text-slate-400">Kết thúc:</span>
-                        <span className="font-bold text-slate-200">
-                          {ver.phase1.endTimeStr} • {ver.phase1.endDateStr}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Phase 2 Card */}
-                  <div
-                    className={`rounded-2xl p-4 border transition-all ${
-                      ver.currentPhase === 2
-                        ? 'bg-gradient-to-br from-amber-500/15 via-orange-500/10 to-transparent border-amber-500/40 shadow-[0_0_20px_rgba(245,158,11,0.15)]'
-                        : 'bg-white/[0.02] border-white/[0.06]'
-                    }`}
-                  >
-                    <div className="flex items-center justify-between gap-2 pb-2.5 border-b border-white/[0.04]">
-                      <div className="flex items-center gap-2">
-                        <div className="w-6 h-6 rounded-lg bg-amber-500/20 text-amber-300 flex items-center justify-center font-black text-xs">
-                          2
-                        </div>
-                        <span className="text-sm font-bold text-white">Giai Đoạn 2 (Phase 2)</span>
-                      </div>
-
-                      <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-amber-500/15 text-amber-300 border border-amber-500/20">
-                        17:00 Chiều Thứ 3
-                      </span>
-                    </div>
-
-                    <div className="mt-3 space-y-2 text-xs">
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="text-slate-400">Bắt đầu:</span>
-                        <span className="font-bold text-amber-200">
-                          {ver.phase2.startTimeStr} • {ver.phase2.startDateStr}
-                        </span>
-                      </div>
-
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="text-slate-400">Kết thúc:</span>
-                        <span className="font-bold text-slate-200">
-                          {ver.phase2.endTimeStr} • {ver.phase2.endDateStr}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Personal Notes / Planning area */}
-                <div className="mt-4 pt-3 border-t border-white/[0.06]">
-                  {isEditingThisNote ? (
-                    <div className="space-y-2">
-                      <textarea
-                        value={noteText}
-                        onChange={(e) => setNoteText(e.target.value)}
-                        placeholder={`Kế hoạch cá nhân cho ${ver.title} (vd: Tích 160 roll cho Mavuika, nâng nhân vật, gom nguyên thạch...)`}
-                        rows={2}
-                        className="w-full text-xs p-2.5 rounded-xl bg-black/40 border border-cyan-500/40 text-slate-200 focus:outline-none focus:border-cyan-400 resize-none"
-                      />
-                      <div className="flex items-center justify-end gap-2">
-                        <button
-                          onClick={() => setEditingNoteId(null)}
-                          className="px-3 py-1 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition-colors cursor-pointer"
-                        >
-                          Hủy
-                        </button>
-                        <button
-                          onClick={() => handleSaveNote(ver.id)}
-                          className="px-3.5 py-1 rounded-lg text-xs font-bold bg-cyan-500 text-slate-950 hover:bg-cyan-400 transition-colors flex items-center gap-1 cursor-pointer"
-                        >
-                          <Check className="w-3.5 h-3.5 stroke-[3]" />
-                          <span>Lưu Ghi Chú</span>
-                        </button>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="flex items-center justify-between gap-2 text-xs">
-                      <div className="flex items-center gap-2 text-slate-400 flex-1 min-w-0">
-                        <Edit3 className="w-3.5 h-3.5 text-slate-500 shrink-0" />
-                        {ver.notes ? (
-                          <span className="text-slate-200 truncate italic">&quot;{ver.notes}&quot;</span>
-                        ) : (
-                          <span className="text-slate-500 text-[11px]">Chưa có ghi chú kế hoạch cho phiên bản này.</span>
-                        )}
-                      </div>
-                      <button
-                        onClick={() => handleStartEditNote(ver)}
-                        className="text-[11px] font-semibold text-cyan-400 hover:text-cyan-300 transition-colors cursor-pointer shrink-0"
+                      <span
+                        className={`text-[9px] font-bold uppercase leading-none ${
+                          d.isToday
+                            ? 'text-cyan-300 font-black'
+                            : d.isWeekend
+                            ? 'text-slate-500'
+                            : 'text-slate-400'
+                        }`}
                       >
-                        {ver.notes ? 'Sửa ghi chú' : '+ Thêm ghi chú'}
-                      </button>
+                        {d.dayOfWeek}
+                      </span>
+                      <span
+                        className={`text-xs mt-0.5 leading-none ${
+                          d.isToday
+                            ? 'font-black text-cyan-200'
+                            : 'font-semibold text-slate-300'
+                        }`}
+                      >
+                        {d.dayNumber}
+                      </span>
                     </div>
-                  )}
-                </div>
+                  );
+                })}
               </div>
-            );
-          })}
+            </div>
+
+            {/* ================= VERTICAL GRID LINES ================= */}
+            <div className="absolute inset-0 top-[72px] pointer-events-none flex z-0">
+              {days.map((d) => (
+                <div
+                  key={d.dateStr}
+                  style={{ width: `${dayWidth}px` }}
+                  className={`shrink-0 border-r border-white/[0.03] h-full ${
+                    d.isToday
+                      ? 'bg-cyan-500/[0.04]'
+                      : d.isWeekend
+                      ? 'bg-white/[0.008]'
+                      : ''
+                  }`}
+                />
+              ))}
+            </div>
+
+            {/* ================= VERTICAL "TODAY" MARKER BEAM ================= */}
+            <div
+              className="absolute top-0 bottom-0 z-30 pointer-events-none flex flex-col items-center"
+              style={{
+                left: `${todayIndex * dayWidth + dayWidth / 2}px`,
+                transform: 'translateX(-50%)',
+              }}
+            >
+              {/* Top Time Badge on Sticky Header */}
+              <div className="sticky top-5 z-40 bg-slate-950/95 border border-white/40 shadow-[0_0_16px_rgba(255,255,255,0.7)] px-2.5 py-0.5 rounded-full text-white font-mono text-[10px] font-bold flex items-center gap-1.5 whitespace-nowrap">
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
+                <span>{todayTimeStr}</span>
+              </div>
+
+              {/* Glowing vertical line cutting down */}
+              <div className="w-[2px] h-full bg-gradient-to-b from-white via-cyan-400 to-white/30 shadow-[0_0_12px_rgba(255,255,255,0.8)] opacity-90 mt-1" />
+            </div>
+
+            {/* ================= GANTT TRACKS & BARS ================= */}
+            <div className="relative z-10 py-4 space-y-3.5">
+              {visibleTracks.map((track) => {
+                const trackItems = allItems.filter((i) =>
+                  track.filterCategories.includes(i.category)
+                );
+
+                if (trackItems.length === 0) return null;
+
+                return (
+                  <div key={track.category} className="relative h-11 flex items-center">
+                    {/* Render each horizontal bar */}
+                    {trackItems.map((item) => {
+                      const startOffset = getDayOffset(item.startDate);
+                      const endOffset = getDayOffset(item.endDate);
+                      const durationDays = Math.max(0.5, endOffset - startOffset);
+
+                      const leftPx = startOffset * dayWidth;
+                      const widthPx = Math.max(dayWidth * 1.2, durationDays * dayWidth);
+
+                      return (
+                        <div
+                          key={item.id}
+                          onClick={() => setSelectedItem(item)}
+                          style={{
+                            left: `${leftPx}px`,
+                            width: `${widthPx}px`,
+                          }}
+                          className={`absolute h-9.5 rounded-xl flex items-center justify-between px-3 overflow-hidden cursor-pointer shadow-md transition-transform hover:scale-[1.01] hover:z-20 bg-gradient-to-r ${item.colorGradient} ${
+                            item.isCurrent
+                              ? 'ring-2 ring-white/60 shadow-[0_0_20px_rgba(255,255,255,0.3)]'
+                              : 'border border-white/10 opacity-85 hover:opacity-100'
+                          }`}
+                          title={`${item.title} (${item.startDate.toLocaleDateString('vi-VN')} - ${item.endDate.toLocaleDateString('vi-VN')})`}
+                        >
+                          {/* Title text */}
+                          <div className="flex items-center gap-2 truncate z-10 pr-2">
+                            <span className="text-xs font-bold text-white truncate drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
+                              {item.title}
+                            </span>
+                          </div>
+
+                          {/* Right side: Badge + Avatar */}
+                          <div className="flex items-center gap-1.5 shrink-0 z-10">
+                            {item.badgeText && (
+                              <span className="text-[10px] font-black px-2 py-0.5 rounded-md bg-black/60 backdrop-blur-sm text-amber-300 border border-white/20 whitespace-nowrap shadow-sm">
+                                {item.badgeText}
+                              </span>
+                            )}
+
+                            {item.imageUrl && (
+                              <div className="w-7 h-7 rounded-lg overflow-hidden bg-black/40 border border-white/20 shrink-0">
+                                <img
+                                  src={item.imageUrl}
+                                  alt={item.title}
+                                  className="w-full h-full object-cover"
+                                  loading="lazy"
+                                />
+                              </div>
+                            )}
+                          </div>
+
+                          {/* Subtle right avatar background bleed */}
+                          {item.imageUrl && (
+                            <div
+                              className="absolute right-0 top-0 bottom-0 w-28 pointer-events-none opacity-20 bg-cover bg-center"
+                              style={{ backgroundImage: `url(${item.imageUrl})` }}
+                            />
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* ================= 5. SETTINGS MODAL ================= */}
-      {isSettingsOpen && (
+      {/* ================= 3. POPUP MODAL ON BAR CLICK ================= */}
+      {selectedItem && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-fade-in">
-          <div className="w-full max-w-md rounded-3xl liquid-glass border border-white/[0.12] p-6 space-y-5 shadow-[0_20px_60px_rgba(0,0,0,0.7)]">
+          <div className="w-full max-w-md rounded-3xl liquid-glass border border-white/[0.14] p-6 space-y-4 shadow-[0_20px_60px_rgba(0,0,0,0.8)]">
             <div className="flex items-center justify-between pb-3 border-b border-white/[0.08]">
               <div className="flex items-center gap-2">
-                <Sliders className="w-4 h-4 text-cyan-400" />
-                <h3 className="text-base font-bold text-white">Tùy Chỉnh Lịch Phiên Bản</h3>
+                <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+                  {selectedItem.categoryLabel}
+                </span>
+                {selectedItem.isCurrent && (
+                  <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                    Đang diễn ra
+                  </span>
+                )}
               </div>
               <button
-                onClick={() => setIsSettingsOpen(false)}
+                onClick={() => setSelectedItem(null)}
                 className="text-slate-400 hover:text-white transition-colors cursor-pointer text-xs"
               >
                 ✕
               </button>
             </div>
 
-            <div className="space-y-4">
+            <div className="flex items-center gap-3">
+              {selectedItem.imageUrl && (
+                <div className="w-14 h-14 rounded-2xl overflow-hidden bg-black/40 border border-white/20 shrink-0 shadow-md">
+                  <img
+                    src={selectedItem.imageUrl}
+                    alt={selectedItem.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              )}
               <div>
-                <label className="block text-xs font-bold text-slate-300 mb-1.5">
-                  Số Phiên Bản Khởi Điểm
-                </label>
-                <input
-                  type="text"
-                  value={inputStartingVersion}
-                  onChange={(e) => setInputStartingVersion(e.target.value)}
-                  placeholder="7.2"
-                  className="w-full px-3 py-2 text-xs rounded-xl bg-black/40 border border-white/[0.1] text-slate-200 focus:outline-none focus:border-cyan-400"
-                />
-                <span className="text-[10px] text-slate-500 mt-1 block">
-                  Các phiên bản tiếp theo sẽ tự động tăng dần (vd: 7.2 ➔ 7.3 ➔ 7.4 ➔ 7.5 ➔ 7.6)
+                <h3 className="text-base sm:text-lg font-black text-white leading-tight">
+                  {selectedItem.title}
+                </h3>
+                {selectedItem.badgeText && (
+                  <div className="text-xs text-amber-300 font-bold mt-1">
+                    Còn lại: {selectedItem.badgeText}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="p-3.5 rounded-2xl bg-black/40 border border-white/[0.06] space-y-2 text-xs">
+              <div className="flex items-center justify-between text-slate-300">
+                <span className="text-slate-400">Thời gian bắt đầu:</span>
+                <span className="font-bold text-white">
+                  {selectedItem.startDate.toLocaleString('vi-VN', {
+                    weekday: 'short',
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                  })}
                 </span>
               </div>
-
-              <div>
-                <label className="block text-xs font-bold text-slate-300 mb-1.5">
-                  Ngày Cập Nhật Bắt Đầu (Thứ Tư)
-                </label>
-                <input
-                  type="date"
-                  value={inputBaseDate}
-                  onChange={(e) => setInputBaseDate(e.target.value)}
-                  className="w-full px-3 py-2 text-xs rounded-xl bg-black/40 border border-white/[0.1] text-slate-200 focus:outline-none focus:border-cyan-400"
-                />
-                <span className="text-[10px] text-slate-500 mt-1 block">
-                  Mặc định là ngày Thứ Tư 04/11/2026. Mỗi phiên bản sẽ kéo dài 42 ngày (6 tuần).
+              <div className="flex items-center justify-between text-slate-300">
+                <span className="text-slate-400">Thời gian kết thúc:</span>
+                <span className="font-bold text-white">
+                  {selectedItem.endDate.toLocaleString('vi-VN', {
+                    weekday: 'short',
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                  })}
                 </span>
               </div>
             </div>
 
-            <div className="flex items-center justify-between pt-3 border-t border-white/[0.08]">
+            <div className="flex justify-end pt-2">
               <button
-                onClick={handleResetSettings}
-                className="flex items-center gap-1.5 text-xs text-rose-400 hover:text-rose-300 transition-colors cursor-pointer"
+                onClick={() => setSelectedItem(null)}
+                className="px-4 py-1.5 rounded-xl text-xs font-bold bg-white/[0.08] hover:bg-white/[0.16] text-white transition-colors cursor-pointer"
               >
-                <RotateCcw className="w-3.5 h-3.5" />
-                <span>Đặt Lại Mặc Định</span>
+                Đóng
               </button>
-
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() => setIsSettingsOpen(false)}
-                  className="px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition-colors cursor-pointer"
-                >
-                  Đóng
-                </button>
-                <button
-                  onClick={handleSaveSettings}
-                  className="px-4 py-1.5 rounded-xl text-xs font-bold bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:opacity-90 shadow-md transition-all cursor-pointer"
-                >
-                  Áp Dụng
-                </button>
-              </div>
             </div>
           </div>
         </div>
