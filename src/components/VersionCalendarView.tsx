@@ -14,6 +14,9 @@ import type { TimelineBarItem, TimelineCategory } from '../data/timelineSchedule
 
 type FilterType = 'all' | 'phase' | 'ao_canh' | 'abyss' | 'theater';
 
+const ZOOM_LEVELS = [60, 80, 100, 125, 150];
+const BASE_DAY_WIDTH = 38;
+
 const TRACK_CONFIG: {
   category: TimelineCategory;
   label: string;
@@ -48,12 +51,27 @@ const TRACK_CONFIG: {
 
 export const VersionCalendarView: React.FC = () => {
   const [now, setNow] = useState<Date>(() => new Date());
-  const [dayWidth, setDayWidth] = useState<number>(38); // pixels per day (zoom)
+  const [zoomIndex, setZoomIndex] = useState<number>(2); // Default to 100% (index 2 in [60, 80, 100, 125, 150])
   const [filter, setFilter] = useState<FilterType>('all');
   const [useLocalTime, setUseLocalTime] = useState<boolean>(true);
   const [selectedItem, setSelectedItem] = useState<TimelineBarItem | null>(null);
 
+  const zoomPercent = ZOOM_LEVELS[zoomIndex];
+  const dayWidth = Math.round((zoomPercent / 100) * BASE_DAY_WIDTH);
+
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  // Close detail modal on Escape key
+  useEffect(() => {
+    if (!selectedItem) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setSelectedItem(null);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedItem]);
 
   // Live timer ticking every second for the "Hôm nay" badge
   useEffect(() => {
@@ -219,21 +237,21 @@ export const VersionCalendarView: React.FC = () => {
           {/* Zoom Controls */}
           <div className="flex items-center gap-1 bg-white/[0.04] p-1 rounded-xl border border-white/[0.08]">
             <button
-              onClick={() => setDayWidth((w) => Math.max(26, w - 6))}
-              disabled={dayWidth <= 26}
-              className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 disabled:opacity-30 cursor-pointer"
-              title="Thu nhỏ ngày"
+              onClick={() => setZoomIndex((idx) => Math.max(0, idx - 1))}
+              disabled={zoomIndex === 0}
+              className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 disabled:opacity-30 cursor-pointer transition-colors"
+              title="Thu nhỏ timeline"
             >
               <ZoomOut className="w-3.5 h-3.5" />
             </button>
-            <span className="text-[10px] font-mono font-bold text-slate-300 px-1 min-w-[28px] text-center">
-              {dayWidth}px
+            <span className="text-[10px] font-mono font-bold text-slate-300 px-1.5 min-w-[36px] text-center select-none">
+              {zoomPercent}%
             </span>
             <button
-              onClick={() => setDayWidth((w) => Math.min(52, w + 6))}
-              disabled={dayWidth >= 52}
-              className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 disabled:opacity-30 cursor-pointer"
-              title="Phóng to ngày"
+              onClick={() => setZoomIndex((idx) => Math.min(ZOOM_LEVELS.length - 1, idx + 1))}
+              disabled={zoomIndex === ZOOM_LEVELS.length - 1}
+              className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 disabled:opacity-30 cursor-pointer transition-colors"
+              title="Phóng to timeline"
             >
               <ZoomIn className="w-3.5 h-3.5" />
             </button>
@@ -411,8 +429,14 @@ export const VersionCalendarView: React.FC = () => {
 
       {/* ================= 3. POPUP MODAL ON BAR CLICK ================= */}
       {selectedItem && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-fade-in">
-          <div className="w-full max-w-md rounded-3xl liquid-glass border border-white/[0.14] p-6 space-y-4 shadow-[0_20px_60px_rgba(0,0,0,0.8)]">
+        <div
+          onClick={() => setSelectedItem(null)}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-fade-in cursor-pointer"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="w-full max-w-md rounded-3xl liquid-glass border border-white/[0.14] p-6 space-y-4 shadow-[0_20px_60px_rgba(0,0,0,0.8)] cursor-default"
+          >
             <div className="flex items-center justify-between pb-3 border-b border-white/[0.08]">
               <div className="flex items-center gap-2">
                 <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
