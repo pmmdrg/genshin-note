@@ -1178,7 +1178,7 @@ export const useStore = create<AppState>()(
       // Version Schedule (Lịch Hoạt Động & Phiên Bản)
       versionScheduleSettings: {
         baseDate: '2026-11-04',
-        startingVersion: '5.2',
+        startingVersion: '7.2',
         customNotes: {},
       },
       updateVersionScheduleSettings: (settings) =>
@@ -1186,7 +1186,7 @@ export const useStore = create<AppState>()(
           versionScheduleSettings: {
             ...(state.versionScheduleSettings || {
               baseDate: '2026-11-04',
-              startingVersion: '5.2',
+              startingVersion: '7.2',
               customNotes: {},
             }),
             ...settings,
@@ -1197,7 +1197,7 @@ export const useStore = create<AppState>()(
           versionScheduleSettings: {
             ...(state.versionScheduleSettings || {
               baseDate: '2026-11-04',
-              startingVersion: '5.2',
+              startingVersion: '7.2',
               customNotes: {},
             }),
             customNotes: {
@@ -1218,11 +1218,11 @@ export const useStore = create<AppState>()(
         if (!state.wishHistory) {
           state.wishHistory = INITIAL_WISH_HISTORY;
         }
-        if (!state.versionScheduleSettings) {
+        if (!state.versionScheduleSettings || state.versionScheduleSettings.startingVersion === '5.2') {
           state.versionScheduleSettings = {
             baseDate: '2026-11-04',
-            startingVersion: '5.2',
-            customNotes: {},
+            startingVersion: '7.2',
+            customNotes: state.versionScheduleSettings?.customNotes || {},
           };
         }
         if (!state.characters || !state.characterTrees) return;

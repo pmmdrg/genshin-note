@@ -37,7 +37,7 @@ export const VersionCalendarView: React.FC = () => {
 
   // Settings modal / edit state
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-  const [inputStartingVersion, setInputStartingVersion] = useState(settings.startingVersion || '5.2');
+  const [inputStartingVersion, setInputStartingVersion] = useState(settings.startingVersion || '7.2');
   const [inputBaseDate, setInputBaseDate] = useState(settings.baseDate || '2026-11-04');
 
   // Editing notes state
@@ -48,7 +48,7 @@ export const VersionCalendarView: React.FC = () => {
   const versions = useMemo(() => {
     return generateVersionSchedule(
       settings.baseDate || '2026-11-04',
-      settings.startingVersion || '5.2',
+      settings.startingVersion || '7.2',
       settings.customNotes || {},
       now
     );
@@ -62,7 +62,7 @@ export const VersionCalendarView: React.FC = () => {
   // Save customized settings
   const handleSaveSettings = () => {
     updateVersionScheduleSettings({
-      startingVersion: inputStartingVersion.trim() || '5.2',
+      startingVersion: inputStartingVersion.trim() || '7.2',
       baseDate: inputBaseDate.trim() || '2026-11-04',
     });
     setIsSettingsOpen(false);
@@ -195,39 +195,12 @@ export const VersionCalendarView: React.FC = () => {
         </div>
       )}
 
-      {/* ================= 3. QUICK STATS BAR ================= */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <div className="p-3.5 rounded-2xl liquid-glass border border-white/[0.08] text-center">
-          <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Tổng Phiên Bản</div>
-          <div className="text-lg sm:text-xl font-extrabold text-white mt-1">5 Phiên Bản</div>
-          <div className="text-[10px] text-slate-500 mt-0.5">Kéo dài 210 ngày (~7 tháng)</div>
-        </div>
-
-        <div className="p-3.5 rounded-2xl liquid-glass border border-white/[0.08] text-center">
-          <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Thời Lượng Version</div>
-          <div className="text-lg sm:text-xl font-extrabold text-cyan-300 mt-1">42 Ngày</div>
-          <div className="text-[10px] text-slate-500 mt-0.5">Chuẩn 6 tuần / bản cập nhật</div>
-        </div>
-
-        <div className="p-3.5 rounded-2xl liquid-glass border border-white/[0.08] text-center">
-          <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Mỗi Version Gồm</div>
-          <div className="text-lg sm:text-xl font-extrabold text-amber-300 mt-1">2 Phase Đều Nhau</div>
-          <div className="text-[10px] text-slate-500 mt-0.5">Phase 1: 20 ngày • Phase 2: 21 ngày</div>
-        </div>
-
-        <div className="p-3.5 rounded-2xl liquid-glass border border-white/[0.08] text-center">
-          <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Thời Điểm Cập Nhật</div>
-          <div className="text-lg sm:text-xl font-extrabold text-purple-300 mt-1">Thứ 4 & Thứ 3 (17h)</div>
-          <div className="text-[10px] text-slate-500 mt-0.5">Thứ Tư bảo trì, Thứ Ba mở Phase 2</div>
-        </div>
-      </div>
-
-      {/* ================= 4. DETAILED 5 VERSIONS LIST ================= */}
-      <div className="space-y-5">
+      {/* ================= 3. DETAILED 5 VERSIONS LIST ================= */}
+      <div className="space-y-4">
         <div className="flex items-center justify-between">
           <h2 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
             <CalendarDays className="w-5 h-5 text-cyan-400" />
-            <span>Lịch Trình Chi Tiết 5 Phiên Bản Tiếp Theo</span>
+            <span>Lịch Trình 5 Phiên Bản Tiếp Theo (Giai Đoạn 7.x)</span>
           </h2>
           <span className="text-xs text-slate-400">
             Từ {versions[0]?.startDateStr} đến {versions[versions.length - 1]?.endDateStr}
@@ -301,17 +274,10 @@ export const VersionCalendarView: React.FC = () => {
                       </div>
                     </div>
                   </div>
-
-                  {/* Right side: Quick Phase status pill */}
-                  <div className="flex items-center gap-2">
-                    <div className="px-3 py-1 rounded-xl bg-white/[0.04] border border-white/[0.06] text-xs font-medium text-slate-300">
-                      Thứ Tư 10:00 ➔ Thứ Ba 17:00 (P2)
-                    </div>
-                  </div>
                 </div>
 
                 {/* 2 Phase Cards Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 pt-3.5">
                   {/* Phase 1 Card */}
                   <div
                     className={`rounded-2xl p-4 border transition-all ${
@@ -320,7 +286,7 @@ export const VersionCalendarView: React.FC = () => {
                         : 'bg-white/[0.02] border-white/[0.06]'
                     }`}
                   >
-                    <div className="flex items-center justify-between gap-2 pb-2 border-b border-white/[0.04]">
+                    <div className="flex items-center justify-between gap-2 pb-2.5 border-b border-white/[0.04]">
                       <div className="flex items-center gap-2">
                         <div className="w-6 h-6 rounded-lg bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-black text-xs">
                           1
@@ -333,23 +299,19 @@ export const VersionCalendarView: React.FC = () => {
                       </span>
                     </div>
 
-                    <div className="mt-3 space-y-2">
-                      <div className="flex items-start justify-between gap-2 text-xs">
-                        <span className="text-slate-400">Thời gian bắt đầu:</span>
-                        <span className="font-bold text-slate-200 text-right">
+                    <div className="mt-3 space-y-2 text-xs">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="text-slate-400">Bắt đầu:</span>
+                        <span className="font-bold text-slate-200">
                           {ver.phase1.startTimeStr} • {ver.phase1.startDateStr}
                         </span>
                       </div>
 
-                      <div className="flex items-start justify-between gap-2 text-xs">
-                        <span className="text-slate-400">Thời gian kết thúc:</span>
-                        <span className="font-bold text-slate-200 text-right">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="text-slate-400">Kết thúc:</span>
+                        <span className="font-bold text-slate-200">
                           {ver.phase1.endTimeStr} • {ver.phase1.endDateStr}
                         </span>
-                      </div>
-
-                      <div className="pt-2 text-[11px] text-slate-400 border-t border-white/[0.04] leading-relaxed">
-                        ✨ Mở bản cập nhật mới lúc 10:00 sáng Thứ Tư sau bảo trì máy chủ. Khởi tranh Banner Nhân Vật & Vũ Khí giới hạn Đợt 1 và chuỗi sự kiện chính.
                       </div>
                     </div>
                   </div>
@@ -362,7 +324,7 @@ export const VersionCalendarView: React.FC = () => {
                         : 'bg-white/[0.02] border-white/[0.06]'
                     }`}
                   >
-                    <div className="flex items-center justify-between gap-2 pb-2 border-b border-white/[0.04]">
+                    <div className="flex items-center justify-between gap-2 pb-2.5 border-b border-white/[0.04]">
                       <div className="flex items-center gap-2">
                         <div className="w-6 h-6 rounded-lg bg-amber-500/20 text-amber-300 flex items-center justify-center font-black text-xs">
                           2
@@ -375,23 +337,19 @@ export const VersionCalendarView: React.FC = () => {
                       </span>
                     </div>
 
-                    <div className="mt-3 space-y-2">
-                      <div className="flex items-start justify-between gap-2 text-xs">
-                        <span className="text-slate-400">Thời gian bắt đầu:</span>
-                        <span className="font-bold text-amber-200 text-right">
+                    <div className="mt-3 space-y-2 text-xs">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="text-slate-400">Bắt đầu:</span>
+                        <span className="font-bold text-amber-200">
                           {ver.phase2.startTimeStr} • {ver.phase2.startDateStr}
                         </span>
                       </div>
 
-                      <div className="flex items-start justify-between gap-2 text-xs">
-                        <span className="text-slate-400">Thời gian kết thúc:</span>
-                        <span className="font-bold text-slate-200 text-right">
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="text-slate-400">Kết thúc:</span>
+                        <span className="font-bold text-slate-200">
                           {ver.phase2.endTimeStr} • {ver.phase2.endDateStr}
                         </span>
-                      </div>
-
-                      <div className="pt-2 text-[11px] text-slate-400 border-t border-white/[0.04] leading-relaxed">
-                        🔥 Bắt đầu chính xác vào chiều Thứ Ba lúc 17:00. Chuyển giao sang Banner Nhân Vật & Vũ Khí Đợt 2 cùng các sự kiện phụ trước khi kết thúc bản.
                       </div>
                     </div>
                   </div>
@@ -475,11 +433,11 @@ export const VersionCalendarView: React.FC = () => {
                   type="text"
                   value={inputStartingVersion}
                   onChange={(e) => setInputStartingVersion(e.target.value)}
-                  placeholder="5.2"
+                  placeholder="7.2"
                   className="w-full px-3 py-2 text-xs rounded-xl bg-black/40 border border-white/[0.1] text-slate-200 focus:outline-none focus:border-cyan-400"
                 />
                 <span className="text-[10px] text-slate-500 mt-1 block">
-                  Các phiên bản tiếp theo sẽ tự động tăng dần (vd: 5.2 ➔ 5.3 ➔ 5.4 ➔ 5.5 ➔ 5.6)
+                  Các phiên bản tiếp theo sẽ tự động tăng dần (vd: 7.2 ➔ 7.3 ➔ 7.4 ➔ 7.5 ➔ 7.6)
                 </span>
               </div>
 

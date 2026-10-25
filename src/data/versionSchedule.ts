@@ -12,7 +12,6 @@ export interface VersionPhase {
   progressPercent: number;
   daysRemaining: number;
   hoursRemaining: number;
-  description: string;
 }
 
 export interface VersionScheduleItem {
@@ -87,7 +86,7 @@ export function getNextVersionNumber(current: string, step: number = 1): string 
 
 export const DEFAULT_VERSION_SCHEDULE_SETTINGS = {
   baseDate: '2026-11-04',
-  startingVersion: '5.2',
+  startingVersion: '7.2',
   customNotes: {} as Record<string, string>,
 };
 
@@ -175,7 +174,6 @@ export function generateVersionSchedule(
       progressPercent: p1Progress,
       daysRemaining: Math.ceil(p1RemainingMs / (1000 * 60 * 60 * 24)),
       hoursRemaining: Math.ceil(p1RemainingMs / (1000 * 60 * 60)),
-      description: 'Mở bản cập nhật mới, Banner Nhân Vật & Vũ Khí Đợt 1, Sự kiện tâm điểm phiên bản.',
     };
 
     const phase2: VersionPhase = {
@@ -192,7 +190,6 @@ export function generateVersionSchedule(
       progressPercent: p2Progress,
       daysRemaining: Math.ceil(p2RemainingMs / (1000 * 60 * 60 * 24)),
       hoursRemaining: Math.ceil(p2RemainingMs / (1000 * 60 * 60)),
-      description: 'Bắt đầu chiều Thứ Ba lúc 17:00, Banner Nhân Vật & Vũ Khí Đợt 2, Sự kiện cuối kỳ.',
     };
 
     versions.push({
