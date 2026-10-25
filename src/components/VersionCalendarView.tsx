@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import {
   ZoomIn,
   ZoomOut,
@@ -61,16 +62,22 @@ export const VersionCalendarView: React.FC = () => {
 
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  // Close detail modal on Escape key
+  // Close detail modal on Escape key & lock scroll when open
   useEffect(() => {
     if (!selectedItem) return;
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         setSelectedItem(null);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = originalOverflow;
+      window.removeEventListener('keydown', handleKeyDown);
+    };
   }, [selectedItem]);
 
   // Live timer ticking every second for the "Hôm nay" badge
@@ -428,90 +435,92 @@ export const VersionCalendarView: React.FC = () => {
       </div>
 
       {/* ================= 3. POPUP MODAL ON BAR CLICK ================= */}
-      {selectedItem && (
-        <div
-          onClick={() => setSelectedItem(null)}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-fade-in cursor-pointer"
-        >
+      {selectedItem &&
+        createPortal(
           <div
-            onClick={(e) => e.stopPropagation()}
-            className="w-full max-w-md rounded-3xl liquid-glass border border-white/[0.14] p-6 space-y-4 shadow-[0_20px_60px_rgba(0,0,0,0.8)] cursor-default"
+            onClick={() => setSelectedItem(null)}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-fade-in cursor-pointer"
           >
-            <div className="flex items-center justify-between pb-3 border-b border-white/[0.08]">
-              <div className="flex items-center gap-2">
-                <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
-                  {selectedItem.categoryLabel}
-                </span>
-                {selectedItem.isCurrent && (
-                  <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                    Đang diễn ra
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="w-full max-w-md rounded-3xl liquid-glass border border-white/[0.14] p-6 space-y-4 shadow-[0_20px_60px_rgba(0,0,0,0.8)] cursor-default"
+            >
+              <div className="flex items-center justify-between pb-3 border-b border-white/[0.08]">
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+                    {selectedItem.categoryLabel}
                   </span>
+                  {selectedItem.isCurrent && (
+                    <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                      Đang diễn ra
+                    </span>
+                  )}
+                </div>
+                <button
+                  onClick={() => setSelectedItem(null)}
+                  className="text-slate-400 hover:text-white transition-colors cursor-pointer text-xs"
+                >
+                  ✕
+                </button>
+              </div>
+
+              <div>
+                <h3 className="text-base sm:text-lg font-black text-white leading-tight">
+                  {selectedItem.title}
+                </h3>
+                {selectedItem.subtitle && (
+                  <div className="text-xs text-slate-400 mt-1">
+                    {selectedItem.subtitle}
+                  </div>
+                )}
+                {selectedItem.badgeText && (
+                  <div className="text-xs text-amber-300 font-bold mt-1.5">
+                    Thời gian còn lại: {selectedItem.badgeText}
+                  </div>
                 )}
               </div>
-              <button
-                onClick={() => setSelectedItem(null)}
-                className="text-slate-400 hover:text-white transition-colors cursor-pointer text-xs"
-              >
-                ✕
-              </button>
-            </div>
 
-            <div>
-              <h3 className="text-base sm:text-lg font-black text-white leading-tight">
-                {selectedItem.title}
-              </h3>
-              {selectedItem.subtitle && (
-                <div className="text-xs text-slate-400 mt-1">
-                  {selectedItem.subtitle}
+              <div className="p-3.5 rounded-2xl bg-black/40 border border-white/[0.06] space-y-2 text-xs">
+                <div className="flex items-center justify-between text-slate-300">
+                  <span className="text-slate-400">Thời gian bắt đầu:</span>
+                  <span className="font-bold text-white">
+                    {selectedItem.startDate.toLocaleString('vi-VN', {
+                      weekday: 'short',
+                      day: '2-digit',
+                      month: '2-digit',
+                      year: 'numeric',
+                      hour: '2-digit',
+                      minute: '2-digit',
+                    })}
+                  </span>
                 </div>
-              )}
-              {selectedItem.badgeText && (
-                <div className="text-xs text-amber-300 font-bold mt-1.5">
-                  Thời gian còn lại: {selectedItem.badgeText}
+                <div className="flex items-center justify-between text-slate-300">
+                  <span className="text-slate-400">Thời gian kết thúc:</span>
+                  <span className="font-bold text-white">
+                    {selectedItem.endDate.toLocaleString('vi-VN', {
+                      weekday: 'short',
+                      day: '2-digit',
+                      month: '2-digit',
+                      year: 'numeric',
+                      hour: '2-digit',
+                      minute: '2-digit',
+                    })}
+                  </span>
                 </div>
-              )}
-            </div>
-
-            <div className="p-3.5 rounded-2xl bg-black/40 border border-white/[0.06] space-y-2 text-xs">
-              <div className="flex items-center justify-between text-slate-300">
-                <span className="text-slate-400">Thời gian bắt đầu:</span>
-                <span className="font-bold text-white">
-                  {selectedItem.startDate.toLocaleString('vi-VN', {
-                    weekday: 'short',
-                    day: '2-digit',
-                    month: '2-digit',
-                    year: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit',
-                  })}
-                </span>
               </div>
-              <div className="flex items-center justify-between text-slate-300">
-                <span className="text-slate-400">Thời gian kết thúc:</span>
-                <span className="font-bold text-white">
-                  {selectedItem.endDate.toLocaleString('vi-VN', {
-                    weekday: 'short',
-                    day: '2-digit',
-                    month: '2-digit',
-                    year: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit',
-                  })}
-                </span>
+
+              <div className="flex justify-end pt-2">
+                <button
+                  onClick={() => setSelectedItem(null)}
+                  className="px-4 py-1.5 rounded-xl text-xs font-bold bg-white/[0.08] hover:bg-white/[0.16] text-white transition-colors cursor-pointer"
+                >
+                  Đóng
+                </button>
               </div>
             </div>
-
-            <div className="flex justify-end pt-2">
-              <button
-                onClick={() => setSelectedItem(null)}
-                className="px-4 py-1.5 rounded-xl text-xs font-bold bg-white/[0.08] hover:bg-white/[0.16] text-white transition-colors cursor-pointer"
-              >
-                Đóng
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+          </div>,
+          document.body
+        )}
     </div>
   );
 };
