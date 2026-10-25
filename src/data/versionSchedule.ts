@@ -56,10 +56,6 @@ export function formatTimeVi(date: Date): string {
   return `${pad2(date.getHours())}:${pad2(date.getMinutes())}`;
 }
 
-export function formatFullDateTimeVi(date: Date): string {
-  return `${formatTimeVi(date)} • ${formatDateVi(date)}`;
-}
-
 /**
  * Increment Genshin version numbers logically:
  * 5.2 -> 5.3 -> 5.4 -> 5.5 -> 5.6 -> 5.7 -> 5.8 -> 6.0

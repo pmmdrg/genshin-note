@@ -14,7 +14,7 @@
 
 ---
 
-## ⚡ 4 Quy Tắc Cốt Lõi Bắt Buộc Tuân Thủ
+## ⚡ 5 Quy Tắc Cốt Lõi Bắt Buộc Tuân Thủ
 
 ### 1. Phong Cách Thiết Kế: Liquid Glass
 - Tất cả giao diện tuân theo ngôn ngữ **Liquid Glass**: lớp nền kính mờ (`liquid-glass`, `liquid-glass-subtle`, `backdrop-blur`), đường viền mảnh tinh tế (`border-white/[0.06]` hoặc `border-white/[0.08]`), hiệu ứng đổ bóng & gradient phát sáng nhẹ nhàng.
@@ -34,6 +34,11 @@
 - **Luôn ưu tiên hiển thị avatar/ảnh chính thức** của nhân vật, vũ khí, nguyên liệu đột phá (lấy từ Enka Network CDN, HoYoverse CDN hoặc assets nội bộ).
 - Tránh để ô vuông chỉ chứa chữ thuần túy hoặc icon trừu tượng khi có thể lấy được hình ảnh đồ họa thực tế của vật phẩm.
 
+### 5. Tối Ưu Cấu Trúc Code & Dọn Dẹp Code Thừa (Clean Code & Scalability)
+- **Tối ưu cấu trúc & module hóa**: Tách riêng biệt giữa logic tính toán (`data/`, `utils/`), quản lý state (`store/`), và giao diện hiển thị (`components/`). Giữ component gọn gàng, tránh biến component thành file nguyên khối (monolithic) khó bảo trì.
+- **Dọn dẹp triệt để code không dùng (Dead Code Elimination)**: Sau khi refactor, sửa đổi hoặc loại bỏ tính năng, ngay lập tức xóa bỏ các biến, hàm, type/interface, import và CSS thừa không còn sử dụng. Tuyệt đối không để lại code rác bị comment-out.
+- **Dễ mở rộng (Extensible Architecture)**: Tổ chức mã nguồn theo hướng dữ liệu động (data-driven), dễ dàng mở rộng thêm nhân vật, vũ khí, banner hay phiên bản mới trong tương lai mà không phải viết lại cấu trúc.
+
 ---
 
 ## 🛠️ Checklist Bắt Buộc Trước & Sau Khi Thực Hiện Yêu Cầu
@@ -42,7 +47,9 @@
 - [ ] **Trong khi code**:
   - Giữ style `liquid-glass`, không phá vỡ bố cục responsive.
   - Sử dụng Tailwind CSS chuẩn. Tránh dùng `transition-all` trên các thẻ con nằm trong grid có FLIP animation (`@formkit/auto-animate`), thay bằng `transition-colors duration-200`.
+  - Tách module hợp lý, không hardcode giá trị phân tán.
 - [ ] **Sau khi code**:
+  - Dọn dẹp sạch sẽ các import, biến, hàm và code cũ không còn dùng.
   - Chạy `cmd.exe /c "npm run lint"` (đảm bảo 0 lỗi).
   - Chạy `cmd.exe /c "npm run build"` (đảm bảo build Vite & TypeScript thành công 100%).
   - Tự động `git add`, `git commit -m '...'` và `git push origin main`.
