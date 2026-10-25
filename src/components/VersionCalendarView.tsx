@@ -3,6 +3,7 @@ import {
   ZoomIn,
   ZoomOut,
   Target,
+  Sparkles,
 } from 'lucide-react';
 import {
   buildDayColumns,
@@ -11,55 +12,37 @@ import {
 } from '../data/timelineScheduleData';
 import type { TimelineBarItem, TimelineCategory } from '../data/timelineScheduleData';
 
-type FilterType = 'all' | 'version' | 'banner' | 'event' | 'endgame';
+type FilterType = 'all' | 'phase' | 'ao_canh' | 'abyss' | 'theater';
 
 const TRACK_CONFIG: {
-  category: TimelineCategory | 'banner';
+  category: TimelineCategory;
   label: string;
   filterGroup: FilterType;
-  filterCategories: TimelineCategory[];
 }[] = [
   {
-    category: 'version',
-    label: 'Phiên Bản (Version & Phase)',
-    filterGroup: 'version',
-    filterCategories: ['version'],
+    category: 'phase_1',
+    label: 'Phase 1 (Giai Đoạn 1)',
+    filterGroup: 'phase',
   },
   {
-    category: 'event',
-    label: 'Sự Kiện Chính & Phụ',
-    filterGroup: 'event',
-    filterCategories: ['event'],
+    category: 'phase_2',
+    label: 'Phase 2 (Giai Đoạn 2)',
+    filterGroup: 'phase',
   },
   {
-    category: 'character_banner_1',
-    label: 'Banner Nhân Vật 1',
-    filterGroup: 'banner',
-    filterCategories: ['character_banner_1'],
-  },
-  {
-    category: 'character_banner_2',
-    label: 'Banner Nhân Vật 2',
-    filterGroup: 'banner',
-    filterCategories: ['character_banner_2'],
-  },
-  {
-    category: 'weapon_banner',
-    label: 'Banner Vũ Khí',
-    filterGroup: 'banner',
-    filterCategories: ['weapon_banner'],
+    category: 'ao_canh',
+    label: 'Ảo Cảnh (Mở 5 ngày sau cập nhật)',
+    filterGroup: 'ao_canh',
   },
   {
     category: 'abyss',
-    label: 'La Hoàn Thâm Cảnh',
-    filterGroup: 'endgame',
-    filterCategories: ['abyss'],
+    label: 'La Hoàn Thâm Cảnh (Ngày 16)',
+    filterGroup: 'abyss',
   },
   {
     category: 'theater',
-    label: 'Nhà Hát Giả Tưởng',
-    filterGroup: 'endgame',
-    filterCategories: ['theater'],
+    label: 'Nhà Hát Giả Tưởng (Ngày 1)',
+    filterGroup: 'theater',
   },
 ];
 
@@ -130,6 +113,7 @@ export const VersionCalendarView: React.FC = () => {
   // Filter tracks
   const visibleTracks = useMemo(() => {
     if (filter === 'all') return TRACK_CONFIG;
+    if (filter === 'phase') return TRACK_CONFIG.filter((t) => t.category === 'phase_1' || t.category === 'phase_2');
     return TRACK_CONFIG.filter((t) => t.filterGroup === filter);
   }, [filter]);
 
@@ -181,44 +165,44 @@ export const VersionCalendarView: React.FC = () => {
               Tất Cả
             </button>
             <button
-              onClick={() => setFilter('version')}
+              onClick={() => setFilter('phase')}
               className={`px-2.5 py-1 rounded-lg font-bold transition-all cursor-pointer ${
-                filter === 'version'
+                filter === 'phase'
                   ? 'bg-cyan-500 text-slate-950 shadow-md'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
-              Phiên Bản
+              Phase 1 & 2
             </button>
             <button
-              onClick={() => setFilter('banner')}
+              onClick={() => setFilter('ao_canh')}
               className={`px-2.5 py-1 rounded-lg font-bold transition-all cursor-pointer ${
-                filter === 'banner'
+                filter === 'ao_canh'
                   ? 'bg-cyan-500 text-slate-950 shadow-md'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
-              Banner
+              Ảo Cảnh
             </button>
             <button
-              onClick={() => setFilter('event')}
+              onClick={() => setFilter('abyss')}
               className={`px-2.5 py-1 rounded-lg font-bold transition-all cursor-pointer ${
-                filter === 'event'
+                filter === 'abyss'
                   ? 'bg-cyan-500 text-slate-950 shadow-md'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
-              Sự Kiện
+              La Hoàn (16)
             </button>
             <button
-              onClick={() => setFilter('endgame')}
+              onClick={() => setFilter('theater')}
               className={`px-2.5 py-1 rounded-lg font-bold transition-all cursor-pointer ${
-                filter === 'endgame'
+                filter === 'theater'
                   ? 'bg-cyan-500 text-slate-950 shadow-md'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
-              La Hoàn & Nhà Hát
+              Nhà Hát (1)
             </button>
           </div>
 
@@ -265,7 +249,7 @@ export const VersionCalendarView: React.FC = () => {
           style={{ maxHeight: '72vh' }}
         >
           <div
-            className="relative min-h-[500px]"
+            className="relative min-h-[420px]"
             style={{ width: `${totalTimelineWidth}px` }}
           >
             {/* ================= STICKY TOP CALENDAR HEADER ================= */}
@@ -365,16 +349,13 @@ export const VersionCalendarView: React.FC = () => {
             </div>
 
             {/* ================= GANTT TRACKS & BARS ================= */}
-            <div className="relative z-10 py-4 space-y-3.5">
+            <div className="relative z-10 py-5 space-y-4">
               {visibleTracks.map((track) => {
-                const trackItems = allItems.filter((i) =>
-                  track.filterCategories.includes(i.category)
-                );
-
+                const trackItems = allItems.filter((i) => i.category === track.category);
                 if (trackItems.length === 0) return null;
 
                 return (
-                  <div key={track.category} className="relative h-11 flex items-center">
+                  <div key={track.category} className="relative h-10 flex items-center">
                     {/* Render each horizontal bar */}
                     {trackItems.map((item) => {
                       const startOffset = getDayOffset(item.startDate);
@@ -392,46 +373,30 @@ export const VersionCalendarView: React.FC = () => {
                             left: `${leftPx}px`,
                             width: `${widthPx}px`,
                           }}
-                          className={`absolute h-9.5 rounded-xl flex items-center justify-between px-3 overflow-hidden cursor-pointer shadow-md transition-transform hover:scale-[1.01] hover:z-20 bg-gradient-to-r ${item.colorGradient} ${
+                          className={`absolute h-9 rounded-xl flex items-center justify-between px-3 overflow-hidden cursor-pointer shadow-md transition-transform hover:scale-[1.01] hover:z-20 bg-gradient-to-r ${item.colorGradient} ${
                             item.isCurrent
-                              ? 'ring-2 ring-white/60 shadow-[0_0_20px_rgba(255,255,255,0.3)]'
+                              ? 'ring-2 ring-white/70 shadow-[0_0_20px_rgba(255,255,255,0.35)]'
                               : 'border border-white/10 opacity-85 hover:opacity-100'
                           }`}
                           title={`${item.title} (${item.startDate.toLocaleDateString('vi-VN')} - ${item.endDate.toLocaleDateString('vi-VN')})`}
                         >
                           {/* Title text */}
                           <div className="flex items-center gap-2 truncate z-10 pr-2">
+                            {item.isCurrent && (
+                              <Sparkles className="w-3 h-3 text-cyan-300 animate-spin-slow shrink-0" />
+                            )}
                             <span className="text-xs font-bold text-white truncate drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
                               {item.title}
                             </span>
                           </div>
 
-                          {/* Right side: Badge + Avatar */}
-                          <div className="flex items-center gap-1.5 shrink-0 z-10">
-                            {item.badgeText && (
+                          {/* Right side: Countdown badge if active */}
+                          {item.badgeText && (
+                            <div className="flex items-center gap-1.5 shrink-0 z-10">
                               <span className="text-[10px] font-black px-2 py-0.5 rounded-md bg-black/60 backdrop-blur-sm text-amber-300 border border-white/20 whitespace-nowrap shadow-sm">
                                 {item.badgeText}
                               </span>
-                            )}
-
-                            {item.imageUrl && (
-                              <div className="w-7 h-7 rounded-lg overflow-hidden bg-black/40 border border-white/20 shrink-0">
-                                <img
-                                  src={item.imageUrl}
-                                  alt={item.title}
-                                  className="w-full h-full object-cover"
-                                  loading="lazy"
-                                />
-                              </div>
-                            )}
-                          </div>
-
-                          {/* Subtle right avatar background bleed */}
-                          {item.imageUrl && (
-                            <div
-                              className="absolute right-0 top-0 bottom-0 w-28 pointer-events-none opacity-20 bg-cover bg-center"
-                              style={{ backgroundImage: `url(${item.imageUrl})` }}
-                            />
+                            </div>
                           )}
                         </div>
                       );
@@ -467,26 +432,20 @@ export const VersionCalendarView: React.FC = () => {
               </button>
             </div>
 
-            <div className="flex items-center gap-3">
-              {selectedItem.imageUrl && (
-                <div className="w-14 h-14 rounded-2xl overflow-hidden bg-black/40 border border-white/20 shrink-0 shadow-md">
-                  <img
-                    src={selectedItem.imageUrl}
-                    alt={selectedItem.title}
-                    className="w-full h-full object-cover"
-                  />
+            <div>
+              <h3 className="text-base sm:text-lg font-black text-white leading-tight">
+                {selectedItem.title}
+              </h3>
+              {selectedItem.subtitle && (
+                <div className="text-xs text-slate-400 mt-1">
+                  {selectedItem.subtitle}
                 </div>
               )}
-              <div>
-                <h3 className="text-base sm:text-lg font-black text-white leading-tight">
-                  {selectedItem.title}
-                </h3>
-                {selectedItem.badgeText && (
-                  <div className="text-xs text-amber-300 font-bold mt-1">
-                    Còn lại: {selectedItem.badgeText}
-                  </div>
-                )}
-              </div>
+              {selectedItem.badgeText && (
+                <div className="text-xs text-amber-300 font-bold mt-1.5">
+                  Thời gian còn lại: {selectedItem.badgeText}
+                </div>
+              )}
             </div>
 
             <div className="p-3.5 rounded-2xl bg-black/40 border border-white/[0.06] space-y-2 text-xs">

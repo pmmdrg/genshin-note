@@ -11,17 +11,20 @@ Tài liệu này tổng hợp toàn bộ các quy tắc nghiệp vụ, công th�
   - Phía trên là trục tháng (`tháng 10`, `tháng 11` màu vàng amber) và các cột ngày trong tuần (`T2 26`, `T3 27`...).
   - **Mốc Hôm Nay**: Đường chỉ báo dọc màu sáng cắt qua toàn bộ các hàng sự kiện, phía trên có huy hiệu thời gian thực (`06:02:07`).
   - Nút **"Về Hôm Nay"** tự động cuộn nhanh và căn giữa ngày hiện tại trên màn hình.
-  - Các thanh sự kiện (Gantt bars): Có nền gradient theo danh mục, tên sự kiện bên trái, ảnh avatar/artwork nhân vật bên phải, và huy hiệu thời gian đếm ngược còn lại (`8d 7h`). Nhấp vào thanh để xem chi tiết thời gian bắt đầu/kết thúc.
+  - Các thanh sự kiện (Gantt bars): Có nền gradient theo danh mục, tên rõ ràng, huy hiệu đếm ngược còn lại (`8d 7h`). Nhấp vào thanh để xem chi tiết ngày giờ.
+- **Quy tắc nội dung (Tối giản & Chính xác 100%)**:
+  - **Không hiển thị chi tiết tên banner** (do không có thông tin chính thức của các banner tương lai/quá khứ). Chỉ hiển thị **Phase 1** và **Phase 2** của từng phiên bản.
+  - **Ảo Cảnh**: Mở vào đúng **5 ngày sau khi cập nhật phiên bản mới** (Thứ Tư + 5 ngày ➔ Thứ Hai).
+  - **La Hoàn Thâm Cảnh (Spiral Abyss)**: Reset định kỳ vào **ngày 16 hàng tháng**.
+  - **Nhà Hát Giả Tưởng (Imaginarium Theater)**: Reset định kỳ vào **ngày 01 hàng tháng**.
 - **Phạm vi hiển thị (11 phiên bản: Trước & Sau mốc hôm nay 5 phiên bản)**:
   - **5 phiên bản trước hôm nay**: v6.5, v6.6, v6.7, v6.8, v7.0.
   - **Phiên bản hiện tại (chứa mốc hôm nay 26/10/2026)**: **v7.1** (Phase 2 đang diễn ra từ 13/10/2026 đến 04/11/2026).
   - **5 phiên bản sau hôm nay**: v7.2 (04/11/2026), v7.3 (16/12/2026), v7.4 (27/01/2027), v7.5 (10/03/2027), v7.6 (21/04/2027).
-- **Quy tắc chu kỳ phiên bản & sự kiện định kỳ**:
+- **Quy tắc chu kỳ phiên bản**:
   - Chu kỳ phiên bản chuẩn: **42 ngày (6 tuần)**, bắt đầu sáng Thứ Tư lúc 10:00.
   - Phase 1: Thứ Tư (10:00) ➔ Thứ Ba (17:00) tuần thứ 3 (20 ngày).
   - Phase 2: Bắt đầu chiều Thứ Ba lúc 17:00 ➔ Thứ Tư (06:00) ngày bảo trì tiếp theo (21 ngày).
-  - **La Hoàn Thâm Cảnh (Spiral Abyss)**: Reset định kỳ vào ngày **16** hàng tháng.
-  - **Nhà Hát Giả Tưởng (Imaginarium Theater)**: Reset định kỳ vào ngày **01** hàng tháng.
 
 ---
 
